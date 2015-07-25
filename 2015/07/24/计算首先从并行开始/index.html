@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Plan.md | Hexo</title>
+  <title>计算首先从并行开始 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Step 1看Andrew Ng在斯坦福的《机器学习》课程视频。看Tom Mitchell的《机器学习》教材。看Hsuan-Tien Lin的《机器学习基石》课程视频。c++实现基本算法，ANN，LR，SVM。。。开小差入门rnn。Step 2看经典论文，比如推荐系统。学习使用大数据平台，hadoop上用java写map reduce程序。写一个真正的系统，比如推荐系统，包括线上展示平台和线下数据">
+  <meta name="description" content="受到char rnn训练数据之慢的影响，深深地体会到了并行计算的重大作用。之前用过hadoop，跑过一些简单的案例，写代码只需要写好mapper和reducer程序。最近用python或者lua这种脚本语言，对比之前用c++的苦逼岁月，脚本的开发效率实在太高了。决定这个阶段，先从脚本出发，做并行计算，用一些开源的包。hadoop的python编程，pyspark等等工具。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Plan.md">
-<meta property="og:url" content="http://yoursite.com/2015/07/13/Plan/index.html">
+<meta property="og:title" content="计算首先从并行开始">
+<meta property="og:url" content="http://yoursite.com/2015/07/24/计算首先从并行开始/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Step 1看Andrew Ng在斯坦福的《机器学习》课程视频。看Tom Mitchell的《机器学习》教材。看Hsuan-Tien Lin的《机器学习基石》课程视频。c++实现基本算法，ANN，LR，SVM。。。开小差入门rnn。Step 2看经典论文，比如推荐系统。学习使用大数据平台，hadoop上用java写map reduce程序。写一个真正的系统，比如推荐系统，包括线上展示平台和线下数据">
-<meta property="og:updated_time" content="2015-07-25T02:18:47.000Z">
+<meta property="og:description" content="受到char rnn训练数据之慢的影响，深深地体会到了并行计算的重大作用。之前用过hadoop，跑过一些简单的案例，写代码只需要写好mapper和reducer程序。最近用python或者lua这种脚本语言，对比之前用c++的苦逼岁月，脚本的开发效率实在太高了。决定这个阶段，先从脚本出发，做并行计算，用一些开源的包。hadoop的python编程，pyspark等等工具。">
+<meta property="og:updated_time" content="2015-07-25T02:25:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Plan.md">
-<meta name="twitter:description" content="Step 1看Andrew Ng在斯坦福的《机器学习》课程视频。看Tom Mitchell的《机器学习》教材。看Hsuan-Tien Lin的《机器学习基石》课程视频。c++实现基本算法，ANN，LR，SVM。。。开小差入门rnn。Step 2看经典论文，比如推荐系统。学习使用大数据平台，hadoop上用java写map reduce程序。写一个真正的系统，比如推荐系统，包括线上展示平台和线下数据">
+<meta name="twitter:title" content="计算首先从并行开始">
+<meta name="twitter:description" content="受到char rnn训练数据之慢的影响，深深地体会到了并行计算的重大作用。之前用过hadoop，跑过一些简单的案例，写代码只需要写好mapper和reducer程序。最近用python或者lua这种脚本语言，对比之前用c++的苦逼岁月，脚本的开发效率实在太高了。决定这个阶段，先从脚本出发，做并行计算，用一些开源的包。hadoop的python编程，pyspark等等工具。">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -153,11 +153,11 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Plan" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-计算首先从并行开始" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/07/13/Plan/" class="article-date">
-  	<time datetime="2015-07-14T05:01:17.000Z" itemprop="datePublished">2015-07-13</time>
+      <a href="/2015/07/24/计算首先从并行开始/" class="article-date">
+  	<time datetime="2015-07-25T02:21:49.000Z" itemprop="datePublished">2015-07-24</time>
 </a>
     </div>
   
@@ -170,7 +170,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Plan.md
+      计算首先从并行开始
     </h1>
   
 
@@ -179,7 +179,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并行计算/">并行计算</a></li></ul>
 	</div>
 
         
@@ -190,7 +190,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Step_1">Step 1</h1><h2 id="看Andrew_Ng在斯坦福的《机器学习》课程视频。">看Andrew Ng在斯坦福的《机器学习》课程视频。</h2><h2 id="看Tom_Mitchell的《机器学习》教材。">看Tom Mitchell的《机器学习》教材。</h2><h2 id="看Hsuan-Tien_Lin的《机器学习基石》课程视频。">看Hsuan-Tien Lin的《机器学习基石》课程视频。</h2><h2 id="c++实现基本算法，ANN，LR，SVM。。。">c++实现基本算法，ANN，LR，SVM。。。</h2><h1 id="开小差">开小差</h1><h2 id="入门rnn。">入门rnn。</h2><h1 id="Step_2">Step 2</h1><h2 id="看经典论文，比如推荐系统。">看经典论文，比如推荐系统。</h2><h2 id="学习使用大数据平台，hadoop上用java写map_reduce程序。">学习使用大数据平台，hadoop上用java写map reduce程序。</h2><h2 id="写一个真正的系统，比如推荐系统，包括线上展示平台和线下数据平台。">写一个真正的系统，比如推荐系统，包括线上展示平台和线下数据平台。</h2><h1 id="Step_3">Step 3</h1><h2 id="理解、分析和使用经典的比赛数据，kddcup，netflix_prize。">理解、分析和使用经典的比赛数据，kddcup，netflix prize。</h2><h2 id="学习一种代码库。比如scikit_learn（python实现）">学习一种代码库。比如scikit learn（python实现）</h2><h2 id="在kaggle完成submission（用scikit）。">在kaggle完成submission（用scikit）。</h2>
+        <p>受到char rnn训练数据之慢的影响，深深地体会到了并行计算的重大作用。<br>之前用过hadoop，跑过一些简单的案例，写代码只需要写好mapper和reducer程序。<br>最近用python或者lua这种脚本语言，对比之前用c++的苦逼岁月，脚本的开发效率实在太高了。<br>决定这个阶段，先从脚本出发，做并行计算，用一些开源的包。<br>hadoop的python编程，pyspark等等工具。</p>
+
       
     </div>
     
@@ -199,18 +200,9 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/07/14/Step1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          Step1
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/07/11/Points-of-Machine-Learning/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Points of Machine Learning</div>
+    <a href="/2015/07/24/项目实践/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">项目实践</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -239,7 +231,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Plan" data-title="Plan.md" data-url="http://yoursite.com/2015/07/13/Plan/"></div>
+	<div class="ds-thread" data-thread-key="计算首先从并行开始" data-title="计算首先从并行开始" data-url="http://yoursite.com/2015/07/24/计算首先从并行开始/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
