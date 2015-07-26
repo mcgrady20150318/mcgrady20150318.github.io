@@ -154,6 +154,92 @@
 </nav>
       <div class="body-wrap">
   
+    
+  
+  
+    <article id="post-Points-of-Machine-Learning" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/11/Points-of-Machine-Learning/" class="article-date">
+  	<time datetime="2015-07-12T02:01:40.000Z" itemprop="datePublished">2015-07-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/11/Points-of-Machine-Learning/">Points of Machine Learning</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="引子">引子</h1><p>看了一个月时间的机器学习在线课程，推导了一些基本的公式，包括：随机梯度下降，误差后向传播，Logistic回归的极大似然估计解释，svm的最优化模型。写了一些基本的分类算法，包括：感知器，Logistic回归，BP神经网络（Qt实现GUI），SMO。学习了一些别人的类库或者代码，包括：决策树，朴素贝叶斯，kd tree索引KNN。下面简单总结下学的东西。</p>
+<h1 id="关于学习分类">关于学习分类</h1><h2 id="监督学习">监督学习</h2><p>分类问题：给定数据集和所属分类标记，预测未知数据集的分类标记。标记为离散型。<br>回归问题：同分类问题，标记为连续型。</p>
+<h2 id="非监督学习">非监督学习</h2><p>只给定数据集，不给定所属分类，学习假设。</p>
+<h2 id="半监督学习">半监督学习</h2><p>给定数据集和部分所属分类，学习假设。</p>
+<h2 id="增强学习">增强学习</h2><p>不给定数据集，也不给定所属分类标记，进行学习。</p>
+<h1 id="关于模型">关于模型</h1><h2 id="model_selection">model selection</h2><p>不同的假设对应不同的算法，不同的算法对应不同类型的参数，不同的参数对应不同的模型。</p>
+<h2 id="feature_selection">feature selection</h2><p>机器学习的问题，经常可以归结为选择feature的问题，feature选择的好坏直接影响模型的效果。<br>尤其当数据维度非常高的时候，需要对数据进行一些降维处理。比如用PCA，通过计算数据的协方差矩阵的较大的特征值和特征向量完成降维，比如用SVD分解，将原矩阵做分解降维。完成一种低维向高维的映射。<br>相反，有的时候为了降低模型复杂度，需要将低维数据的线性不可分作处理，映射到高维空间中，成为线性可分的状态，这称为kernel trick。</p>
+<h2 id="overfitting_and_underfitting">overfitting and underfitting</h2><p>机器学习模型中最头疼的问题就是过拟合，为了一味地追求训练集上的误差最小，无情地将数据中的噪声拟合地非常好，单纯地追求bias小不是好的模型，还需要兼顾viriance。</p>
+<h2 id="regularization">regularization</h2><p>通过在loss function中添加正则化项，对优化的权值进行约束，避免搜索的过程中对噪声进行过拟合。</p>
+<h2 id="bias_and_variance_trade-off">bias and variance trade-off</h2><p>bias 度量了某种学习算法的平均估计结果所能逼近学习目标的程度；（独立于训练样本的误差，刻画了匹配的准确性和质量：一个高的偏差意味着一个坏的匹配）<br>variance 则度量了在面对同样规模的不同训练集时，学习算法的估计结果发生变动的程度。（相关于观测样本的误差，刻画了一个学习算法的精确性和特定性：一个高的方差意味着一个弱的匹配）<br>举个极端的例子：<br>1、记住训练集合上所有的点的label，这样的系统低偏倚，高方差<br>2、无论输入是什么，总是预测一个相同的，这样的系统高偏倚，低方差。</p>
+<h1 id="关于数据集">关于数据集</h1><h2 id="training_set,_validation_set,_test_set-">training set, validation set, test set.</h2><p>拿到数据集后，可以分三份，训练集，验证集和测试集。</p>
+<h2 id="cross_validation_and_parameters">cross validation and parameters</h2><p>交叉验证，尤其是k折交叉验证，训练出最优的模型参数作为最终的模型进行使用。</p>
+<h1 id="关于算法">关于算法</h1><h2 id="分类问题">分类问题</h2><p>这个问题最基础，也是看的最多的问题。</p>
+<h3 id="SGD">SGD</h3><p>第一个算法，随机梯度下降。寻找最优参数的解，就是在损失函数的梯度下降方向上寻找。此算法非常容易进行并行化，改天可以写一个map reduce版本的SGD。</p>
+<h3 id="BPNN">BPNN</h3><p>bp神经网络，三层神经网络即可以任意精度去逼近任何函数。算法比较简单，需要调的参数不多，但是容易陷入到局部最小值的陷阱当中。寻找最优解的步长不可以过大，也不可以过小。模型的可解释性不强，而且容易对噪声进行过拟合。</p>
+<h3 id="LR">LR</h3><p>逻辑斯特回归，大概是分类问题中用的最多的方法吧。利用梯度上升法寻找最优解。对线性回归结果做sigmoid处理，将很大的数拉回到1，将很小的数据拉回到0.具有可解释性，计算结果是正例发生的概率。（极大似然函数估计）</p>
+<h3 id="SVM_and_SMO">SVM and SMO</h3><p>SVM是机器学习中最有理论基础的一个算法，准确率最高的一个算法，模型复杂度最低的一个算法之一。拥有非常好的性能。非常适合少量数据样本的数据。因为是凸优化问题，所以可以得到全局最优解。<br>SMO通过一个巧妙地手法求解二次规划的问题。</p>
+<h3 id="KNN">KNN</h3><p>刚刚接触推荐系统那会了解过的算法，寻找最邻近的user或者item。<br>算法需要高效的索引和查询结构：数据量小的时候可以用KD Tree，数据量大的时候用Min Sensitive Hash。</p>
+<h3 id="NB">NB</h3><p>一个不太严格的模型，却有着不错的结果。</p>
+<h3 id="DT">DT</h3><p>不喜欢用。</p>
+<h2 id="回归问题">回归问题</h2><h3 id="Linear_Regression">Linear Regression</h3><p>大概是数值计算那门课开始就会的东西。</p>
+<h2 id="聚类问题">聚类问题</h2><h3 id="KMeans">KMeans</h3><p>EM的一种特殊情况，无监督学习的基石正是EM算法。<br>分为两步：<br>E Step：根据假设求隐含随机变量的分布。<br>M Step：根据随机变量的分布求假设。<br>直到收敛，算法停止。</p>
+<h1 id="关于大数据">关于大数据</h1><h2 id="Hadoop">Hadoop</h2><p>简单使用过几次hadoop，速度奇慢，如果数据量没那么大的话，没必要用hadoop。<br>如果数据量够大了以后，可以考虑搭建个分布式计算环境，写几个简单地map reduce程序跑一跑。</p>
+<h3 id="Map_Reduce">Map Reduce</h3><p>分而治之的思想，将传统的串行程序改写为并行运行的程序，将一台计算节点无法完成的计算任务进行分割，利用多台计算节点一同计算，然后将所得的结果合并起来。</p>
+<h2 id="Storm">Storm</h2><p>听说速度很快，没有用过，有机会学习一下。</p>
+<h1 id="关于理论">关于理论</h1><p>机器学习是一门交叉学科，拥有丰富的理论基础。</p>
+<h2 id="VC维度">VC维度</h2><p>来表示一个模型的学习能力有多强。</p>
+<h2 id="函数逼近理论">函数逼近理论</h2><p>比如神经网络对非线性函数的逼近，比如感知器对布尔函数的逼近。</p>
+<h2 id="最优化理论">最优化理论</h2><p>很多的机器学习问题都是归结为优化问题，在一个假设空间中搜索最优解。</p>
+<p>本文就是一些闲言碎语，不成系统，望文生义而已。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-helloworld" class="article article-type-post" itemscope itemprop="blogPost">
   
