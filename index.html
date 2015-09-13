@@ -98,7 +98,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/并行计算/" style="font-size: 10px;">并行计算</a> <a href="/tags/推荐系统/" style="font-size: 10px;">推荐系统</a> <a href="/tags/机器学习/" style="font-size: 20px;">机器学习</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
+						<a href="/tags/CoC/" style="font-size: 10px;">CoC</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/并行计算/" style="font-size: 10px;">并行计算</a> <a href="/tags/推荐系统/" style="font-size: 10px;">推荐系统</a> <a href="/tags/机器学习/" style="font-size: 20px;">机器学习</a> <a href="/tags/随笔/" style="font-size: 10px;">随笔</a>
 					</div>
 				</section>
 				
@@ -172,6 +172,70 @@
   
     
   
+  
+    <article id="post-CoC" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/09/12/CoC/" class="article-date">
+  	<time datetime="2015-09-13T02:02:08.000Z" itemprop="datePublished">2015-09-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/12/CoC/">CoC</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有些日子没有更新日志了，每天绝大多数时间和经历都浪费在不感兴趣的事情和人身上是一种煎熬，是一种真正的浪费。<br>不知道这样的生活什么时候可以结束。那时，我可以带着我的爱人和狗去看看这个美丽的世界，去旅行，去拍照，去体验，去挑战，去丰富自己的人生。</p>
+<p>最近玩CoC有点频繁，感觉多人对战平台中匹配对手需要好久才能匹配到合适的对手。当然，匹配的次数越多对于制作方的收益是一个好消息，但太影响用户体验了吧，终究不是一件好事情。</p>
+<p>这几天简单思索了一下有没有什么好的策略来提升体验。</p>
+<p>简单上官网supercell上看了下updates，google了一些网友的讨论贴子。（英语是硬伤）<br>我这里只简单地涉及到多人对战中搜索对手的功能。</p>
+<p>官网的更新说，匹配对手只考虑大本的level，而不是之前的考虑杯数，是为了照顾新手玩家。</p>
+<h1 id="思路一">思路一</h1><p>本的level在一定程度上反映了两个clans的实力，但并不精细和严格，只能说是一种大概。<br>精确地分析两个clans的实力，可以考虑以下几个因素：<br>1、本数，是一个强约束因素，直接决定了进攻和防守的实力上限。<br>2、杯数，表征一个clan打对手抢资源的次数，赢会赢得杯数，输会丢掉杯数。<br>3、防御阵型，CoC本身是一个塔防类游戏，一个有趣的玩点正是如何搭配所有的游戏元素，本、加农炮、箭塔、迫击炮、墙等等如何摆放是一门非常有意思的学问。我在想的问题是，是否可以将阵型的摆放问题作为一个0-1规划问题，地图上的每个坐标作为一个0-1变量，0代表在该位置上无游戏元素，1代表有，1上的元素应该是什么是作为约束条件，目标值设为防御力，这里防御力可以理解为每个防守元素的防御值和防御范围的一个量化概念，目标函数就是最大化防御力。单纯地统计拥有的防御设备，是一种粗略的防守力计算，考虑防守阵型的防御力计算会更加合理。<br>4、攻击方案，对于匹配对手来说，我们无法得知玩家如何进攻，只能计算用户当前兵力的安排情况，计算一个攻击力的值。<br>另外，我还在想官方可以拿到所有的对战数据，做一些数据挖掘可以找到一些关于攻击力和防守阵型的关系，而且可以做出攻击胜率或者摧毁建筑的比例的概率预测（这个改天可以好好想想）<br>综合考虑以上几个因素，先经过本的level将大概的对手list列出来，计算攻击力和防御力的对比情况，进行对手的匹配。</p>
+<h1 id="思路二">思路二</h1><p>搜索对手的问题是否可以考虑成一个推荐对手的问题？<br>推荐系统的出现正是解决信息过载的问题，在一定程度上弥补了搜索的缺陷。<br>现在流行的推荐系统算法是使用一种叫做协同过滤的方法，利用已知的数据，找到用户的相似用户和用户的兴趣点，对用户进行推荐。<br>如何建模？<br>如果采用推荐系统中常用的user-item rating matrix来分析的话，我们可以将这里的item理解成阵型，因为阵型是千变万化的，但大致可以归为有限数量的N类，rating相当于user打这种阵型的建筑摧毁比例。（范围为0-1，浮点数）<br>这需要将每个user的阵型聚类为N类，（N可以很大，但一定要有限）。套用推荐系统一般方法的思路，我们可以计算user的相似度甚至阵型的相似度，将user的相似user打过的高分阵型（这里高分的阵型等同于user喜欢的高分item）推荐出来形成一个list，然后乱序推荐给user。<br>将所有user的阵型聚类，是一个非常有意思的问题。<br>如何计算两个阵型的“距离”？<br>一种非常简单和偷懒的方法，将地图作为一个矩阵，地图上的元素可以定义为一个灰度值，将地图视为一张图片，计算两张图片的距离。聚类的一个核心问题就是定义距离，距离有了，后面的事情都好做了。<br>但是这种计算方法太过粗糙和暴力了，一个简单的改进方法是剔除掉无关的元素（草地和树枝什么的），只计算有意义的游戏元素（墙、炮等等），重新计算距离，可以提升效率。<br>以上两种思路还是太过粗略了，好一点的思路应该很多，改天好好想想。<br>一旦，将问题考虑成一个推荐系统的问题，就可以用很多很棒的算法来作计算。关键之处在于如何进行问题转换。</p>
+<h1 id="总结">总结</h1><p>以上，是自己最近两天的一点点简单思考，很浅很浅。有三个问题还需要好好再深入思考下：<br>1、如何用数学模型优化防守阵型（思路：0-1规划）<br>2、如何计算不同防守阵型之间的距离（相似度），然后采用推荐系统的思路进行推荐对手。<br>3、如何计算当前user的兵力部署对阵当前防御阵型的胜率（建筑摧毁率）</p>
+<p>想清楚上面的问题，对于CoC提升游戏体验有很大的好处。</p>
+<p>最后，本文是一篇脑洞大开文，没有太深入思考，希望各位CoC高手轻拍。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CoC/">CoC</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-陈绮贞歌词生成" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -646,60 +710,6 @@
       
         <p>整整一个月的时间，重新拾起了荒废了几年的机器学习。<br>这次出发，重新从Andrew Ng的《机器学习》课程开始，从阅读Tom Michell的书开始，从一步一步推导公式开始，从《机器学习基石》中更加生动地理解机器学习的要点。<br>没有了盲从，没有了漫无目的。<br>每天学到的新知识，每天对机器学习的新认识、新了解都让我心里充满了自信。<br>动手写下的每一行c++代码都让我对挑战更难的实际问题充满了信心。<br>从根本原理上看机器学习，让读应用层次的论文或者博客变得更加容易，更加轻松地可以抓到要点。<br>视频和书只是过了第一遍，有了一个很浅的认识，在之后的学习之路上，会更多遍地看，相信每一次都会有不错的收获和新发现。<br>go to step2.<br>开始学习使用库，参加一些competition。</p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-Plan" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/07/13/Plan/" class="article-date">
-  	<time datetime="2015-07-14T05:01:17.000Z" itemprop="datePublished">2015-07-13</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/13/Plan/">Plan.md</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Step_1">Step 1</h1><h2 id="看Andrew_Ng在斯坦福的《机器学习》课程视频。">看Andrew Ng在斯坦福的《机器学习》课程视频。</h2><h2 id="看Tom_Mitchell的《机器学习》教材。">看Tom Mitchell的《机器学习》教材。</h2><h2 id="看Hsuan-Tien_Lin的《机器学习基石》课程视频。">看Hsuan-Tien Lin的《机器学习基石》课程视频。</h2><h2 id="c++实现基本算法，ANN，LR，SVM。。。">c++实现基本算法，ANN，LR，SVM。。。</h2><h1 id="开小差">开小差</h1><h2 id="入门rnn。">入门rnn。</h2><h1 id="Step_2">Step 2</h1><h2 id="看经典论文，比如推荐系统。">看经典论文，比如推荐系统。</h2><h2 id="学习使用大数据平台，hadoop上用java写map_reduce程序。">学习使用大数据平台，hadoop上用java写map reduce程序。</h2><h2 id="写一个真正的系统，比如推荐系统，包括线上展示平台和线下数据平台。">写一个真正的系统，比如推荐系统，包括线上展示平台和线下数据平台。</h2><h1 id="Step_3">Step 3</h1><h2 id="理解、分析和使用经典的比赛数据，kddcup，netflix_prize。">理解、分析和使用经典的比赛数据，kddcup，netflix prize。</h2><h2 id="学习一种代码库。比如scikit_learn（python实现）">学习一种代码库。比如scikit learn（python实现）</h2><h2 id="在kaggle完成submission（用scikit）。">在kaggle完成submission（用scikit）。</h2>
       
     </div>
     
