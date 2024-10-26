@@ -73,6 +73,133 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2410-12855" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-12855/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T14:30:31.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/26/2410-12855/">香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>引言部分首先指出，<strong>越狱攻击</strong>是指通过恶意指令操纵大型语言模型（LLMs），以诱使其产生有害行为的行为。然而，尽管随着研究的深入，越来越多的应对措施和防御机制被提出，评估这些语言模型对越狱攻击的抵御能力仍然是一个重要且开放的问题。准确判断语言模型是否受到越狱攻击（例如，生成有害和非法的响应）是提高模型安全性和有效性的关键。</p>
+<p>现有的越狱评估方法存在诸多不足，它们往往缺乏可解释性，并且在复杂场景下的泛化能力较弱，导致评估结果不够完整和不准确。例如，在复杂场景下，GPT-4的F1得分仅为55%，且在多语言环境中的评估存在偏见。这些不足表明，急需一种更全面、科学的方法来评估LLMs的越狱能力，确保它们在不同恶意情境下的安全性。</p>
+<p>为了解决这些问题，研究团队提出了全面的评估基准——<strong>JAILJUDGE</strong>，这个新基准涵盖了多种复杂的恶意提示场景（如合成、对抗、实际应用和多语言场景等），并且配备了高质量的人类注释测试数据集。JAILJUDGE数据集包含了超过35000个用于指令调优的训练数据，这些数据具有推理可解释性，而测试部分则包含了4500多个标签集的广泛风险场景，以及6000多个多语言场景。通过构建多智能体越狱评估框架<strong>JailJudge MultiAgent</strong>，该项目不仅提升了评估质量，还可以显式并清晰地展现决策推理过程，从而为用户提供细致入微的评估结果。最终，该研究的目标是推动对大型语言模型越狱防御能力的有效评估，并提升模型的安全性。</p>
+<p><img src="/images/e4628f40939d69403239471785c4143525ccd124caf9296998a474913666dca5.jpg" alt="JAILJUDGE Benchmark and Multi-agent Judge Framework"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本部分介绍了JAILJUDGE指标的构建及多代理监判框架的设计，旨在评估大型语言模型（LLMs）在复杂攻击情景下的表现。</p>
+<h3 id="JAILJUDGE-基准的构建"><a href="#JAILJUDGE-基准的构建" class="headerlink" title="JAILJUDGE 基准的构建"></a>JAILJUDGE 基准的构建</h3><p>JAILJUDGE的基准包括两个主要部分，分别是JAILJUDGE TRAIN和JAILJUDGE TEST。JAILJUDGE TRAIN是一个综合的指令调优数据集，包含超过35,000个项，来源于多种复杂的风险情景。数据集中涵盖了以下六种类型的提示：</p>
+<ul>
+<li><strong>原生有害提示</strong>：从现有的安全基准数据集中收集的有害提示，经过精细化地分类。</li>
+<li><strong>合成原生提示</strong>：使用GPT-4对原始有害提示进行重写和扩展。</li>
+<li><strong>合成对抗提示</strong>：运用最近的越狱攻击技术，修改原生有害提示以增加模型生成不安全响应的可能性。</li>
+<li><strong>多语言有害提示</strong>：收集多种语言（共十种）中存在的有害提示来检测多语言下模型的偏见。</li>
+<li><strong>真实场景提示</strong>：从各类社交平台和开源数据集中收集的真实用户提示。</li>
+<li><strong>欺骗性有害提示</strong>：通过自动化对抗提示完善技术，对原始有害提示进行细化。</li>
+</ul>
+<p>数据集示例可见下图。<br><img src="/images/a803074a1208aebec9cb80d1b4ae6508eb5b1b36c965bd97001f1a7f6b1aa0bd.jpg"></p>
+<h3 id="JAILJUDGE-TEST-设计"><a href="#JAILJUDGE-TEST-设计" class="headerlink" title="JAILJUDGE TEST 设计"></a>JAILJUDGE TEST 设计</h3><p>JAILJUDGE TEST是一个高质量的人类注释的监评数据集，分为两个部分：JAILJUDGE ID和JAILJUDGE OOD。其中，JAILJUDGE ID是从JAILJUDGE TRAIN中提取的超过4,500个上下文提示-响应对，而JAILJUDGE OOD则专注于多语言场景，包含6,300个示例。每个样本的注释过程包括以下四个阶段：</p>
+<ul>
+<li>人类注释者培训</li>
+<li>手动标注</li>
+<li>使用GPT-4进行标注</li>
+<li>交叉比较和多人投票</li>
+</ul>
+<h3 id="多代理监判框架"><a href="#多代理监判框架" class="headerlink" title="多代理监判框架"></a>多代理监判框架</h3><p>为了提升监判的效能，JAILJUDGE引入了一个多代理监判框架JailJudge MultiAgent。该框架包括多个判断代理、投票代理和推理代理，分工明确。各类代理通过协作来评估LLM是否被越狱，具体过程如下：</p>
+<ul>
+<li><strong>判断阶段</strong>：每个判断代理独立分析模型的提示及其响应，给出初步的评分和理由。</li>
+<li><strong>投票阶段</strong>：投票代理根据判断阶段的结果进行投票，以决定是否接受判断。</li>
+<li><strong>推理阶段</strong>：推理代理根据投票结果进行最终判断。</li>
+</ul>
+<p>通过这一框架，JAILJUDGE实现了更加透明和可解释的评估过程。</p>
+<h3 id="关键公式"><a href="#关键公式" class="headerlink" title="关键公式"></a>关键公式</h3><p>在推理评估中，使用以下公式评估模型的表现：</p>
+<ul>
+<li><p>概率模型表示为：<br>$$<br>P_{\pi_{\theta}}(\mathbf{y}|\mathbf{x}<em>{1:n})&#x3D;P</em>{\pi_{\theta}}(\mathbf{x}<em>{n+i}|\mathbf{x}</em>{1:n+i-1}),<br>$$</p>
+</li>
+<li><p>监判的目标可以定义为：<br>$$<br>(a,s)&#x3D;\pi_{\phi}(\hat{\mathbf{x}}_{1:n},\hat{\mathbf{y}}),<br>$$<br>其中$a$为解释分析，$s$为监判评分，范围为1到10，评分标准如下：</p>
+</li>
+<li><p>1表示完全合规的响应（拒绝响应或与任务无关）。</p>
+</li>
+<li><p>10表示直接违反伦理或法律的响应。</p>
+</li>
+</ul>
+<p>这套框架通过在无API成本的情况下，提供了增强的可解释性与细粒度评估的能力。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>为了评估JAILJUDGE的性能，研究人员使用了JAILJUDGE ID和JBB行为数据集进行实验。此外，还包括公共的监狱攻击评估数据集，以验证模型在各种复杂情境下的有效性。实验中使用的指标包括准确率、精确率、召回率和F1分数，评估解释能力的质量则使用GPT-4进行打分，范围从1到5，最高分表示更清晰和合理的解释。</p>
+<p>在主要实验中，研究人员的JailJudge MultiAgent和JAILJUDGE Guard模型在JAILJUDGE ID和JBB行为数据集上的表现持续超越了所有开源基线。具体而言，MultiAgent Judge在JAILJUDGE ID数据集上取得了最高的平均F1分数，达到了0.9197，而在JBB行为数据集上的分数为0.9609。JailJudge MultiAgent在推理能力方面也优于Baseline模型GPT-4-Reasoning，其在JAILJUDGE ID数据集上的EQ分数为4.5234，高于4.3989。</p>
+<p>在零-shot情境下进行的实验中，研究人员发现JAILJUDGE的监狱评估方法在JAILJUDGE OOD和WILDEST数据集上持续优于所有开源基线。在多语言的JAILJUDGE OOD数据集中，MultiAgent Judge的F1分数达到了0.711，明显高于GPT-4-Reasoning的0.5633。这突出表明了利用先进的LLM（如GPT-4）在多语言和零-shot场景下的优势。</p>
+<p>研究还通过HEx-PHI数据集对JailBoost和Guard Shield进行了评估。对于攻击实验，较高的成功率（ASR）表示攻击方法更有效，而对于防御方法，则较低的ASR指示更好的防护效果。实验结果显示，JailBoost显著提升了攻击者的能力，而Guard Shield在防御能力方面则出色，几乎实现了对四种SOTA攻击者的近100%防御效果，平均ASR仅为0.15%。</p>
+<p>在消融研究中，研究人员评价了多代理判断框架中各组成部分的有效性。他们比较了四种配置的表现，结果表明，每一个增强步骤都逐渐提升了模型性能。例如，在JAILJUDGE ID任务中，使用普通的GPT-4获得的F1分数仅为0.55，而经过多代理判断的最终分数提高至0.91。</p>
+<p>实验结果的详细数据和可视化信息在下表和下图中呈现。</p>
+<table>
+<thead>
+<tr>
+<th>数据集</th>
+<th>F1 分数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JAILJUDGE ID</td>
+<td>0.9197</td>
+</tr>
+<tr>
+<td>JBB 行为</td>
+<td>0.9609</td>
+</tr>
+<tr>
+<td>JAILJUDGE OOD</td>
+<td>0.711</td>
+</tr>
+<tr>
+<td>WILDEST</td>
+<td>0.7314</td>
+</tr>
+</tbody></table>
+<p><img src="/images/22d99337da20849b336dc3349114058d3d92618fbf5612eda4bf3cad466f4b62.jpg"></p>
+<p><img src="/images/5d752cff8ca83ad29fe95c8a0cc3d4cdc2fb3e24b25dcd2e13bc9210c2b7807f.jpg"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本研究中，作者提出了JAILJUDGE，一个全面的评估基准，用于评估大型语言模型（LLMs）在复杂风险场景中的表现。JAILJUDGE涵盖了高质量的人类标注数据集，并采用了多代理越狱评估框架JailJudge MultiAgent，以增强解释性和准确性。此外，作者还开发了基于指令调优的数据集JAILJUDGE Guard，无需API成本即可应用。</p>
+<p>通过实验，研究表明，越狱评估方法的表现优越，显示出在GPT-4和安全中介工具（如Llama-Guard-3）等模型中具有最先进的性能。重要的是，JAILJUDGE Guard能够提高下游任务的能力，包括越狱攻击和防御机制，证明了其在处理多样化和复杂情境中的有效性和可靠性。整体而言，研究为保证LLMs的安全性提供了新的见解，并推动了越狱评估技术的发展。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-12855/" data-id="cm2q9dauh0006hrjles24h68w" data-title="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2410-13236" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/26/2410-13236/" class="article-date">
@@ -163,7 +290,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2q93w3a000b89jl164a4z01" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2q9dauh0007hrjl7g972ap3" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -247,7 +374,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2q93w38000689jl02ew5x21" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2q9dauh0008hrjlhtok31xe" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -341,7 +468,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2q93w38000889jlhrj102m8" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2q9dauh0009hrjleqrp5epj" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -427,7 +554,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2q93w38000789jl4eie6vck" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2q9daui000ahrjlgxnf4k3p" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -541,7 +668,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2q93w3a000c89jl6sedahou" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2q9daui000bhrjlhpi8cxic" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -620,7 +747,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q93w39000989jlbl8u563q" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q9daui000chrjl2qsu29uf" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -721,7 +848,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q93w3b000e89jlggba57f9" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q9dauj000ghrjleu87bu0z" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -874,7 +1001,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q93w39000a89jl87hvaeoi" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q9daui000dhrjlevcn76p7" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1035,95 +1162,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q93w3a000d89jlbmfwf8jk" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2410-18640" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-18640/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T04:16:59.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-18640/">上海交通大学提出弱到强偏好优化方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>大量的语言模型（LLMs）在第三阶段的强化学习和人类反馈（RLHF）中进行了训练，目的是使其更好地符合人类的期望。然而，现有的模型在产生事实不准确性、表现偏见及其他不理想行为方面仍存在缺陷。为了解决这些问题，研究者们探讨了一种从人类偏好中学习的范式，这也是当前模型对齐的一个关键方向。为提高模型与人类价值观和目标的一致性，文献中提出了多种对齐方法，如直接偏好优化（Direct Preference Optimization, DPO），该方法试图在没有单独奖赏模型的情况下直接对齐模型。</p>
-<p>在研究过程中，发现了一种称为“弱到强泛化”的新现象，即经过弱监督模型生成的标签进行微调的强模型，其表现通常会超过其弱监督者。这一发现促使研究者们提出了一个重要的问题：是否能够将弱模型的对齐信号用于对强模型的对齐？</p>
-<p>为此，本文提出了一种新方法，称为“弱到强偏好优化”（Weak-to-Strong Preference Optimization, WSPO），旨在通过学习弱模型在对齐前后的分布差异，向强模型有效转移对齐能力。WSPO的创新之处在于其不仅可将弱模型的对齐表现传递给强模型，且能放大强模型的对齐能力。实验结果表明，该方法显著提升了模型在多项任务上的表现，展示了强模型在对齐能力上的潜力。</p>
-<p><img src="/images/08ed79bda04c4b999fda81ad605902f8c7b4416b11f1d43cbe5555911ddef85c.jpg">  </p>
-<p>这一研究的核心在于如何利用弱模型所掌握的对齐信号，使得强模型不仅能够超越弱模型的表现，还能在此基础上实现更强的泛化能力。通过对WSPO方法的探索，研究者们期望能在语言模型对齐的领域中取得更为显著的进展。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究提出了一种新的方法，称为弱到强偏好优化（Weak-to-Strong Preference Optimization，WSPO），旨在通过利用弱模型在对齐能力方面的表现，来提升强模型的对齐性能。该方法的核心思想是基于分布的差异来实现模型之间的对齐，而不是直接使用弱模型的输出作为标签。</p>
-<p>WSPO的方法框架可以概括为以下几个部分：</p>
-<h3 id="基础理论"><a href="#基础理论" class="headerlink" title="基础理论"></a>基础理论</h3><p>在WSPO中，弱模型的对齐信号被转移至强模型，通过学习在弱模型对齐前后观察到的分布差异来实现。根据先前研究的理论，给定一个奖励模型$r(x,y)$，优化问题的最优解可以表示为：</p>
-<p>$$<br>\pi_{r}(y\mid x)&#x3D;\frac{1}{Z(x)}\pi_{\mathrm{ref}}(y\mid x)\exp\left(\frac{1}{\beta}r(x,y)\right),<br>$$</p>
-<p>其中$Z(x)$是划分函数。</p>
-<h3 id="WSPO目标的推导"><a href="#WSPO目标的推导" class="headerlink" title="WSPO目标的推导"></a>WSPO目标的推导</h3><p>利用从弱模型对齐后的分布差异，WSPO的目标函数可表示为：</p>
-<p>$$<br>\mathcal{L}<em>{\mathrm{WSPO}}&#x3D;\mathbb{E}</em>{(\boldsymbol{x},\boldsymbol{y})\sim\mathcal{D}}\left[\frac{1}{|\boldsymbol{y}|}\left|\gamma\log\frac{\pi_{\theta}^{\mathrm{strong}}(\boldsymbol{y}\mid\boldsymbol{x})}{\pi_{\mathrm{ref}}^{\mathrm{strong}}(\boldsymbol{y}\mid\boldsymbol{x})}-\log\frac{\pi_{r}^{\mathrm{weak}}(\boldsymbol{y}\mid\boldsymbol{x})}{\pi_{\mathrm{ref}}^{\mathrm{weak}}(\boldsymbol{y}\mid\boldsymbol{x})}\right|_{2}^{2}\right].<br>$$</p>
-<p>这个损失函数的核心在于通过对数概率分布的差异来引导强模型的优化。</p>
-<h3 id="WSPO的步骤"><a href="#WSPO的步骤" class="headerlink" title="WSPO的步骤"></a>WSPO的步骤</h3><p>WSPO的主要流程如下：</p>
-<ul>
-<li>使用离线数据集$\mathcal{D}&#x3D;$ $\left{\boldsymbol{x}^{(i)},\boldsymbol{y}<em>{w}^{(i)}\right}</em>{i&#x3D;1}^{N}$，如所选的偏好或SFT数据集；</li>
-<li>准备弱模型，包含其对齐前后的版本；</li>
-<li>优化强模型 $\pi_{\theta}^{\mathrm{strong}}(y\mid x)$，以最小化目标函数$\mathcal{L}_{\mathrm{WSPO}}$，其中唯一需要调整的参数为$\gamma$。</li>
-</ul>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>WSPO方法通过利用弱模型的对齐能力，成功实现了强模型的增强，不仅提供了一种新的思路，也在相应实验中显示出较强的性能表现。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本部分实验评估了WSPO（Weak-to-Strong Preference Optimization）在通过较弱模型的学习来对较强模型进行对齐的能力。研究结果表明，经过对齐的弱模型能够有效地将其对齐行为转移给较强模型，通常能产生增强的对齐效果。此外，WSPO在与通过PPO和DPO训练的强模型的比较中也展示了竞争力的性能。实验过程主要包括以下几个步骤：首先，利用Qwen2-1.5B-base和Qwen2-7B-base模型作为弱模型和强模型，分别对其进行微调以生成SFT模型。接下来，进行对齐训练以实现对齐模型的获取。</p>
-<h3 id="总结任务与长度奖励"><a href="#总结任务与长度奖励" class="headerlink" title="总结任务与长度奖励"></a>总结任务与长度奖励</h3><p>在总结任务中，模型需要根据一段文章生成摘要。实验设置开始于一个已知的奖励函数环境，采用一种简单的总结任务，通过硬编码的奖励函数来激励模型生成在设定长度范围内的摘要。具体为奖励函数定义为当生成的摘要长度在[20, 30]之间时给予0的奖励，其他情况则给予-1的奖励。详情步骤见下图。</p>
-<p><img src="/images/126b0fef4a2f03d470212843639414d40aec694e63def7b372a46d70191cb912.jpg"></p>
-<p>左图显示了不同对齐算法生成的序列长度，WSPO表现出与PPO相当的对齐能力；右图展示了WSPO在不同温度下，使用Top-p抽样算法生成的奖励命中率。</p>
-<h3 id="单轮对话"><a href="#单轮对话" class="headerlink" title="单轮对话"></a>单轮对话</h3><p>在单轮对话实验中，模型需要针对用户提问进行友好的回答或拒绝回答。这个实验几乎没有经过SFT模型的微调，只是在选定的偏好的完成项上进行微调以创建SFT模型。随后对齐训练使用Anthropic Helpful and Harmless对话数据集。结果显示，WSPO模型在多种温度设定下依然展现出稳定的表现，优于DPO方法。</p>
-<p><img src="/images/ef9ef22ffbe78affedc50199d81fbdd094495aba62525251dcf7a9bfcd5c8ca7.jpg"></p>
-<p>左图展示了不同温度下WSPO模型在单轮对话中的胜率；右图展示了在训练过程中不同采样温度下的胜率保持相对稳定的趋势。</p>
-<h3 id="复杂评估"><a href="#复杂评估" class="headerlink" title="复杂评估"></a>复杂评估</h3><p>这一部分使用了UltraChat-200k数据集进行SFT模型训练，并在Ultra Feedback数据集上应用偏好优化。评估主要基于三种广泛采用的开放式指令跟随基准：MT-Bench、AlpacaEval 2 以及 Arena-Hard，进一步通过这三个基准评估模型在对话灵活性上的表现。实验结果显示，WSPO能有效学习并放大弱模型的对齐信号，强模型在各基准测试中均显示出卓越的性能。</p>
-<p><img src="/images/0c9264790398e70e904e5892ce801360188279e4c490a1c5e3de5ac87dfaefa6.jpg"></p>
-<p>此外，表1中展示了不同设置和基准中的模型评估结果，显示出WSPO方法的有效性。</p>
-<p><img src="/images/1371f846f176e2e8cd93bc71205e85e45b2b083e0e23990aaed9dbf6492ba739.jpg"></p>
-<p>表2总结了模型在多个基准测试中的评估结果，进一步验证了WSPO在对齐和保持知识能力方面的出色表现。 </p>
-<p>这些实验表明，WSPO方法不仅能借助弱模型的对齐信号有效地实现强模型的对齐，而且在多项测试基准中超越了传统的对齐方法。</p>
-<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>本文提出了一种方法，称为弱到强偏好优化（WSPO），旨在通过利用弱模型的对齐能力来提升强模型的对齐效果。研究表明，WSPO通过学习弱模型在对齐前后的分布差异，能够有效地将对齐信号传递给更强的模型，从而增强其对齐性能。</p>
-<p>实验结果显示，WSPO在多个关键基准测试中显著提升了模型的表现，相对于传统的对齐方法，WSPO提供了一种更高效的替代方案。这一成果不仅验证了利用弱模型作为奖励模型的可行性，还表明在强模型中能够实现对弱模型对齐能力的放大效应。</p>
-<p>此外，WSPO的快速收敛和稳定性使其在实践中的应用前景广阔。尽管本文未深入探讨不同语言模型架构之间对齐能力的转移特性，但未来的研究可以围绕这一主题展开，以进一步提升模型的对齐效果与性能。总之，WSPO方法的提出使得从弱模型到强模型的知识迁移和对齐变得更加有效，为语言模型的优化提供了新的思路。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2q93w3b000g89jl2wk8canm" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q9daui000ehrjl27bx2qi7" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1171,6 +1210,10 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/26/2410-12855/">香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-13236/">哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性</a>
           </li>
         
@@ -1184,10 +1227,6 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-13901/">曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-15362/">清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击</a>
           </li>
         
       </ul>
