@@ -163,115 +163,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2q8uepu00050qjl1uxje53g" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2410-13691" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-13691/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T13:49:11.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-13691/">宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>本研究的引言部分探讨了当前大型语言模型（LLMs）在机器人领域的广泛应用及其潜在风险。随着技术的发展，许多将LLMs集成到机器人中的实际应用不断涌现，涵盖了自动驾驶、移动操作和人机交互等多个领域。然而，这些集成系统的安全性问题正变得日益突出，特别是当LLMs遭遇恶意攻击时，可能导致机器人产生有害的物理行为。</p>
-<p>现有技术已在LLMs的文本生成安全性上进行了广泛研究，主要聚焦于模型对有害文本（如炸药制造指南）的抵抗。然而，相较于文本生成，LLM控制的机器人所面临的安全风险更为严重。因为这类机器人不仅能生成文本，甚至可能执行导致身体伤害或环境破坏的物理行为。因此，确保LLM控制的机器人在实际操作中的安全，与对话系统不同，需要设定更高的安全标准。</p>
-<p>为了解决这一问题，研究者们提出了R OBO PAIR，这是一种专门设计用于“越狱”LLM控制的机器人的攻击算法，试图展示这种技术在现实世界中的潜在危险。该算法与现有的聊天机器人越狱技术不同，能够在不同的控制架构和环境设置下，实现机器人执行有害行为。这一创新点在论文中通过三个不同的实验场景得到了验证：白盒攻击（完全访问系统）、灰盒攻击（部分访问）、黑盒攻击（仅查询接口），并表明R OBO PAIR在迅速找到越狱方法方面表现优异。</p>
-<p>通过这项研究，作者希望引起相关方对LLM集成的机器人设计和部署中潜在安全隐患的重视，并推动开发更有效的安全防护措施，以确保这项技术在物理世界中的安全应用。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究中介绍了一种新的算法R OBO PAIR，该算法主要针对使用大型语言模型（LLMs）控制的机器人开展监测以识别与攻击相关的漏洞。R OBO PAIR的设计灵感来源于现有的对话机器人越狱算法PAIR，但针对的是能够导致真实世界中有害行为的物理机器人。</p>
-<h3 id="攻击场景及威胁模型"><a href="#攻击场景及威胁模型" class="headerlink" title="攻击场景及威胁模型"></a>攻击场景及威胁模型</h3><p>本研究考虑了三种不同的威胁模型，这些模型分别描述了攻击者在与LLM控制的机器人互动时的访问级别：</p>
-<ul>
-<li><p><strong>白盒攻击</strong>：在此模型中，攻击者对整个机器人-LLM架构具有完全访问权限，包括所有API和模型参数。本研究通过NVIDIA Dolphins自驾LLM进行了实验。</p>
-</li>
-<li><p><strong>灰盒攻击</strong>：在此模型中，攻击者对系统的某些部分具有有限访问权限。实验中使用了配备GPT-4o规划器的Clearpath Robotics Jackal UGV机器人，攻击者可以利用高层API引导机器人，但不能控制较低级别的组件。</p>
-</li>
-<li><p><strong>黑盒攻击</strong>：在此模式下，攻击者对机器人-LLM架构没有访问权限，只能通过输入查询与系统进行交互。这种设定在商业机器人中较为常见，以Unitree Robotics Go2机器人狗为实验对象。</p>
-</li>
-</ul>
-<h3 id="R-OBO-PAIR算法框架"><a href="#R-OBO-PAIR算法框架" class="headerlink" title="R OBO PAIR算法框架"></a>R OBO PAIR算法框架</h3><p>R OBO PAIR的运作分为多个模块，具体示例详见下图。该框架包括以下四个主要部分：</p>
-<ul>
-<li><strong>Attacker（攻击者）</strong>：负责制定对目标机器人的有害指令。</li>
-<li><strong>Target（目标）</strong>：代表被攻击的LLM控制的机器人。</li>
-<li><strong>Judge（评估者）</strong>：负责判断被生成的响应是否符合攻击者设定的恶意目标。</li>
-<li><strong>Syntax Checker（语法检查器）</strong>：确保生成的代码能够正确执行并兼容机器人的API。</li>
-</ul>
-<p><img src="/images/5a65b725cfeeb7bf94ac6ad5f1220d1db0e6a2c93a583f0aa6dd3f92ec6f567f.jpg"></p>
-<p>R OBO PAIR的核心思想是在每次迭代中对目标LLM发起攻击，生成的代码会被环境中的安全审查者评估，以检测其是否能导致恶意行动。每次迭代结束时，攻击者会根据反馈调整下一轮的攻击，通过多轮迭代找到有效的越狱策略。</p>
-<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>为了评估每种攻击方法的有效性，使用了一种称为攻击成功率（ASR）的度量标准。ASR的计算公式为：</p>
-<p>$$<br>\text{ASR} &#x3D; \frac{\text{Number of successful jailbreaks}}{\text{Number of attempted jailbreaks}}<br>$$</p>
-<p>目标是最大化针对每个LLM控制机器人所进行的ASR，从而确保R OBO PAIR算法的有效性。</p>
-<h3 id="重要特性"><a href="#重要特性" class="headerlink" title="重要特性"></a>重要特性</h3><ul>
-<li><strong>可解释性</strong>：R OBO PAIR生成的提示是人类可理解的，适用于以语音命令进行控制的商业系统。</li>
-<li><strong>高效性</strong>：该算法能够在较少的迭代内找到成功的越狱策略，在实验中使用了10次迭代。</li>
-<li><strong>普遍适用性</strong>：实验中展示了白盒、灰盒和黑盒威胁模型的有效性，表明该方法适用于多种LLM控制的机器人。</li>
-</ul>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本文对三种不同威胁模型的LLM控制机器人进行了实验，具体包括白盒的NVIDIA Dolphins自驾LLM、灰盒的Clearpath Robotics Jackal UGV搭载GPT-4o规划器和黑盒的Unitree Robotics Go2机器人犬。在每个子部分中，实验细致描述了这些LLM-机器人系统的特征、威胁模型特点、测试其稳健性所使用的数据集，以及实验证据结果。</p>
-<p>实验中使用了多种提示方法，每种方法都以不同的方式请求有害行为。具体的提示方法包括：</p>
-<ul>
-<li>直接提示：直接要求机器人执行有害动作。</li>
-<li>上下文监狱破坏：在直接提示被拒绝后，机器人保留初始提示和响应的上下文，再次进行提示。</li>
-<li>模板监狱破坏：将直接提示嵌入手动设计的模板中，以欺骗潜在的LLM忽视拒绝有害请求的趋势。</li>
-<li>PAIR监狱破坏：使用PAIR返回的提示来指导机器人行为。</li>
-<li>R OBO PAIR监狱破坏：通过R OBO PAIR返回的提示来指导机器人行为。</li>
-</ul>
-<p>对于每个机器人系统，实验均基于特定的有害行为创建了独特的数据集。</p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>在不同的模型中，R OBO PAIR显著提高了监狱破坏的成功率。例如，在NVIDIA Dolphins自驾LLM的测试中，无论是针对行人碰撞、桥梁坠落还是忽略停车标志的任务，均显示出100%的监狱破坏成功率。</p>
-<p><img src="/images/a1ea926b390bc2657b982b3b8d4828714111ad99b043e7b2720ddd353d770df0.jpg"></p>
-<p>表 1: NVIDIA Dolphins自驾LLM的监狱破坏结果  </p>
-<p>而在Clearpath Robotics Jackal UGV的测试中，R OBO PAIR的监狱破坏成功率达到100%，而直接提示的成功率仅为3%。通过上下文监狱破坏，其成功率提升至91%。而PAIRS方法的成功率为14%，由于出现了语法和语义错误，导致较低的成功率。</p>
-<p><img src="/images/8aa75c60cbeb71f4c5805c009d7d6246da06196b326b53017ce6cca37043f91a.jpg"></p>
-<p>表 2: Clearpath Jackal UGV的监狱破坏结果  </p>
-<p>对于Unitree Go2机器犬，R OBO PAIR的成功率也是100%，与此相比，直接提示的成功率仅为8%。上下文和模板监狱破坏分别 تحقق了97%和89%的成功率。</p>
-<p><img src="/images/e5bb7da3a0918d4cd42bb26aea57ab4f131b2df7a6f315be19bc77484f8f22ef.jpg"></p>
-<p>表 3: Unitree Go2机器犬的监狱破坏结果  </p>
-<p>R OBO PAIR通过与其他算法的比较验证了其有效性，并展示了在不同机器人平台上针对特定有害行为的成功监狱破坏能力。</p>
-<p>在所有实验中，R OBO PAIR展示了其在白盒、灰盒和黑盒威胁模型下的广泛适用性和有效性，甚至在一系列独特的攻击情况下均能快速找到监狱破坏的有效手段。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>论文揭示了大型语言模型（LLMs）在机器人控制中的潜在风险，尤其是这些模型在遭遇监狱越狱（jailbreaking）攻击后能引发物理危害的可能性。研究者们展示了，通过提出特定的攻击方法，黑客能够轻而易举地让受控机器人执行有害行为。这项研究的主要发现强调了当前集成LLMs的机器人在实际应用中存在的安全隐患。</p>
-<p>作者明确指出，虽然LLMs在生成文本方面进行了广泛的安全性评估，但相较于文本生成的风险，LLM控制的机器人在执行的物理操作中造成伤害的潜力更为严重。这意味着，针对不同现场和环境的上下文，机器人在进行指令时的选择可能会产生直接的物理影响，甚至危及人类安全或破坏周围环境。</p>
-<p>生成的实验证据表明，攻击策略的有效性不仅限于文本，且可以通过新的攻击算法（如R OBO PAIR）快速实现高成功率的越狱。这一成果提示人们，不能只依赖于文本内容的安全措施，开发适合机器人的特定过滤和监控机制是确保LLM安全应用的必要步骤。</p>
-<p>因此，在今后的研究和应用中，尤其是在涉及自主行动和复杂决策的机器人系统中，必须关注这些潜在的安全风险，并开发新的防御措施。作者呼吁，围绕LLM的研究需明确将优先级放在提高机器人的物理安全性上，以确保它们在实际部署时不会引发不可预见的危害。同时，这一研究为未来机器人系统的安全设计提供了重要的启示和指引。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13691/" data-id="cm2q8uepu00060qjlgq5xfqt6" data-title="宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2q93w3a000b89jl164a4z01" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -355,7 +247,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2q8uepu00080qjl1wd85qw0" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2q93w38000689jl02ew5x21" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -449,7 +341,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2q8uepv000a0qjl4h2w6yoj" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2q93w38000889jlhrj102m8" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -535,7 +427,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2q8uepv00090qjlh9vu6b07" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2q93w38000789jl4eie6vck" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -649,7 +541,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2q8uepv000b0qjl5k9nd6u6" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2q93w3a000c89jl6sedahou" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -728,7 +620,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q8uepv000c0qjl3u636s04" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q93w39000989jlbl8u563q" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -829,7 +721,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q8uepw000h0qjlc86p2odq" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q93w3b000e89jlggba57f9" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -982,7 +874,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q8uepv000d0qjldipi1umq" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q93w39000a89jl87hvaeoi" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1143,7 +1035,95 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q8uepw000e0qjl4b9hbh8l" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q93w3a000d89jlbmfwf8jk" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2410-18640" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-18640/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T04:16:59.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/26/2410-18640/">上海交通大学提出弱到强偏好优化方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>大量的语言模型（LLMs）在第三阶段的强化学习和人类反馈（RLHF）中进行了训练，目的是使其更好地符合人类的期望。然而，现有的模型在产生事实不准确性、表现偏见及其他不理想行为方面仍存在缺陷。为了解决这些问题，研究者们探讨了一种从人类偏好中学习的范式，这也是当前模型对齐的一个关键方向。为提高模型与人类价值观和目标的一致性，文献中提出了多种对齐方法，如直接偏好优化（Direct Preference Optimization, DPO），该方法试图在没有单独奖赏模型的情况下直接对齐模型。</p>
+<p>在研究过程中，发现了一种称为“弱到强泛化”的新现象，即经过弱监督模型生成的标签进行微调的强模型，其表现通常会超过其弱监督者。这一发现促使研究者们提出了一个重要的问题：是否能够将弱模型的对齐信号用于对强模型的对齐？</p>
+<p>为此，本文提出了一种新方法，称为“弱到强偏好优化”（Weak-to-Strong Preference Optimization, WSPO），旨在通过学习弱模型在对齐前后的分布差异，向强模型有效转移对齐能力。WSPO的创新之处在于其不仅可将弱模型的对齐表现传递给强模型，且能放大强模型的对齐能力。实验结果表明，该方法显著提升了模型在多项任务上的表现，展示了强模型在对齐能力上的潜力。</p>
+<p><img src="/images/08ed79bda04c4b999fda81ad605902f8c7b4416b11f1d43cbe5555911ddef85c.jpg">  </p>
+<p>这一研究的核心在于如何利用弱模型所掌握的对齐信号，使得强模型不仅能够超越弱模型的表现，还能在此基础上实现更强的泛化能力。通过对WSPO方法的探索，研究者们期望能在语言模型对齐的领域中取得更为显著的进展。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究提出了一种新的方法，称为弱到强偏好优化（Weak-to-Strong Preference Optimization，WSPO），旨在通过利用弱模型在对齐能力方面的表现，来提升强模型的对齐性能。该方法的核心思想是基于分布的差异来实现模型之间的对齐，而不是直接使用弱模型的输出作为标签。</p>
+<p>WSPO的方法框架可以概括为以下几个部分：</p>
+<h3 id="基础理论"><a href="#基础理论" class="headerlink" title="基础理论"></a>基础理论</h3><p>在WSPO中，弱模型的对齐信号被转移至强模型，通过学习在弱模型对齐前后观察到的分布差异来实现。根据先前研究的理论，给定一个奖励模型$r(x,y)$，优化问题的最优解可以表示为：</p>
+<p>$$<br>\pi_{r}(y\mid x)&#x3D;\frac{1}{Z(x)}\pi_{\mathrm{ref}}(y\mid x)\exp\left(\frac{1}{\beta}r(x,y)\right),<br>$$</p>
+<p>其中$Z(x)$是划分函数。</p>
+<h3 id="WSPO目标的推导"><a href="#WSPO目标的推导" class="headerlink" title="WSPO目标的推导"></a>WSPO目标的推导</h3><p>利用从弱模型对齐后的分布差异，WSPO的目标函数可表示为：</p>
+<p>$$<br>\mathcal{L}<em>{\mathrm{WSPO}}&#x3D;\mathbb{E}</em>{(\boldsymbol{x},\boldsymbol{y})\sim\mathcal{D}}\left[\frac{1}{|\boldsymbol{y}|}\left|\gamma\log\frac{\pi_{\theta}^{\mathrm{strong}}(\boldsymbol{y}\mid\boldsymbol{x})}{\pi_{\mathrm{ref}}^{\mathrm{strong}}(\boldsymbol{y}\mid\boldsymbol{x})}-\log\frac{\pi_{r}^{\mathrm{weak}}(\boldsymbol{y}\mid\boldsymbol{x})}{\pi_{\mathrm{ref}}^{\mathrm{weak}}(\boldsymbol{y}\mid\boldsymbol{x})}\right|_{2}^{2}\right].<br>$$</p>
+<p>这个损失函数的核心在于通过对数概率分布的差异来引导强模型的优化。</p>
+<h3 id="WSPO的步骤"><a href="#WSPO的步骤" class="headerlink" title="WSPO的步骤"></a>WSPO的步骤</h3><p>WSPO的主要流程如下：</p>
+<ul>
+<li>使用离线数据集$\mathcal{D}&#x3D;$ $\left{\boldsymbol{x}^{(i)},\boldsymbol{y}<em>{w}^{(i)}\right}</em>{i&#x3D;1}^{N}$，如所选的偏好或SFT数据集；</li>
+<li>准备弱模型，包含其对齐前后的版本；</li>
+<li>优化强模型 $\pi_{\theta}^{\mathrm{strong}}(y\mid x)$，以最小化目标函数$\mathcal{L}_{\mathrm{WSPO}}$，其中唯一需要调整的参数为$\gamma$。</li>
+</ul>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>WSPO方法通过利用弱模型的对齐能力，成功实现了强模型的增强，不仅提供了一种新的思路，也在相应实验中显示出较强的性能表现。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本部分实验评估了WSPO（Weak-to-Strong Preference Optimization）在通过较弱模型的学习来对较强模型进行对齐的能力。研究结果表明，经过对齐的弱模型能够有效地将其对齐行为转移给较强模型，通常能产生增强的对齐效果。此外，WSPO在与通过PPO和DPO训练的强模型的比较中也展示了竞争力的性能。实验过程主要包括以下几个步骤：首先，利用Qwen2-1.5B-base和Qwen2-7B-base模型作为弱模型和强模型，分别对其进行微调以生成SFT模型。接下来，进行对齐训练以实现对齐模型的获取。</p>
+<h3 id="总结任务与长度奖励"><a href="#总结任务与长度奖励" class="headerlink" title="总结任务与长度奖励"></a>总结任务与长度奖励</h3><p>在总结任务中，模型需要根据一段文章生成摘要。实验设置开始于一个已知的奖励函数环境，采用一种简单的总结任务，通过硬编码的奖励函数来激励模型生成在设定长度范围内的摘要。具体为奖励函数定义为当生成的摘要长度在[20, 30]之间时给予0的奖励，其他情况则给予-1的奖励。详情步骤见下图。</p>
+<p><img src="/images/126b0fef4a2f03d470212843639414d40aec694e63def7b372a46d70191cb912.jpg"></p>
+<p>左图显示了不同对齐算法生成的序列长度，WSPO表现出与PPO相当的对齐能力；右图展示了WSPO在不同温度下，使用Top-p抽样算法生成的奖励命中率。</p>
+<h3 id="单轮对话"><a href="#单轮对话" class="headerlink" title="单轮对话"></a>单轮对话</h3><p>在单轮对话实验中，模型需要针对用户提问进行友好的回答或拒绝回答。这个实验几乎没有经过SFT模型的微调，只是在选定的偏好的完成项上进行微调以创建SFT模型。随后对齐训练使用Anthropic Helpful and Harmless对话数据集。结果显示，WSPO模型在多种温度设定下依然展现出稳定的表现，优于DPO方法。</p>
+<p><img src="/images/ef9ef22ffbe78affedc50199d81fbdd094495aba62525251dcf7a9bfcd5c8ca7.jpg"></p>
+<p>左图展示了不同温度下WSPO模型在单轮对话中的胜率；右图展示了在训练过程中不同采样温度下的胜率保持相对稳定的趋势。</p>
+<h3 id="复杂评估"><a href="#复杂评估" class="headerlink" title="复杂评估"></a>复杂评估</h3><p>这一部分使用了UltraChat-200k数据集进行SFT模型训练，并在Ultra Feedback数据集上应用偏好优化。评估主要基于三种广泛采用的开放式指令跟随基准：MT-Bench、AlpacaEval 2 以及 Arena-Hard，进一步通过这三个基准评估模型在对话灵活性上的表现。实验结果显示，WSPO能有效学习并放大弱模型的对齐信号，强模型在各基准测试中均显示出卓越的性能。</p>
+<p><img src="/images/0c9264790398e70e904e5892ce801360188279e4c490a1c5e3de5ac87dfaefa6.jpg"></p>
+<p>此外，表1中展示了不同设置和基准中的模型评估结果，显示出WSPO方法的有效性。</p>
+<p><img src="/images/1371f846f176e2e8cd93bc71205e85e45b2b083e0e23990aaed9dbf6492ba739.jpg"></p>
+<p>表2总结了模型在多个基准测试中的评估结果，进一步验证了WSPO在对齐和保持知识能力方面的出色表现。 </p>
+<p>这些实验表明，WSPO方法不仅能借助弱模型的对齐信号有效地实现强模型的对齐，而且在多项测试基准中超越了传统的对齐方法。</p>
+<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>本文提出了一种方法，称为弱到强偏好优化（WSPO），旨在通过利用弱模型的对齐能力来提升强模型的对齐效果。研究表明，WSPO通过学习弱模型在对齐前后的分布差异，能够有效地将对齐信号传递给更强的模型，从而增强其对齐性能。</p>
+<p>实验结果显示，WSPO在多个关键基准测试中显著提升了模型的表现，相对于传统的对齐方法，WSPO提供了一种更高效的替代方案。这一成果不仅验证了利用弱模型作为奖励模型的可行性，还表明在强模型中能够实现对弱模型对齐能力的放大效应。</p>
+<p>此外，WSPO的快速收敛和稳定性使其在实践中的应用前景广阔。尽管本文未深入探讨不同语言模型架构之间对齐能力的转移特性，但未来的研究可以围绕这一主题展开，以进一步提升模型的对齐效果与性能。总之，WSPO方法的提出使得从弱模型到强模型的知识迁移和对齐变得更加有效，为语言模型的优化提供了新的思路。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2q93w3b000g89jl2wk8canm" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1195,10 +1175,6 @@ MathJax = {
           </li>
         
           <li>
-            <a href="/2024/10/26/2410-13691/">宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR</a>
-          </li>
-        
-          <li>
             <a href="/2024/10/26/2410-13722/">卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法</a>
           </li>
         
@@ -1208,6 +1184,10 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-13901/">曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-15362/">清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击</a>
           </li>
         
       </ul>
