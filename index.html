@@ -73,6 +73,107 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2410-09040" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-09040/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T15:00:46.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/26/2410-09040/">2410.0904</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在引言部分，研究者们探讨了基于Transformer的大型语言模型（LLMs）在自然语言处理领域中的广泛应用与成功，同时指出这些系统在实现类人智能的过程中仍然存在安全隐患。尽管许多LLMs通过全面的安全训练来确保用户交互的安全性，但这些模型仍然容易受到恶意攻击，尤其是针对模型安全协议的“监狱突破”攻击（jail breaking attacks）。</p>
+<p>特定的攻击方式，如优化基础的攻击，利用模型的内在安全漏洞，旨在生成有害的文本输出。研究者们观察到，现有的优化方法虽然旨在最大化生成特定目标令牌的概率，但高概率并不一定意味着攻击的成功，这限制了当前攻击框架的有效性和可解释性。针对这一问题，本文提出了一个新的方法——AttnGCG，通过操控模型的注意力分数来增强监狱突破攻击的效果。研究者们发现，提升攻击相关后缀的注意力分数与攻击成功率之间存在显著的正相关性。</p>
+<p>最终，研究者们通过引入注意力损失（attention loss），让模型更加集中于对抗后缀，从而为成功监狱突破提供了更多的机会。这些创新点不仅提高了不同模型上的攻击效能，还为理解模型内部行为提供了重要的可解释性。</p>
+<p><img src="/images/56b6ccf6d3f57bd844d3a4abdb4cf674b3233f530053a1d3800c6b93db41ef8d.jpg" alt="注意力分数的可视化"><br><em>图1: 不同攻击方法对LLMs的注意力分数影响</em></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在本节中，研究者首先介绍了基于优化的监狱破坏攻击方法——贪婪坐标梯度（GCG），并在此基础上提出了其主要贡献——注意力丧失（attention loss），以增强针对对抗后缀的效果。</p>
+<h3 id="背景：贪婪坐标梯度（GCG）"><a href="#背景：贪婪坐标梯度（GCG）" class="headerlink" title="背景：贪婪坐标梯度（GCG）"></a>背景：贪婪坐标梯度（GCG）</h3><p>GCG方法是通过离散令牌级优化从对齐的LLM（大语言模型）中引出恶意文本输出的前沿方法。在这种方法中，LLM被视为输入 $N$ 个Token序列 $x_{1:N}$ 到下一Token $x_{N+1}$ 的概率分布映射。在监狱破坏场景下，前 $N$ 个Token $x_{\mathcal{T}}&#x3D;x_{1:N}$ 包含三个组件：系统提示 $x_{\mathcal{Z}<em>{\mathrm{sys}}}$、用户请求 $x</em>{\mathcal{Z}<em>{\mathrm}} $ 和我们希望优化的对抗后缀 $x</em>{\mathcal{Z}<em>{\mathrm{adv}}}$。GCG的目标是找到一个对抗后缀 $x</em>{\mathcal{T}<em>{\mathrm{adv}}}$，使得目标Token序列 $x</em>{\mathcal{O}}^{*}$ 的负对数概率最小化。</p>
+<h4 id="GCG的优化问题可以表示为："><a href="#GCG的优化问题可以表示为：" class="headerlink" title="GCG的优化问题可以表示为："></a>GCG的优化问题可以表示为：</h4><p>$$<br>\operatorname*{min}<em>{\substack{x</em>{\mathscr{T}<em>{\mathrm{adv}}}\in V^{|\mathscr{T}</em>{\mathrm{adv}}|}}}\mathscr{L}<em>{t}(x</em>{\mathscr{T}}),<br>$$</p>
+<p>其中，$\mathcal{L}_{\mathrm{adv}}$ 表示LLM输入中对抗后缀Token的索引，而 $V$ 表示模型的词汇集。</p>
+<h3 id="注意力分数和注意力损失"><a href="#注意力分数和注意力损失" class="headerlink" title="注意力分数和注意力损失"></a>注意力分数和注意力损失</h3><p>当前的LLM主要基于注意力机制，我们期望在生成下一个Token时，模型会生成一个注意力矩阵来指示所有先前Tokens $x_{1:N}$ 对下一个Token $x_{N+1}$ 的重要性。根据损失函数的计算，我们可以获得注意力权重矩阵 $W$，其形状为 $(n+L) \times (n+L)$，其中 $W_{i,j}$ 表示Token $x_{j}$ 对Token $x_{i}$ 的注意力权重。</p>
+<p>为了量化特定Token $x_{j}$ 对LLM输出的影响，我们可以将其定义为在输出Tokens $x_{\mathcal{O}}$ 上的注意力权重平均值：</p>
+<p>$$<br>s_{j}&#x3D;\sum_{i\in\mathcal{O}}\frac{W_{i,j}}{|\mathcal{O}|}.<br>$$</p>
+<p>当我们研究攻击过程中的注意力分数时，注意力矩阵来自最后的解码层，并定义输入组件 $x_{\mathcal{T}}$ 的注意力分数为所有包含Tokens在输出Tokens $x_{\mathcal{O}}$ 上的注意力分数的平均值：</p>
+<p>$$<br>s_{\mathcal{Z}}&#x3D;\sum_{i\in\mathcal{Z}}\frac{s_{i}}{|\mathcal{Z}|}.<br>$$</p>
+<p>研究者观察到，在对Llama-2-Chat-7B模型进行攻击时，对“后缀”的注意力分数与攻击成功率存在强正相关。这暗示着当模型将更多注意力分配给对抗后缀时，就会减少对系统和目标输入的关注，从而增强监狱破坏攻击的有效性。</p>
+<p>为了验证这一假设，研究者引入了一种额外的注意力损失，通过直接优化对抗后缀的注意力分数来实现：</p>
+<p>$$<br>\operatorname*{min}<em>{\substack{x</em>{\mathcal{I}<em>{\mathrm{adv}}}\in V^{|\mathcal{I}</em>{\mathrm{adv}}|}}}\mathcal{L}<em>{a}(x</em>{\mathcal{I}})&#x3D;-\operatorname*{max}<em>{\substack{x</em>{\mathcal{I}<em>{\mathrm{adv}}}\in V^{|\mathcal{I}</em>{\mathrm{adv}}|}}}s_{\mathcal{I}_{\mathrm{adv}}}.<br>$$</p>
+<p>在最终的攻击损失中，研究者将新的注意力损失与原GCG损失结合，形成一个加权和的形式：</p>
+<p>$$<br>\mathcal{L}<em>{t+a}(x</em>{\varSigma})&#x3D;w_{t}\mathcal{L}<em>{t}(x</em>{\varSigma})+w_{a}\mathcal{L}<em>{a}(\bar{x</em>{\varSigma}}).<br>$$</p>
+<p>其中，$w_{t}$ 和 $w_{a}$ 是权重。该框架旨在通过引导模型重视对抗后缀来构建有效的对抗后缀，同时确保模型的响应与用户的目标一致，以免注意力分数过低，导致模型拒绝响应。最终，AttnGCG的整体优化目标可以写为：</p>
+<p>$$<br>\operatorname*{min}<em>{\substack{x</em>{\mathscr{Z}<em>{\mathrm{adv}}}\in V^{|\mathscr{Z}</em>{\mathrm{adv}}|}}}\mathscr{L}<em>{t+a}(x</em>{\mathscr{Z}}).<br>$$</p>
+<p>研究者利用贪婪坐标梯度来优化这个集成了注意力损失的目标。 </p>
+<p>图像1展示了对比GCG和AttnGCG在攻击中的注意力变化，明确展示了这两种方法在关注对抗后缀时的差异。 </p>
+<p><img src="/images/56b6ccf6d3f57bd844d3a4abdb4cf674b3233f530053a1d3800c6b93db41ef8d.jpg"><br><img src="/images/65d1240a98c4b157e636d55f8600b79394355c91d2be9d303bc695d4e5b24696.jpg"> </p>
+<p>通过引导模型将更多注意力集中在对抗后缀上，AttnGCG显著提高了监狱破坏的成功率，提供了对其过程的更好理解。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本节首先介绍了实验设置，然后分析了AttnGCG在不同白盒大型语言模型（LLMs）上的结果，并与原始的GCG进行比较。同时验证了该方法在其他越狱方法中的通用性，最后进行了针对新目标和黑箱模型的转移攻击实验以验证AttnGCG生成的提示的转移能力。</p>
+<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p><strong>数据集</strong><br>使用AdvBench有害行为基准（Zou et al., 2023）评估越狱攻击的性能。该数据集包括520个请求，涵盖了亵渎、图形描绘、威胁行为、错误信息、歧视、网络犯罪和危险或非法建议。为评估随机抽取了100种行为。</p>
+<p><strong>语言模型</strong><br>实验涉及两个主要类别的LLMs：开源模型和闭源模型。开源模型包括LLaMA系列（Touvron et al., 2023）、Gemma系列（Mesnard et al., 2024）以及Mistral系列（Jiang et al., 2023）。闭源模型则主要集中在GPT-3.5（Brown et al., 2020）、GPT-4（Achiam et al., 2024）和Gemini系列（Georgiev et al., 2024）。为每个目标模型使用零温度设置进行确定性生成。</p>
+<p><strong>基线和超参数</strong><br>本实验以广泛使用的GCG（Zou et al., 2023）作为白盒和黑箱LLMs攻击的基线。GCG与AttnGCG均训练500步，其参数设置保持一致。具体细节可在附录查阅。</p>
+<p><strong>评估</strong><br>为了全面评估提出的攻击，使用了两种评估协议来测量攻击成功率（ASR）：</p>
+<ul>
+<li>ASR_KW：采用关键词检测方法衡量有害性，通过检查响应前几个Token中是否包含预定义的拒绝关键词。</li>
+<li>ASR_GPT：利用LLMs作为判断工具，确定攻击是否成功，GPT-4被用作语义评估。</li>
+</ul>
+<h3 id="直接攻击"><a href="#直接攻击" class="headerlink" title="直接攻击"></a>直接攻击</h3><p><strong>主要结果与分析</strong><br>在白盒攻击结果中，AttnGCG在多个模型上持续优于GCG基线。例如，在ASR_GPT上的平均提升为6.3%，在ASR_KW上的平均提升为3.9%。这验证了引入注意力损失（Equation 5）增强了LLM攻击的效果。</p>
+<p>统计数据显示当前LLMs存在“虚假越狱”的问题。以Gemma模型为例，ASR通过检测拒绝关键词被测量为高出9.8%，这通常是由于模型在遇到恶意查询时产生延迟拒绝或不完全响应所致。相反，AttnGCG显著减少了这一评估差距，平均降低了8%，从23.5%下降到15.5%。</p>
+<p><strong>注意力分数可视化</strong><br>通过图4展示了LLM输入（目标和对抗后缀）在训练进程中的注意力热图。成功的越狱攻击中，注意力明显转移至对抗后缀部分，相应减少了对目标的关注。反之，对于失败的攻击，模型过于关注目标输入，导致攻击失败。</p>
+<h3 id="将AttnGCG泛化到其他攻击方法"><a href="#将AttnGCG泛化到其他攻击方法" class="headerlink" title="将AttnGCG泛化到其他攻击方法"></a>将AttnGCG泛化到其他攻击方法</h3><p>验证该模型的内部机制是否对其他攻击方法同样适用，研究将AttnGCG与AutoDAN（Liu et al., 2024）和ICA（Wei et al., 2024）结合。结果显示，AttnGCG相较于GCG能够更好地增强其他攻击方法，表现出在ASR_GPT上平均高出5%的提升。</p>
+<p><strong>其他攻击中的注意力分数</strong><br>通过图5展示了由ICA和AutoDAN生成的提示的注意力热图。虽然这两者的后缀都能将模型的注意力从有害目标上移走，仍需强调的是，目标的注意力分数与攻击成功率之间存在相关性。</p>
+<h3 id="转移攻击"><a href="#转移攻击" class="headerlink" title="转移攻击"></a>转移攻击</h3><p>探索AttnGCG生成的后缀的转移能力，主要分为目标转移和模型转移两类。</p>
+<p><strong>跨目标转移</strong><br>在不同攻击目标之间进行转移越狱，AttnGCG在各个基准LLMs上均持续优于GCG，Llama系列的平均提升为15.3%，Gemma系列为9.0%。这表明注意力损失使优化后的后缀能够有效捕捉模型的注意力，使其对新有害目标具有很强的适应性。</p>
+<p><strong>跨模型转移</strong><br>通过四个GPT-3.5版本、GPT-4-1106-Preview和Gemini-Pro作为黑箱LLMs，对比GCG，AttnGCG生成的对抗后缀显示出显著更强的转移能力。值得注意的是，Llama-2作为更安全的LLM，生成的后缀平均在ASR_GPT上表现优越，证明了从更强的LLM中生成的后缀具有更强的转移能力。</p>
+<h3 id="注意力分数可视化的例子"><a href="#注意力分数可视化的例子" class="headerlink" title="注意力分数可视化的例子"></a>注意力分数可视化的例子</h3><p>利用以下实例进一步说明了不同条件下的注意力分数转移过程：</p>
+<p><strong>初始化</strong>：以对抗性请求检测无效命令的情况下，注意力集中在目标上。</p>
+<p>**GCG (步骤60)**：生成的请求依然反应出拒绝反应的显著属性。</p>
+<p>**AttnGCG (步骤60)**：生成的响应显示兼职目标，成功诱导出目标内容。</p>
+<h3 id="注意力热图"><a href="#注意力热图" class="headerlink" title="注意力热图"></a>注意力热图</h3><p>图4展示了初始化、失败和成功的越狱情况其注意力得分的变化。通过这些图，可以洞察到训练过程中心理重定向的效果。<br><img src="/images/ecccaf17c77a8bcb36ca803f8b6c300823955dfab5938af5e4f7080de478c8e3.jpg"><br><img src="/images/03eb9c68c8140aa82554159161788159d128b5aaced10b8a7751bb712596fc1e.jpg">  </p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文针对基于transformer的大型语言模型（LLMs）的越狱攻击进行了研究。研究发现，攻击的有效性与模型的内部行为，特别是模型对敌意后缀（adversarial suffix）的注意力分配有密切关系。通过这一发现，研究者提出了一种新的方法——AttnGCG，旨在操控模型的注意力分数，促使模型将更多注意力转向敌意后缀，从而提升越狱攻击的成功率。</p>
+<p>实验结果表明，AttnGCG在直接攻击和转移攻击中的表现均显著优于传统的GCG方法，能够更有效地绕过LLMs的安全协议。此外，通过可视化模型的注意力分数，研究者提供了关于如何利用注意力分布进行越狱攻击的清晰洞见。这些研究成果不仅为攻击LLMs提供了新的策略，也为未来在这一领域的防御工作提供了有价值的参考。</p>
+<p>虽然AttnGCG在早期模型上表现良好，但在最新的LLMs（如Gemini-1.5-Pro-latest等）上，转移攻击的效果仍然不尽如人意，这需要进一步研究来解决这一问题。总的来说，本文的研究进展为LLMs的攻击和防御奠定了基础，促进了相关领域的未来研究。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-09040/" data-id="cm2qag6ph0006mxjl5nd6hnme" data-title="2410.0904" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2410-09804" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/26/2410-09804/" class="article-date">
@@ -162,7 +263,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-09804/" data-id="cm2qae73l0006j8jlcrey8lqf" data-title="北京航空航天大学提出多目标黑盒优化框架BlackDAN以实现大型语言模型的有效和上下文化的越狱攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-09804/" data-id="cm2qag6ph0007mxjlbenf7tdq" data-title="北京航空航天大学提出多目标黑盒优化框架BlackDAN以实现大型语言模型的有效和上下文化的越狱攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -312,7 +413,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-10414/" data-id="cm2qae73l0007j8jl258maycb" data-title="新加坡国立大学提出的基于大型语言模型的内容审核守护模型的可靠性校准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-10414/" data-id="cm2qag6ph0008mxjl0nzyak4b" data-title="新加坡国立大学提出的基于大型语言模型的内容审核守护模型的可靠性校准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -407,7 +508,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-11459/" data-id="cm2qae73l0008j8jl2w2o3fgs" data-title="莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-11459/" data-id="cm2qag6pi0009mxjl6sbc9h60" data-title="莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -534,7 +635,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-12855/" data-id="cm2qae73m0009j8jlf8et6k98" data-title="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-12855/" data-id="cm2qag6pi000amxjl8taz3utt" data-title="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -636,7 +737,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2qae73m000aj8jldc2d59iw" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2qag6pi000bmxjl53z43hs1" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -720,7 +821,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2qae73m000bj8jl4wwo2kxe" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2qag6pi000cmxjl9loo6uid" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -814,7 +915,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2qae73m000cj8jlb2fmh0l7" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2qag6pi000dmxjl1yb36trp" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -900,7 +1001,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2qae73m000dj8jl05x88cic" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2qag6pi000emxjl5yk09hvw" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1014,86 +1115,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2qae73m000ej8jlg9k986o2" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2410-15645" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-15645/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T11:45:26.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-15645/">北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在引言部分，研究者强调大型语言模型（LLMs）在语言理解和生成、机器翻译以及代码生成等多个领域的卓越性能。然而，尽管在提高LLMs的安全性方面做出了显著努力，研究表明，旨在保护这些模型的对齐机制仍然容易受到复杂的对抗性监狱攻击的影响。这些监狱攻击通过精心设计的提示绕过安全措施，诱导模型生成有害的响应。</p>
-<p>研究者指出，与其他监狱攻击方法相比，基于优化的技术通常能实现更好的攻击效果，并且被广泛研究和应用。然而，这些方法一般依赖于简单的目标模板来生成监狱后缀，这在某种程度上限制了它们的效果。它们往往忽视特别针对恶意内容的优化，导致生成的有害模板不足以真正引发有害响应。即使模型的初始输出契合优化目标，生成的监狱后缀也可能无法有效诱导模型生成有害内容。因此，研究者认为，单纯优化目标模板远不足以实现有效的监狱攻击。</p>
-<p>为解决这一问题，研究者提出了一种新颖的方法，同时考虑恶意问题上下文和目标模板在监狱后缀优化中的作用。他们设计了固定的有害模板，以处理恶意问题，并通过这一方法增强了对LLMs的误导性影响，力求通过恶意问题和目标句子共同作用，增强对模型的影响力。此外，在每个优化步骤中，他们评估前五个具有最小损失值的后缀，以选择最有效的一个进行下一次更新。这种方法结合了各种优化技术，包括重附后缀攻击机制，以最大化避免生成不一致内容，确保生成输出的一致性及有效性。</p>
-<p>综上所述，研究者的创新点主要体现在以下几个方面：考虑恶意问题上下文与目标模板的整合、采用多后缀评估策略强化更新过程，以及引入重附后缀机制确保有效序列生成。这些改进方法不仅提升了监狱攻击的成功率，还提高了模型的转移能力，使得该方法在各种基准测试中表现出色，近乎100%的成功率，标志着对LLMs安全性研究的重要进展。 </p>
-<p><img src="/images/8d4f0ffab1afa409d26970f28db610565a76ea6741cfa78dbff1875e3b339d03.jpg" alt="Figure 1"></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在这篇论文中，作者提出了一种名为SI-GCG的改进方法，旨在增强对大型语言模型（LLMs）的监狱越狱攻击的效果，尤其是针对恶意问题上下文和目标模板的优化。方法的主要步骤概述如下。</p>
-<h3 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h3><p>首先，作者定义了输入Token的形式，表示为 $x_{1:n},&#x3D;,{x_{1},x_{2},.,.,.,,x_{n}}$，其中 $x_{i},\in,{1,.,.,.,,V}$，$V$ 表示词汇表的大小。大型语言模型将Token序列映射到下一个Token的分布上，其表达形式为：</p>
-<p>$$<br>p\left(x_{n+1}\mid x_{1:n}\right)<br>$$  </p>
-<p>响应Token序列的概率可以表示为：</p>
-<p>$$<br>p\left(x_{n+1:n+H}\mid x_{1:n}\right)&#x3D;\prod_{i&#x3D;1}^{H}p\left(x_{n+i}\mid x_{1:n+i-1}\right)<br>$$  </p>
-<p>在这个过程里，恶意问题 $x_{1:n}$ 被简化为 $x^{Q}$，越狱 $x_{n+1:n+m}$ 被表示成 $x^{S}$，而整个越狱提示 $x_{1:n}\oplus x_{n+1:n+m}$ 表示为 $x^{Q}\oplus x^{S}$。此外，预定义的目标模板表示为 $x_{n+m+1:n+m+k}^{R}$，简记为 $x^{R}$。</p>
-<h3 id="SI-GCG攻击方法"><a href="#SI-GCG攻击方法" class="headerlink" title="SI-GCG攻击方法"></a>SI-GCG攻击方法</h3><p>作者的SI-GCG方法考虑了恶意问题和目标模板，以便于更有效地进行攻击。具体而言，作者建立了一个固定的有害模板来处理恶意问题，如图1所示。该过程被表示为 $x^{H Q}\oplus x^{Q}$，其中 $x^{H Q}$ 表示有害问题模板，而 $x^{Q}$ 表示初始恶意问题。</p>
-<p>相应的，有害响应的优化过程如下：</p>
-<p>$$<br>\mathcal{L}\Bigl((x^{H Q}\oplus x^{Q})\oplus x^{S}\Bigr)&#x3D;-l o g p\bigl(x^{H R}\oplus x^{R}\vert(x^{H Q}\oplus x^{Q})\oplus x^{S}\bigr)<br>$$  </p>
-<p>在生成的每个越狱后缀的更新迭代中，作者的方法包括了两个阶段的优化过程：第一阶段旨在寻找一个成功的攻击后缀及其对应的有害输出；第二阶段利用这一成功后缀作为新的初始化点，以优化其他对抗后缀。</p>
-<h3 id="自动最佳后缀选择策略"><a href="#自动最佳后缀选择策略" class="headerlink" title="自动最佳后缀选择策略"></a>自动最佳后缀选择策略</h3><p>为了提升更新效率，作者提出了一种自动最佳后缀选择策略。该策略不仅使用最小损失标准，还评估前五个最小损失的后缀生成的内容害性。这样做的目的是确保后缀更新始终在生成有害内容的方向上前进。这一过程可以被表达为：</p>
-<p>$$<br>C h e c k\big(G\big((x^{H Q}\oplus x^{Q})\oplus x^{S_{i}}\big)\big)<br>$$  </p>
-<p>其中 $\mathbf{G}(\cdot)$ 表示大型语言模型生成的内容判别函数，Check 函数用于判断生成的内容是否有害。当没有任何生成内容被认定为有害时，选择损失最小的后缀进行更新。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>SI-GCG方法通过结合恶意问题上下文与目标模板，显著提高了对大型语言模型的监狱越狱攻击的成功率，同时也提升了攻击的转移能力。通过采用优化更新策略和引入重后缀攻击机制，确保了每次更新都能够有效地生成有害输出，从而实现了接近100%的攻击成功率。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>实验部分使用了AI Singapore提供的数据集，数据集中包含50个恶意问题，所有结果均来自于在比赛网站上报告的分数。作为受害者模型，研究者使用了两种大型语言模型（LLM）：LLAMA2-7B-CHAT和VICUNA-7B-1.5。</p>
-<h3 id="攻击成功率在Track-1a"><a href="#攻击成功率在Track-1a" class="headerlink" title="攻击成功率在Track 1a"></a>攻击成功率在Track 1a</h3><p>在Track 1a阶段，研究者确保比较算法在设置迭代次数和批次大小方面性能良好。他们发现，GCG和I-GCG并未使用他们的问题模板，而是使用了其他不同的响应模板。Table 1展示了对于这两个模型的攻击成功率，结果显示，提出的SI-GCG方法明显领先于其他恶意破解方法。</p>
-<h3 id="攻击成功率在Track-1b"><a href="#攻击成功率在Track-1b" class="headerlink" title="攻击成功率在Track 1b"></a>攻击成功率在Track 1b</h3><p>在Track 1b阶段，由于比赛组织方对计算资源的限制，研究者将批次大小调整为32，并将最大迭代次数限制为100。在此阶段，由于某些问题被视为不可触碰，并引入了更多黑箱模型，研究者仅能从LLAMA2-7B-CHAT中获得结果。在结果中，SI-GCG方法继续在排行榜上领先，证明了其良好的攻击转移能力。以下是Track 1b的结果展示。</p>
-<p><img src="/images/9f94b5bf4fea74554792a05c6550b9e0b6c2b6f7f852206c310c7e285d1ec141.jpg" alt="Track 1b Attack Success Rates"></p>
-<h3 id="消融研究"><a href="#消融研究" class="headerlink" title="消融研究"></a>消融研究</h3><p>研究者提出了三种增强技术，以提高破解性能：有害问题和响应模板、更新的最佳后缀选择策略，以及重新后缀攻击机制。为了验证每个组件的有效性，他们在Track 1a的50个恶意问题上进行消融实验，使用LLAMA2-7B-CHAT和VICUNA-7B-1.5模型，GCG则作为基线。结果总结在Table 3中。分析结果表明，使用有害模板显著提高了两种模型的攻击成功率，特别是在攻击转移能力方面，同时还减少了平均步骤。</p>
-<h3 id="可变感叹号的攻击成功率"><a href="#可变感叹号的攻击成功率" class="headerlink" title="可变感叹号的攻击成功率"></a>可变感叹号的攻击成功率</h3><p>研究者发现，向优化后的后缀前加“!”可以显著增强攻击的转移能力。为了验证这一点，他们在优化后进行了对比测试，分析了使用的“!”数量对成功率的影响。结果显示，附加10个感叹号可最大化攻击的转移能力，但超过这个数量则会降低两种模型的成功率。以下是不同感叹号数量下的成功率结果。</p>
-<p><img src="/images/f9ec1c2015bdeaf3705559af3a73cfaf641043048ae73a61bc5f31261bf5aa44.jpg" alt="Variable Exclamation Marks Attack Success Rates"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在总结中，提出的SI-GCG方法为利用恶意问题背景和目标模板进行大型语言模型的越狱攻击提供了一种强有力的策略。该方法通过采用创新机制，如在每次迭代中评估前五个损失值以及整合重新后缀攻击机制，确保了可靠和有效的更新。SI-GCG在多个大型语言模型上达到了几乎完美的成功率，超越了现有的越狱技术。其与其他优化方法的兼容性进一步增强了其灵活性和影响力，标志着在大型语言模型安全研究领域的一项重要进展。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2qae73n000fj8jl3xl89vq2" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2qag6pj000fmxjl369gbn5u" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1141,6 +1163,10 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/26/2410-09040/">2410.0904</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-09804/">北京航空航天大学提出多目标黑盒优化框架BlackDAN以实现大型语言模型的有效和上下文化的越狱攻击</a>
           </li>
         
@@ -1154,10 +1180,6 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-12855/">香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-13236/">哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性</a>
           </li>
         
       </ul>
