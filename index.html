@@ -73,6 +73,89 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2410-18436" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-18436/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T09:39:35.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/26/2410-18436/">延世大学提出的英韩代码切换文本激活知识开关的有效性研究方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在引言部分，作者强调了代码切换（Code-switching, CS）现象的重要性，指出它是在多语言环境中常见的一种语言交替使用的行为。此现象赋予了交流以文化和语言层面的细微差别，而这些差别在单一语言翻译中可能会被忽略。研究表明，现代的多语言大型语言模型（LLMs）在理解CS方面表现出色，但尚未探讨CS在激活语言特定知识方面的作用。因此，文章的研究动机是探明代码切换在激活LLMs内部知识的有效性。</p>
+<p>本研究通过构建E N K O QA，一个合成的英韩代码切换问答数据集，并且将知识激活过程细分为两个任务（知识识别和知识利用），以此来评估LLMs在CS和英语文本中的表现。实验证明，相较于英语文本，CS能够更有效地激活LLMs内部的知识，特别是在特定的语言领域。此外，研究发现，LLMs的CS表现与其在各自语言的熟练程度存在相关性，CS能够在一些文化语境中更好地导入语言特定知识的可能性。</p>
+<p>创新点包括：</p>
+<ul>
+<li>提出了一个系统化的方法，分析了代码切换在激活LLMs知识方面的有效性，并将其划分为知识识别和知识利用两个任务。</li>
+<li>合成了一个高质量的英韩代码切换问答数据集E N K O QA，丰富了现有的CS数据资源。</li>
+<li>通过广泛实验分析表明，代码切换在某些语言特定领域下具备更大的优势，为多语言LLMs的知识激活提供了新的视角。</li>
+</ul>
+<p><img src="/images/fc9d7e7a113d211e38509df9a652706a00b10449a58823c189b881b73eb7a67e.jpg" alt="Figure 1"><br>（动机引导了本研究的不同维度，强调了代码切换与知识激活的潜在联系。）</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在本研究中，作者首先构建了E N K O QA，这是一个合成的英语-韩语代码切换问答数据集。该数据集的构建流程分为多个步骤，包括数据来源、自动翻译、候选生成、质量控制等。</p>
+<p>数据来源主要利用了两个与韩国文化相关的多项选择问答数据集：CLIcK和HAE-RAE。CLIcK数据集包含1995个多项选择问答对，涵盖文化和语言等11个子类别，主要来源于各种韩国官方考试和教科书。HAE-RAE数据集则是一个专注于捕捉韩国语言内在文化和上下文细微差别的基准数据集。</p>
+<p>在自动翻译步骤中，研究者使用GPT-3.5-turbo将韩语问答对翻译成英语。模型根据示例进行指导，确保翻译的准确性。</p>
+<p>候选生成阶段，研究者采取了不同百分比的韩语内容词嵌入到英语句子中，从而生成包含30%、50%、70%和90%韩语内容词的候选文本。具体而言，GPT-3.5-turbo被指示从韩语问题中识别出内容词，并根据指定的百分比将它们嵌入到英语问题中。通过这种方式，每个问题生成了总共八个代码切换候选文本。</p>
+<p>为了确保数据质量，两位有韩语和英语双语能力的合格注释人员会对生成的候选文本进行审核，选择符合英语语法结构且自然融合的候选者。</p>
+<p>在实验设置中，作者对两类最先进的多语种LLMs进行了分析：可通过API获取的专有LLMs（如GPT-3.5、GPT-4o和Claude 3.5 Sonnet），以及开源LLMs（如Solar、Llama 3和Gemma 2）。这些模型的耳目一新之处在于它们在代码切换任务中的表现被广泛分析。</p>
+<p>接下来的知识激活过程分为两个任务：知识识别和知识利用。知识识别任务评估模型在英语和代码切换环境下识别所需知识的能力。知识利用任务则评测模型是否能够基于识别出的知识进行合理推理，完成问答任务。 </p>
+<p>为确保评估的有效性，研究者进行了人类评估，依据真实性和帮助性对知识列表进行评分。此外，研究者还通过可视化图表呈现了不同模型在代码切换和英语设置下的问答准确率、知识利用等结果。对于知识利用任务，模型获取了已识别的知识后，依据这些知识选择正确答案并提供解释。所有的评估方法和实验设置经过严格的设计，目的是为了全面评估代码切换对多语种LLMs知识激活的影响。 </p>
+<p>总体而言，作者通过系统的数据构建和严谨的实验设计，探索了代码切换如何影响语言特定知识的激活，这一研究为多语言处理领域提供了新的视角和实证依据。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在本研究中，研究者们开展了一系列实验，以比较使用代码切换（CS）和英语提问时大型语言模型（LLMs）的表现。为了实现这一目标，他们构建了E N K O QA，一个涵盖英语和韩语的代码切换问答数据集，并对多种多语言LLMs进行了评估。</p>
+<h3 id="数据集构建"><a href="#数据集构建" class="headerlink" title="数据集构建"></a>数据集构建</h3><p>研究者从两个具有文化背景的韩语问答数据集（CLIcK和HAE-RAE）中获取数据。通过自动翻译和合成，他们创建了包含代码切换结构的问题。数据集的构建过程严格遵循了矩阵语言框架模型（Matrix Language Frame Model），确保了有效的代码切换文本生成。</p>
+<p><img src="/images/77e464365a0c5a3f353d78d95bbb1e8ab42204e6bcefcf9f0181994bc3e09f56.jpg" alt="Table 2: EnKoQA的样本数量"></p>
+<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>在实验中，研究者将多种多语言LLMs分为两组，分别是通过API访问的专有LLMs（如GPT-3.5和Claude 3.5）和开源的LLMs（如Solar和Llama 3）。他们对模型在英语和代码切换问题上的表现进行评估，使用相同的评估准则确保了实验的一致性。</p>
+<p><img src="/images/8ac76f53a269620af4823375ae297b329e7ebce7d2ae2ef00a67fadeff1ae8a2.jpg" alt="Table 8: CS和英语设置下多语言LLMs的知识利用表现"></p>
+<h3 id="整体表现"><a href="#整体表现" class="headerlink" title="整体表现"></a>整体表现</h3><p>实验结果显示，代码切换问题在多种模型中的表现普遍优于英语提问。在表现优异的模型（如GPT-4o和Claude 3.5）中，代码切换的优势尤为明显。具体来说，在语言特定的领域（如历史和传统），模型在代码切换设置中的准确性显著高于英语设置。</p>
+<p><img src="/images/d3557e51851c8fd8b0dbb75299e16d55585b2b1da446439dbc7ffffa1c54c7b7.jpg" alt="Table 9: None错误计数"></p>
+<h3 id="知识识别与利用"><a href="#知识识别与利用" class="headerlink" title="知识识别与利用"></a>知识识别与利用</h3><p>研究者将知识激活过程细分为知识识别（Knowledge Identification）和知识利用（Knowledge Leveraging）两个任务。在知识识别任务中，他们评估了模型在不同语言设置下识别所需知识的能力。在知识利用任务中，模型需根据识别到的知识作出正确的回答。</p>
+<p>在评估过程中，研究者观察到，使用代码切换提问时，模型所识别的知识更加真实且有用，尤其是在涉及文化背景的领域。评估结果不仅显示了代码切换对知识激活的积极影响，亦强调了学习者对语言特定知识的潜在触达能力。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>研究表明，代码切换（CS）在激活嵌入于大型语言模型（LLMs）中的语言特定知识方面具有显著的效果。通过利用两个以韩国文化为中心的问答数据集，研究构建了一个合格的英语-韩语代码切换问答数据集E N K O QA，并在多种多语种LLMs上进行了实验。</p>
+<p>实验结果显示，与英语文本相比，代码切换能够更有效地激活LLMs中的知识，特别是在语言特定领域。特别是，能够通过代码切换模式获得更高的回答准确率的模型往往在韩语的单语能力上表现不俗，这进一步强调了代码切换与韩语熟练度之间的关系。</p>
+<p>此外，该研究揭示了代码切换不仅能够在激活知识方面发挥作用，同时也是有效传达文化细微差别的策略。整体而言，代码切换被认为是一种有效的策略，用于从LLMs中挖掘和激活语言特定的知识。</p>
+<p>通过本研究，作者建议未来可以将代码切换的研究扩展到其他语言和文化的背景之中，以进一步探讨其在不同情境下的有效性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-18436/" data-id="cm2pzyq4r0008z2tf5if3115r" data-title="延世大学提出的英韩代码切换文本激活知识开关的有效性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2410-18491-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/26/2410-18491-1/" class="article-date">
@@ -99,7 +182,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18491-1/" data-id="cm2pyvyk70007m2tf6277g9db" data-title="2410.18491" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18491-1/" data-id="cm2pzyq4q0007z2tf2e2pe686" data-title="2410.18491" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -193,7 +276,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18856/" data-id="cm2pyvyk80009m2tf69rwc9yf" data-title="国家医学图书馆提出大语言模型在医学领域应用的系统性方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18856/" data-id="cm2pzyq4r000cz2tfciqf5up8" data-title="国家医学图书馆提出大语言模型在医学领域应用的系统性方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -294,7 +377,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2pyvyk9000dm2tfba9g7m9s" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2pzyq4r000bz2tf5mbd0isu" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -385,7 +468,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18906/" data-id="cm2pyvyk8000am2tf3gr1c6ss" data-title="斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18906/" data-id="cm2pzyq4s000dz2tfgbi7ah5f" data-title="斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -482,7 +565,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2pyvyk70006m2tf1zas754z" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2pzyq4q0006z2tfe68ee6we" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -643,7 +726,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2pyvyk9000cm2tf24z26y8s" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2pzyq4r0009z2tfajvucdnh" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -731,7 +814,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2pyvyk70008m2tf3mrf3bp0" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2pzyq4r000az2tfb8hrhyh8" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -825,7 +908,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2pyvyk60004m2tf4j1v71gt" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2pzyq4q0005z2tf9wpdhqhe" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -912,112 +995,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2pyvyk60003m2tfdr5idari" data-title="2401.0673" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2311-09096" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/25/2311-09096/" class="article-date">
-  <time class="dt-published" datetime="2024-10-25T06:14:49.000Z" itemprop="datePublished">2024-10-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/25/2311-09096/">清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在近年来，随着大型语言模型（LLMs）的发展，虽然它们在多种任务中表现出色，但其安全缺陷也逐渐显露出来。这些安全缺陷包括泄露用户数据、生成有害内容和促进非法活动等。特别是，越来越多的研究集中在破解这些模型的安全机制，即所谓的“越狱攻击”（jail breaking attacks），这种攻击能够绕过为LLMs设置的安全对齐。</p>
-<p>在这项研究的引言中，作者指出，大多数现有的研究主要关注于如何进行越狱攻击，而针对防御这些攻击的研究仍显不足。越狱攻击的成功往往源于模型在“有用性”（helpfulness）和“安全性”（safety）这两个目标之间的内在冲突。当前的模型优化方法，如SFT（监督微调）和RLHF（基于强化学习的微调），未能明确区分这两个目标的优先级，导致其在复杂和非分布的数据输入（out-of-distribution inputs）缺乏有效辨识能力。</p>
-<p>为了解决这一问题，作者提出了一种新的防御机制——“目标优先化”（goal prioritization），旨在通过明确指定安全性优先于有用性，从而有效减少越狱攻击的成功率。通过在训练和推理阶段实施目标优先化，研究表明该方法能够大幅降低越狱攻击的成功率，充分验证了作者的假设，即越狱攻击的成功与模型对目标优先级的认识密切相关。</p>
-<p>此外，研究还发现，尽管更强大的LLMs可能更容易受到越狱攻击，但它们也具备更强的能力去抵御这些攻击。这一发现为理解LLMs的能力与安全性之间的关系提供了重要的洞察。</p>
-<p>总的来说，这项研究旨在提升对越狱攻击及其防御的理解，同时为LLMs的可靠应用提供了新的思路和方法。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>该研究提出了一种通过“目标优先化”来抵御大型语言模型（LLMs）面临的监狱突破攻击的方法。目标优先化是在训练和推理阶段引入的，主要包括以下两个情境：没有训练（w&#x2F;o Training）和有训练（w&#x2F; Training）。</p>
-<h3 id="没有训练的情况下"><a href="#没有训练的情况下" class="headerlink" title="没有训练的情况下"></a>没有训练的情况下</h3><p>在没有训练（例如，使用API LLMs或没有开放源代码微调数据的LLMs）的情况下，研究人员设计了一种即插即用的提示方法。这种方法包括一个要求模型优先考虑安全而非有用的指令，和两个示例以引导LLMs进行判断。具体步骤如下：</p>
-<ol>
-<li>模型首先被提醒要优先考虑安全性。</li>
-<li>然后提供两个示例：<ul>
-<li>第一个示例是一个良性查询及其有用的响应；</li>
-<li>第二个示例是一个有害查询及其拒绝的响应。</li>
-</ul>
-</li>
-</ol>
-<p>在响应中，模型使用[内部思维]部分分析用户指令是否违反了优先需求，并在[最终响应]中提供相应的答复。</p>
-<h3 id="有训练的情况下"><a href="#有训练的情况下" class="headerlink" title="有训练的情况下"></a>有训练的情况下</h3><p>在训练可用的情况下（即能够访问模型权重和微调数据），研究人员将目标优先化融入训练实例，以便模型能够更好地遵循优先化要求。为了使模型理解这两种目标优先化，研究设计了两种相对立的生成实例：</p>
-<ul>
-<li><p>当用户查询为有害时，模型与两种目标优先化指令配对：</p>
-<ul>
-<li>当与优先考虑有用性而非安全的指令配对时，模型应生成有用但不安全的响应。</li>
-<li>当与优先考虑安全性而非有用性的指令配对时，模型应生成安全但可能不太有用的响应。</li>
-</ul>
-<p>这会生成数据集 $D_{1}&#x3D;{(x_{\bar{b}},g_{h},y_{h,\bar{s}}),(x_{\bar{b}},g_{s},y_{\bar{h},s})}$。</p>
-</li>
-<li><p>当用户查询为良性时，两种目标优先化指令可能导致相同的安全且有用的响应，因此会随机选择一个指令 $g_{r}$ 配对良性查询，得到数据集 $D_{2}&#x3D;{(x_{b},g_{r},y_{h,s})}$。</p>
-</li>
-</ul>
-<p>此外，为了促进模型对目标优先化的理解，研究利用ChatGPT生成[内部思维]部分，让模型分析用户查询与目标优先化要求之间的关系。</p>
-<p>训练期间所采用的标准交叉熵损失函数为：</p>
-<p>$$<br>\begin{align*}<br>&amp;\mathcal{L}&#x3D;-,\displaystyle\frac{1}{|D_{1}|}\sum_{i&#x3D;1}^{|D_{1}|}\log P(y_{h,\bar{s}}^{i},t_{h}^{i}|x_{b}^{i},g_{h};M)\<br>&amp;{\phantom{m m m m m}-,\displaystyle\frac{1}{|D_{1}|}\sum_{i&#x3D;1}^{|D_{1}|}\log P(y_{h,s}^{i},t_{s}^{i}|x_{b}^{i},g_{s};M)\<br>&amp;{\phantom{m m m m m m}-,\displaystyle\frac{1}{|D_{2}|}\sum_{i&#x3D;1}^{|D_{2}|}\log P(y_{h,s}^{i},t^{i}|x_{b}^{i},g_{r}^{i};M)}<br>\end{align*}<br>$$</p>
-<h3 id="整体框架图"><a href="#整体框架图" class="headerlink" title="整体框架图"></a>整体框架图</h3><p><img src="/images/475b31255f0be4b055d6184980c896dbe9d99036f0891318b9d9cf16412997ac.jpg"></p>
-<p>通过上述训练过程，模型可以在推理阶段仅添加 $g_{s}$ 指令以确保安全优先化要求。在输出时，开发者亦可隐藏[内部思维]，仅向用户展示[最终响应]。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在这一部分，研究团队对他们提出的目标优先化方法进行了详尽的实验评估，以验证其在防御监狱攻击方面的有效性。</p>
-<h3 id="监狱攻击测试集"><a href="#监狱攻击测试集" class="headerlink" title="监狱攻击测试集"></a>监狱攻击测试集</h3><p>研究人员根据第二章中介绍的监狱攻击方法，设计了一个测试集。最终测试集包含50个监狱攻击提示和20个最具攻击成功率的有害问题，由此生成的测试样本总数达到1,000个。</p>
-<h3 id="训练集"><a href="#训练集" class="headerlink" title="训练集"></a>训练集</h3><p>在有训练的情况下，研究团队从Ultra Feedback收集了10,000个良性查询并配对相应的GPT-4响应。此外，从AdvBench中获得500个有害指令，并将它们与监狱攻击提示进行随机配对。为了确保训练集中不包含任何监狱攻击提示，研究者精心设计了训练实例以支持目标优先化的要求。</p>
-<h3 id="评估的LLMs"><a href="#评估的LLMs" class="headerlink" title="评估的LLMs"></a>评估的LLMs</h3><p>在无训练的设置中，研究团队评估了包括GPT-3.5-turbo-0613和GPT-4-0613等API基础的LLM，以及Vicuna-7B-v1.3、Llama2-7B-Chat和Llama2-13B-Chat等开源模型。而在有训练的设置中，则使用了Llama2-7B和Llama2-13B作为基础模型。</p>
-<h3 id="基准测试"><a href="#基准测试" class="headerlink" title="基准测试"></a>基准测试</h3><p>在无训练的设置中，研究人员将他们的方法与没有额外防御技术的简单LLM进行了比较，同时也评估了Self-Reminder的方法。对于有训练的情况，基准测试比较了他们的方法与只使用良性查询的SFT方法，以及将监狱攻击查询与安全拒绝响应结合使用的对齐SFT方法。</p>
-<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>为了评估ASR，研究团队采用了一种经过微调的RoBERTa模型，这是一种在安全响应检测中具有高效性的工具。对于LLMs的整体性能则通过对比它们在100个良性查询上的表现来衡量。</p>
-<h3 id="无训练的结果"><a href="#无训练的结果" class="headerlink" title="无训练的结果"></a>无训练的结果</h3><p>研究结果显示，目标优先化方法在防御监狱攻击方面表现出色，显著降低了ChatGPT的ASR，从66.4%减少到3.6%。该方法在开源模型中同样表现良好，相较于Self-Reminder，ASR也显著降低，且模型的整体性能保持在可接受的范围内。</p>
-<p><img src="/images/492d50a113c0d2c9271483a01c9747fe9c95f71ad7c365e13bb5a4088495ac95.jpg"></p>
-<h3 id="有训练的结果"><a href="#有训练的结果" class="headerlink" title="有训练的结果"></a>有训练的结果</h3><p>在有训练的结果中，Llama2-7B和Llama2-13B的ASR分别降低到4.6%和6.6%。这些结果表明，训练过程中融入目标优先化能有效压制监狱攻击，但不会对模型的整体性能形成显著影响。</p>
-<p><img src="/images/6c6caa931ffc8fbb9913c95b0d3d4721612e14122592a146adfc6978c0c9d928.jpg"></p>
-<h3 id="消融研究"><a href="#消融研究" class="headerlink" title="消融研究"></a>消融研究</h3><p>研究团队进行了消融实验，以评估各组成部分的有效性。当去掉内部思考部分或去掉训练中的有害响应时，模型的防御能力明显下降，这表明内部思考对理解目标优先化要求至关重要。</p>
-<ul>
-<li>结果分析表明，增加有害响应的训练实例有助于模型更好地遵循目标优先化要求。</li>
-<li>研究还发现目标优先化方法在处理未知类型的监狱攻击方面表现优异，即使没有特定的监狱攻击样本纳入训练。</li>
-</ul>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>实验结果表明，目标优先化方法在各类监狱攻击中均展现出了强大的防守能力，并为进一步探索LLM的安全性与能力之间的关系提供了重要的见解。</p>
-<p><img src="/images/16b81bd78c363cda6f409090a9f47d39a4ac65cd53fe4289f081a89ef2bd46b7.jpg"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>该研究提出了通过目标优先化来防御大语言模型（LLMs）免受监狱突破攻击的有效方法。研究人员假设，监狱突破成功的核心原因在于模型缺乏对目标优先级的理解。具体而言，LLMs在生成响应时往往面临提供帮助和确保安全之间的内在冲突。为了应对此问题，研究提出在训练和推理阶段集成目标优先化，旨在增强模型对安全性的重视。</p>
-<p>经过广泛的实验验证，该方法在降低攻击成功率（ASR）方面表现出色。例如，通过添加目标优先化，ChatGPT的ASR从66.4%降至3.6%；Llama2-13B的ASR则从71.0%降至6.6%。这些结果表明，即使在没有监狱突破样本的情况下，目标优先化的应用仍能显著提升模型的防御能力。此外，相较于较弱的模型，较强的模型（如GPT-4）在接受适当的防御机制时，可以更有效地抵御监狱突破攻击。</p>
-<p>研究的结论不仅为理解监狱突破攻击的成因提供了新视角，也加强了对LLMs能力与安全之间关系的理解。通过引入目标优先化的机制，该研究为构建更加安全和可靠的语言模型铺平了道路，同时也为未来在此领域的研究提供了有价值的参考。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2pyvyk40001m2tfdx99e2ko" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2pzyq4p0001z2tf4frqfzf0" data-title="2401.0673" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1065,6 +1043,10 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/26/2410-18436/">延世大学提出的英韩代码切换文本激活知识开关的有效性研究方法</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-18491-1/">2410.18491</a>
           </li>
         
@@ -1078,10 +1060,6 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-18906/">斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-18469/">加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力</a>
           </li>
         
       </ul>
