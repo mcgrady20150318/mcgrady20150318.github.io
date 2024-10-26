@@ -73,6 +73,80 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2410-04447" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-04447/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T15:36:14.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/26/2410-04447/">印度理工学院鲁尔基分校提出无训练的注意力重加权方法以减少生成模型中的不安全内容</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着深度学习技术的进步，生成模型（特别是文本到图像扩散模型）在内容生成领域取得了显著的成就。然而，近期的研究揭示了这些模型在生成不安全或有害内容方面的令人担忧的趋势。例如，当以与裸体或裸露个体相关的提示词作为输入时，这些模型生成的结果往往存在偏见，尤其是倾向于表现女性的裸体或暗示性姿态。这样的结果不仅反映了训练数据中的偏见，也在社会背景中可能助长了对女性的物化，散布了系统性的性别偏见。</p>
+<p>研究团队分析了现有的安全过滤机制的低效率、模型对“监狱越狱”提示的脆弱性，以及现有概念去除方法无法有效限制生成内容的局限性。这些问题共同表明，在确保生成模型安全使用方面依然存在明确的需求。</p>
+<p>为了应对这些挑战，研究团队提出了一种创新的方法，即使用注意力重新加权机制，在推理过程中动态调整模型的注意力图，以消除不安全概念。这一方法不但降低了对训练的依赖，还避免了额外的训练流程，能够更灵活地应对多个不安全内容的同时去除，因此具有较好的可扩展性。通过对比现有的消融方法，团队在定量和定性的评估中取得了良好的效果，为内容限制提供了新的思路。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究提出了一种基于注意力重加权的无训练方法，以削弱生成中不安全内容的影响，同时保持生成安全内容的性能。该方法由两个部分组成：提示验证和局部编辑。</p>
+<p>在提示验证阶段，研究者使用了Mistral-8x7B模型对输入提示进行安全性检测。对于被评估为不安全的提示，模型会进行修改，以确保其符合安全标准。例如，”一个携带机枪的孩子”的提示可以被修改为”一个携带玩具的孩子”。该修改有助于降低生成不安全内容的风险。</p>
+<p>在注意力重加权阶段，研究者通过增加与安全内容相关的Tokens的重要性，以提升安全提示的生成效果。具体而言，如果原始提示中包含不安全的Tokens，这些Tokens在新的提示中会被安全的Tokens替代，同时通过适当的权重调整提升这些安全Tokens在生成过程中的影响力。通过对注意力图的规范化和比例缩放，实现信息的优先权重分配，以确保生成的图像更加符合安全标准。</p>
+<p><img src="/images/bd9211b0152635b4b073ec42680f75bb3e9af03f6daf23bc1ebc28f3a0dc7b4c.jpg"><br>这段方法展示了如何通过替换不安全的Tokens与安全的Tokens，调整注意力图来实现更安全的图像生成。</p>
+<p>该方法的设计旨在具备扩展性，能够并行处理多种不安全内容的去除，而无需消耗大量计算资源或进行额外的微调。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>实验部分主要评估了不同方法在生成不安全内容上的表现，包括直接提示和越狱提示。研究者选择了“孩子与枪”和“裸露女性”这两个直接提示来评估暴力和色情内容的生成情况。此外，越狱提示则并不直接提及枪支或裸露，但仍可能导致生成不当内容。</p>
+<p>实验中，研究者为每个指标采样了100个图像，以应对扩散去噪过程的随机性。最终结果是基于100个图像的平均值，具体的提示内容在附录中列出。原始基线方法最初是通过LoRA对Stable Diffusion v1-4模型进行微调。然而，此方法导致图像严重失真，因此最后选择了禁用安全过滤器的标准Stable Diffusion模型作为基线。</p>
+<p>实验中使用了多种评估指标，包括CLIP评分、图像奖励模型输出、FID分数以及人类评估。CLIP评分用于测量生成图像中目标概念的相关性，得分越低表示不安全概念的消除越成功；而图像奖励模型则基于人类偏好对生成的图像进行评分，得分越高表示提示的对齐情况越好；FID分数用于评估生成安全图像与原始图像的分布相似性，低FID分数表示图像质量的更好保留。此外，通过人类评估直接评估了消融的成功率。</p>
+<p>在不同方法下的实验保持一致，覆盖了包括暴力和色情内容的多个类型，具体结果见下方表格。  </p>
+<p><img src="/images/7a5a3251f0891abd98f912ebc0d4c758a5b68954cd08f23a2af2a626ab655aae.jpg">  </p>
+<p>为支持研究的有效性，研究者还进行了一项用户研究，邀请了50名来自不同背景的参与者进行评估，确保方法的可辨识性。参与者需要判断每幅图像是否包含被移除的概念，且对每幅图像进行了分类评分 。</p>
+<p>表格记录了不同方法生成的图像评估结果，显示出各个实验方法的表现差异。  </p>
+<p><img src="/images/9ae72bae28550ca9a6da0606d809b1404dedcfb05260a4c9a68c14aca1a12978.jpg">  </p>
+<p>另外，研究者还展示了应用各种技术生成的图像对比，强调了每种方法下图像生成的特点。  </p>
+<p><img src="/images/d5d6bf22cd25db58e7ae53b950dbd3be68fe4b3864e9b9ab38071e5754637250.jpg">  </p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这项研究中，作者们提出了一种新颖的训练免疫方法，通过关注重加权技术，有效地抑制生成模型产生的不安全内容。在比较多种先进的消融方法后，作者们发现现有的方法在处理直接和狡猾的触发提示时，效果各有不同，但均存在一定的局限性。这些局限主要体现在无法完美消除目标概念，以及在某些情况下可能导致安全内容的误分类。</p>
+<p>通过精准的提示验证和关注重加权，作者们的方法能够动态调整跨注意力图，以降低不安全内容的生成可能性，而不影响安全概念的生成。实验结果表明，他们的方法比传统的消融方法在保护生成内容质量方面表现更佳，尤其是在处理容易被越狱的提示时。</p>
+<p>然而，研究也认识到该方法的局限性，尤其是其对大语言模型（LLM）准确性的依赖，可能导致对不安全提示的检测和修改出现误判。此外，研究在明确处理显性有害内容的同时，也意识到对潜在隐性偏见内容的监管不足。因此，作者们呼吁未来的研究应提高对隐性偏见的防范能力，推动安全内容生成的广泛标准化评估。</p>
+<p>总之，本研究不仅展示了通过新方法减少生成模型不安全内容的潜力，也呼应了在快速发展的生成性AI领域中需要更严格、更全面的内容监控与伦理审查的必要性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-04447/" data-id="cm2qbqgjv00063pjlacq86sjd" data-title="印度理工学院鲁尔基分校提出无训练的注意力重加权方法以减少生成模型中的不安全内容" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2410-09804" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/26/2410-09804/" class="article-date">
@@ -183,7 +257,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-09804/" data-id="cm2qbjuly0007y9jl4bhpdp78" data-title="北京航空航天大学提出一种多目标黑箱优化框架BlackDAN用于有效的上下文劫持大型语言模型" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-09804/" data-id="cm2qbqgjv00083pjl4bkv38bx" data-title="北京航空航天大学提出一种多目标黑箱优化框架BlackDAN用于有效的上下文劫持大型语言模型" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -267,7 +341,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-09040/" data-id="cm2qbjuly0006y9jlc50h46g9" data-title="加州大学圣克鲁斯分校提出了一种基于注意力操控的增强型大语言模型越狱攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-09040/" data-id="cm2qbqgjv00073pjle9bc4ova" data-title="加州大学圣克鲁斯分校提出了一种基于注意力操控的增强型大语言模型越狱攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -417,7 +491,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-10414/" data-id="cm2qbjuly0008y9jlaocrhsd3" data-title="新加坡国立大学提出的基于大型语言模型的内容审核守护模型的可靠性校准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-10414/" data-id="cm2qbqgjv00093pjl1anuhbd9" data-title="新加坡国立大学提出的基于大型语言模型的内容审核守护模型的可靠性校准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -512,7 +586,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-11459/" data-id="cm2qbjuly0009y9jldmcpfd9b" data-title="莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-11459/" data-id="cm2qbqgjv000a3pjlf85rh72k" data-title="莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -639,7 +713,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-12855/" data-id="cm2qbjuly000ay9jl0bcr35nb" data-title="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-12855/" data-id="cm2qbqgjw000b3pjl9e8g05wv" data-title="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -741,7 +815,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2qbjum0000ly9jl8fm8c5mb" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2qbqgjw000c3pjldk12a2p2" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -825,7 +899,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2qbjulz000by9jlc5m369gf" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2qbqgjw000d3pjl9g9z3nbn" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -919,7 +993,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2qbjulz000cy9jl0l9eb5bn" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2qbqgjw000e3pjl8x1zemtj" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1005,121 +1079,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2qbjulz000dy9jl18329ubz" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2410-15362" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-15362/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T13:00:48.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-15362/">清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在现代人工智能领域，尤其是在大型语言模型（LLMs）中，模型的对齐训练一直是一个重要话题。对齐的LLMs旨在遵循人类的道德标准，并拒绝生成有害或有毒的内容。这些模型在处理各种任务中表现出色，然而，研究发现它们对jailbreak攻击依然脆弱。Jailbreak攻击通常通过特定的提示操纵模型，以引导其生成应该被避免的有害内容，从而揭示了LLMs在安全性方面的固有弱点。这一现象引发了对如何识别和修复LLMs安全漏洞的广泛关注，以防止其被不当使用。</p>
-<p>在已有的研究中，Zou等人提出了一种名为GCG（Greedy Coordinate Gradient）的攻击方法，将jailbreak问题形式化为离散的Token优化问题，通过迭代过程寻找能够突破LLMs防御的后缀。然而，该方法在计算效率和攻击效果上表现不佳，导致在较大的计算成本下成功率有限。因此，本文的研究动机在于改进GCG方法，提出一种更高效的新方法——Faster-GCG，旨在以更低的计算成本取得更好的攻击成功率。</p>
-<p>本研究的创新点体现在以下几个方面：</p>
-<ol>
-<li><strong>瓶颈识别</strong>：通过深入分析GCG方法，识别出其在离散优化过程中的多个瓶颈，指出原有方法在梯度信息利用和Token间距假设等方面的缺陷。</li>
-<li><strong>技术改进</strong>：提出了三种简单有效的技术以提高jailbreak攻击的效率，这包括引入与Token间距离相关的正则化项、采用贪婪采样替代随机采样，以及通过历史记录避免自循环问题。</li>
-<li><strong>实验证明</strong>：对多种开放源代码的对齐LLMs进行实验证明，Faster-GCG在计算成本减少至原来1&#x2F;10的情况下显著提高了攻击成功率，这一方法在封闭源LLMs如ChatGPT中的迁移能力也得到了验证。</li>
-</ol>
-<p>通过这些创新，本研究为了解和改善LLMs的安全性提供了前景广阔的视角，并为未来的研究提供了重要基础。 </p>
-<p><img src="/images/cf530afc3b27711b58fd250a74516a41350971552d6e1e76cbc841e5fea96558.jpg" alt="Figure"></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在本节中，研究者们提出了一种高效的离散优化方法，称为Faster-GCG，以提高对大语言模型（LLMs）进行越狱攻击的效率。Faster-GCG基于GCG方法，首先对越狱问题进行了形式化，然后详细介绍了GCG的工作原理，并讨论了GCG的关键局限性，最后引入了Faster-GCG中的改进技术。</p>
-<h3 id="越狱问题的形式化"><a href="#越狱问题的形式化" class="headerlink" title="越狱问题的形式化"></a>越狱问题的形式化</h3><p>设定输入为由分词器生成的Token序列。令$x_k \in {1, 2, \ldots, m}$表示词汇表中单个Token，$\mathbf{x}$或$\mathbf{x}<em>{1:l}$表示长度为$l$的Token序列。LLM被视为从Token序列$\mathbf{x}</em>{1:l}$映射到下一个Token的概率分布，即:</p>
-<p>$$<br>p_{\theta}(x_{l+1} \mid \text{emb}(\mathbf{x}_{1:l})),<br>$$</p>
-<p>其中$p_{\theta}(\cdot)$表示LLM的输出概率，$\text{emb}(\cdot)$表示将每个Token映射为维度为$d$的向量的嵌入函数。为简便起见，在大多数情况下省略$\text{emb}(\cdot)$。</p>
-<p>如下图所示，越狱任务可以形式化为一个离散优化问题。给定系统提示$\mathbfcal{X}^{(s_1)}$、用户请求$\mathbfcal{X}^{(u)}$和连接系统提示$\mathbfcal{X}^{(s_2)}$，目标是找到一个固定长度为$n$的对抗后缀$\mathbfcal{X}^{(a)}$，使得交叉熵损失$\mathcal{L}(\mathbf{x}^{(a)})$最小化，在此损失中，LLM的输出与预定义的优化目标$\mathbf{x}^{(t)}$（有害内容）之间进行比较。</p>
-<p>$$<br>\begin{align*}<br>\mathcal{L}(\mathbf{x}^{(a)}) &#x3D; -\log p_{\theta}(\mathbf{x}^{(t)} \mid \mathbf{x}^{(s_1)} \oplus \mathbf{x}^{(u)} \oplus \mathbf{x}^{(a)} \oplus \mathbf{x}^{(s_2)})<br>\end{align*}<br>$$</p>
-<p>该过程将优化目标转化为寻找最小化该损失的对抗后缀的问题。</p>
-<h3 id="GCG的初步介绍"><a href="#GCG的初步介绍" class="headerlink" title="GCG的初步介绍"></a>GCG的初步介绍</h3><p>GCG通过以下两步迭代过程寻求最小化上述目标来找到越狱后缀：</p>
-<ol>
-<li><p><strong>候选选择</strong>：GCG首先选择一组有前景的Token在后缀的每个位置进行替换，这通过计算损失函数$\mathcal{L}$对一热编码Token指示矩阵的梯度来实现：</p>
-<p>$$<br>G &#x3D; \frac{\partial \mathcal{L}}{\partial \mathbf{E}} \in \mathbb{R}^{m \times n}.<br>$$</p>
-<p>对于后缀的每个Token位置$i$，GCG识别最可能降低损失的候选Token $\mathcal{X}_{i}$，依赖于梯度信息：</p>
-<p>$$<br>\mathcal{X}<em>{i} :&#x3D; \text{Top}-K(-\mathbf{g}</em>{i}).<br>$$</p>
-</li>
-<li><p><strong>精确评估替换</strong>：在获得$\mathcal{X}<em>{i}$后，GCG生成后缀候选$\tilde{x}</em>{1:n}^{(b)}$，通过复制当前后缀并从前K个替换中随机选择一个替换Token$\tilde{x}_{i}^{(b)}$，计算每个候选的精确损失，并选择具有最低损失的替换Token，用于下一次迭代。</p>
-</li>
-</ol>
-<h3 id="GCG的关键限制"><a href="#GCG的关键限制" class="headerlink" title="GCG的关键限制"></a>GCG的关键限制</h3><p>研究者发现GCG在计算开销和越狱性能上存在显著的高成本，且效果有限。分析显示关键限制包括：</p>
-<ul>
-<li>近似误差依赖于不切实际的假设。</li>
-<li>从前K梯度中随机采样导致低效的优化。</li>
-<li>自环问题使得算法在迭代中可能返回到之前的状态，导致效率降低。</li>
-</ul>
-<h3 id="Faster-GCG"><a href="#Faster-GCG" class="headerlink" title="Faster-GCG"></a>Faster-GCG</h3><p>为了解决上述限制，Faster-GCG引入了三种简单但有效的技术：</p>
-<ul>
-<li><p><strong>附加正则化项</strong>：在候选Token选择过程中引入与Token间距相关的正则化项，通过权重$\hat{g}_{k}$改进梯度估计，以提高Token选择的准确性：</p>
-<p>$$<br>\hat{g}<em>{k} &#x3D; \frac{\partial \mathcal{L}}{\partial e</em>{k}} + w \cdot |X_{j} - X_{k}|.<br>$$</p>
-</li>
-<li><p><strong>贪婪采样</strong>：用确定性贪婪采样替代随机采样，按$\hat{g}$的值从高到低顺序选择，进一步加快搜索的收敛速度。  </p>
-</li>
-<li><p><strong>避免自环问题</strong>：保持已评估后缀的历史记录，过滤掉重复的状态，从而防止迭代中的自环。</p>
-</li>
-</ul>
-<p>通过这些改进，Faster-GCG有效提高了越狱攻击的性能。本节的伪代码如下所示：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Require: 初始后缀 $x_&#123;1:n&#125;$，迭代次数 $T$，损失函数 $\mathcal&#123;L&#125; := \mathcal&#123;L&#125;_&#123;CW&#125;$，批量大小 $B$，历史记录集 $\mathcal&#123;S&#125; := \emptyset$</span><br><span class="line"></span><br><span class="line">loop $T$ 次</span><br><span class="line">    for $i=1$ to $n$ do</span><br><span class="line">        计算正则化梯度 $-\hat&#123;g&#125;^&#123;(i)&#125;$ </span><br><span class="line">        $b=0$ </span><br><span class="line">        while $b&lt;B$ do</span><br><span class="line">            $\tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125; := x_&#123;1:n&#125;$</span><br><span class="line">            更新 $\tilde&#123;x&#125;_&#123;i&#125;^&#123;(b)&#125;$ 采用贪婪采样</span><br><span class="line">            if $\tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125; \notin \mathcal&#123;S&#125;$ then</span><br><span class="line">                计算损失 $\mathcal&#123;L&#125;(\tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125;)$</span><br><span class="line">                $S = S \cup \&#123; \tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125; \&#125;$ </span><br><span class="line">                $b = b + 1$</span><br><span class="line">        $x_&#123;1:n&#125; := \tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b^&#123;*&#125;)&#125;$，其中 $b^&#123;*&#125;=\arg\min_&#123;b&#125; \mathcal&#123;L&#125;(\tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125;)$</span><br><span class="line">        </span><br><span class="line">return 优化后的后缀 $x_&#123;1:n&#125;$</span><br></pre></td></tr></table></figure>
-
-<p>通过这些策略，Faster-GCG能够在效率和效果上都取得提升，有效地挖掘LLMs的脆弱性。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在本研究中，Faster-GCG方法的有效性通过一系列实验进行了验证，实验包括开放源代码与封闭源代码的大型语言模型（LLMs）的针对性攻击。</p>
-<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>模型方面，研究团队测试了Faster-GCG在四个大型语言模型上的表现，包括两个开放源代码模型：Vicuna-13B和Llama-2-7B-chat，以及两个封闭源代码模型：GPT-3.5-Turbo和GPT-4。实验使用了JBB-Behaviors数据集，该数据集包含100个精心设计的行为场景，用于评估对大型语言模型的攻击成功率（ASR）。</p>
-<h3 id="白盒设置下的结果"><a href="#白盒设置下的结果" class="headerlink" title="白盒设置下的结果"></a>白盒设置下的结果</h3><p>在白盒设置中，Faster-GCG的大幅改进在于，无论是在计算成本上还是在攻击成功率上都显著超越了原始的GCG方法。具体而言，在Llama-2-7B-chat模型上，Faster-GCG的ASR提高了31%，而对于Vicuna-13B模型，ASR的提升为7%。为了进一步验证效果，实验还展示了Faster-GCG在相同计算成本下明显更高的攻击成功率。</p>
-<p>以下是Llama-2-7B-chat和Vicuna-13B在JBB-Behaviors数据集上的结果（表格省略）：</p>
-<h3 id="黑盒设置下的结果"><a href="#黑盒设置下的结果" class="headerlink" title="黑盒设置下的结果"></a>黑盒设置下的结果</h3><p>Faster-GCG还展示了出色的转移能力。当Vicuna-13B模型生成的后缀被直接应用于封闭源代码模型时，Faster-GCG生成的后缀在封闭源代码模型中的表现优于GCG。这一结果表明，Faster-GCG所生成的后缀具有更好的通用性。</p>
-<p>以下是封闭源代码LLMs在黑盒设置下的结果（表格省略）：</p>
-<h3 id="消融研究"><a href="#消融研究" class="headerlink" title="消融研究"></a>消融研究</h3><p>为了更深入地了解Faster-GCG的改进效果，研究人员开展了消融研究，分别禁用不同的技术，以评估每种技术对ASR的影响。结果显示，距离正则化项的去除导致ASR下降14%，而消除自环预防措施带来了20%的ASR降幅，显示出避免冗余循环对有效优化的重要性。</p>
-<p>以下是Llama-2-7B-chat模型的消融研究结果（表格省略）：</p>
-<h3 id="损失对比"><a href="#损失对比" class="headerlink" title="损失对比"></a>损失对比</h3><p>在实验过程中，Faster-GCG和GCG的损失值曲线也进行了比较。Faster-GCG的损失值在整个迭代过程中始终低于GCG，表明其在离散优化效率上的提升。</p>
-<p>以下是GCG与Faster-GCG的损失曲线对比图（见图3）：</p>
-<p><img src="/images/60d9fd89502ef6c37ff6b78e745808dc121400f613dc3cc63a6bd5c8667b12d7.jpg" alt="Average loss comparison between GCG and Faster-GCG"></p>
-<p>通过这些实验，Faster-GCG在多个方面的有效性和效率得到了验证，展现了其作为一种竞争性方法的潜力。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文提出了Faster-GCG，一种优化且高效的对抗性越狱方法，针对大型语言模型（LLMs）。通过识别并解决原始GCG方法中的关键瓶颈，Faster-GCG在攻击成功率方面实现了显著提升，同时将计算成本降低了十倍。实验结果表明，Faster-GCG不仅在像Llama-2-7B-chat和Vicuna-13B等开源LLMs上超越了GCG，而且在应用于闭源模型时也表现出更好的转移能力。这些结果表明，尽管在使LLMs更好地遵循预期行为的努力中取得了进展，但对抗性越狱攻击仍然是一个关键的安全漏洞。Faster-GCG的卓越表现强调了需要持续改善LLMs的对齐能力，以应对这些风险。</p>
-<p>尽管如此，本文也指出了一些局限性。例如，与GCG相似，Faster-GCG优化的对抗性后缀在困惑度方面要高于自然语言，这使得通过基于困惑度的检测机制易于识别。此外，Faster-GCG没有在转移基础攻击设置中采用集成技术，这通常会显著提升黑盒攻击的攻击成功率。作者计划在未来的工作中继续致力于解决这些问题。</p>
-<p>最后，作者认为Faster-GCG可以作为基础的离散优化算法，适用于超越LLMs的多种模型，如文本到图像的扩散模型。这将有助于在不同领域中推动AI安全的更广泛理解和协作发展。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2qbjulz000ey9jl32vaaec7" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2qbqgjw000f3pjlahag3bma" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1167,6 +1127,10 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/26/2410-04447/">印度理工学院鲁尔基分校提出无训练的注意力重加权方法以减少生成模型中的不安全内容</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-09804/">北京航空航天大学提出一种多目标黑箱优化框架BlackDAN用于有效的上下文劫持大型语言模型</a>
           </li>
         
@@ -1180,10 +1144,6 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-11459/">莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-12855/">香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架</a>
           </li>
         
       </ul>
