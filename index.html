@@ -73,6 +73,92 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2410-13901" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-13901/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T13:10:10.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/26/2410-13901/">曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在引言部分，研究者探讨了大型语言模型（LLMs）在自然语言处理领域的重大进展，以及它们如何能够通过仅仅提供任务描述和少量示例实现人类语言的理解与生成。这些任务包括文本分类、问题回答、代码编写等，展现了LLMs在多个领域的广泛影响。然而，尽管LLMs的能力得到了显著提升，它们在应用中的安全性和可靠性仍然面临重大挑战。</p>
+<p>研究者指出，随着LLMs通过API的日益普及，新的脆弱性随之而来，尤其是在金融、医疗和法律等关键应用中，prompt hacking（诱导攻击）可能导致严重后果。因此，理解这些安全威胁及相关的防范措施至关重要。</p>
+<p>具体而言，研究者探讨了prompt hacking所涉及的三种主要类型：prompt jailbreak（越狱攻击）、prompt injection（注入攻击）和prompt leaking（泄露攻击）。这些攻击利用LLM的脆弱性来操控模型行为，产生无意或有害的输出。而这项研究的主要目标在于系统化地了解这些攻击技术及其防御方法，并评估当前流行LLM在应对这些攻击时的表现。</p>
+<p>创新点包括：</p>
+<ol>
+<li>研究者提出了一种新的系统框架，将LLM的响应分类为五个不同的类别，超越传统的二元分类，提供更细致的行为洞察，从而改善诊断精度并推动系统安全性与稳健性的有针对性增强。</li>
+<li>研究整合了已有文献，细致分析了prompt hacking的不同类型，明确了它们的特征与目标，从而为未来的安全性研究奠定基础。</li>
+</ol>
+<p>以下是一张图，总结了LLMs面临的主要安全威胁与挑战。<br><img src="/images/467e6a2ed15210681d13db8c1b5d090b5022f7a5cbafaea438fde3642059a39a.jpg"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>该研究深入分析了大语言模型（LLMs）在面对提示攻击时的行为，尤其是对三种主要类型的提示攻击：提示越狱、提示注入和提示泄漏。</p>
+<p>首先，该研究构建了一些关于提示攻击的“非法问题”，包括创建爆炸装置的成分、在线赌场盗窃的计划、生成恶意代码等，以便评估不同LLMs在面对恶意提示时的反应。实验设计考虑了每种攻击方法，结合恶意查询和特定的构造技术，以评估AI系统的响应能力。</p>
+<h3 id="提示越狱攻击结果"><a href="#提示越狱攻击结果" class="headerlink" title="提示越狱攻击结果"></a>提示越狱攻击结果</h3><p>通过“DAN”（Do Anything Now）和“Pretending”两种方法进行的越狱攻击测试显示了生成AI模型在应对对抗性提示时的安全性差异。例如，新模型Gemini和ChatGPT-4表现出较新颖的安全特性，能够有效触发安全机制，表明近来的模型架构和训练方法在增强抵抗对抗输入方面效果显著。</p>
+<p>越狱提示的有效性在不同模型之间存在显著差异。部分模型如Microsoft Copilot在处理“DAN”提示时，几乎完全无法应对过长的输入，这表明模型在输入处理上存在特定的设计限制。模型应对特定攻击类型的成功率差异表明了对抗防御的复杂性。</p>
+<h3 id="提示注入攻击结果"><a href="#提示注入攻击结果" class="headerlink" title="提示注入攻击结果"></a>提示注入攻击结果</h3><p>在提示注入攻击的实验中，包括直接和间接的攻击方式。结果显示，相比于间接方法，直接方法的成功率更高。例如，ChatGPT-3.5对直接提示注入的攻击成功率高达100%，而ChatGPT-4表现出强大的抵抗性，大约86%的情况下触发了安全机制。模型在防御注入攻击方面的表现显示了需要继续改进的空间。</p>
+<h3 id="提示泄漏攻击结果"><a href="#提示泄漏攻击结果" class="headerlink" title="提示泄漏攻击结果"></a>提示泄漏攻击结果</h3><p>研究直接询问模型关于提示泄漏的内容，测试各大语言模型对于此类攻击的防御能力。从结果来看，Gemini模型在处理提示泄漏时出现了部分成功和无关输出的情况，Microsoft Copilot则在该方面表现出100%的无关输出，反映出在这方面的显著局限性。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过对三种提示攻击的分析，研究展示了不同LLMs在应对对抗性输入时的关键强项和弱项。这些结果揭示了LLMs在设计和实施安全措施方面的现有不足和未来的改进机会。研究强调了在多种应用场景中实现可靠性能的必要性。</p>
+<p>以下是对应的图表展示：</p>
+<p><img src="/images/0bce93d717209a21939dda0c35c8efb797f374923fdd169d3c326fe62fee44ef.jpg" alt="Prompt Hacking Types Comparison"></p>
+<p>表格可视化了三种提示攻击的相互比较，显示了各类攻击的特征与防御措施之间的关系。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本文分析了流行的 LLM 在面对针对其进行的 prompt hacking 攻击时的行为，并评估了它们抵御这些攻击的有效性。研究中评估的各种 LLM 的特征如表 3 所示。</p>
+<p>在研究中，将 prompt 定义为通常为问题的指令或任务，并对其进行修改以进行 prompt hacking。攻击设计结合了有害查询（例如：“如何盗取一辆车”）与特定的构建技术（例如：“伪装”）。</p>
+<p>在针对 jailbreak 攻击的实验中，使用了 “DAN” 和 “Pretending” 两种方法，并创建了七个与这些攻击相关的问题。DAN 方法涉及指示 LLM 模型采用一个“角色”，使其看似能够绕过正常的伦理和功能限制。另一方面，Pretending 方法则要求 LLM 想象自己处于一个假设或虚构的场景中，从而试图绕过伦理过滤。</p>
+<p>表 4 显示了使用 “DAN” 和 “Pretending” 方法的 jailbreak 攻击结果，说明了不同生成 AI 模型在面对对抗性提示时的韧性差异。</p>
+<p>在 prompt injection 的实验中，采用了间接和直接注入两种方法。根据结果，表 5 展示了 “间接” 和 “直接” 注入攻击的有效性分析。研究发现，直接方法的成功率明显高于间接方法，对于不同模型的表现也有明显差异。</p>
+<p>在针对 prompt leaking 攻击的实验中，研究人员直接提出问题，没有采用任何特定方法。结果显示，流行的生成 AI 模型在处理 prompt leaking 攻击时表现不一，表 6 展示了这一结果的有效性。</p>
+<p>综合这些实验结果，表 7 提供了针对不同类型的 prompt hacking 攻击的整体表现视图，进一步展现了各个模型的强项和弱点。  </p>
+<p><img src="/images/26e4407240e9abad1ca516e6b50b1d4d68f5d57320c1b84a783b910c94f3b3d2.jpg"><br>表 3: LLM 的描述，包括开发者、发布年份、Token 限制和上下文理解特征  </p>
+<p><img src="/images/e031a3c3d816c380f696f55d8f510077e57fee850676d790cd7f12d6c02c78cc.jpg"><br>表 4: jailbreak 攻击结果，DAN 和 Pretending 攻击有效性  </p>
+<p><img src="/images/07f18e8e75126a836a67bdf3cda072271f725e7a5d142d815b16557c7fe23c78.jpg"><br>表 5: 注入攻击结果，间接和直接攻击的有效性  </p>
+<p><img src="/images/fc0d00138e85227101865d90c6ee8bf11b72bdaa57ad034d904c0a56fdb0a2e7.jpg"><br>表 6: prompt leaking 攻击结果，针对生成 AI 模型的有效性  </p>
+<p><img src="/images/ffd3d7f83be59a658e0f0c6f907dfe7b3a2dc212c1766fc3df2231f1223a1c41.jpg"><br>表 7: prompt hacking 攻击结果，针对 LLM 的 jailbreak、注入和 leaking 的有效性  </p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本研究中，作者深入分析了针对大型语言模型（LLMs）的三种主要提示攻击类型：提示注入、越狱和信息泄露。这些攻击虽然存在相似之处，但各自服务于不同的目的，并利用了模型的不同脆弱性。研究结果突显了多种LLMs模型的关键优势和劣势。例如，Gemini模型和Perplexity AI展现出强大的安全机制，经常在各种攻击类型中触发这些防御，但这也可能导致过度敏感，从而在某些情况下影响性能。相比之下，Microsoft Copilot和ChatSonic在处理提示泄露和越狱尝试时则常常产生无关输出和对提示长度的处理困难。</p>
+<p>此外，ChatGPT-3.5和ChatGPT-4表现出色，其中ChatGPT-4在处理提示注入攻击方面的能力有显著提高，同时在越狱攻击中也保持了强大的防护表现。这些发现强调了在持续推进LLMs技术的过程中，平衡安全性和效率的重要性，以确保在不同应用场景中的可靠性能。</p>
+<p>未来的工作将集中在针对复杂提示注入、越狱及信息泄露技术的防御优化，以及探索能够平衡安全性和可用性之间的适应机制。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2q6hyiw00057cjl34xi3cq7" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2410-15362" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/26/2410-15362/" class="article-date">
@@ -175,7 +261,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2q65x7v0004uzjl6i7z5qdn" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2q6hyix00077cjl9qny2y55" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -254,7 +340,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q65x7x000auzjl7nv2cord" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q6hyix00087cjl207tg84j" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -355,7 +441,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q65x7x000buzjlhxn2cwtx" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q6hyiy000d7cjlhul1gkqd" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -508,7 +594,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q65x7w0006uzjl4yynhr4q" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q6hyiy000b7cjl4kbncp0n" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -669,7 +755,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q65x7w0008uzjlg88dhnq1" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q6hyix00097cjldeah7wt2" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -757,7 +843,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2q65x7x000cuzjlgm4c124x" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2q6hyix000a7cjlb28g5frf" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -851,7 +937,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2q65x7w0005uzjlbl2s5rjf" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2q6hyiw00067cjl1tjr2rzz" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -938,7 +1024,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2q65x7v0002uzjlayt8gxr7" data-title="斯坦福大学提出语言模型不确定性表达与人类互动的风险研究" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2q6hyiw00037cjl53tj4u9c" data-title="斯坦福大学提出语言模型不确定性表达与人类互动的风险研究" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1043,111 +1129,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2q65x7w0007uzjldk93dtp0" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2310-03708" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/25/2310-03708/" class="article-date">
-  <time class="dt-published" datetime="2024-10-25T06:03:04.000Z" itemprop="datePublished">2024-10-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/25/2310-03708/">上海人工智能实验室提出多目标直接偏好优化方法（MODPO）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着现代基于Transformer的语言模型在互联网规模的语料库上进行预训练并通过人类反馈进行精炼，这些模型通常能够较好地与特定群体的偏好对齐。目前，强化学习与人类反馈（RLHF）是一种主要的对齐方法，它使用单一的奖励模型来表示平均标签者的偏好，以引导语言模型最大化该奖励模型，从而生成预期的结果。然而，早期的成功假设人类偏好是同质的，实际情况却表明人类偏好的个体差异巨大，因此很难用单一的语言模型来满足所有偏好的要求。</p>
-<p>这促使研究者们寻求多策略方法，通过训练多个候选语言模型来满足不同群体的需求。最近的研究集中于将人类反馈分解为多个细分维度，为每一维度创建独立的奖励模型。这种多目标的方法使得可以通过调整奖励权重来灵活定制语言模型，以适应不同的偏好分布。然而，尽管这种方法在理论上有效，但经过多目标RLHF（MORLHF）的微调过程往往复杂、资源消耗大且不稳定。</p>
-<p>为了解决这一问题，研究者们提出了多目标直接偏好优化（MODPO），这是一种无RL的新方法，旨在扩展直接偏好优化（DPO）以适应多个对齐目标。MODPO的关键在于，它将语言建模与奖励建模直接结合在一起，从而训练语言模型作为隐式的集体奖励模型，结合所有目标并赋予特定的权重。理论上，MODPO能够提供与MORLHF相同的最优解，但在实际应用中更加稳定和高效。通过在安全对齐和长篇问答等任务中的实证结果，MODPO展示出能够在显著减少计算资源的前提下，产生匹配或超越现有方法的结果，并形成多样化偏好的Pareto前沿。</p>
-<p><img src="/images/ec97fefe13cb27546c6b20f0d517806bae9fc4c27efb88ce355d4ffbeadc86df.jpg" alt="动机图"></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本节描述了多目标直接偏好优化（MODPO）的方法论。MODPO是对直接偏好优化（DPO）的扩展，旨在处理多重对齐目标，而无需强化学习（RL）方法。主要思想是将语言建模与奖励建模结合起来，直接训练不同的语言模型以隐式表征不同的集体奖励模型，从而实现多个目标的整合。</p>
-<h3 id="MODPO的推导"><a href="#MODPO的推导" class="headerlink" title="MODPO的推导"></a>MODPO的推导</h3><p>MODPO依赖于以下理论关系，将目标模型与最优语言模型连接起来：</p>
-<p>$$<br>\mathbf{w}^{T}\mathbf{r}^{<em>}(\mathbf{x},\mathbf{y})&#x3D;\beta\log\frac{\pi_{(\mathbf{w}^{T}\mathbf{r}^{</em>})}(\mathbf{y}|\mathbf{x})}{\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})}+\beta\log Z(\mathbf{x}),<br>$$</p>
-<p>其中，$Z(\mathbf{x})&#x3D;\sum_{\mathbf{y}}\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})\exp\left(\frac{1}{\beta}\mathbf{w}^{T}\mathbf{r}^{*}(\mathbf{x},\mathbf{y})\right)$是配分函数。通过利用偏好数据集，可以去除配分函数，从而实现如下变化：</p>
-<p>$$<br>p_{\mathcal{D}<em>{k}}(\mathbf{y}</em>{1}\succ\mathbf{y}<em>{2} ,|,,\mathbf{x})&#x3D;\sigma\left(\mathbf{r}</em>{k}^{<em>}(\mathbf{x},\mathbf{y}<em>{1})-\mathbf{r}</em>{k}^{</em>}(\mathbf{x},\mathbf{y}_{2})\right).<br>$$</p>
-<p>结合上面的两个公式，MODPO可以构造一个实用的最大似然目标：</p>
-<p>$$<br>\mathcal{L}<em>{\mathrm{MODPO}}(\pi</em>{\theta_{\mathbf{w}}};\mathbf{r}<em>{\phi,-k},\pi</em>{\mathrm{sf}},\mathcal{D}<em>{k})&#x3D;-\mathbb{E}</em>{\mathcal{D}<em>{k}}\left[\log\sigma\left(\frac{\beta}{\mathbf{w}</em>{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}<em>{w}|\mathbf{x})}{\pi</em>{\mathrm{sf}}(\mathbf{y}<em>{w}|\mathbf{x})}-\frac{\beta}{\mathbf{w}</em>{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}<em>{l}|\mathbf{x})}{\pi</em>{\mathrm{sf}}(\mathbf{y}<em>{l}|\mathbf{x})}-\frac{1}{\mathbf{w}</em>{k}}\mathbf{w}<em>{-k}^{T}\left(\mathbf{r}</em>{\phi,-k}(\mathbf{x},\mathbf{y}<em>{w})-\mathbf{r}</em>{\phi,-k}(\mathbf{x},\mathbf{y}_{l})\right)\right)\right],<br>$$</p>
-<p>其中期望以$(\mathbf{x},\mathbf{y}<em>{w},\mathbf{y}</em>{l})\sim\mathcal{D}_{k}$为基础。</p>
-<h3 id="MODPO的实施步骤"><a href="#MODPO的实施步骤" class="headerlink" title="MODPO的实施步骤"></a>MODPO的实施步骤</h3><p>MODPO的实施过程包括以下步骤：</p>
-<ol>
-<li><strong>边际奖励建模</strong>：首先在数据集$\mathcal{D}<em>{-k}$上训练边际奖励模型$\mathbf{r}</em>{\phi,-k}$。</li>
-<li><strong>语言建模</strong>：根据不同的权重迭代遍历$\mathbf{w}\in\Omega$，对每一个权重优化目标$\mathcal{L}<em>{\mathrm{MODPO}}$以获得经验前沿${\pi</em>{\theta_{\mathbf{w}}},|,\mathbf{w}\in\Omega}$。</li>
-</ol>
-<p>这些步骤的设计使得MODPO在处理多个目标时只需最小的开销，相比DPO只有轻微的追加计算需求，同时保证了训练的稳定性与效率。</p>
-<h3 id="MODPO的优势"><a href="#MODPO的优势" class="headerlink" title="MODPO的优势"></a>MODPO的优势</h3><p>MODPO通过以下几个方面展现出其优势：</p>
-<ul>
-<li><strong>稳定性</strong>：MODPO和DPO在本质上解决的是相同的二元分类问题，因此在训练动态上没有显著区别。</li>
-<li><strong>效率</strong>：MODPO只需获得已拟合的边际奖励模型$\mathbf{r}_{\phi,-k}$，可来自公共源或一次预训练，降低了每个LM的训练成本。</li>
-</ul>
-<p>通过这些实施步骤和优势分析，MODPO展示了在多目标对齐中具备可行性和效率，是对传统RLHF方法的有益补充。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>实验部分主要围绕两个关键问题展开：MODPO是否能够利用现有的人类反馈数据集为各种人类偏好创建语言模型前沿？MODPO是否能在生成语言模型前沿方面超越其他基线方法？为此，研究者在安全对齐和长篇问答这两个任务上进行了实验。</p>
-<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>在实验中，所有语言模型使用8个Nvidia 80G A100 GPU进行训练，整体采用LoRA技术。实验的主要评估指标是两个对齐目标之间的权衡，表现为所取得的真实奖励前沿。此外，还考虑最小化KL散度作为额外目标，以便评估在比较MODPO与其他方法时所取得的奖励和KL散度。  </p>
-<p>在安全对齐任务中，使用了10k子集的BEAVER TAILS数据集，通过使用GPT-3.5和GPT-4评估模型表现。长篇问答任务则使用QA-FEEDBACK数据集，其中包含人为偏好的多维反馈。</p>
-<h3 id="安全对齐实验结果"><a href="#安全对齐实验结果" class="headerlink" title="安全对齐实验结果"></a>安全对齐实验结果</h3><p>在安全对齐实验中，使用了合成反馈和真实反馈两个来源。合成反馈设置下，MODPO产生的前沿无论在高β（0.1）还是低β（0.5）条件下，均表现出色，与MORLHF相当（图2）。MODPO的性能在“有用性”维度上一般更佳，在“无害性”维度上MORLHF略有优势。  </p>
-<p><img src="/images/8208e0dbb27fde940c91ecbb0ff0dbca15d9f3565ebc520a8c123e8a13c87cdb.jpg" alt="图2"><br>图2: 在不同β下的（合成）安全对齐前沿。MODPO在权衡有用性和无害性方面表现出色。  </p>
-<h3 id="长篇问答实验结果"><a href="#长篇问答实验结果" class="headerlink" title="长篇问答实验结果"></a>长篇问答实验结果</h3><p>在长篇问答任务的实验中，MODPO始终在相似的KL预算下超越了MORLHF，特别是在使用不同的数据集组合时（图3）。这种表现得益于MODPO在学习过程中处理细微差别的能力。</p>
-<p><img src="/images/824ccd15dbf7668b21634ed702ed56ca0765a42df45fafdb20e679333c414926.jpg" alt="图3"><br>图3: 长篇问答前沿（β&#x3D;0.5）。MODPO在类似的KL预算下始终超越MORLHF。  </p>
-<p>在真实反馈下的安全对齐实验中，MODPO展现出了更优的前沿，同时要求的GPU时间也相对较少（表1）。</p>
-<table>
-<thead>
-<tr>
-<th>模型</th>
-<th>训练所需GPU小时</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>MODPO</td>
-<td>具体小时数</td>
-</tr>
-<tr>
-<td>MORLHF</td>
-<td>具体小时数</td>
-</tr>
-</tbody></table>
-<h3 id="最终实验结果"><a href="#最终实验结果" class="headerlink" title="最终实验结果"></a>最终实验结果</h3><p>实验结果进一步表明，MODPO无论是在安全对齐还是长篇问答任务中，均能产生高效且多样的语言模型前沿，体现出其在处理多任务、多目标对齐的优越性能。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，作者提出了一种名为多目标直接偏好优化（MODPO）的方法，旨在解决通过人类反馈对语言模型进行对齐时的复杂性与效率问题。MODPO是对直接偏好优化（DPO）的扩展，能够在没有强化学习（RL）的情况下对多个对齐目标进行优化。与多目标强化学习（MORLHF）相比，MODPO在理论上可以产生相同的最优解，但在实践中具有更高的稳定性和效率。</p>
-<p>研究结果显示，MODPO能够通过简单的交叉熵损失，稳定地训练出能够满足人为偏好的语言模型，并且在多个任务上表现良好。特别是在安全对齐与长形式问答任务中，MODPO的效果与现有方法相当，甚至超出它们，且在计算资源上节省了三倍。这种方法能够产生多样化的语言模型前沿，使其能够适应不同群体的偏好。</p>
-<p>作者强调，MODPO不仅在生成模型的对齐中展现出良好的灵活性，还保证了模型的可定制性，对于处理不同的人类偏好而言，MODPO是一种有效且易于实现的方法。此外，如果目标偏好已知，开发者可以使用偏好向量作为可调超参数，方便地定制单一语言模型，使得MODPO在多目标对齐的背景下，显得尤为有效与普适。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2q65x7u0001uzjl2z6fdghr" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2q6hyiv00027cjlf0vn70ti" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1195,6 +1177,10 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/26/2410-13901/">曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-15362/">清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击</a>
           </li>
         
@@ -1208,10 +1194,6 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-18469/">加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-18491/">南方科技大学提出中文安全基准以评估大型语言模型的安全性</a>
           </li>
         
       </ul>

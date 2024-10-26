@@ -73,6 +73,110 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2310-03708" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/25/2310-03708/" class="article-date">
+  <time class="dt-published" datetime="2024-10-25T06:03:04.000Z" itemprop="datePublished">2024-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/2310-03708/">上海人工智能实验室提出多目标直接偏好优化方法（MODPO）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着现代基于Transformer的语言模型在互联网规模的语料库上进行预训练并通过人类反馈进行精炼，这些模型通常能够较好地与特定群体的偏好对齐。目前，强化学习与人类反馈（RLHF）是一种主要的对齐方法，它使用单一的奖励模型来表示平均标签者的偏好，以引导语言模型最大化该奖励模型，从而生成预期的结果。然而，早期的成功假设人类偏好是同质的，实际情况却表明人类偏好的个体差异巨大，因此很难用单一的语言模型来满足所有偏好的要求。</p>
+<p>这促使研究者们寻求多策略方法，通过训练多个候选语言模型来满足不同群体的需求。最近的研究集中于将人类反馈分解为多个细分维度，为每一维度创建独立的奖励模型。这种多目标的方法使得可以通过调整奖励权重来灵活定制语言模型，以适应不同的偏好分布。然而，尽管这种方法在理论上有效，但经过多目标RLHF（MORLHF）的微调过程往往复杂、资源消耗大且不稳定。</p>
+<p>为了解决这一问题，研究者们提出了多目标直接偏好优化（MODPO），这是一种无RL的新方法，旨在扩展直接偏好优化（DPO）以适应多个对齐目标。MODPO的关键在于，它将语言建模与奖励建模直接结合在一起，从而训练语言模型作为隐式的集体奖励模型，结合所有目标并赋予特定的权重。理论上，MODPO能够提供与MORLHF相同的最优解，但在实际应用中更加稳定和高效。通过在安全对齐和长篇问答等任务中的实证结果，MODPO展示出能够在显著减少计算资源的前提下，产生匹配或超越现有方法的结果，并形成多样化偏好的Pareto前沿。</p>
+<p><img src="/images/ec97fefe13cb27546c6b20f0d517806bae9fc4c27efb88ce355d4ffbeadc86df.jpg" alt="动机图"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本节描述了多目标直接偏好优化（MODPO）的方法论。MODPO是对直接偏好优化（DPO）的扩展，旨在处理多重对齐目标，而无需强化学习（RL）方法。主要思想是将语言建模与奖励建模结合起来，直接训练不同的语言模型以隐式表征不同的集体奖励模型，从而实现多个目标的整合。</p>
+<h3 id="MODPO的推导"><a href="#MODPO的推导" class="headerlink" title="MODPO的推导"></a>MODPO的推导</h3><p>MODPO依赖于以下理论关系，将目标模型与最优语言模型连接起来：</p>
+<p>$$<br>\mathbf{w}^{T}\mathbf{r}^{<em>}(\mathbf{x},\mathbf{y})&#x3D;\beta\log\frac{\pi_{(\mathbf{w}^{T}\mathbf{r}^{</em>})}(\mathbf{y}|\mathbf{x})}{\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})}+\beta\log Z(\mathbf{x}),<br>$$</p>
+<p>其中，$Z(\mathbf{x})&#x3D;\sum_{\mathbf{y}}\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})\exp\left(\frac{1}{\beta}\mathbf{w}^{T}\mathbf{r}^{*}(\mathbf{x},\mathbf{y})\right)$是配分函数。通过利用偏好数据集，可以去除配分函数，从而实现如下变化：</p>
+<p>$$<br>p_{\mathcal{D}<em>{k}}(\mathbf{y}</em>{1}\succ\mathbf{y}<em>{2} ,|,,\mathbf{x})&#x3D;\sigma\left(\mathbf{r}</em>{k}^{<em>}(\mathbf{x},\mathbf{y}<em>{1})-\mathbf{r}</em>{k}^{</em>}(\mathbf{x},\mathbf{y}_{2})\right).<br>$$</p>
+<p>结合上面的两个公式，MODPO可以构造一个实用的最大似然目标：</p>
+<p>$$<br>\mathcal{L}<em>{\mathrm{MODPO}}(\pi</em>{\theta_{\mathbf{w}}};\mathbf{r}<em>{\phi,-k},\pi</em>{\mathrm{sf}},\mathcal{D}<em>{k})&#x3D;-\mathbb{E}</em>{\mathcal{D}<em>{k}}\left[\log\sigma\left(\frac{\beta}{\mathbf{w}</em>{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}<em>{w}|\mathbf{x})}{\pi</em>{\mathrm{sf}}(\mathbf{y}<em>{w}|\mathbf{x})}-\frac{\beta}{\mathbf{w}</em>{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}<em>{l}|\mathbf{x})}{\pi</em>{\mathrm{sf}}(\mathbf{y}<em>{l}|\mathbf{x})}-\frac{1}{\mathbf{w}</em>{k}}\mathbf{w}<em>{-k}^{T}\left(\mathbf{r}</em>{\phi,-k}(\mathbf{x},\mathbf{y}<em>{w})-\mathbf{r}</em>{\phi,-k}(\mathbf{x},\mathbf{y}_{l})\right)\right)\right],<br>$$</p>
+<p>其中期望以$(\mathbf{x},\mathbf{y}<em>{w},\mathbf{y}</em>{l})\sim\mathcal{D}_{k}$为基础。</p>
+<h3 id="MODPO的实施步骤"><a href="#MODPO的实施步骤" class="headerlink" title="MODPO的实施步骤"></a>MODPO的实施步骤</h3><p>MODPO的实施过程包括以下步骤：</p>
+<ol>
+<li><strong>边际奖励建模</strong>：首先在数据集$\mathcal{D}<em>{-k}$上训练边际奖励模型$\mathbf{r}</em>{\phi,-k}$。</li>
+<li><strong>语言建模</strong>：根据不同的权重迭代遍历$\mathbf{w}\in\Omega$，对每一个权重优化目标$\mathcal{L}<em>{\mathrm{MODPO}}$以获得经验前沿${\pi</em>{\theta_{\mathbf{w}}},|,\mathbf{w}\in\Omega}$。</li>
+</ol>
+<p>这些步骤的设计使得MODPO在处理多个目标时只需最小的开销，相比DPO只有轻微的追加计算需求，同时保证了训练的稳定性与效率。</p>
+<h3 id="MODPO的优势"><a href="#MODPO的优势" class="headerlink" title="MODPO的优势"></a>MODPO的优势</h3><p>MODPO通过以下几个方面展现出其优势：</p>
+<ul>
+<li><strong>稳定性</strong>：MODPO和DPO在本质上解决的是相同的二元分类问题，因此在训练动态上没有显著区别。</li>
+<li><strong>效率</strong>：MODPO只需获得已拟合的边际奖励模型$\mathbf{r}_{\phi,-k}$，可来自公共源或一次预训练，降低了每个LM的训练成本。</li>
+</ul>
+<p>通过这些实施步骤和优势分析，MODPO展示了在多目标对齐中具备可行性和效率，是对传统RLHF方法的有益补充。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>实验部分主要围绕两个关键问题展开：MODPO是否能够利用现有的人类反馈数据集为各种人类偏好创建语言模型前沿？MODPO是否能在生成语言模型前沿方面超越其他基线方法？为此，研究者在安全对齐和长篇问答这两个任务上进行了实验。</p>
+<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>在实验中，所有语言模型使用8个Nvidia 80G A100 GPU进行训练，整体采用LoRA技术。实验的主要评估指标是两个对齐目标之间的权衡，表现为所取得的真实奖励前沿。此外，还考虑最小化KL散度作为额外目标，以便评估在比较MODPO与其他方法时所取得的奖励和KL散度。  </p>
+<p>在安全对齐任务中，使用了10k子集的BEAVER TAILS数据集，通过使用GPT-3.5和GPT-4评估模型表现。长篇问答任务则使用QA-FEEDBACK数据集，其中包含人为偏好的多维反馈。</p>
+<h3 id="安全对齐实验结果"><a href="#安全对齐实验结果" class="headerlink" title="安全对齐实验结果"></a>安全对齐实验结果</h3><p>在安全对齐实验中，使用了合成反馈和真实反馈两个来源。合成反馈设置下，MODPO产生的前沿无论在高β（0.1）还是低β（0.5）条件下，均表现出色，与MORLHF相当（图2）。MODPO的性能在“有用性”维度上一般更佳，在“无害性”维度上MORLHF略有优势。  </p>
+<p><img src="/images/8208e0dbb27fde940c91ecbb0ff0dbca15d9f3565ebc520a8c123e8a13c87cdb.jpg" alt="图2"><br>图2: 在不同β下的（合成）安全对齐前沿。MODPO在权衡有用性和无害性方面表现出色。  </p>
+<h3 id="长篇问答实验结果"><a href="#长篇问答实验结果" class="headerlink" title="长篇问答实验结果"></a>长篇问答实验结果</h3><p>在长篇问答任务的实验中，MODPO始终在相似的KL预算下超越了MORLHF，特别是在使用不同的数据集组合时（图3）。这种表现得益于MODPO在学习过程中处理细微差别的能力。</p>
+<p><img src="/images/824ccd15dbf7668b21634ed702ed56ca0765a42df45fafdb20e679333c414926.jpg" alt="图3"><br>图3: 长篇问答前沿（β&#x3D;0.5）。MODPO在类似的KL预算下始终超越MORLHF。  </p>
+<p>在真实反馈下的安全对齐实验中，MODPO展现出了更优的前沿，同时要求的GPU时间也相对较少（表1）。</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>训练所需GPU小时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MODPO</td>
+<td>具体小时数</td>
+</tr>
+<tr>
+<td>MORLHF</td>
+<td>具体小时数</td>
+</tr>
+</tbody></table>
+<h3 id="最终实验结果"><a href="#最终实验结果" class="headerlink" title="最终实验结果"></a>最终实验结果</h3><p>实验结果进一步表明，MODPO无论是在安全对齐还是长篇问答任务中，均能产生高效且多样的语言模型前沿，体现出其在处理多任务、多目标对齐的优越性能。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，作者提出了一种名为多目标直接偏好优化（MODPO）的方法，旨在解决通过人类反馈对语言模型进行对齐时的复杂性与效率问题。MODPO是对直接偏好优化（DPO）的扩展，能够在没有强化学习（RL）的情况下对多个对齐目标进行优化。与多目标强化学习（MORLHF）相比，MODPO在理论上可以产生相同的最优解，但在实践中具有更高的稳定性和效率。</p>
+<p>研究结果显示，MODPO能够通过简单的交叉熵损失，稳定地训练出能够满足人为偏好的语言模型，并且在多个任务上表现良好。特别是在安全对齐与长形式问答任务中，MODPO的效果与现有方法相当，甚至超出它们，且在计算资源上节省了三倍。这种方法能够产生多样化的语言模型前沿，使其能够适应不同群体的偏好。</p>
+<p>作者强调，MODPO不仅在生成模型的对齐中展现出良好的灵活性，还保证了模型的可定制性，对于处理不同的人类偏好而言，MODPO是一种有效且易于实现的方法。此外，如果目标偏好已知，开发者可以使用偏好向量作为可调超参数，方便地定制单一语言模型，使得MODPO在多目标对齐的背景下，显得尤为有效与普适。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2q6hyiv00017cjl0qag8c1g" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2309-07045" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/25/2309-07045/" class="article-date">
@@ -177,7 +281,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2q65x7s0000uzjl5b1y4hse" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2q6hyit00007cjl9c005lft" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -264,7 +368,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2402-08983/" data-id="cm2q65x7v0003uzjl07rx5uce" data-title="华盛顿大学提出安全解码方法以防御监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2402-08983/" data-id="cm2q6hyiw00047cjl7atx81il" data-title="华盛顿大学提出安全解码方法以防御监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -302,7 +406,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/hello-world/" data-id="cm2q65x7x0009uzjl5gpyga87" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/hello-world/" data-id="cm2q6hyiy000c7cjlayio98e0" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -350,6 +454,10 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/26/2410-13901/">曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-15362/">清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击</a>
           </li>
         
@@ -363,10 +471,6 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-18469/">加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-18491/">南方科技大学提出中文安全基准以评估大型语言模型的安全性</a>
           </li>
         
       </ul>
