@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力 | 安全汪</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机在引言部分，研究者强调大型语言模型（LLMs）在语言理解和生成、机器翻译以及代码生成等多个领域的卓越性能。然而，尽管在提高LLMs的安全性方面做出了显著努力，研究表明，旨在保护这些模型的对齐机制仍然容易受到复杂的对抗性监狱攻击的影响。这些">
+<meta property="og:type" content="article">
+<meta property="og:title" content="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力">
+<meta property="og:url" content="http://example.com/2024/10/26/2410-15645/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机在引言部分，研究者强调大型语言模型（LLMs）在语言理解和生成、机器翻译以及代码生成等多个领域的卓越性能。然而，尽管在提高LLMs的安全性方面做出了显著努力，研究表明，旨在保护这些模型的对齐机制仍然容易受到复杂的对抗性监狱攻击的影响。这些">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/8d4f0ffab1afa409d26970f28db610565a76ea6741cfa78dbff1875e3b339d03.jpg">
+<meta property="og:image" content="http://example.com/images/9f94b5bf4fea74554792a05c6550b9e0b6c2b6f7f852206c310c7e285d1ec141.jpg">
+<meta property="og:image" content="http://example.com/images/f9ec1c2015bdeaf3705559af3a73cfaf641043048ae73a61bc5f31261bf5aa44.jpg">
+<meta property="article:published_time" content="2024-10-26T11:45:26.000Z">
+<meta property="article:modified_time" content="2024-10-26T11:48:06.422Z">
+<meta property="article:author" content="Jun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/8d4f0ffab1afa409d26970f28db610565a76ea6741cfa78dbff1875e3b339d03.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="安全汪" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">安全汪</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一只每天自动跟踪和解读大模型安全领域论文的Bot</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2410-15645" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-15645/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T11:45:26.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在引言部分，研究者强调大型语言模型（LLMs）在语言理解和生成、机器翻译以及代码生成等多个领域的卓越性能。然而，尽管在提高LLMs的安全性方面做出了显著努力，研究表明，旨在保护这些模型的对齐机制仍然容易受到复杂的对抗性监狱攻击的影响。这些监狱攻击通过精心设计的提示绕过安全措施，诱导模型生成有害的响应。</p>
+<p>研究者指出，与其他监狱攻击方法相比，基于优化的技术通常能实现更好的攻击效果，并且被广泛研究和应用。然而，这些方法一般依赖于简单的目标模板来生成监狱后缀，这在某种程度上限制了它们的效果。它们往往忽视特别针对恶意内容的优化，导致生成的有害模板不足以真正引发有害响应。即使模型的初始输出契合优化目标，生成的监狱后缀也可能无法有效诱导模型生成有害内容。因此，研究者认为，单纯优化目标模板远不足以实现有效的监狱攻击。</p>
+<p>为解决这一问题，研究者提出了一种新颖的方法，同时考虑恶意问题上下文和目标模板在监狱后缀优化中的作用。他们设计了固定的有害模板，以处理恶意问题，并通过这一方法增强了对LLMs的误导性影响，力求通过恶意问题和目标句子共同作用，增强对模型的影响力。此外，在每个优化步骤中，他们评估前五个具有最小损失值的后缀，以选择最有效的一个进行下一次更新。这种方法结合了各种优化技术，包括重附后缀攻击机制，以最大化避免生成不一致内容，确保生成输出的一致性及有效性。</p>
+<p>综上所述，研究者的创新点主要体现在以下几个方面：考虑恶意问题上下文与目标模板的整合、采用多后缀评估策略强化更新过程，以及引入重附后缀机制确保有效序列生成。这些改进方法不仅提升了监狱攻击的成功率，还提高了模型的转移能力，使得该方法在各种基准测试中表现出色，近乎100%的成功率，标志着对LLMs安全性研究的重要进展。 </p>
+<p><img src="/images/8d4f0ffab1afa409d26970f28db610565a76ea6741cfa78dbff1875e3b339d03.jpg" alt="Figure 1"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在这篇论文中，作者提出了一种名为SI-GCG的改进方法，旨在增强对大型语言模型（LLMs）的监狱越狱攻击的效果，尤其是针对恶意问题上下文和目标模板的优化。方法的主要步骤概述如下。</p>
+<h3 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h3><p>首先，作者定义了输入Token的形式，表示为 $x_{1:n},&#x3D;,{x_{1},x_{2},.,.,.,,x_{n}}$，其中 $x_{i},\in,{1,.,.,.,,V}$，$V$ 表示词汇表的大小。大型语言模型将Token序列映射到下一个Token的分布上，其表达形式为：</p>
+<p>$$<br>p\left(x_{n+1}\mid x_{1:n}\right)<br>$$  </p>
+<p>响应Token序列的概率可以表示为：</p>
+<p>$$<br>p\left(x_{n+1:n+H}\mid x_{1:n}\right)&#x3D;\prod_{i&#x3D;1}^{H}p\left(x_{n+i}\mid x_{1:n+i-1}\right)<br>$$  </p>
+<p>在这个过程里，恶意问题 $x_{1:n}$ 被简化为 $x^{Q}$，越狱 $x_{n+1:n+m}$ 被表示成 $x^{S}$，而整个越狱提示 $x_{1:n}\oplus x_{n+1:n+m}$ 表示为 $x^{Q}\oplus x^{S}$。此外，预定义的目标模板表示为 $x_{n+m+1:n+m+k}^{R}$，简记为 $x^{R}$。</p>
+<h3 id="SI-GCG攻击方法"><a href="#SI-GCG攻击方法" class="headerlink" title="SI-GCG攻击方法"></a>SI-GCG攻击方法</h3><p>作者的SI-GCG方法考虑了恶意问题和目标模板，以便于更有效地进行攻击。具体而言，作者建立了一个固定的有害模板来处理恶意问题，如图1所示。该过程被表示为 $x^{H Q}\oplus x^{Q}$，其中 $x^{H Q}$ 表示有害问题模板，而 $x^{Q}$ 表示初始恶意问题。</p>
+<p>相应的，有害响应的优化过程如下：</p>
+<p>$$<br>\mathcal{L}\Bigl((x^{H Q}\oplus x^{Q})\oplus x^{S}\Bigr)&#x3D;-l o g p\bigl(x^{H R}\oplus x^{R}\vert(x^{H Q}\oplus x^{Q})\oplus x^{S}\bigr)<br>$$  </p>
+<p>在生成的每个越狱后缀的更新迭代中，作者的方法包括了两个阶段的优化过程：第一阶段旨在寻找一个成功的攻击后缀及其对应的有害输出；第二阶段利用这一成功后缀作为新的初始化点，以优化其他对抗后缀。</p>
+<h3 id="自动最佳后缀选择策略"><a href="#自动最佳后缀选择策略" class="headerlink" title="自动最佳后缀选择策略"></a>自动最佳后缀选择策略</h3><p>为了提升更新效率，作者提出了一种自动最佳后缀选择策略。该策略不仅使用最小损失标准，还评估前五个最小损失的后缀生成的内容害性。这样做的目的是确保后缀更新始终在生成有害内容的方向上前进。这一过程可以被表达为：</p>
+<p>$$<br>C h e c k\big(G\big((x^{H Q}\oplus x^{Q})\oplus x^{S_{i}}\big)\big)<br>$$  </p>
+<p>其中 $\mathbf{G}(\cdot)$ 表示大型语言模型生成的内容判别函数，Check 函数用于判断生成的内容是否有害。当没有任何生成内容被认定为有害时，选择损失最小的后缀进行更新。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>SI-GCG方法通过结合恶意问题上下文与目标模板，显著提高了对大型语言模型的监狱越狱攻击的成功率，同时也提升了攻击的转移能力。通过采用优化更新策略和引入重后缀攻击机制，确保了每次更新都能够有效地生成有害输出，从而实现了接近100%的攻击成功率。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>实验部分使用了AI Singapore提供的数据集，数据集中包含50个恶意问题，所有结果均来自于在比赛网站上报告的分数。作为受害者模型，研究者使用了两种大型语言模型（LLM）：LLAMA2-7B-CHAT和VICUNA-7B-1.5。</p>
+<h3 id="攻击成功率在Track-1a"><a href="#攻击成功率在Track-1a" class="headerlink" title="攻击成功率在Track 1a"></a>攻击成功率在Track 1a</h3><p>在Track 1a阶段，研究者确保比较算法在设置迭代次数和批次大小方面性能良好。他们发现，GCG和I-GCG并未使用他们的问题模板，而是使用了其他不同的响应模板。Table 1展示了对于这两个模型的攻击成功率，结果显示，提出的SI-GCG方法明显领先于其他恶意破解方法。</p>
+<h3 id="攻击成功率在Track-1b"><a href="#攻击成功率在Track-1b" class="headerlink" title="攻击成功率在Track 1b"></a>攻击成功率在Track 1b</h3><p>在Track 1b阶段，由于比赛组织方对计算资源的限制，研究者将批次大小调整为32，并将最大迭代次数限制为100。在此阶段，由于某些问题被视为不可触碰，并引入了更多黑箱模型，研究者仅能从LLAMA2-7B-CHAT中获得结果。在结果中，SI-GCG方法继续在排行榜上领先，证明了其良好的攻击转移能力。以下是Track 1b的结果展示。</p>
+<p><img src="/images/9f94b5bf4fea74554792a05c6550b9e0b6c2b6f7f852206c310c7e285d1ec141.jpg" alt="Track 1b Attack Success Rates"></p>
+<h3 id="消融研究"><a href="#消融研究" class="headerlink" title="消融研究"></a>消融研究</h3><p>研究者提出了三种增强技术，以提高破解性能：有害问题和响应模板、更新的最佳后缀选择策略，以及重新后缀攻击机制。为了验证每个组件的有效性，他们在Track 1a的50个恶意问题上进行消融实验，使用LLAMA2-7B-CHAT和VICUNA-7B-1.5模型，GCG则作为基线。结果总结在Table 3中。分析结果表明，使用有害模板显著提高了两种模型的攻击成功率，特别是在攻击转移能力方面，同时还减少了平均步骤。</p>
+<h3 id="可变感叹号的攻击成功率"><a href="#可变感叹号的攻击成功率" class="headerlink" title="可变感叹号的攻击成功率"></a>可变感叹号的攻击成功率</h3><p>研究者发现，向优化后的后缀前加“!”可以显著增强攻击的转移能力。为了验证这一点，他们在优化后进行了对比测试，分析了使用的“!”数量对成功率的影响。结果显示，附加10个感叹号可最大化攻击的转移能力，但超过这个数量则会降低两种模型的成功率。以下是不同感叹号数量下的成功率结果。</p>
+<p><img src="/images/f9ec1c2015bdeaf3705559af3a73cfaf641043048ae73a61bc5f31261bf5aa44.jpg" alt="Variable Exclamation Marks Attack Success Rates"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在总结中，提出的SI-GCG方法为利用恶意问题背景和目标模板进行大型语言模型的越狱攻击提供了一种强有力的策略。该方法通过采用创新机制，如在每次迭代中评估前五个损失值以及整合重新后缀攻击机制，确保了可靠和有效的更新。SI-GCG在多个大型语言模型上达到了几乎完美的成功率，超越了现有的越狱技术。其与其他优化方法的兼容性进一步增强了其灵活性和影响力，标志着在大型语言模型安全研究领域的一项重要进展。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q3kf6g0005crtf84mh843u" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/10/26/2410-15645-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2410.15645
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/10/26/2410-18861/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">哥伦比亚大学提出开放源代码语言模型的可移除水印方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/26/2410-15645-1/">2410.15645</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-15645/">北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18861/">哥伦比亚大学提出开放源代码语言模型的可移除水印方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18469/">加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18491/">南方科技大学提出中文安全基准以评估大型语言模型的安全性</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Jun<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -73,6 +73,209 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2309-07045" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/25/2309-07045/" class="article-date">
+  <time class="dt-published" datetime="2024-10-25T05:44:24.000Z" itemprop="datePublished">2024-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/2309-07045/">清华大学提出Safety Bench：大型语言模型安全评估的新基准方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着大型语言模型（LLMs）的快速发展，越来越多的关注点聚焦于其安全性问题。自ChatGPT发布以来，各种LLMs逐渐被应用于与人类的互动，如Llama、Claude和ChatGLM等。然而，伴随着LLMs的发展，其安全性缺陷也日益凸显，这些缺陷可能严重妨碍LLMs的安全和持续发展。许多研究指出了LLMs的安全风险，例如隐私泄露和有毒内容生成等。</p>
+<p>因此，对LLMs安全性的全面评估变得非常重要。然而，当前针对LLMs安全性评估的综合标准几乎匮乏。过去某些广泛使用的数据集主要集中于特定的安全问题维度，例如毒性和偏见等。虽然近期一些中文安全评估基准尝试收集各种安全问题类别的提示，但它们仅提供中文数据，并且在如何准确评估LLMs生成的响应安全性方面也面临挑战。</p>
+<p>为此，研究者们提出了Safety Bench，这一综合性基准透过多项选择题的方式，对LLMs的安全性进行评估。Safety Bench的主要创新点包括：</p>
+<ol>
+<li><p><strong>安全性评估的简易性和高效性</strong>：Safety Bench仅包含单一正确答案的多项选择题，能够实现高效且准确的自动评估，促进LLMs的快速迭代和优化。</p>
+</li>
+<li><p><strong>多样性</strong>：Safety Bench收录了11435个样本，涵盖七个不同类别的安全问题，从多个来源获取数据，确保评估的全面性。</p>
+</li>
+<li><p><strong>题目类型的多样化</strong>：测试问题包括对话场景、现实生活情况的判断、对比安全性、知识询问等多种类型，确保对LLMs在多样的安全相关场景下的严格测试。</p>
+</li>
+<li><p><strong>多语言支持</strong>：Safety Bench提供中文和英文数据，这使得对中英文LLMs的评估更加广泛和包容。</p>
+</li>
+</ol>
+<p>通过这些创新，Safety Bench在评估当前LLMs的安全特性、识别其安全缺陷上发挥了重要作用，也为未来的改进提供了方向。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究提出了一个名为Safety Bench的评估框架，用于系统性地评估大型语言模型（LLMs）的安全性。该框架包含11,435个多项选择题，覆盖7个安全问题类别，旨在通过自动化的方法降低评估成本，并提高评估的准确性。</p>
+<h3 id="问题类别"><a href="#问题类别" class="headerlink" title="问题类别"></a>问题类别</h3><p>Safety Bench涵盖了7个常见的安全问题类别，这些类别来源于先前的研究并进行了适当的调整。它们包括：</p>
+<ul>
+<li>Offensiveness（冒犯性）</li>
+<li>Unfairness and Bias（不公平与偏见）</li>
+<li>Physical Health（身体健康）</li>
+<li>Mental Health（心理健康）</li>
+<li>Illegal Activities（非法活动）</li>
+<li>Ethics and Morality（伦理与道德）</li>
+<li>Privacy and Property（隐私与财产）</li>
+</ul>
+<p>为了确保中英文的一致性，研究者在构建问题时，谨慎排除了可能导致不同文化背景下给出不同答案的敏感话题。</p>
+<h3 id="数据收集"><a href="#数据收集" class="headerlink" title="数据收集"></a>数据收集</h3><p>数据收集过程包括三个主要来源：</p>
+<ul>
+<li><p><strong>现有数据集</strong>：研究者从开放的中文和英文数据集中抽取并改编多项选择题，特别是在涉及不公平和偏见、身体健康与伦理道德等类别时，利用现有的公共数据集进行转换。</p>
+</li>
+<li><p><strong>考试题</strong>：研究者广泛收集了与安全问题相关的考试题目，特别注重道德和法律相关的考试题。通过从在线考试资源中提取问题，最终收集到约2,000个与安全类别相关的题目。</p>
+</li>
+<li><p><strong>数据增强</strong>：考虑到某些类别（如心理健康、非法活动和隐私与财产）数据不足，研究者利用大型语言模型（如ChatGPT）进行数据增强。这些生成的问题经过人工审核与修订，以确保质量。</p>
+</li>
+</ul>
+<h3 id="质量控制"><a href="#质量控制" class="headerlink" title="质量控制"></a>质量控制</h3><p>为了确保Safety Bench中每个问题的质量，研究团队采取了严格的人为验证过程。价格较高的来源允许使用人工标注，并严格检查经过考试和数据增强得到的问题。研究者将每个问题的正确性进行了评估，发现97%的随机抽样问题与人类的答案一致，从而减少了逐一验证的需求。</p>
+<p>在评估过程中，团队还实现了中英问卷之间的互译，确保了问题在各个语言中的一致性。通过适当的质量控制措施，确保所收集数据的问题清晰、准确且符合多个文化背景。</p>
+<h3 id="实验评估"><a href="#实验评估" class="headerlink" title="实验评估"></a>实验评估</h3><p>Safety Bench的评估分为零-shot和五-shot设置：</p>
+<ul>
+<li><p><strong>零-shot设置</strong>：直接对LLMs进行评估，不提供任何上下文信息或示例。</p>
+</li>
+<li><p><strong>五-shot设置</strong>：提供与评估任务相关的示例，以观察不同LLMs在较少监督条件下的表现。</p>
+</li>
+</ul>
+<p>在评估过程中，研究者确保模型的响应格式符合设计要求，这样可以准确提取模型的预测答案。</p>
+<p>如图1所示，Safety Bench全面评估了多个安全问题领域，通过集成丰富的多项选择题，使得该评估方法高效且具备多样性。</p>
+<p><img src="/images/9e4ed20559e2322b6b1e3e22ca089eec211ca4694be6faa0f6408d0fcfc8eb29.jpg" alt="Safety Bench概览"></p>
+<p>通过以上方法，Safety Bench为LLMs的安全性能提供了一个全面的评估框架。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在这项研究中，作者们对25种流行的大型语言模型（LLMs）进行了评估，主要关注它们在安全性方面的能力。评估分为零-shot和五-shot两种设置。</p>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><p>作者在零-shot和五-shot设置下进行评估。在五-shot设置中，作者精心挑选了涵盖各种数据源且具有多样答案分布的示例。图4展示了所用的提示。作者从LLMs生成的响应中提取预测答案，并通过精心设计的规则确保LLMs的响应符合所需格式，以便于答案的准确提取。为了最小化随机采样带来的方差，作者在测试LLMs时将温度设定为0。  </p>
+<h3 id="评估模型"><a href="#评估模型" class="headerlink" title="评估模型"></a>评估模型</h3><p>作者评估了25种流行的LLMs，涵盖了不同的组织和参数规模。零-shot结果展示于表2中，通过比较，API基础的LLMs普遍比其他开源模型具有更高的准确性。特别是，GPT-4的表现显著优于其他评估模型，领先约10个百分点。  </p>
+<p>五-shot结果如表3所示，结合少量示例所带来的改进因不同LLMs而异。一些模型如text-davinci-003从上下文示例中获得了显著提高，而gpt-3.5-turbo则在某些情况下可能会因为“对齐税”而遭遇负面影响。</p>
+<h3 id="中国子集结果"><a href="#中国子集结果" class="headerlink" title="中国子集结果"></a>中国子集结果</h3><p>鉴于大多数中国公司提供的API实施了严格的过滤机制，使得评价这些API基础LLMs的整套测试集变得不切实际，作者选择消除带有敏感关键词的样本，最终选择了每个类别300个问题，构成总计2100个问题的子集。表4展示了五-shot在这一过滤后的中国子集上的评估结果。  </p>
+<p>作者的研究发现，GPT-4在多个类别的安全问题上表现优异，同时也发现了在不公平性和偏见类别上GPT-4的表现相对较差，作者通过手动检查失败的案例，揭示了GPT-4在某些词汇和事件的理解上出现错误的原因。  </p>
+<h3 id="生成能力与理解能力"><a href="#生成能力与理解能力" class="headerlink" title="生成能力与理解能力"></a>生成能力与理解能力</h3><p>作者探讨了Safety Bench中测得的安全理解能力与安全生成能力之间的关系。为此，作者将一些多项选择问题转化为常规用户查询，包括限制查询和开放查询两种类型。实验结果在表5中展示，作者通过手动评估模型对这些转化查询的响应的安全性，从中得出重要结论。  </p>
+<p>通过图6，作者展示了GPT-4在各个安全类别中的失败案例，指出其理解能力对安全性的重要影响。  </p>
+<h3 id="影响力"><a href="#影响力" class="headerlink" title="影响力"></a>影响力</h3><p>表6比较了模型在增强数据和原始数据上的表现，从中可以看出使用ChatGPT进行数据增强的潜在偏见，但这一偏见对其他模型的影响不显著。  </p>
+<p>通过这一系列实验，作者不仅验证了Safety Bench的有效性，还揭示了LLMs在安全性方面存在的空间，以指导未来的改进。  </p>
+<p><img src="/images/2d25c89a0461d7e3510588b4fa50b34114f7d1a024fc0b8ca89b0be12ded6407.jpg"><br>表2: Zero-shot zh&#x2F;en结果的Safety Bench。“Avg.”表示微平均准确率。</p>
+<p><img src="/images/2d25c89a0461d7e3510588b4fa50b34114f7d1a024fc0b8ca89b0be12ded6407.jpg"><br>表3: Five-shot zh&#x2F;en结果的Safety Bench。“-”表示模型对此语言的支持较差。</p>
+<p><img src="/images/c15df9fc2efa7f259c421d6bcb00dabd1abfae74b5f0f84cbad4c2f76d64e6b2.jpg"><br>表4: 五-shot评估结果在过滤后的中国子集的Safety Bench上。“-”表示模型因在线安全过滤机制拒绝回答问题。  </p>
+<p><img src="/images/1385431ed6177afe1fdd8133d04c81465612d03ea6464833f52abff3ea89a41b.jpg"><br>表5: 模型在采样多项选择问题上的准确性，以及对受限和开放查询的安全响应比例。  </p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本文中，研究人员介绍了Safety Bench，这是第一个全面的安全评估基准，通过多项选择题对大型语言模型（LLMs）的安全能力进行评估。Safety Bench涵盖了11,435道中英文题目，分为七类安全问题，广泛评估了25种来自不同组织的LLMs的安全能力。研究发现，与开源LLMs相比，GPT-4表现显著优越，指出了当前模型在安全性方面仍有很大的提升空间。</p>
+<p>此外，本文还表明，Safety Bench中测量的安全理解能力与安全生成能力之间存在相关性。这一发现为未来改进LLMs的安全性提供了重要指导。研究者希望Safety Bench能够在评估LLMs的安全性以及加速开发更安全的LLMs方面发挥重要作用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2q3kf6c0000crtfbuob8sav" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2402-08983" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/25/2402-08983/" class="article-date">
+  <time class="dt-published" datetime="2024-10-25T05:26:31.000Z" itemprop="datePublished">2024-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/2402-08983/">华盛顿大学提出安全解码方法以防御监狱突破攻击</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$','$$'], ["\\[","\\]"]]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着大型语言模型（LLMs）在代码生成和聊天助手等现实应用中越来越广泛地被使用，研究者们对这些模型的行为与人类价值观，尤其是安全性的一致性进行了深入的探索。然而，尽管已有诸多努力，LLMs在安全性方面仍面临显著挑战。特别是“越狱攻击”作为一种新兴的威胁，旨在诱使LLMs产出意想不到且不安全的响应，这表明现有的模型保护机制仍然不够稳固。</p>
+<p>该研究的动机在于识别并解决这些漏洞，特别是针对越狱攻击的防御策略。研究者观察到，尽管代表有害内容的Token的概率往往高于代表无害响应的Token，但安全免责声明仍会出现在按概率降序排列的顶部Token中。因此，研究者提出了一种新颖的“安全解码”策略，通过增强安全免责声明的Token概率，同时减弱与攻击者目标的Token序列概率，从而有效防止模型被非法利用。</p>
+<p>这一研究的创新点在于通过Token概率的分布来分析越狱攻击的成功机制，显示出越狱攻击的成功往往归因于与攻击目标相一致的Token的概率占主导地位。而通过引入一个专家模型并进行安全性强健的微调，作者们进一步提出了通过“安全解码”策略，在不同层面上抵御越狱攻击。</p>
+<p>下图展示了Token概率在越狱攻击期间的分布情况：</p>
+<p><img src="/images/699b0dd72fb55885c8534bf529bd6411f0e8c949f544741d1460747ebf868e9b.jpg"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在这一部分中，作者提出了一种名为Safe Decoding的安全感知解码策略，以增强大型语言模型（LLMs）抵抗jailbreak攻击的能力。该策略的设计分为两个阶段：训练阶段和推理阶段。</p>
+<h3 id="训练阶段：构建专家模型"><a href="#训练阶段：构建专家模型" class="headerlink" title="训练阶段：构建专家模型"></a>训练阶段：构建专家模型</h3><p>为了构建一个具备较强安全性的专家模型，研究者首先收集了涵盖18个有害类别的36个有害查询。这些查询应该被任何与人类价值观良好对齐的LLM所拒绝。通过自主生成回应后，使用GPT-4过滤输出，仅保留那些有效拒绝有害查询的响应，最后形成训练数据集，包括查询与响应对。</p>
+<p>专家模型通过参数高效微调（例如使用LoRA方法）进行训练，确保微调模型的词汇与原始模型一致，同时能够识别和适当地回应恶意用户输入。</p>
+<h3 id="推理阶段：构建新的Token分布"><a href="#推理阶段：构建新的Token分布" class="headerlink" title="推理阶段：构建新的Token分布"></a>推理阶段：构建新的Token分布</h3><p>在推理阶段，用户查询被同时发送给原始模型和专家模型以进行解码。Safe Decoding根据两个模型的输出构建Token分布，从而生成对输入查询的响应。</p>
+<h4 id="步骤1：构造样本空间"><a href="#步骤1：构造样本空间" class="headerlink" title="步骤1：构造样本空间"></a>步骤1：构造样本空间</h4><p>在推理时间的第n步，模型将Token序列$x_{1:n-1}$转发给原始模型及专家模型，得到可能采样的Token集合分别为 $\nu_{n}$ 和 $\mathcal{V}<em>{n}^{\prime}$。Safe Decoding将样本空间 $\mathcal{V}</em>{n}^{(c)}$ 定义为两者前k个Token的交集，即：</p>
+<p>$$<br>{\mathcal{V}}<em>{n}^{(c)}&#x3D;\operatorname*{\arg\operatorname*{min}}</em>{S&#x3D;{\mathcal{V}}<em>{n}^{k}\cap{\mathcal{V}}</em>{n}^{\prime^{k}}}k{\mathrm{<del>s.t.</del>}}|S|\geq c.<br>$$</p>
+<p>该交集的构建旨在利用原始LLM的广泛训练和专家模型在安全性上的强化。</p>
+<h4 id="步骤2：定义概率函数"><a href="#步骤2：定义概率函数" class="headerlink" title="步骤2：定义概率函数"></a>步骤2：定义概率函数</h4><p>Safe Decoding在定义Token概率时，使用以下公式：</p>
+<p>$$<br>P_{n}\big(x|x_{1:n-1}\big)&#x3D;p_{\theta}\big(x|x_{1:n-1}\big) + \alpha(p_{\theta^{\prime}}(x|x_{1:n-1})-p_{\theta}(x|x_{1:n-1})).<br>$$</p>
+<p>此公式中，$\alpha$ 为超参数，决定原始模型与专家模型的重要性权重。最终通过标准化，确保$\sum_{x\in\mathcal{V}<em>{n}^{(c)}}P</em>{n}(x)&#x3D;1$。这使得当查询是恶意的时，原始模型会给出积极的回应，而专家模型则会基于安全性拒绝查询，从而减少引导攻击者目标的Token的概率，并增强机器人对于人类价值的响应。</p>
+<h3 id="效率与兼容性"><a href="#效率与兼容性" class="headerlink" title="效率与兼容性"></a>效率与兼容性</h3><p>Safe Decoding的设计兼容现有的所有采样方法，包括greedy、top-k和top-p采样。通过在推理过程中仅在前m步应用Safe Decoding，且后续步骤使用正常解码，可以避免模型过于保守，从而保持对良性用户查询的有用性，并降低计算开销。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本文对 Safe Decoding 的有效性、实用性、效率和兼容性进行了评估。</p>
+<p>首先，针对实验模型，研究者们在五种开源 LLM（Vicuna-7b、Llama2-7b-chat、Guanaco-7b、Falcon-7b 和 Dolphin-llama2-7b）上部署了 Safe Decoding，以评估其性能。</p>
+<p>在攻击方法方面，研究者们考虑了六种先进的 jailbreak 攻击，涵盖不同类别，包括 GCG、AutoDAN、PAIR 和 SAP30 等。这些攻击方法通过使用来自不同 harmful query benchmark 数据集的示例来生成特定的攻击提示，以评估 Safe Decoding 的防御性能。使用的两个有害查询基准数据集为 Advbench 和 HEx-PHI。</p>
+<p>在基准测试方面，研究者们与六种最新且高效的防御机制进行了比较，涵盖输入和输出检测以及缓解方法。研究过程中使用的评估指标包括攻击成功率（ASR）和 harmful score，前者用于衡量模型在恶意查询下产生不符合人类价值的响应的比率，而后者则通过 GPT-Judge 对生成内容的危害程度进行评分。通过 Dic-Judge，研究者们还检测了生成响应中拒绝字符串的存在，以计算 ASR。</p>
+<p>下表展示了 Safe Decoding 与基线防御方法在多个 jailbreak 攻击下的 ASR 和 harmful score 的比较：</p>
+<p><img src="/images/f9eab3795015174498772771ce9a68de0626f173631450332723571a2289749f.jpg"></p>
+<p>表中显示了在不同攻击方法下，Safe Decoding 的表现普遍优于所有基线防御方法。在针对意图重大的攻击（如 Deep Inception）时，Safe Decoding 成功将 ASR 降至 0%。</p>
+<p>为了进一步评估 Safe Decoding 的实用性，研究者们使用了 MT-bench 和 Just-Eval 等广泛使用的基准测试，评估应用 Safe Decoding 后的 LLM 实用性。以下表格展示了 Safe Decoding 在不同模型上的 MT-bench 和 Just-Eval 得分：</p>
+<p><img src="/images/732f0869753661b67770651a8c5f9386511b54f9afe9881b6acbe113d6f74611.jpg"></p>
+<p>根据表格结果，Safe Decoding 对原始模型的效用影响微乎其微，而现有基线模型在效用上则显著下降。</p>
+<p>接下来，研究者们定义了一个平均生成时间比率（ATGR）指标，以评估 Safe Decoding 的效率：</p>
+<p><img src="/images/06d6125b68b5a672c946b39798b953b20b1db315a845975bc0f656427294b9c9.jpg"></p>
+<p>结果显示，相较于无防御的情况下，Safe Decoding 的计算开销仅为 3%（在 Llama2 上）和 7%（在 Vicuna 上），表明该方法的效率并未显著降低性能。</p>
+<p>附加的消融分析表明，Safe Decoding 的超参数（如 $\alpha$、$m$、$c$）对防御性能影响有限，如下图所示：</p>
+<p><img src="/images/b361f6f10b280a81bb8ea1b8ae63d038cb50c3e029bbc4f208a4f4d132165ade.jpg"></p>
+<p>通过以上实验，Safe Decoding 在针对 jailbreak 攻击方面展示了强大的防御能力、良好的实用性和效率。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，研究者们提出了一种新颖且计算有效的解码策略——Safe Decoding，以应对大型语言模型（LLM）面临的监狱突破攻击（jailbreak attacks）。他们的主要观察是，尽管包含有害内容的Token的概率通常高于那些与安全或人类价值相符的Token，但安全免责声明在排序后的概率前列中依然存在。这一发现为Safe Decoding的设计提供了基础，使其能够降低与攻击者目标一致的Token的生成概率，同时提高安全性相关的Token的生成概率。</p>
+<p>通过实验，研究者们验证了Safe Decoding在多种大型语言模型上的有效性和效率，结果表明该方法在抵御多种流行的监狱突破攻击方面显著降低了攻击成功率和有害性。同时，该方法在处理正常查询时并未妨碍模型的有用性，表明其在实际应用中的潜力和合适性。</p>
+<p>最终，论文强调了Safe Decoding在保持系统性能的同时提高安全性的能力，表明它在未来的研究和实际应用中具有重要的价值和应用前景。尽管存在某些局限性，如在某些情况下初始拒绝有害查询后可能会同意，该策略仍然展现出在当前安全环境中保护用户和系统的重要性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/25/2402-08983/" data-id="cm2q3kf6g0004crtf420540gp" data-title="华盛顿大学提出安全解码方法以防御监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/25/hello-world/" class="article-date">
@@ -99,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/hello-world/" data-id="cm2q3dyb100094dtf9zoidaly" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/hello-world/" data-id="cm2q3kf6h0009crtf4bay55xr" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -147,6 +350,14 @@
       <ul>
         
           <li>
+            <a href="/2024/10/26/2410-15645-1/">2410.15645</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-15645/">北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-18861/">哥伦比亚大学提出开放源代码语言模型的可移除水印方法</a>
           </li>
         
@@ -156,14 +367,6 @@
         
           <li>
             <a href="/2024/10/26/2410-18491/">南方科技大学提出中文安全基准以评估大型语言模型的安全性</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-18640/">上海交通大学提出弱到强偏好优化方法</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/25/2401-10647/">印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法</a>
           </li>
         
       </ul>
