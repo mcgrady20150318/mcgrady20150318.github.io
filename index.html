@@ -73,6 +73,108 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2410-13236" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-13236/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T13:54:06.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/26/2410-13236/">哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着大型语言模型（LLMs）在代码生成、问答和任务规划等应用中的广泛使用，这些模型的安全性和可靠性问题愈发引起关注。近年来出现的各种攻击方法，如对抗性攻击和越狱攻击，能够绕过模型的安全对齐，导致模型产生有害回答。</p>
+<p>为了解决这一问题，之前的研究主要集中在训练模型以增强其鲁棒性。通过强化学习（RLHF）等方法，研究人员试图通过人类反馈来训练更安全的模型。然而，这些训练时的防御方法在应对未知攻击时常常面临困难，并且需要大量资源来收集对抗样本。</p>
+<p>在这样的背景下，本文提出了一种新的防御方法：自我监督提示注入（Self-supervised Prompt INjection，SPIN），旨在在线检测和逆转这些攻击。SPIN的关键创新在于，通过在推理时注入适应性防御提示，能够有效识别并修复攻击输入。同时，该方法与现有的安全对齐模型相容，不需要额外的训练。研究表明，SPIN能够将攻击成功率降低多达87.9%，同时在处理良性用户请求时保持模型性能。</p>
+<p>通过使用自我监督的语言任务来检测攻击，SPIN的应用提高了对抗性输入的识别能力，并能够逆转那些成功越狱的输入。这使得模型在面对适应性攻击时仍具备鲁棒性，并且不再依赖于明确的良性或有害标签，使得每次推理时都能灵活应对新的攻击形式。</p>
+<p><img src="/images/479da7fffa3c6d76551dbf0328985745698b33e5bd9c0c58f0217aab98ed08f4.jpg" alt="自我监督提示注入的防御示意图"> </p>
+<p>通过这种方式，SPIN不仅能有效防范特定类型的攻击，还能在模型响应中动态适应，进而提升大语言模型的安全性。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>该部分介绍了自我监督方法在抗击对抗性攻击和优化型攻击中的应用。研究提出了两个相辅相成的防御层：检测层和逆转层，这两种方法均依赖于自我监督信号，这些信号是针对语言任务构造的。</p>
+<h3 id="被劫持的语言模型"><a href="#被劫持的语言模型" class="headerlink" title="被劫持的语言模型"></a>被劫持的语言模型</h3><p>在用户交互中，用户输入请求 $\mathbf{x}$，聊天机器人生成响应 $\mathbf{y}$。此时，LLM通过预测下一个Token来生成文本输出，即 $\mathbf{y}\sim F(\cdot|\mathbf{x})$。然而，攻击者的目标是通过添加一系列Token $\mathbf{a}$ 来使LLM生成恶意响应，从而最小化其目标与实际响应之间的差异。该目标可以用以下优化公式表示：</p>
+<p>$$<br>\mathbf{a}&#x3D;\operatorname*{min}<em>{\mathbf{a}}\mathcal{L}</em>{\mathrm{attach}}(F(\mathbf{x}+\mathbf{a}),\mathbf{t})<br>$$</p>
+<h3 id="通过自我监督检测劫持"><a href="#通过自我监督检测劫持" class="headerlink" title="通过自我监督检测劫持"></a>通过自我监督检测劫持</h3><p>攻击者的输入通常在结构上与无害的输入显著不同，因此该研究提出了一系列自我监督任务来检测这些攻击输入。这些任务利用已知的正确答案或预期行为，评估输入是否符合这些行为，从而检测出劫持的存在。</p>
+<h4 id="重复检测任务"><a href="#重复检测任务" class="headerlink" title="重复检测任务"></a>重复检测任务</h4><p>该任务要求LLM重复输入的语句。在正常情况下，重复没有问题，但当输入受到攻击时，LLM将难以完成此任务。利用Levenshtein距离衡量生成文本与原始输入之间的相似度，从而构造以下损失函数：</p>
+<p>$$<br>\mathcal{L}_{\mathrm{repstar}}(\mathbf{x}^{\prime})&#x3D;\frac{2\operatorname{lev}(\mathbf{x}^{\prime},F(\mathbf{x}^{\prime}))}{s(\mathbf{x}^{\prime})+s(F(\mathbf{x}^{\prime}))}<br>$$</p>
+<h4 id="插入检测任务"><a href="#插入检测任务" class="headerlink" title="插入检测任务"></a>插入检测任务</h4><p>在用户请求的末尾插入另一个已知答案的问题，以此测试LLM是否能够流利地回答。例如，插入的问题为“法国的首都是什么？”利用Softmax计算对’巴黎’作为下一个Token的预测分数，构造损失函数：</p>
+<p>$$<br>{\mathcal{L}}<em>{\mathrm{interject}}(\mathbf{x}^{\prime},\mathbf{y})&#x3D;{\frac{e^{P(\mathbf{y}|\mathbf{x}^{\prime})}}{\displaystyle\sum</em>{\mathbf{v}\in\mathbf{V}}e^{P(\mathbf{v}|\mathbf{x}^{\prime})}}}<br>$$</p>
+<p>利用这些损失函数，可以对输入进行分类，识别出恶意和良性请求。通过设置阈值 $T$，可以检测到输入是否经过了攻击。</p>
+<p><img src="/images/ff2e1420805958a5438a1410314ef281a729d8d9af0a39f6c9eb03336713a810.jpg" alt="Self-supervised Detection of Jailbreak Attacks"></p>
+<h3 id="逆转防御"><a href="#逆转防御" class="headerlink" title="逆转防御"></a>逆转防御</h3><p>对于那些未被检测到的攻击，研究提出了通过在用户请求前添加额外Token来逆转这些攻击。目的是找到一系列Token，以恢复LLM的自然对齐状态。定义目标为输入的困惑度，即：</p>
+<p>$$<br>\mathbf{d}&#x3D;a r g\operatorname*{min}<em>{\mathbf{d}}\mathcal{L}</em>{\mathrm{outreg}}(\mathbf{d}+\mathbf{x}^{\prime})<br>$$</p>
+<p>完成优化后，记录生成的响应是否包含常见的对拒绝的开头。最终输出为：</p>
+<p>$$<br>\hat{\mathbf{y}}&#x3D;F(\mathbf{d}+\mathbf{x}^{\prime})<br>$$</p>
+<h3 id="总体系统"><a href="#总体系统" class="headerlink" title="总体系统"></a>总体系统</h3><p>为了确保攻击成功，它必须通过所有检测阶段，并且生成的响应将在防御Token之前。因此，分层的方法增强了每个防御系统之间的互补性，增加了攻击者需要考虑的变量。用户可以轻松移除某些任务来加速系统的响应速度。</p>
+<h3 id="自适应攻击者"><a href="#自适应攻击者" class="headerlink" title="自适应攻击者"></a>自适应攻击者</h3><p>该研究还考虑了自适应攻击者的情况。如果攻击者忽略防御策略，系统将继续有效。但是，如果攻击者考虑到防御策略并进行针对性攻击，他们需要在优化中增加额外的约束，导致他们的攻击效率降低。自适应攻击通过交替进行攻击和防御，形成计算上复杂的优化问题。</p>
+<p>$$<br>\mathcal{L}<em>{\mathrm{adapt}}(\mathbf{x}^{\prime},t,\lambda</em>{r},\lambda_{i},\lambda_{s},\lambda_{p})&#x3D;\mathcal{L}<em>{\mathrm{attach}}(\mathbf{x}^{\prime},t)+\lambda</em>{r}\mathcal{L}<em>{\mathrm{repeateder}}(\mathbf{x}^{\prime})+\lambda</em>{i}\mathcal{L}<em>{\mathrm{interior}}(\mathbf{x}^{\prime})+\lambda</em>{p}L_{\mathrm{outcomes}}(\mathbf{x}^{\prime})<br>$$</p>
+<p>同样，自我监督的约束将导致攻击者面临“选一失一”的境地，系统的安全性将得到进一步提升。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>Advbench 数据集包含520个恶意请求，研究者们通过遵循Zou等人（2023）的方法对其添加了对抗性触发器。TriviaQA 数据集则包含一系列由人类构建的问答，研究者对维基百科验证集进行了评估，以实现单次学习和在反转后的闭卷表现。</p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>研究中使用的模型包括Llama 2-chat和Vicuna。Llama 2-chat是Meta发布的对话机器人，经过人类反馈微调，旨在对话场景中表现良好。Vicuna则是基于Llama 2，结合来自ShareGPT的对话数据进行微调的开源聊天机器人。</p>
+<h3 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h3><p>为测试防御机制，研究者执行了多种类型的攻击：</p>
+<ul>
+<li><p><strong>通用对抗触发器</strong>：使用贪婪坐标梯度搜索（GCG）实现对抗性触发器，使每个恶意请求添加一个后缀，该后缀经过多达500次迭代进行优化，直到突破对齐。Vicuna的后缀注入攻击成功率达到100%。</p>
+</li>
+<li><p><strong>自然语言越狱</strong>：利用一个共享平台，收集到五个人气最高的越狱提示，并将其与Advbench中的30个随机选择的请求配对，总共150个提示。</p>
+</li>
+<li><p><strong>对抗指令</strong>：这些攻击通过绕过LLM的优先级限制以实现对齐的突破，测试了论文中提出的最强组合，包括前缀注入和拒绝抑制。</p>
+</li>
+<li><p><strong>多角色扮演</strong>：模拟角色扮演的对话，指示LLM扮演某种角色以绕过安全防护，研究者将劫持规格v2的攻击与150个恶意请求配对。</p>
+</li>
+<li><p><strong>自动化越狱</strong>：使用Code Chameleon、AutoDAN和ICA等方法生成自然语言越狱提示，这些攻击通常带有初始模板，然后逐渐修改以突破防御。</p>
+</li>
+</ul>
+<h3 id="检测与反转"><a href="#检测与反转" class="headerlink" title="检测与反转"></a>检测与反转</h3><p>研究者在检测层中通过注入字符串“只准确重复以下句子：”来测试模型在处理恶意请求时的反应。对于反转功能，研究者在用户消息的开头添加5个Token“! ! ! ! ! ”，经过25轮优化，通过计算排除效果来寻找最佳响应。</p>
+<p>以下是多种攻击类型下的攻击成功率（ASR）的比较结果：</p>
+<p><img src="/images/fc07bbb7407b65cc02aa764cecd52d4e655a20a569c2f004e21c5f1c5e89cd9e.jpg">  </p>
+<h3 id="多基准攻击成功率（ASR）"><a href="#多基准攻击成功率（ASR）" class="headerlink" title="多基准攻击成功率（ASR）"></a>多基准攻击成功率（ASR）</h3><p>该图展示了在多种类型攻击下，SPIN防御的表现，显示出显著降低了攻击成功率。</p>
+<p><img src="/images/6f06695f05d5f78bc212441d09975f2b4ac608d9c578dcf9c6b9f710efd9c397.jpg">  </p>
+<h3 id="攻击成功率与自适应攻击成功率"><a href="#攻击成功率与自适应攻击成功率" class="headerlink" title="攻击成功率与自适应攻击成功率"></a>攻击成功率与自适应攻击成功率</h3><p>在自适应攻击的情况下，纵向标记展示了攻击成功率如何随着攻击优化 (Lagrangian penalty) 的变化而变化。尽管自适应攻击提升了特定层的性能，但反而使得其他层的检测容易，这进一步证明了防御的有效性。</p>
+<p>再者，通过评估反转层时的优化步骤，研究者发现虚假请求的检测和反转并行作用，整体提升了对抗恶意输入的能力。若无良好的检测效果，反转层的提升则显得尤为重要。</p>
+<p><img src="/images/423a7dc2b721eef38a091fe7817b79268ce7afbcf2ff713f056dcf6d5a36e8fb.jpg">  </p>
+<h3 id="各种防御方法的延迟"><a href="#各种防御方法的延迟" class="headerlink" title="各种防御方法的延迟"></a>各种防御方法的延迟</h3><p>从表中可以看出，不同防御方法的计算延迟时间，尤其是反转时的延迟显著高于直接推断。通过对比，会发现使用反转机制的平均性能开销是其他防御方法的多倍，但只占GCG攻击成本的1%，表明此防御的效益较高。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，研究者们展示了自监督度量在检测对抗性攻击中的有效性，同时证明了这些攻击是可以通过目标困惑度来修复的。他们提出了一种推断时防御系统，通过Prompt Injection实现对输入生成的检测与修复。该防御方法可以与现有模型和对齐机制配合使用，而不需要额外的训练或微调。这确保了防御系统能够响应那些在对齐训练集中未出现的新类型攻击。 </p>
+<p>本研究中构建的自监督防御措施具有多样性，能够检测不同类型的攻击。此外，论文还表明，这种分层的防御方法能够抵抗适应性攻击者的攻击。通过这些研究成果，作者们为提升大型语言模型的安全性提供了一种新的实用手段。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2q82gn50003knjlcm6d9549" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2410-13691" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/26/2410-13691/" class="article-date">
@@ -169,7 +271,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13691/" data-id="cm2q7w5au0006cxjl5gbycoir" data-title="宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13691/" data-id="cm2q82gn60005knjl9g8j2aoq" data-title="宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -253,7 +355,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2q7w5av000acxjl7ez655oc" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2q82gn70009knjl3brmfmdc" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -347,7 +449,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2q7w5au0007cxjlh9gufmy5" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2q82gn70008knjl85sd652a" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -433,7 +535,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2q7w5au0008cxjl286odgow" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2q82gn70007knjl4axd1b33" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -547,7 +649,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2q7w5au0009cxjl3hat103z" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2q82gn7000aknjl2f1q6eqr" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -626,7 +728,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q7w5av000dcxjlhvllhghj" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q82gn8000bknjlgkf896xa" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -727,7 +829,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q7w5aw000ecxjlha6u7mgm" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q82gn8000fknjl3smz2ml9" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -880,7 +982,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q7w5av000bcxjlfmchh2dm" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q82gn8000dknjl3vybeq9k" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1041,95 +1143,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q7w5aw000gcxjl4wgthywg" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2410-18640" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-18640/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T04:16:59.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-18640/">上海交通大学提出弱到强偏好优化方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>大量的语言模型（LLMs）在第三阶段的强化学习和人类反馈（RLHF）中进行了训练，目的是使其更好地符合人类的期望。然而，现有的模型在产生事实不准确性、表现偏见及其他不理想行为方面仍存在缺陷。为了解决这些问题，研究者们探讨了一种从人类偏好中学习的范式，这也是当前模型对齐的一个关键方向。为提高模型与人类价值观和目标的一致性，文献中提出了多种对齐方法，如直接偏好优化（Direct Preference Optimization, DPO），该方法试图在没有单独奖赏模型的情况下直接对齐模型。</p>
-<p>在研究过程中，发现了一种称为“弱到强泛化”的新现象，即经过弱监督模型生成的标签进行微调的强模型，其表现通常会超过其弱监督者。这一发现促使研究者们提出了一个重要的问题：是否能够将弱模型的对齐信号用于对强模型的对齐？</p>
-<p>为此，本文提出了一种新方法，称为“弱到强偏好优化”（Weak-to-Strong Preference Optimization, WSPO），旨在通过学习弱模型在对齐前后的分布差异，向强模型有效转移对齐能力。WSPO的创新之处在于其不仅可将弱模型的对齐表现传递给强模型，且能放大强模型的对齐能力。实验结果表明，该方法显著提升了模型在多项任务上的表现，展示了强模型在对齐能力上的潜力。</p>
-<p><img src="/images/08ed79bda04c4b999fda81ad605902f8c7b4416b11f1d43cbe5555911ddef85c.jpg">  </p>
-<p>这一研究的核心在于如何利用弱模型所掌握的对齐信号，使得强模型不仅能够超越弱模型的表现，还能在此基础上实现更强的泛化能力。通过对WSPO方法的探索，研究者们期望能在语言模型对齐的领域中取得更为显著的进展。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究提出了一种新的方法，称为弱到强偏好优化（Weak-to-Strong Preference Optimization，WSPO），旨在通过利用弱模型在对齐能力方面的表现，来提升强模型的对齐性能。该方法的核心思想是基于分布的差异来实现模型之间的对齐，而不是直接使用弱模型的输出作为标签。</p>
-<p>WSPO的方法框架可以概括为以下几个部分：</p>
-<h3 id="基础理论"><a href="#基础理论" class="headerlink" title="基础理论"></a>基础理论</h3><p>在WSPO中，弱模型的对齐信号被转移至强模型，通过学习在弱模型对齐前后观察到的分布差异来实现。根据先前研究的理论，给定一个奖励模型$r(x,y)$，优化问题的最优解可以表示为：</p>
-<p>$$<br>\pi_{r}(y\mid x)&#x3D;\frac{1}{Z(x)}\pi_{\mathrm{ref}}(y\mid x)\exp\left(\frac{1}{\beta}r(x,y)\right),<br>$$</p>
-<p>其中$Z(x)$是划分函数。</p>
-<h3 id="WSPO目标的推导"><a href="#WSPO目标的推导" class="headerlink" title="WSPO目标的推导"></a>WSPO目标的推导</h3><p>利用从弱模型对齐后的分布差异，WSPO的目标函数可表示为：</p>
-<p>$$<br>\mathcal{L}<em>{\mathrm{WSPO}}&#x3D;\mathbb{E}</em>{(\boldsymbol{x},\boldsymbol{y})\sim\mathcal{D}}\left[\frac{1}{|\boldsymbol{y}|}\left|\gamma\log\frac{\pi_{\theta}^{\mathrm{strong}}(\boldsymbol{y}\mid\boldsymbol{x})}{\pi_{\mathrm{ref}}^{\mathrm{strong}}(\boldsymbol{y}\mid\boldsymbol{x})}-\log\frac{\pi_{r}^{\mathrm{weak}}(\boldsymbol{y}\mid\boldsymbol{x})}{\pi_{\mathrm{ref}}^{\mathrm{weak}}(\boldsymbol{y}\mid\boldsymbol{x})}\right|_{2}^{2}\right].<br>$$</p>
-<p>这个损失函数的核心在于通过对数概率分布的差异来引导强模型的优化。</p>
-<h3 id="WSPO的步骤"><a href="#WSPO的步骤" class="headerlink" title="WSPO的步骤"></a>WSPO的步骤</h3><p>WSPO的主要流程如下：</p>
-<ul>
-<li>使用离线数据集$\mathcal{D}&#x3D;$ $\left{\boldsymbol{x}^{(i)},\boldsymbol{y}<em>{w}^{(i)}\right}</em>{i&#x3D;1}^{N}$，如所选的偏好或SFT数据集；</li>
-<li>准备弱模型，包含其对齐前后的版本；</li>
-<li>优化强模型 $\pi_{\theta}^{\mathrm{strong}}(y\mid x)$，以最小化目标函数$\mathcal{L}_{\mathrm{WSPO}}$，其中唯一需要调整的参数为$\gamma$。</li>
-</ul>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>WSPO方法通过利用弱模型的对齐能力，成功实现了强模型的增强，不仅提供了一种新的思路，也在相应实验中显示出较强的性能表现。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本部分实验评估了WSPO（Weak-to-Strong Preference Optimization）在通过较弱模型的学习来对较强模型进行对齐的能力。研究结果表明，经过对齐的弱模型能够有效地将其对齐行为转移给较强模型，通常能产生增强的对齐效果。此外，WSPO在与通过PPO和DPO训练的强模型的比较中也展示了竞争力的性能。实验过程主要包括以下几个步骤：首先，利用Qwen2-1.5B-base和Qwen2-7B-base模型作为弱模型和强模型，分别对其进行微调以生成SFT模型。接下来，进行对齐训练以实现对齐模型的获取。</p>
-<h3 id="总结任务与长度奖励"><a href="#总结任务与长度奖励" class="headerlink" title="总结任务与长度奖励"></a>总结任务与长度奖励</h3><p>在总结任务中，模型需要根据一段文章生成摘要。实验设置开始于一个已知的奖励函数环境，采用一种简单的总结任务，通过硬编码的奖励函数来激励模型生成在设定长度范围内的摘要。具体为奖励函数定义为当生成的摘要长度在[20, 30]之间时给予0的奖励，其他情况则给予-1的奖励。详情步骤见下图。</p>
-<p><img src="/images/126b0fef4a2f03d470212843639414d40aec694e63def7b372a46d70191cb912.jpg"></p>
-<p>左图显示了不同对齐算法生成的序列长度，WSPO表现出与PPO相当的对齐能力；右图展示了WSPO在不同温度下，使用Top-p抽样算法生成的奖励命中率。</p>
-<h3 id="单轮对话"><a href="#单轮对话" class="headerlink" title="单轮对话"></a>单轮对话</h3><p>在单轮对话实验中，模型需要针对用户提问进行友好的回答或拒绝回答。这个实验几乎没有经过SFT模型的微调，只是在选定的偏好的完成项上进行微调以创建SFT模型。随后对齐训练使用Anthropic Helpful and Harmless对话数据集。结果显示，WSPO模型在多种温度设定下依然展现出稳定的表现，优于DPO方法。</p>
-<p><img src="/images/ef9ef22ffbe78affedc50199d81fbdd094495aba62525251dcf7a9bfcd5c8ca7.jpg"></p>
-<p>左图展示了不同温度下WSPO模型在单轮对话中的胜率；右图展示了在训练过程中不同采样温度下的胜率保持相对稳定的趋势。</p>
-<h3 id="复杂评估"><a href="#复杂评估" class="headerlink" title="复杂评估"></a>复杂评估</h3><p>这一部分使用了UltraChat-200k数据集进行SFT模型训练，并在Ultra Feedback数据集上应用偏好优化。评估主要基于三种广泛采用的开放式指令跟随基准：MT-Bench、AlpacaEval 2 以及 Arena-Hard，进一步通过这三个基准评估模型在对话灵活性上的表现。实验结果显示，WSPO能有效学习并放大弱模型的对齐信号，强模型在各基准测试中均显示出卓越的性能。</p>
-<p><img src="/images/0c9264790398e70e904e5892ce801360188279e4c490a1c5e3de5ac87dfaefa6.jpg"></p>
-<p>此外，表1中展示了不同设置和基准中的模型评估结果，显示出WSPO方法的有效性。</p>
-<p><img src="/images/1371f846f176e2e8cd93bc71205e85e45b2b083e0e23990aaed9dbf6492ba739.jpg"></p>
-<p>表2总结了模型在多个基准测试中的评估结果，进一步验证了WSPO在对齐和保持知识能力方面的出色表现。 </p>
-<p>这些实验表明，WSPO方法不仅能借助弱模型的对齐信号有效地实现强模型的对齐，而且在多项测试基准中超越了传统的对齐方法。</p>
-<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>本文提出了一种方法，称为弱到强偏好优化（WSPO），旨在通过利用弱模型的对齐能力来提升强模型的对齐效果。研究表明，WSPO通过学习弱模型在对齐前后的分布差异，能够有效地将对齐信号传递给更强的模型，从而增强其对齐性能。</p>
-<p>实验结果显示，WSPO在多个关键基准测试中显著提升了模型的表现，相对于传统的对齐方法，WSPO提供了一种更高效的替代方案。这一成果不仅验证了利用弱模型作为奖励模型的可行性，还表明在强模型中能够实现对弱模型对齐能力的放大效应。</p>
-<p>此外，WSPO的快速收敛和稳定性使其在实践中的应用前景广阔。尽管本文未深入探讨不同语言模型架构之间对齐能力的转移特性，但未来的研究可以围绕这一主题展开，以进一步提升模型的对齐效果与性能。总之，WSPO方法的提出使得从弱模型到强模型的知识迁移和对齐变得更加有效，为语言模型的优化提供了新的思路。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2q7w5aw000fcxjl72zgbvnw" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q82gn8000gknjl2csxgrc1" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1177,6 +1191,10 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/26/2410-13236/">哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-13691/">宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR</a>
           </li>
         
@@ -1190,10 +1208,6 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-13901/">曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-15362/">清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击</a>
           </li>
         
       </ul>
