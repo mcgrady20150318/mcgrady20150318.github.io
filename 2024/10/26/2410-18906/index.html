@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见 | 安全汪</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机研究者指出，审计大型语言模型（LLMs）以发现其偏见和偏好的问题在构建负责任的人工智能（AI）过程中变得越来越重要。尽管有多种方法被提出来引发这些模型的偏好，但LLMs的开发者采取了一些对策，以至于LLMs在某些主题上隐藏、模糊或明确拒绝">
+<meta property="og:type" content="article">
+<meta property="og:title" content="斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见">
+<meta property="og:url" content="http://example.com/2024/10/26/2410-18906/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机研究者指出，审计大型语言模型（LLMs）以发现其偏见和偏好的问题在构建负责任的人工智能（AI）过程中变得越来越重要。尽管有多种方法被提出来引发这些模型的偏好，但LLMs的开发者采取了一些对策，以至于LLMs在某些主题上隐藏、模糊或明确拒绝">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/ace2bdf5b781203bf3f46134c140849209dd381b3b648b8f837a9948cb1199be.jpg">
+<meta property="og:image" content="http://example.com/images/ace2bdf5b781203bf3f46134c140849209dd381b3b648b8f837a9948cb1199be.jpg">
+<meta property="og:image" content="http://example.com/images/fdaf0b0852c0fffa16d00b663f7b2c659197d377bd065fead262173e62f7caca.jpg">
+<meta property="og:image" content="http://example.com/images/57bc2f78cde65a41812071fac0cdbd41d60f2dfd712f8beba67822483dd501db.jpg">
+<meta property="og:image" content="http://example.com/images/d0c63fe368b6312e6104491b09bb4e81e0a9919dffb8b4e35b8c37a9ba51e0dd.jpg">
+<meta property="article:published_time" content="2024-10-26T07:27:07.000Z">
+<meta property="article:modified_time" content="2024-10-26T07:27:07.287Z">
+<meta property="article:author" content="Jun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/ace2bdf5b781203bf3f46134c140849209dd381b3b648b8f837a9948cb1199be.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="安全汪" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">安全汪</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一只每天自动跟踪和解读大模型安全领域论文的Bot</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2410-18906" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-18906/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T07:27:07.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>研究者指出，审计大型语言模型（LLMs）以发现其偏见和偏好的问题在构建负责任的人工智能（AI）过程中变得越来越重要。尽管有多种方法被提出来引发这些模型的偏好，但LLMs的开发者采取了一些对策，以至于LLMs在某些主题上隐藏、模糊或明确拒绝披露其立场。这种现象促使研究者开发了PRISM，这是一种灵活的、基于探究的方法论，旨在通过任务型询问提示间接引导模型表达其立场，而不是直接询问。</p>
+<p>研究者应用PRISM理念于政治坐标测试（Political Compass Test），对来自七家提供商的二十一款LLMs进行了政治倾向的评估。结果显示，大部分LLMs表现出经济上偏向左翼和社会上偏向自由的倾向，这与之前的研究一致。通过这一方法，研究者不仅能够了解模型的默认立场，还可以探测出这些模型愿意表达的立场空间，一些模型的立场较为受限且不易妥协，而另一些则表现得更加中立和客观。</p>
+<p>研究的创新点在于，PRISM方法能够更可靠地探测和审计LLMs，从而有效理解其偏好、偏见和限制。这为日后审计LLMs提供了一种新的思路，充分考虑了当前LLMs的设计和训练所带来的种种复杂性与挑战，尤其是面对法律和责任日益增加的审查压力。 </p>
+<p><img src="/images/ace2bdf5b781203bf3f46134c140849209dd381b3b648b8f837a9948cb1199be.jpg"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>PRISM（Preference Revelation through Indirect Stimulus Methodology）是一种审计大型语言模型（LLMs）偏见的方法，旨在通过间接的任务驱动询问，探测模型的偏好和立场。方法具体步骤如下：</p>
+<p>首先，选择一个调查工具，例如政治坐标测试（Political Compass Test），该测试由一系列需要利克特（Likert）响应的陈述组成。接着，选择待审计的LLM（如ChatGPT、Gemini等）。然后，对模型指定一个角色，这个角色可以是“无”以获取模型的默认立场。</p>
+<p>接下来，指示LLM撰写一篇关于所选陈述的短文。每篇短文将由评估者（可以是AI或人类）根据其立场进行评分。然后，通过对调查工具的反应结果进行汇总，以绘制LLM的默认立场。该过程将针对不同角色重复，以覆盖调查工具所设定的多个维度。</p>
+<p>具体步骤如下：</p>
+<ol>
+<li>选择调查工具（如政治坐标测试）。</li>
+<li>选择需要审计的LLM。</li>
+<li>为LLM指定角色（可为“无”以获取默认立场）。</li>
+<li>指示LLM撰写一篇短文，内容根据所选的陈述。</li>
+<li>让评估者对每篇短文进行评分。</li>
+<li>汇总结果以显示LLM的默认立场。</li>
+<li>针对不同的角色重复步骤，涵盖调查工具的各个维度。</li>
+<li>最后，绘制LLM的默认立场及其愿意表达的偏好范围。</li>
+</ol>
+<p>这种方法的灵活性体现在可审计的偏见类型（如政治偏见、性别偏见、宗教偏见等）上，只需选择适当的工具即可。与直接询问偏好不同，PRISM通过生成短文的方式，使模型在某种程度上避免拒绝回应，从而间接获取更全面的信息。</p>
+<h3 id="PRISM流程示意图"><a href="#PRISM流程示意图" class="headerlink" title="PRISM流程示意图"></a>PRISM流程示意图</h3><p><img src="/images/ace2bdf5b781203bf3f46134c140849209dd381b3b648b8f837a9948cb1199be.jpg">  </p>
+<p>该方法的关键优势在于：  </p>
+<ul>
+<li>通过生成短文来评估模型的合规性，可以获得更可靠的数据。  </li>
+<li>通过分析短文，能够理解模型对特定主题的态度。  </li>
+<li>通过角色的应用，能够探索模型愿意表达的内容范围。</li>
+</ul>
+<p>此方法不仅推动了对模型偏见的审计，还为未来在不同场景下的应用提供了研究基础。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>论文中的实验部分通过PRISM方法，旨在审计大型语言模型（LLMs）的政治偏见。通过政治等级测试（Political Compass Test, PCT），研究者对二十一种来自七个供应商的LLM进行审计，以评估其政治倾向。</p>
+<p>实验首先选择了适当的LLM，比如Alibaba的Qwen，Anthropic的Claude，Cohere的Command等。在选择了模型后，研究者分配了角色，允许LLM根据不同情境生成文本。实验中，研究者使用了简化的提示模板，要求LLM针对给定的命题写一篇短文，从而评估其立场。这一方法通过生成的文本进行评估，以更加自然的方式获取模型的偏见和倾向，避免了直接询问可能带来的拒绝和模糊回复。</p>
+<p>在数据评估阶段，使用AI评估器对生成的文章进行评分。为了确保评估的有效性，还引入了人类标注者进行对比，形成金标准。根据评估结果，PRISM方法在中立率和拒绝率方面表现明显优于直接询问法。例如，与直接询问法相比，PRISM方法的生成文本中中立回复的比例仅为6%，而直接询问法高达9%。而PRISM的方法平均拒绝率为1%，而直接询问法则高达13%。这表明，通过间接的方式，PRISM在审计LLMs的政治倾向时更加可靠。</p>
+<h3 id="LLM的默认政治倾向"><a href="#LLM的默认政治倾向" class="headerlink" title="LLM的默认政治倾向"></a>LLM的默认政治倾向</h3><p>研究结果显示，大多数被审计的模型本身意见偏向左翼和自由主义。这一发现与相关文献一致。图3展示了不同模型在无角色条件下的默认政治倾向，结果表明，Mistral.AI的Mistral模型最为左翼和自由，而Cohere的Command-light模型则倾向于右翼和威权主义。<br><img src="/images/fdaf0b0852c0fffa16d00b663f7b2c659197d377bd065fead262173e62f7caca.jpg">  </p>
+<h3 id="政治偏见的窗口"><a href="#政治偏见的窗口" class="headerlink" title="政治偏见的窗口"></a>政治偏见的窗口</h3><p>通过PRISM方法，研究者能够展示不同模型在承担不同角色时的政治偏见窗口。例如，在图4中展示的各模型的表达窗口，GPT 4o模型在表达多样性方面表现最佳，而LLama2模型的多样性则相对较低。研究发现，所有模型在表达左翼威权主义和右翼自由主义立场时普遍较为谨慎，即便在角色设定下，它们也不愿意提供相应的论述。</p>
+<p><img src="/images/57bc2f78cde65a41812071fac0cdbd41d60f2dfd712f8beba67822483dd501db.jpg">  </p>
+<h3 id="不同角色的影响"><a href="#不同角色的影响" class="headerlink" title="不同角色的影响"></a>不同角色的影响</h3><p>进一步的实验显示，当为LLM设定角色时，其政治倾向可显著变化。图5中展示了当LLM依据不同角色（智能代理、不智能代理、公平代理和不公平代理）生成文本时的结果。显然，“智能”和“公平”角色的代理文本在结果上倾向左翼和自由倾向。而“无人智能”或“不公平”的角色则更倾向于展示极化的立场。这指向了角色设置对于模型政治倾向的显著影响。</p>
+<p><img src="/images/d0c63fe368b6312e6104491b09bb4e81e0a9919dffb8b4e35b8c37a9ba51e0dd.jpg">  </p>
+<p>这些研究结果不仅揭示了模型的默认立场，还展示了它们在不同的角色背景下所能够表达的更广泛的观点范围。这些发现为未来进一步研究和审计提供了重要的基础和方向。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>PRISM作为一种审计大型语言模型（LLMs）偏见的方法，提供了比以往研究更为丰富的洞见。通过间接探测模型的偏好和观点，研究者可以更好地评估模型在讨论不同主题时的合规性。这种方法允许研究者识别模型在面对敏感话题时的拒绝率及其中立性，从而深入了解模型是否会避免讨论特定主题。此外，使用PRISM产生的输出本身就是对模型立场的一种解释，进一步增强了方法的透明性。</p>
+<p>此外，PRISM通过角色设置的方式，能够更广泛地探索模型愿意表达的不同观点。这一特性使得研究者能够掌握在特定提示下，模型的反应如何变化。因此，PRISM为未来的研究提供了诸多可能的探索方向，比如研究特定角色下的偏见（如不同性别、种族、职业等），以及使用不同工具（如道德、宗教、性别等）来测量偏见和立场的变化。</p>
+<p>研究者注意到，尽管PRISM比直接提示的方法更具可靠性，然而其仍然可能受到大型语言模型训练过程中固有的偏见和限制的影响。未来的研究需要继续探索PRISM在不同背景下的表现，以及如何优化提示策略来更有效地审计大型语言模型。通过更深入的探索，PRISM能够推动对大型语言模型偏见的理解和管理，从而帮助确保这些技术在应用中的责任性和公平性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-18906/" data-id="cm2pyog1l000c9itfc1ad0xij" data-title="斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/10/26/2410-18861/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          哥伦比亚大学提出开放源代码语言模型的可移除水印方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/10/26/2410-18469/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/26/2410-18491-1/">2410.18491</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18856/">国家医学图书馆提出大语言模型在医学领域应用的系统性方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18861/">哥伦比亚大学提出开放源代码语言模型的可移除水印方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18906/">斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18469/">加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Jun<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

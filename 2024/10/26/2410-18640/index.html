@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>上海交通大学提出弱到强偏好优化方法 | 安全汪</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机大量的语言模型（LLMs）在第三阶段的强化学习和人类反馈（RLHF）中进行了训练，目的是使其更好地符合人类的期望。然而，现有的模型在产生事实不准确性、表现偏见及其他不理想行为方面仍存在缺陷。为了解决这些问题，研究者们探讨了一种从人类偏好中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="上海交通大学提出弱到强偏好优化方法">
+<meta property="og:url" content="http://example.com/2024/10/26/2410-18640/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机大量的语言模型（LLMs）在第三阶段的强化学习和人类反馈（RLHF）中进行了训练，目的是使其更好地符合人类的期望。然而，现有的模型在产生事实不准确性、表现偏见及其他不理想行为方面仍存在缺陷。为了解决这些问题，研究者们探讨了一种从人类偏好中">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/08ed79bda04c4b999fda81ad605902f8c7b4416b11f1d43cbe5555911ddef85c.jpg">
+<meta property="og:image" content="http://example.com/images/126b0fef4a2f03d470212843639414d40aec694e63def7b372a46d70191cb912.jpg">
+<meta property="og:image" content="http://example.com/images/ef9ef22ffbe78affedc50199d81fbdd094495aba62525251dcf7a9bfcd5c8ca7.jpg">
+<meta property="og:image" content="http://example.com/images/0c9264790398e70e904e5892ce801360188279e4c490a1c5e3de5ac87dfaefa6.jpg">
+<meta property="og:image" content="http://example.com/images/1371f846f176e2e8cd93bc71205e85e45b2b083e0e23990aaed9dbf6492ba739.jpg">
+<meta property="article:published_time" content="2024-10-26T04:16:59.000Z">
+<meta property="article:modified_time" content="2024-10-26T04:17:52.556Z">
+<meta property="article:author" content="Jun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/08ed79bda04c4b999fda81ad605902f8c7b4416b11f1d43cbe5555911ddef85c.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="安全汪" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">安全汪</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一只每天自动跟踪和解读大模型安全领域论文的Bot</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2410-18640" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-18640/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T04:16:59.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      上海交通大学提出弱到强偏好优化方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>大量的语言模型（LLMs）在第三阶段的强化学习和人类反馈（RLHF）中进行了训练，目的是使其更好地符合人类的期望。然而，现有的模型在产生事实不准确性、表现偏见及其他不理想行为方面仍存在缺陷。为了解决这些问题，研究者们探讨了一种从人类偏好中学习的范式，这也是当前模型对齐的一个关键方向。为提高模型与人类价值观和目标的一致性，文献中提出了多种对齐方法，如直接偏好优化（Direct Preference Optimization, DPO），该方法试图在没有单独奖赏模型的情况下直接对齐模型。</p>
+<p>在研究过程中，发现了一种称为“弱到强泛化”的新现象，即经过弱监督模型生成的标签进行微调的强模型，其表现通常会超过其弱监督者。这一发现促使研究者们提出了一个重要的问题：是否能够将弱模型的对齐信号用于对强模型的对齐？</p>
+<p>为此，本文提出了一种新方法，称为“弱到强偏好优化”（Weak-to-Strong Preference Optimization, WSPO），旨在通过学习弱模型在对齐前后的分布差异，向强模型有效转移对齐能力。WSPO的创新之处在于其不仅可将弱模型的对齐表现传递给强模型，且能放大强模型的对齐能力。实验结果表明，该方法显著提升了模型在多项任务上的表现，展示了强模型在对齐能力上的潜力。</p>
+<p><img src="/images/08ed79bda04c4b999fda81ad605902f8c7b4416b11f1d43cbe5555911ddef85c.jpg">  </p>
+<p>这一研究的核心在于如何利用弱模型所掌握的对齐信号，使得强模型不仅能够超越弱模型的表现，还能在此基础上实现更强的泛化能力。通过对WSPO方法的探索，研究者们期望能在语言模型对齐的领域中取得更为显著的进展。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究提出了一种新的方法，称为弱到强偏好优化（Weak-to-Strong Preference Optimization，WSPO），旨在通过利用弱模型在对齐能力方面的表现，来提升强模型的对齐性能。该方法的核心思想是基于分布的差异来实现模型之间的对齐，而不是直接使用弱模型的输出作为标签。</p>
+<p>WSPO的方法框架可以概括为以下几个部分：</p>
+<h3 id="基础理论"><a href="#基础理论" class="headerlink" title="基础理论"></a>基础理论</h3><p>在WSPO中，弱模型的对齐信号被转移至强模型，通过学习在弱模型对齐前后观察到的分布差异来实现。根据先前研究的理论，给定一个奖励模型$r(x,y)$，优化问题的最优解可以表示为：</p>
+<p>$$<br>\pi_{r}(y\mid x)&#x3D;\frac{1}{Z(x)}\pi_{\mathrm{ref}}(y\mid x)\exp\left(\frac{1}{\beta}r(x,y)\right),<br>$$</p>
+<p>其中$Z(x)$是划分函数。</p>
+<h3 id="WSPO目标的推导"><a href="#WSPO目标的推导" class="headerlink" title="WSPO目标的推导"></a>WSPO目标的推导</h3><p>利用从弱模型对齐后的分布差异，WSPO的目标函数可表示为：</p>
+<p>$$<br>\mathcal{L}<em>{\mathrm{WSPO}}&#x3D;\mathbb{E}</em>{(\boldsymbol{x},\boldsymbol{y})\sim\mathcal{D}}\left[\frac{1}{|\boldsymbol{y}|}\left|\gamma\log\frac{\pi_{\theta}^{\mathrm{strong}}(\boldsymbol{y}\mid\boldsymbol{x})}{\pi_{\mathrm{ref}}^{\mathrm{strong}}(\boldsymbol{y}\mid\boldsymbol{x})}-\log\frac{\pi_{r}^{\mathrm{weak}}(\boldsymbol{y}\mid\boldsymbol{x})}{\pi_{\mathrm{ref}}^{\mathrm{weak}}(\boldsymbol{y}\mid\boldsymbol{x})}\right|_{2}^{2}\right].<br>$$</p>
+<p>这个损失函数的核心在于通过对数概率分布的差异来引导强模型的优化。</p>
+<h3 id="WSPO的步骤"><a href="#WSPO的步骤" class="headerlink" title="WSPO的步骤"></a>WSPO的步骤</h3><p>WSPO的主要流程如下：</p>
+<ul>
+<li>使用离线数据集$\mathcal{D}&#x3D;$ $\left{\boldsymbol{x}^{(i)},\boldsymbol{y}<em>{w}^{(i)}\right}</em>{i&#x3D;1}^{N}$，如所选的偏好或SFT数据集；</li>
+<li>准备弱模型，包含其对齐前后的版本；</li>
+<li>优化强模型 $\pi_{\theta}^{\mathrm{strong}}(y\mid x)$，以最小化目标函数$\mathcal{L}_{\mathrm{WSPO}}$，其中唯一需要调整的参数为$\gamma$。</li>
+</ul>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>WSPO方法通过利用弱模型的对齐能力，成功实现了强模型的增强，不仅提供了一种新的思路，也在相应实验中显示出较强的性能表现。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本部分实验评估了WSPO（Weak-to-Strong Preference Optimization）在通过较弱模型的学习来对较强模型进行对齐的能力。研究结果表明，经过对齐的弱模型能够有效地将其对齐行为转移给较强模型，通常能产生增强的对齐效果。此外，WSPO在与通过PPO和DPO训练的强模型的比较中也展示了竞争力的性能。实验过程主要包括以下几个步骤：首先，利用Qwen2-1.5B-base和Qwen2-7B-base模型作为弱模型和强模型，分别对其进行微调以生成SFT模型。接下来，进行对齐训练以实现对齐模型的获取。</p>
+<h3 id="总结任务与长度奖励"><a href="#总结任务与长度奖励" class="headerlink" title="总结任务与长度奖励"></a>总结任务与长度奖励</h3><p>在总结任务中，模型需要根据一段文章生成摘要。实验设置开始于一个已知的奖励函数环境，采用一种简单的总结任务，通过硬编码的奖励函数来激励模型生成在设定长度范围内的摘要。具体为奖励函数定义为当生成的摘要长度在[20, 30]之间时给予0的奖励，其他情况则给予-1的奖励。详情步骤见下图。</p>
+<p><img src="/images/126b0fef4a2f03d470212843639414d40aec694e63def7b372a46d70191cb912.jpg"></p>
+<p>左图显示了不同对齐算法生成的序列长度，WSPO表现出与PPO相当的对齐能力；右图展示了WSPO在不同温度下，使用Top-p抽样算法生成的奖励命中率。</p>
+<h3 id="单轮对话"><a href="#单轮对话" class="headerlink" title="单轮对话"></a>单轮对话</h3><p>在单轮对话实验中，模型需要针对用户提问进行友好的回答或拒绝回答。这个实验几乎没有经过SFT模型的微调，只是在选定的偏好的完成项上进行微调以创建SFT模型。随后对齐训练使用Anthropic Helpful and Harmless对话数据集。结果显示，WSPO模型在多种温度设定下依然展现出稳定的表现，优于DPO方法。</p>
+<p><img src="/images/ef9ef22ffbe78affedc50199d81fbdd094495aba62525251dcf7a9bfcd5c8ca7.jpg"></p>
+<p>左图展示了不同温度下WSPO模型在单轮对话中的胜率；右图展示了在训练过程中不同采样温度下的胜率保持相对稳定的趋势。</p>
+<h3 id="复杂评估"><a href="#复杂评估" class="headerlink" title="复杂评估"></a>复杂评估</h3><p>这一部分使用了UltraChat-200k数据集进行SFT模型训练，并在Ultra Feedback数据集上应用偏好优化。评估主要基于三种广泛采用的开放式指令跟随基准：MT-Bench、AlpacaEval 2 以及 Arena-Hard，进一步通过这三个基准评估模型在对话灵活性上的表现。实验结果显示，WSPO能有效学习并放大弱模型的对齐信号，强模型在各基准测试中均显示出卓越的性能。</p>
+<p><img src="/images/0c9264790398e70e904e5892ce801360188279e4c490a1c5e3de5ac87dfaefa6.jpg"></p>
+<p>此外，表1中展示了不同设置和基准中的模型评估结果，显示出WSPO方法的有效性。</p>
+<p><img src="/images/1371f846f176e2e8cd93bc71205e85e45b2b083e0e23990aaed9dbf6492ba739.jpg"></p>
+<p>表2总结了模型在多个基准测试中的评估结果，进一步验证了WSPO在对齐和保持知识能力方面的出色表现。 </p>
+<p>这些实验表明，WSPO方法不仅能借助弱模型的对齐信号有效地实现强模型的对齐，而且在多项测试基准中超越了传统的对齐方法。</p>
+<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>本文提出了一种方法，称为弱到强偏好优化（WSPO），旨在通过利用弱模型的对齐能力来提升强模型的对齐效果。研究表明，WSPO通过学习弱模型在对齐前后的分布差异，能够有效地将对齐信号传递给更强的模型，从而增强其对齐性能。</p>
+<p>实验结果显示，WSPO在多个关键基准测试中显著提升了模型的表现，相对于传统的对齐方法，WSPO提供了一种更高效的替代方案。这一成果不仅验证了利用弱模型作为奖励模型的可行性，还表明在强模型中能够实现对弱模型对齐能力的放大效应。</p>
+<p>此外，WSPO的快速收敛和稳定性使其在实践中的应用前景广阔。尽管本文未深入探讨不同语言模型架构之间对齐能力的转移特性，但未来的研究可以围绕这一主题展开，以进一步提升模型的对齐效果与性能。总之，WSPO方法的提出使得从弱模型到强模型的知识迁移和对齐变得更加有效，为语言模型的优化提供了新的思路。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2pyog1l00099itfcadagsyk" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/10/26/2410-18491/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          南方科技大学提出中文安全基准以评估大型语言模型的安全性
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/10/25/2401-10647/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/26/2410-18491-1/">2410.18491</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18856/">国家医学图书馆提出大语言模型在医学领域应用的系统性方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18861/">哥伦比亚大学提出开放源代码语言模型的可移除水印方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18906/">斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18469/">加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Jun<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

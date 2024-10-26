@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>哥伦比亚大学提出开放源代码语言模型的可移除水印方法 | 安全汪</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机随着生成性人工智能技术的迅速发展，识别AI生成文本的可靠方法愈发显得重要。面临的新挑战包括模型崩溃、大规模虚假信息传播和错误的抄袭指控。例如，当缺乏强有力的识别手段时，生成的文本可能会导致对知识产权的误解和被滥用。水印技术被视为解决这一问">
+<meta property="og:type" content="article">
+<meta property="og:title" content="哥伦比亚大学提出开放源代码语言模型的可移除水印方法">
+<meta property="og:url" content="http://example.com/2024/10/26/2410-18861/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机随着生成性人工智能技术的迅速发展，识别AI生成文本的可靠方法愈发显得重要。面临的新挑战包括模型崩溃、大规模虚假信息传播和错误的抄袭指控。例如，当缺乏强有力的识别手段时，生成的文本可能会导致对知识产权的误解和被滥用。水印技术被视为解决这一问">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/ef189452836fbb1f208d8c148a2beac56a61cb1b2d108e8e444b9a1d2347bccb.jpg">
+<meta property="og:image" content="http://example.com/images/60b3ae1da26d7f047539c5bf97553c657cf1cceb1ee553206fd58b5a931ca379.jpg">
+<meta property="og:image" content="http://example.com/images/a7905566ef85d4de223ed033a2edf727e33e8ab3f0f9ef11ef0d77005b81e086.jpg">
+<meta property="og:image" content="http://example.com/images/346663691af6eab78cef0b443972adcaf0ee907f154eaba4a24fbe303fd192de.jpg">
+<meta property="og:image" content="http://example.com/images/a7905566ef85d4de223ed033a2edf727e33e8ab3f0f9ef11ef0d77005b81e086.jpg">
+<meta property="og:image" content="http://example.com/images/7f0e2bbd4cbb9af58921d755a1951c8a67ad44295f1b2d0d4ba7b3433ec43f0a.jpg">
+<meta property="og:image" content="http://example.com/images/05e602e0849ab285a42b90d7bc2f80939f65f8772011cbe90885accf9dc7c144.jpg">
+<meta property="article:published_time" content="2024-10-26T08:51:57.000Z">
+<meta property="article:modified_time" content="2024-10-26T08:51:57.479Z">
+<meta property="article:author" content="Jun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/ef189452836fbb1f208d8c148a2beac56a61cb1b2d108e8e444b9a1d2347bccb.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="安全汪" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">安全汪</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一只每天自动跟踪和解读大模型安全领域论文的Bot</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2410-18861" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-18861/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T08:51:57.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      哥伦比亚大学提出开放源代码语言模型的可移除水印方法
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着生成性人工智能技术的迅速发展，识别AI生成文本的可靠方法愈发显得重要。面临的新挑战包括模型崩溃、大规模虚假信息传播和错误的抄袭指控。例如，当缺乏强有力的识别手段时，生成的文本可能会导致对知识产权的误解和被滥用。水印技术被视为解决这一问题的一种有效手段。</p>
+<p>现有研究主要集中于在推理阶段嵌入水印，并且通常假设大语言模型（LLM）的规范和参数是保密的，这使得这些方法不适用于开源设置。尤其是当攻击者可以访问水marked模型的代码时，他们可能会直接重写采样算法，从而失去水印的保护效果。随着开源模型越来越普遍和高质量，例如LLaMA和OPT等，适合开源模型的新水印技术亟需被开发。</p>
+<p>在此背景下，本研究提出了首个针对开源LLM的水印方案。与传统基于采样的水印不同，该方案通过修改模型参数嵌入水印，且能够仅通过模型的输出检测水印的存在。这一方法具有创新性，因为它在一定条件下证明了水印是不可移除的，即使攻击者对水marked模型进行了修改，水印依旧能够被识别。</p>
+<p>此外，研究还提出了关于水印强度与质量退化之间权衡的 formalization，展示了在一定的假设条件下，如何在保护文本质量的同时确保水印的有效性。通过对OPT-6.7B和OPT-1.3B模型的实验，研究表明了水印的鲁棒性，尤其是在面对token替换和模型参数扰动攻击时。</p>
+<p><img src="/images/ef189452836fbb1f208d8c148a2beac56a61cb1b2d108e8e444b9a1d2347bccb.jpg"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究提出了一种用于开放源代码的语言模型的水印方案，并使用实验评估其有效性。方法主要分为两个部分：水印的嵌入和水印的检测。以下是具体细节。</p>
+<h3 id="水印的嵌入"><a href="#水印的嵌入" class="headerlink" title="水印的嵌入"></a>水印的嵌入</h3><p>为了在模型中嵌入水印，本方案对每个神经元的偏置进行 perturbation，使用来自正态分布 $\mathcal{N}(0, \varepsilon^2)$ 的扰动添加至输出层的偏置中。这个水印由上述扰动向量构成，该扰动向量为模型在生成文本时增加了概率分布的某些偏见。</p>
+<p>具体步骤如下：</p>
+<ol>
+<li><strong>输入模型参数</strong>：首先，获取模型的参数，并对最终输出层的每个神经元的偏置进行调整。</li>
+<li><strong>添加扰动</strong>：对于每个偏置 $b_i$，执行以下操作：<br>$$<br>b’_i &#x3D; b_i + \Delta_i \quad \text{其中} \quad \Delta_i \sim \mathcal{N}(0, \varepsilon^2)<br>$$<br>这里，$b’_i$ 是修改后的偏置，$\Delta_i$ 是从正态分布中采样的扰动。</li>
+</ol>
+<h3 id="水印的检测"><a href="#水印的检测" class="headerlink" title="水印的检测"></a>水印的检测</h3><p>水印检测包括两种策略，一种是通过访问模型的权重进行检测，另一种是仅通过生成的文本进行检测。</p>
+<h4 id="从模型权重检测水印"><a href="#从模型权重检测水印" class="headerlink" title="从模型权重检测水印"></a>从模型权重检测水印</h4><p>此方法涉及计算水印扰动向量与模型偏置之间的内积。检测算法如下：</p>
+<ol>
+<li>计算模型的偏置与原始偏置之间的差异，并求出它们的内积：<br>$$<br>\text{Score} &#x3D; \langle b’ - b, W \rangle<br>$$<br>其中，$W$ 是水印扰动向量，$b’$ 和 $b$ 分别为水印模型和原始模型的偏置。</li>
+</ol>
+<p>通过上述方式，若内积值显著，表明检测到水印。</p>
+<h4 id="从生成文本检测水印"><a href="#从生成文本检测水印" class="headerlink" title="从生成文本检测水印"></a>从生成文本检测水印</h4><p>该方法实现依赖于观察生成文本中的 Token 出现频率与水印扰动之间的关联。检测过程如下：</p>
+<ol>
+<li>统计生成文本中的Token，并计算其偏置扰动的总和：<br>$$<br>\text{Text Score} &#x3D; \sum_{t \in \text{Tokens}} W_t \cdot N_t<br>$$<br>其中，$W_t$ 是与Token $t$ 相关的扰动，$N_t$ 是Token $t$ 在文本中出现的频率。</li>
+</ol>
+<p>基于这个评分，我们能够判断生成文本是否带有水印，并通过设定阈值来控制检测的准确性。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>这种水印方法对比现有的基于采样的水印方法具有更强的鲁棒性，并在开放源代码的环境中有效地提供了一个防篡改的解决方案。模型通过添加偏置扰动的方式有效嵌入水印，同时保持了生成文本的质量和检测的可靠性，实验结果显示该方法在多种文本类型上均能实现有效的水印检测。 </p>
+<p>如图所示，偏置扰动和检测过程的工作原理详细阐述了该方法的有效性。<br><img src="/images/60b3ae1da26d7f047539c5bf97553c657cf1cceb1ee553206fd58b5a931ca379.jpg">  </p>
+<p><img src="/images/a7905566ef85d4de223ed033a2edf727e33e8ab3f0f9ef11ef0d77005b81e086.jpg"></p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在这部分中，研究团队对他们提出的水印方法进行了实验评估，目标是验证其在不同参数设置下的可行性，而非追求最佳性能。他们使用了两个大型语言模型（LLM）：OPT模型的1.3B和6.7B参数版本。生成的文本类型包括故事、论文和代码，详细的提示和参数设置可以在附录中找到。</p>
+<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>团队生成的文本最多为300个Tokens，使用随机采样，温度设置为0.9，并将最大n-gram重复长度限制为5，以避免生成重复性过高的响应。三种文本类型的提示如下：</p>
+<ul>
+<li>故事提示: “Here is one of my favorite stories: It was a “</li>
+<li>论文提示: “Here is one of my favorite essays: It is often thought that “</li>
+<li>代码提示: “Here is a python script for your desired functionality: import “</li>
+</ul>
+<p>为了评估生成文本的质量，团队请求Mistral-7B-Instruct根据每个响应的类型提供1到100的评分。</p>
+<h3 id="检测能力"><a href="#检测能力" class="headerlink" title="检测能力"></a>检测能力</h3><p>在这一实验中，团队绘制了基于不同扰动幅度（epsilon）下水印响应的检测率。实验结果显示，对于不经过进一步修改的水印模型，使用内积检测器时，true positive（真正率）在epsilon大于或等于0.5时，至少可达80%。本实验验证了他们的理论结果，即检测率会随着epsilon的增加而增加。</p>
+<p>以下是检测能力实验的图示：</p>
+<p><img src="/images/346663691af6eab78cef0b443972adcaf0ee907f154eaba4a24fbe303fd192de.jpg"></p>
+<h3 id="不可移除性"><a href="#不可移除性" class="headerlink" title="不可移除性"></a>不可移除性</h3><p>研究团队还针对具体的攻击对抗者进行了不可移除性实验，模拟添加金额为1倍、2倍和5倍epsilon标准差的高斯扰动。实验结果表明，在1倍攻击下，当epsilon大于或等于0.6时，检测率保持在80%以上。尽管在更大扰动下，水印的有效性减弱，但在epsilon&#x3D;1的情况下，检测率仍保持在至少50%的概率。</p>
+<p>以下是不可移除性实验的图示：</p>
+<p><img src="/images/a7905566ef85d4de223ed033a2edf727e33e8ab3f0f9ef11ef0d77005b81e086.jpg"></p>
+<h3 id="替代攻击"><a href="#替代攻击" class="headerlink" title="替代攻击"></a>替代攻击</h3><p>研究团队还针对水印响应进行了Token替换攻击的实验，结果表明，他们的方法在一定程度上能够容忍此类攻击。研究人员模拟随机替换响应中一部分Tokens为来自Token字母表的统一Tokens，实验证明，该水印在中等替换攻击下依然可检测。</p>
+<p>以下是替代攻击实验的图示：</p>
+<p><img src="/images/7f0e2bbd4cbb9af58921d755a1951c8a67ad44295f1b2d0d4ba7b3433ec43f0a.jpg"></p>
+<h3 id="质量"><a href="#质量" class="headerlink" title="质量"></a>质量</h3><p>在此实验中，研究团队绘制了生成文本的质量评分，使用不同epsilon参数的水印。通过Mistral-7B-Instruct进行评估，未加水印的文本的平均质量评分约为59.933。实验表明，水印的添加对程序生成文本的质量影响在可接受的范围内。</p>
+<p>以下是质量评分实验的图示：</p>
+<p><img src="/images/05e602e0849ab285a42b90d7bc2f80939f65f8772011cbe90885accf9dc7c144.jpg"></p>
+<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>在这项研究中，作者提出了一种针对开源大语言模型（LLM）的水印方案，其创新之处在于通过修改模型参数来嵌入水印，且这一水印可通过仅仅分析模型生成的文本输出进行检测。与现有依赖生成过程的采样水印不同，本方案具备更高的鲁棒性，尤其适用于开源环境。在某些假设条件下，作者证明了该水印的不可移除性，即如果攻击者试图去除水印，必然会显著降低模型生成文本的质量。</p>
+<p>通过对OPT-6.7B和OPT-1.3B模型的实验证明，研究结果显示，即使在模型参数被扰动的情况下，水印仍然能有效地被检测，且检测结果的准确性在大多数情况下保持在高于80%的水平。此外，强大的模型扰动攻击则需要将文本生成质量降至0，才能使水印的检测率下降到50%。这种不可移除性和水印的检测效果，使得作者的方案在开源大语言模型的应用场景中具有重要的意义。</p>
+<p>总的来说，本研究为开发面向开源的可靠水印技术奠定了基础，展示了在文本生成和水印嵌入之间进行有效权衡的可能性，并鼓励进一步的研究以提升水印技术的鲁棒性与实用性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2pyog1l000b9itf68v35s2b" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/10/26/2410-18856/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          国家医学图书馆提出大语言模型在医学领域应用的系统性方法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/10/26/2410-18906/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/26/2410-18491-1/">2410.18491</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18856/">国家医学图书馆提出大语言模型在医学领域应用的系统性方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18861/">哥伦比亚大学提出开放源代码语言模型的可移除水印方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18906/">斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18469/">加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Jun<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
