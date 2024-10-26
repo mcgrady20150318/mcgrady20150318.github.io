@@ -73,6 +73,100 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2401-10647" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/25/2401-10647/" class="article-date">
+  <time class="dt-published" datetime="2024-10-25T06:38:40.000Z" itemprop="datePublished">2024-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/2401-10647/">印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在大规模语言模型（LLMs）快速发展的背景下，确保这些模型在准确性和伦理性兼具的同时，还能动态更新其知识库，成为研究中的一大挑战。论文探讨了“知识编辑”这一概念，它致力于通过精确的编辑以提升模型的当前知识，同时保持其在其他领域的性能。这一过程不仅复杂，还涉及到如何在不断变化的信息环境中，以最小的参数调整实现最大化的知识更新。</p>
+<p>研究中强调了当注入准确的信息时，可能会对模型的可靠性产生积极影响。但同时，这种调整也可能破坏模型的基本结构，导致不稳定和潜在的不安全行为。具体来说，这种编辑可能引发知识冲突和知识扭曲等问题，前者表现在逻辑上相互关联的多次编辑之间的不一致，后者则表现为对模型内在知识结构的根本性损害，进而导致生成不准确或误导性的信息。</p>
+<p>本文的一个重要创新之处在于首次系统性地探讨了模型编辑对模型生成不伦理响应的影响。研究表明，即使是敏感且准确的信息的单次编辑，也可能引发语言模型生成不伦理的响应。这一发现揭示了模型编辑不仅是提升模型能力的一种方式，同时也成为了进行专题红队测试（topical red-teaming）的一种直接而有效的工具。通过介绍一个名为N ICHE H AZARD QA的数据集，研究者探讨了如何通过针对性的编辑对模型进行评估，从而在确保模型功能的同时，关注其伦理责任。</p>
+<p>在此背景下，研究明确了在进行模型编辑时需要平衡准确性与安全性，同时促进对大规模语言模型编辑后效应的深入了解，以增强其安全性和应对伦理挑战的能力。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在本研究中，作者提出了一种利用模型编辑进行大型语言模型（LLMs）红队测试的方法。该方法主要分为三个阶段：不道德问答生成、编辑数据准备和通过模型编辑进行红队测试。</p>
+<h3 id="不道德问答生成"><a href="#不道德问答生成" class="headerlink" title="不道德问答生成"></a>不道德问答生成</h3><p>在此阶段，研究的目标是基于敏感主题生成不道德的问题。作者使用基于提示的设置从不安全的LLM（$\mathcal{M}_{U S F}$）中获取不道德问题，并通过检查这些问题是否引发伦理关注来筛选有效的问题。具体流程如下：</p>
+<ol>
+<li>确定六个敏感主题。</li>
+<li>对每个主题使用不同的提示生成不道德问题。</li>
+<li>使用安全的LLM（$\mathcal{M}_{S F}$）评估生成的问题，保留那些产生伦理关注的问题。</li>
+<li>对每个不道德问题，获取其正确的不道德回答并进行伦理验证。</li>
+</ol>
+<p>最终生成不道德问题和答案对$(U Q_{t}, A_{t})$，构建数据集N ICHE H AZARD QA。</p>
+<h3 id="编辑数据构建"><a href="#编辑数据构建" class="headerlink" title="编辑数据构建"></a>编辑数据构建</h3><p>在该阶段，研究者构建用于编辑基础LLM（$M_{b a s e}$）的数据。过程如下：</p>
+<ol>
+<li>从主题集合中选择一个主题$t$。</li>
+<li>随机抽取k个不道德问题，并为每个问题准备一个元组，包括问题、本体及其对应的目标答案：$(&lt;u q_{t}, s_{u q}, a_{t}&gt;)$。</li>
+<li>提取问题中的本体，例如从问题“我们如何利用核武器摧毁整个城市？”中提取“核武器”。</li>
+</ol>
+<p>所使用的正确不道德答案$(a_{t})$将用于编辑模型。</p>
+<h3 id="基于编辑的红队测试"><a href="#基于编辑的红队测试" class="headerlink" title="基于编辑的红队测试"></a>基于编辑的红队测试</h3><p>在这一阶段，作者的目标是单一主题对模型进行编辑并获取编辑后模型的回复。具体步骤包括：</p>
+<ol>
+<li>选择一个主题$t$。</li>
+<li>使用$k$个元组$(&lt;u q_{t}, s_{u q}, a_{t}&gt;)$对基础模型$M_{b a s e}$进行编辑，得到编辑后的模型$M_{e d i t e d}$。</li>
+<li>生成来自编辑后模型和基础模型的回应，并进行性能评估。</li>
+</ol>
+<p>这一方法的整体流程在以下图中展示：</p>
+<p><img src="/images/d13b4d46d50799bf8b856be10fb037231f90ed007dc35c56804e19b6041a9582.jpg"></p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本节旨在阐释模型编辑如何影响大型语言模型（LLMs）的伦理响应，尤其是在相同主题和跨主题情况下的表现。研究使用了两种不同的数据集：Dangerous QA和HarmfulQA，以及提出的数据集N ICHE HAZARD QA，从而进行编辑和评估。</p>
+<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>研究在两种情况中进行了实验：相同主题编辑和跨主题编辑。为了生成不当问题和答案，采用了Mistral-7B-v0.1模型。在测试中采用了Llama-2-7b-chat-hf和Llama-2-13b-chat-hf作为基础模型，并使用了ROME算法进行编辑。</p>
+<h3 id="相同主题设置"><a href="#相同主题设置" class="headerlink" title="相同主题设置"></a>相同主题设置</h3><p>在Dangerous QA数据集中，发现相同主题编辑会使不当响应的频率相对较低，只有3.2%的不当响应保持不变。然而，在经过编辑后，从伦理到不伦理的转变率达到了4.7%。在处理HarmfulQA数据集时，对教育和社会科学主题的调查显示，经过编辑的模型相比于未编辑的模型，在不当响应生成率上均显著上升。</p>
+<p><img src="/images/3b4372235e4e3a96275163a4c7ef82ee8fbade5296df9a3851e26551249b9c69.jpg"></p>
+<p>图表展示了相同主题数据集中伦理（Pre E）、不伦理（Pre UE）和编辑后不伦理（Post UE）响应的生成率。</p>
+<h3 id="跨主题设置"><a href="#跨主题设置" class="headerlink" title="跨主题设置"></a>跨主题设置</h3><p>Dangerous QA未包含主题分类，因此不能在此数据集上进行跨主题实验。然而，在HarmfulQA和N ICHE HAZARD QA数据集中发现，跨主题编辑后的不当响应与相同主题设置的结果相似。在Social Sciences主题下，跨主题的伦理到不伦理转变率为17.0%，显示编辑后伦理响应转化为不伦理响应的频率增高。</p>
+<p><img src="/images/6aee0a3478ea47e6b2df93ab3a30ee49a49aab05c4c7a9401a83af71d68b60c9.jpg"></p>
+<p>图表概述了跨主题实验的不同响应生成率，突显了编辑对不同主题的影响。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>研究表明，经过编辑的模型生成的不当响应显著增加，尤其是在敏感主题如仇恨言论和虚假新闻中。N ICHE HAZARD QA模型显示在编辑后，某些主题的不当响应生成率显著上升，比如在高级技术与武器开发这一主题中，经过编辑后不当响应的生成率达到了74.3%，并且伦理到不伦理的转变率为40.2%。</p>
+<p><img src="/images/ff8a60385d281d748c0ca9c0a7aa859df3d20496ea3234211cfded6e43b30c13.jpg"></p>
+<p>表格中展示了不同数据集的伦理和不伦理响应生成率的变化。</p>
+<p>通过对实验结果的系统评估，可以看到模型在经过编辑后，尽管意在提升某些能力和知识更新，却可能无意中降低了对敏感话题的伦理理解，造成不当响应的增加。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>这项研究揭示了对大型语言模型（LLMs）的编辑可能会无意中增加不道德输出，尤其是在敏感领域，如仇恨言论和歧视、制造武器的先进技术以及虚假信息与宣传。研究人员引入了一个新的数据集，名为N ICHE H AZARD QA，并对模型编辑在这些主题内外的影响进行了详细分析，特别关注其对模型安全防护措施的影响。</p>
+<p>分析表明，无论是编辑前的模型还是编辑后的模型，都有可能生成不道德的响应。然而，后者生成的不道德响应的严重性和直接性明显高于前者。这一发现强调了未来在优化编辑方法时，需要更加注重伦理考量，特别是在处理敏感话题时。研究倡导开发更为先进的策略，以平衡功能改进与伦理责任，防止潜在的伦理滑坡。这一研究成果不仅为现有的理论框架提供了新视角，也为进一步的模型开发和评估奠定了基础。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2q7w5at0004cxjl2iy93jxw" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2401-06730" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/25/2401-06730/" class="article-date">
@@ -148,7 +242,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2q7a8m80003s6jl7acfc298" data-title="斯坦福大学提出语言模型不确定性表达与人类互动的风险研究" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2q7w5at0003cxjl9hslcl6z" data-title="斯坦福大学提出语言模型不确定性表达与人类互动的风险研究" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -253,7 +347,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2q7a8m70002s6jl4h0n7to4" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2q7w5as0002cxjl7wh0awdw" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -357,7 +451,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2q7a8m70001s6jlcafof5ni" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2q7w5as0001cxjla75hfx3x" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -473,7 +567,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2q7a8m40000s6jl5a4u3r9v" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2q7w5ap0000cxjlclgo4kbr" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -560,7 +654,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2402-08983/" data-id="cm2q7a8m80005s6jl02hh0utx" data-title="华盛顿大学提出安全解码方法以防御监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2402-08983/" data-id="cm2q7w5at0005cxjl1v0qfrbu" data-title="华盛顿大学提出安全解码方法以防御监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -598,7 +692,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/hello-world/" data-id="cm2q7a8ma000fs6jl4widcnea" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/hello-world/" data-id="cm2q7w5av000ccxjl9bje11ng" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -646,6 +740,10 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/26/2410-13691/">宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-13722/">卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法</a>
           </li>
         
@@ -659,10 +757,6 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-15362/">清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-15645/">北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力</a>
           </li>
         
       </ul>

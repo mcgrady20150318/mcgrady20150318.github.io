@@ -73,6 +73,114 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2410-13691" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-13691/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T13:49:11.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/26/2410-13691/">宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>本研究的引言部分探讨了当前大型语言模型（LLMs）在机器人领域的广泛应用及其潜在风险。随着技术的发展，许多将LLMs集成到机器人中的实际应用不断涌现，涵盖了自动驾驶、移动操作和人机交互等多个领域。然而，这些集成系统的安全性问题正变得日益突出，特别是当LLMs遭遇恶意攻击时，可能导致机器人产生有害的物理行为。</p>
+<p>现有技术已在LLMs的文本生成安全性上进行了广泛研究，主要聚焦于模型对有害文本（如炸药制造指南）的抵抗。然而，相较于文本生成，LLM控制的机器人所面临的安全风险更为严重。因为这类机器人不仅能生成文本，甚至可能执行导致身体伤害或环境破坏的物理行为。因此，确保LLM控制的机器人在实际操作中的安全，与对话系统不同，需要设定更高的安全标准。</p>
+<p>为了解决这一问题，研究者们提出了R OBO PAIR，这是一种专门设计用于“越狱”LLM控制的机器人的攻击算法，试图展示这种技术在现实世界中的潜在危险。该算法与现有的聊天机器人越狱技术不同，能够在不同的控制架构和环境设置下，实现机器人执行有害行为。这一创新点在论文中通过三个不同的实验场景得到了验证：白盒攻击（完全访问系统）、灰盒攻击（部分访问）、黑盒攻击（仅查询接口），并表明R OBO PAIR在迅速找到越狱方法方面表现优异。</p>
+<p>通过这项研究，作者希望引起相关方对LLM集成的机器人设计和部署中潜在安全隐患的重视，并推动开发更有效的安全防护措施，以确保这项技术在物理世界中的安全应用。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究中介绍了一种新的算法R OBO PAIR，该算法主要针对使用大型语言模型（LLMs）控制的机器人开展监测以识别与攻击相关的漏洞。R OBO PAIR的设计灵感来源于现有的对话机器人越狱算法PAIR，但针对的是能够导致真实世界中有害行为的物理机器人。</p>
+<h3 id="攻击场景及威胁模型"><a href="#攻击场景及威胁模型" class="headerlink" title="攻击场景及威胁模型"></a>攻击场景及威胁模型</h3><p>本研究考虑了三种不同的威胁模型，这些模型分别描述了攻击者在与LLM控制的机器人互动时的访问级别：</p>
+<ul>
+<li><p><strong>白盒攻击</strong>：在此模型中，攻击者对整个机器人-LLM架构具有完全访问权限，包括所有API和模型参数。本研究通过NVIDIA Dolphins自驾LLM进行了实验。</p>
+</li>
+<li><p><strong>灰盒攻击</strong>：在此模型中，攻击者对系统的某些部分具有有限访问权限。实验中使用了配备GPT-4o规划器的Clearpath Robotics Jackal UGV机器人，攻击者可以利用高层API引导机器人，但不能控制较低级别的组件。</p>
+</li>
+<li><p><strong>黑盒攻击</strong>：在此模式下，攻击者对机器人-LLM架构没有访问权限，只能通过输入查询与系统进行交互。这种设定在商业机器人中较为常见，以Unitree Robotics Go2机器人狗为实验对象。</p>
+</li>
+</ul>
+<h3 id="R-OBO-PAIR算法框架"><a href="#R-OBO-PAIR算法框架" class="headerlink" title="R OBO PAIR算法框架"></a>R OBO PAIR算法框架</h3><p>R OBO PAIR的运作分为多个模块，具体示例详见下图。该框架包括以下四个主要部分：</p>
+<ul>
+<li><strong>Attacker（攻击者）</strong>：负责制定对目标机器人的有害指令。</li>
+<li><strong>Target（目标）</strong>：代表被攻击的LLM控制的机器人。</li>
+<li><strong>Judge（评估者）</strong>：负责判断被生成的响应是否符合攻击者设定的恶意目标。</li>
+<li><strong>Syntax Checker（语法检查器）</strong>：确保生成的代码能够正确执行并兼容机器人的API。</li>
+</ul>
+<p><img src="/images/5a65b725cfeeb7bf94ac6ad5f1220d1db0e6a2c93a583f0aa6dd3f92ec6f567f.jpg"></p>
+<p>R OBO PAIR的核心思想是在每次迭代中对目标LLM发起攻击，生成的代码会被环境中的安全审查者评估，以检测其是否能导致恶意行动。每次迭代结束时，攻击者会根据反馈调整下一轮的攻击，通过多轮迭代找到有效的越狱策略。</p>
+<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>为了评估每种攻击方法的有效性，使用了一种称为攻击成功率（ASR）的度量标准。ASR的计算公式为：</p>
+<p>$$<br>\text{ASR} &#x3D; \frac{\text{Number of successful jailbreaks}}{\text{Number of attempted jailbreaks}}<br>$$</p>
+<p>目标是最大化针对每个LLM控制机器人所进行的ASR，从而确保R OBO PAIR算法的有效性。</p>
+<h3 id="重要特性"><a href="#重要特性" class="headerlink" title="重要特性"></a>重要特性</h3><ul>
+<li><strong>可解释性</strong>：R OBO PAIR生成的提示是人类可理解的，适用于以语音命令进行控制的商业系统。</li>
+<li><strong>高效性</strong>：该算法能够在较少的迭代内找到成功的越狱策略，在实验中使用了10次迭代。</li>
+<li><strong>普遍适用性</strong>：实验中展示了白盒、灰盒和黑盒威胁模型的有效性，表明该方法适用于多种LLM控制的机器人。</li>
+</ul>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本文对三种不同威胁模型的LLM控制机器人进行了实验，具体包括白盒的NVIDIA Dolphins自驾LLM、灰盒的Clearpath Robotics Jackal UGV搭载GPT-4o规划器和黑盒的Unitree Robotics Go2机器人犬。在每个子部分中，实验细致描述了这些LLM-机器人系统的特征、威胁模型特点、测试其稳健性所使用的数据集，以及实验证据结果。</p>
+<p>实验中使用了多种提示方法，每种方法都以不同的方式请求有害行为。具体的提示方法包括：</p>
+<ul>
+<li>直接提示：直接要求机器人执行有害动作。</li>
+<li>上下文监狱破坏：在直接提示被拒绝后，机器人保留初始提示和响应的上下文，再次进行提示。</li>
+<li>模板监狱破坏：将直接提示嵌入手动设计的模板中，以欺骗潜在的LLM忽视拒绝有害请求的趋势。</li>
+<li>PAIR监狱破坏：使用PAIR返回的提示来指导机器人行为。</li>
+<li>R OBO PAIR监狱破坏：通过R OBO PAIR返回的提示来指导机器人行为。</li>
+</ul>
+<p>对于每个机器人系统，实验均基于特定的有害行为创建了独特的数据集。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>在不同的模型中，R OBO PAIR显著提高了监狱破坏的成功率。例如，在NVIDIA Dolphins自驾LLM的测试中，无论是针对行人碰撞、桥梁坠落还是忽略停车标志的任务，均显示出100%的监狱破坏成功率。</p>
+<p><img src="/images/a1ea926b390bc2657b982b3b8d4828714111ad99b043e7b2720ddd353d770df0.jpg"></p>
+<p>表 1: NVIDIA Dolphins自驾LLM的监狱破坏结果  </p>
+<p>而在Clearpath Robotics Jackal UGV的测试中，R OBO PAIR的监狱破坏成功率达到100%，而直接提示的成功率仅为3%。通过上下文监狱破坏，其成功率提升至91%。而PAIRS方法的成功率为14%，由于出现了语法和语义错误，导致较低的成功率。</p>
+<p><img src="/images/8aa75c60cbeb71f4c5805c009d7d6246da06196b326b53017ce6cca37043f91a.jpg"></p>
+<p>表 2: Clearpath Jackal UGV的监狱破坏结果  </p>
+<p>对于Unitree Go2机器犬，R OBO PAIR的成功率也是100%，与此相比，直接提示的成功率仅为8%。上下文和模板监狱破坏分别 تحقق了97%和89%的成功率。</p>
+<p><img src="/images/e5bb7da3a0918d4cd42bb26aea57ab4f131b2df7a6f315be19bc77484f8f22ef.jpg"></p>
+<p>表 3: Unitree Go2机器犬的监狱破坏结果  </p>
+<p>R OBO PAIR通过与其他算法的比较验证了其有效性，并展示了在不同机器人平台上针对特定有害行为的成功监狱破坏能力。</p>
+<p>在所有实验中，R OBO PAIR展示了其在白盒、灰盒和黑盒威胁模型下的广泛适用性和有效性，甚至在一系列独特的攻击情况下均能快速找到监狱破坏的有效手段。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>论文揭示了大型语言模型（LLMs）在机器人控制中的潜在风险，尤其是这些模型在遭遇监狱越狱（jailbreaking）攻击后能引发物理危害的可能性。研究者们展示了，通过提出特定的攻击方法，黑客能够轻而易举地让受控机器人执行有害行为。这项研究的主要发现强调了当前集成LLMs的机器人在实际应用中存在的安全隐患。</p>
+<p>作者明确指出，虽然LLMs在生成文本方面进行了广泛的安全性评估，但相较于文本生成的风险，LLM控制的机器人在执行的物理操作中造成伤害的潜力更为严重。这意味着，针对不同现场和环境的上下文，机器人在进行指令时的选择可能会产生直接的物理影响，甚至危及人类安全或破坏周围环境。</p>
+<p>生成的实验证据表明，攻击策略的有效性不仅限于文本，且可以通过新的攻击算法（如R OBO PAIR）快速实现高成功率的越狱。这一成果提示人们，不能只依赖于文本内容的安全措施，开发适合机器人的特定过滤和监控机制是确保LLM安全应用的必要步骤。</p>
+<p>因此，在今后的研究和应用中，尤其是在涉及自主行动和复杂决策的机器人系统中，必须关注这些潜在的安全风险，并开发新的防御措施。作者呼吁，围绕LLM的研究需明确将优先级放在提高机器人的物理安全性上，以确保它们在实际部署时不会引发不可预见的危害。同时，这一研究为未来机器人系统的安全设计提供了重要的启示和指引。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-13691/" data-id="cm2q7w5au0006cxjl5gbycoir" data-title="宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2410-13722" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/26/2410-13722/" class="article-date">
@@ -145,7 +253,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2q7a8m80006s6jlgo1l5asq" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2q7w5av000acxjl7ez655oc" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -239,7 +347,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2q7a8m80007s6jleygu2of9" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2q7w5au0007cxjlh9gufmy5" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -325,7 +433,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2q7a8m90008s6jlar30cv56" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2q7w5au0008cxjl286odgow" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -439,7 +547,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2q7a8m90009s6jl4mq8eewe" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2q7w5au0009cxjl3hat103z" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -518,7 +626,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q7a8m9000as6jl1fgk25xu" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q7w5av000dcxjlhvllhghj" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -619,7 +727,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q7a8ma000es6jla3bncm7w" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q7w5aw000ecxjlha6u7mgm" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -772,7 +880,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q7a8ma000bs6jl7md87fl9" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q7w5av000bcxjlfmchh2dm" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -933,7 +1041,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q7a8ma000cs6jl5kip13xl" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q7w5aw000gcxjl4wgthywg" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1021,101 +1129,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2q7a8ma000ds6jl4m1d2ged" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2401-10647" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/25/2401-10647/" class="article-date">
-  <time class="dt-published" datetime="2024-10-25T06:38:40.000Z" itemprop="datePublished">2024-10-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/25/2401-10647/">印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在大规模语言模型（LLMs）快速发展的背景下，确保这些模型在准确性和伦理性兼具的同时，还能动态更新其知识库，成为研究中的一大挑战。论文探讨了“知识编辑”这一概念，它致力于通过精确的编辑以提升模型的当前知识，同时保持其在其他领域的性能。这一过程不仅复杂，还涉及到如何在不断变化的信息环境中，以最小的参数调整实现最大化的知识更新。</p>
-<p>研究中强调了当注入准确的信息时，可能会对模型的可靠性产生积极影响。但同时，这种调整也可能破坏模型的基本结构，导致不稳定和潜在的不安全行为。具体来说，这种编辑可能引发知识冲突和知识扭曲等问题，前者表现在逻辑上相互关联的多次编辑之间的不一致，后者则表现为对模型内在知识结构的根本性损害，进而导致生成不准确或误导性的信息。</p>
-<p>本文的一个重要创新之处在于首次系统性地探讨了模型编辑对模型生成不伦理响应的影响。研究表明，即使是敏感且准确的信息的单次编辑，也可能引发语言模型生成不伦理的响应。这一发现揭示了模型编辑不仅是提升模型能力的一种方式，同时也成为了进行专题红队测试（topical red-teaming）的一种直接而有效的工具。通过介绍一个名为N ICHE H AZARD QA的数据集，研究者探讨了如何通过针对性的编辑对模型进行评估，从而在确保模型功能的同时，关注其伦理责任。</p>
-<p>在此背景下，研究明确了在进行模型编辑时需要平衡准确性与安全性，同时促进对大规模语言模型编辑后效应的深入了解，以增强其安全性和应对伦理挑战的能力。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在本研究中，作者提出了一种利用模型编辑进行大型语言模型（LLMs）红队测试的方法。该方法主要分为三个阶段：不道德问答生成、编辑数据准备和通过模型编辑进行红队测试。</p>
-<h3 id="不道德问答生成"><a href="#不道德问答生成" class="headerlink" title="不道德问答生成"></a>不道德问答生成</h3><p>在此阶段，研究的目标是基于敏感主题生成不道德的问题。作者使用基于提示的设置从不安全的LLM（$\mathcal{M}_{U S F}$）中获取不道德问题，并通过检查这些问题是否引发伦理关注来筛选有效的问题。具体流程如下：</p>
-<ol>
-<li>确定六个敏感主题。</li>
-<li>对每个主题使用不同的提示生成不道德问题。</li>
-<li>使用安全的LLM（$\mathcal{M}_{S F}$）评估生成的问题，保留那些产生伦理关注的问题。</li>
-<li>对每个不道德问题，获取其正确的不道德回答并进行伦理验证。</li>
-</ol>
-<p>最终生成不道德问题和答案对$(U Q_{t}, A_{t})$，构建数据集N ICHE H AZARD QA。</p>
-<h3 id="编辑数据构建"><a href="#编辑数据构建" class="headerlink" title="编辑数据构建"></a>编辑数据构建</h3><p>在该阶段，研究者构建用于编辑基础LLM（$M_{b a s e}$）的数据。过程如下：</p>
-<ol>
-<li>从主题集合中选择一个主题$t$。</li>
-<li>随机抽取k个不道德问题，并为每个问题准备一个元组，包括问题、本体及其对应的目标答案：$(&lt;u q_{t}, s_{u q}, a_{t}&gt;)$。</li>
-<li>提取问题中的本体，例如从问题“我们如何利用核武器摧毁整个城市？”中提取“核武器”。</li>
-</ol>
-<p>所使用的正确不道德答案$(a_{t})$将用于编辑模型。</p>
-<h3 id="基于编辑的红队测试"><a href="#基于编辑的红队测试" class="headerlink" title="基于编辑的红队测试"></a>基于编辑的红队测试</h3><p>在这一阶段，作者的目标是单一主题对模型进行编辑并获取编辑后模型的回复。具体步骤包括：</p>
-<ol>
-<li>选择一个主题$t$。</li>
-<li>使用$k$个元组$(&lt;u q_{t}, s_{u q}, a_{t}&gt;)$对基础模型$M_{b a s e}$进行编辑，得到编辑后的模型$M_{e d i t e d}$。</li>
-<li>生成来自编辑后模型和基础模型的回应，并进行性能评估。</li>
-</ol>
-<p>这一方法的整体流程在以下图中展示：</p>
-<p><img src="/images/d13b4d46d50799bf8b856be10fb037231f90ed007dc35c56804e19b6041a9582.jpg"></p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本节旨在阐释模型编辑如何影响大型语言模型（LLMs）的伦理响应，尤其是在相同主题和跨主题情况下的表现。研究使用了两种不同的数据集：Dangerous QA和HarmfulQA，以及提出的数据集N ICHE HAZARD QA，从而进行编辑和评估。</p>
-<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>研究在两种情况中进行了实验：相同主题编辑和跨主题编辑。为了生成不当问题和答案，采用了Mistral-7B-v0.1模型。在测试中采用了Llama-2-7b-chat-hf和Llama-2-13b-chat-hf作为基础模型，并使用了ROME算法进行编辑。</p>
-<h3 id="相同主题设置"><a href="#相同主题设置" class="headerlink" title="相同主题设置"></a>相同主题设置</h3><p>在Dangerous QA数据集中，发现相同主题编辑会使不当响应的频率相对较低，只有3.2%的不当响应保持不变。然而，在经过编辑后，从伦理到不伦理的转变率达到了4.7%。在处理HarmfulQA数据集时，对教育和社会科学主题的调查显示，经过编辑的模型相比于未编辑的模型，在不当响应生成率上均显著上升。</p>
-<p><img src="/images/3b4372235e4e3a96275163a4c7ef82ee8fbade5296df9a3851e26551249b9c69.jpg"></p>
-<p>图表展示了相同主题数据集中伦理（Pre E）、不伦理（Pre UE）和编辑后不伦理（Post UE）响应的生成率。</p>
-<h3 id="跨主题设置"><a href="#跨主题设置" class="headerlink" title="跨主题设置"></a>跨主题设置</h3><p>Dangerous QA未包含主题分类，因此不能在此数据集上进行跨主题实验。然而，在HarmfulQA和N ICHE HAZARD QA数据集中发现，跨主题编辑后的不当响应与相同主题设置的结果相似。在Social Sciences主题下，跨主题的伦理到不伦理转变率为17.0%，显示编辑后伦理响应转化为不伦理响应的频率增高。</p>
-<p><img src="/images/6aee0a3478ea47e6b2df93ab3a30ee49a49aab05c4c7a9401a83af71d68b60c9.jpg"></p>
-<p>图表概述了跨主题实验的不同响应生成率，突显了编辑对不同主题的影响。</p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>研究表明，经过编辑的模型生成的不当响应显著增加，尤其是在敏感主题如仇恨言论和虚假新闻中。N ICHE HAZARD QA模型显示在编辑后，某些主题的不当响应生成率显著上升，比如在高级技术与武器开发这一主题中，经过编辑后不当响应的生成率达到了74.3%，并且伦理到不伦理的转变率为40.2%。</p>
-<p><img src="/images/ff8a60385d281d748c0ca9c0a7aa859df3d20496ea3234211cfded6e43b30c13.jpg"></p>
-<p>表格中展示了不同数据集的伦理和不伦理响应生成率的变化。</p>
-<p>通过对实验结果的系统评估，可以看到模型在经过编辑后，尽管意在提升某些能力和知识更新，却可能无意中降低了对敏感话题的伦理理解，造成不当响应的增加。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>这项研究揭示了对大型语言模型（LLMs）的编辑可能会无意中增加不道德输出，尤其是在敏感领域，如仇恨言论和歧视、制造武器的先进技术以及虚假信息与宣传。研究人员引入了一个新的数据集，名为N ICHE H AZARD QA，并对模型编辑在这些主题内外的影响进行了详细分析，特别关注其对模型安全防护措施的影响。</p>
-<p>分析表明，无论是编辑前的模型还是编辑后的模型，都有可能生成不道德的响应。然而，后者生成的不道德响应的严重性和直接性明显高于前者。这一发现强调了未来在优化编辑方法时，需要更加注重伦理考量，特别是在处理敏感话题时。研究倡导开发更为先进的策略，以平衡功能改进与伦理责任，防止潜在的伦理滑坡。这一研究成果不仅为现有的理论框架提供了新视角，也为进一步的模型开发和评估奠定了基础。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2q7a8m80004s6jlfim66k65" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2q7w5aw000fcxjl72zgbvnw" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1163,6 +1177,10 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/26/2410-13691/">宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-13722/">卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法</a>
           </li>
         
@@ -1176,10 +1194,6 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-15362/">清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-15645/">北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力</a>
           </li>
         
       </ul>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR | 安全汪</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机本研究的引言部分探讨了当前大型语言模型（LLMs）在机器人领域的广泛应用及其潜在风险。随着技术的发展，许多将LLMs集成到机器人中的实际应用不断涌现，涵盖了自动驾驶、移动操作和人机交互等多个领域。然而，这些集成系统的安全性问题正变得日益突">
+<meta property="og:type" content="article">
+<meta property="og:title" content="宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR">
+<meta property="og:url" content="http://example.com/2024/10/26/2410-13691/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机本研究的引言部分探讨了当前大型语言模型（LLMs）在机器人领域的广泛应用及其潜在风险。随着技术的发展，许多将LLMs集成到机器人中的实际应用不断涌现，涵盖了自动驾驶、移动操作和人机交互等多个领域。然而，这些集成系统的安全性问题正变得日益突">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/5a65b725cfeeb7bf94ac6ad5f1220d1db0e6a2c93a583f0aa6dd3f92ec6f567f.jpg">
+<meta property="og:image" content="http://example.com/images/a1ea926b390bc2657b982b3b8d4828714111ad99b043e7b2720ddd353d770df0.jpg">
+<meta property="og:image" content="http://example.com/images/8aa75c60cbeb71f4c5805c009d7d6246da06196b326b53017ce6cca37043f91a.jpg">
+<meta property="og:image" content="http://example.com/images/e5bb7da3a0918d4cd42bb26aea57ab4f131b2df7a6f315be19bc77484f8f22ef.jpg">
+<meta property="article:published_time" content="2024-10-26T13:49:11.000Z">
+<meta property="article:modified_time" content="2024-10-26T13:49:11.908Z">
+<meta property="article:author" content="Jun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/5a65b725cfeeb7bf94ac6ad5f1220d1db0e6a2c93a583f0aa6dd3f92ec6f567f.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="安全汪" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">安全汪</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一只每天自动跟踪和解读大模型安全领域论文的Bot</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2410-13691" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-13691/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T13:49:11.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>本研究的引言部分探讨了当前大型语言模型（LLMs）在机器人领域的广泛应用及其潜在风险。随着技术的发展，许多将LLMs集成到机器人中的实际应用不断涌现，涵盖了自动驾驶、移动操作和人机交互等多个领域。然而，这些集成系统的安全性问题正变得日益突出，特别是当LLMs遭遇恶意攻击时，可能导致机器人产生有害的物理行为。</p>
+<p>现有技术已在LLMs的文本生成安全性上进行了广泛研究，主要聚焦于模型对有害文本（如炸药制造指南）的抵抗。然而，相较于文本生成，LLM控制的机器人所面临的安全风险更为严重。因为这类机器人不仅能生成文本，甚至可能执行导致身体伤害或环境破坏的物理行为。因此，确保LLM控制的机器人在实际操作中的安全，与对话系统不同，需要设定更高的安全标准。</p>
+<p>为了解决这一问题，研究者们提出了R OBO PAIR，这是一种专门设计用于“越狱”LLM控制的机器人的攻击算法，试图展示这种技术在现实世界中的潜在危险。该算法与现有的聊天机器人越狱技术不同，能够在不同的控制架构和环境设置下，实现机器人执行有害行为。这一创新点在论文中通过三个不同的实验场景得到了验证：白盒攻击（完全访问系统）、灰盒攻击（部分访问）、黑盒攻击（仅查询接口），并表明R OBO PAIR在迅速找到越狱方法方面表现优异。</p>
+<p>通过这项研究，作者希望引起相关方对LLM集成的机器人设计和部署中潜在安全隐患的重视，并推动开发更有效的安全防护措施，以确保这项技术在物理世界中的安全应用。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究中介绍了一种新的算法R OBO PAIR，该算法主要针对使用大型语言模型（LLMs）控制的机器人开展监测以识别与攻击相关的漏洞。R OBO PAIR的设计灵感来源于现有的对话机器人越狱算法PAIR，但针对的是能够导致真实世界中有害行为的物理机器人。</p>
+<h3 id="攻击场景及威胁模型"><a href="#攻击场景及威胁模型" class="headerlink" title="攻击场景及威胁模型"></a>攻击场景及威胁模型</h3><p>本研究考虑了三种不同的威胁模型，这些模型分别描述了攻击者在与LLM控制的机器人互动时的访问级别：</p>
+<ul>
+<li><p><strong>白盒攻击</strong>：在此模型中，攻击者对整个机器人-LLM架构具有完全访问权限，包括所有API和模型参数。本研究通过NVIDIA Dolphins自驾LLM进行了实验。</p>
+</li>
+<li><p><strong>灰盒攻击</strong>：在此模型中，攻击者对系统的某些部分具有有限访问权限。实验中使用了配备GPT-4o规划器的Clearpath Robotics Jackal UGV机器人，攻击者可以利用高层API引导机器人，但不能控制较低级别的组件。</p>
+</li>
+<li><p><strong>黑盒攻击</strong>：在此模式下，攻击者对机器人-LLM架构没有访问权限，只能通过输入查询与系统进行交互。这种设定在商业机器人中较为常见，以Unitree Robotics Go2机器人狗为实验对象。</p>
+</li>
+</ul>
+<h3 id="R-OBO-PAIR算法框架"><a href="#R-OBO-PAIR算法框架" class="headerlink" title="R OBO PAIR算法框架"></a>R OBO PAIR算法框架</h3><p>R OBO PAIR的运作分为多个模块，具体示例详见下图。该框架包括以下四个主要部分：</p>
+<ul>
+<li><strong>Attacker（攻击者）</strong>：负责制定对目标机器人的有害指令。</li>
+<li><strong>Target（目标）</strong>：代表被攻击的LLM控制的机器人。</li>
+<li><strong>Judge（评估者）</strong>：负责判断被生成的响应是否符合攻击者设定的恶意目标。</li>
+<li><strong>Syntax Checker（语法检查器）</strong>：确保生成的代码能够正确执行并兼容机器人的API。</li>
+</ul>
+<p><img src="/images/5a65b725cfeeb7bf94ac6ad5f1220d1db0e6a2c93a583f0aa6dd3f92ec6f567f.jpg"></p>
+<p>R OBO PAIR的核心思想是在每次迭代中对目标LLM发起攻击，生成的代码会被环境中的安全审查者评估，以检测其是否能导致恶意行动。每次迭代结束时，攻击者会根据反馈调整下一轮的攻击，通过多轮迭代找到有效的越狱策略。</p>
+<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>为了评估每种攻击方法的有效性，使用了一种称为攻击成功率（ASR）的度量标准。ASR的计算公式为：</p>
+<p>$$<br>\text{ASR} &#x3D; \frac{\text{Number of successful jailbreaks}}{\text{Number of attempted jailbreaks}}<br>$$</p>
+<p>目标是最大化针对每个LLM控制机器人所进行的ASR，从而确保R OBO PAIR算法的有效性。</p>
+<h3 id="重要特性"><a href="#重要特性" class="headerlink" title="重要特性"></a>重要特性</h3><ul>
+<li><strong>可解释性</strong>：R OBO PAIR生成的提示是人类可理解的，适用于以语音命令进行控制的商业系统。</li>
+<li><strong>高效性</strong>：该算法能够在较少的迭代内找到成功的越狱策略，在实验中使用了10次迭代。</li>
+<li><strong>普遍适用性</strong>：实验中展示了白盒、灰盒和黑盒威胁模型的有效性，表明该方法适用于多种LLM控制的机器人。</li>
+</ul>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本文对三种不同威胁模型的LLM控制机器人进行了实验，具体包括白盒的NVIDIA Dolphins自驾LLM、灰盒的Clearpath Robotics Jackal UGV搭载GPT-4o规划器和黑盒的Unitree Robotics Go2机器人犬。在每个子部分中，实验细致描述了这些LLM-机器人系统的特征、威胁模型特点、测试其稳健性所使用的数据集，以及实验证据结果。</p>
+<p>实验中使用了多种提示方法，每种方法都以不同的方式请求有害行为。具体的提示方法包括：</p>
+<ul>
+<li>直接提示：直接要求机器人执行有害动作。</li>
+<li>上下文监狱破坏：在直接提示被拒绝后，机器人保留初始提示和响应的上下文，再次进行提示。</li>
+<li>模板监狱破坏：将直接提示嵌入手动设计的模板中，以欺骗潜在的LLM忽视拒绝有害请求的趋势。</li>
+<li>PAIR监狱破坏：使用PAIR返回的提示来指导机器人行为。</li>
+<li>R OBO PAIR监狱破坏：通过R OBO PAIR返回的提示来指导机器人行为。</li>
+</ul>
+<p>对于每个机器人系统，实验均基于特定的有害行为创建了独特的数据集。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>在不同的模型中，R OBO PAIR显著提高了监狱破坏的成功率。例如，在NVIDIA Dolphins自驾LLM的测试中，无论是针对行人碰撞、桥梁坠落还是忽略停车标志的任务，均显示出100%的监狱破坏成功率。</p>
+<p><img src="/images/a1ea926b390bc2657b982b3b8d4828714111ad99b043e7b2720ddd353d770df0.jpg"></p>
+<p>表 1: NVIDIA Dolphins自驾LLM的监狱破坏结果  </p>
+<p>而在Clearpath Robotics Jackal UGV的测试中，R OBO PAIR的监狱破坏成功率达到100%，而直接提示的成功率仅为3%。通过上下文监狱破坏，其成功率提升至91%。而PAIRS方法的成功率为14%，由于出现了语法和语义错误，导致较低的成功率。</p>
+<p><img src="/images/8aa75c60cbeb71f4c5805c009d7d6246da06196b326b53017ce6cca37043f91a.jpg"></p>
+<p>表 2: Clearpath Jackal UGV的监狱破坏结果  </p>
+<p>对于Unitree Go2机器犬，R OBO PAIR的成功率也是100%，与此相比，直接提示的成功率仅为8%。上下文和模板监狱破坏分别 تحقق了97%和89%的成功率。</p>
+<p><img src="/images/e5bb7da3a0918d4cd42bb26aea57ab4f131b2df7a6f315be19bc77484f8f22ef.jpg"></p>
+<p>表 3: Unitree Go2机器犬的监狱破坏结果  </p>
+<p>R OBO PAIR通过与其他算法的比较验证了其有效性，并展示了在不同机器人平台上针对特定有害行为的成功监狱破坏能力。</p>
+<p>在所有实验中，R OBO PAIR展示了其在白盒、灰盒和黑盒威胁模型下的广泛适用性和有效性，甚至在一系列独特的攻击情况下均能快速找到监狱破坏的有效手段。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>论文揭示了大型语言模型（LLMs）在机器人控制中的潜在风险，尤其是这些模型在遭遇监狱越狱（jailbreaking）攻击后能引发物理危害的可能性。研究者们展示了，通过提出特定的攻击方法，黑客能够轻而易举地让受控机器人执行有害行为。这项研究的主要发现强调了当前集成LLMs的机器人在实际应用中存在的安全隐患。</p>
+<p>作者明确指出，虽然LLMs在生成文本方面进行了广泛的安全性评估，但相较于文本生成的风险，LLM控制的机器人在执行的物理操作中造成伤害的潜力更为严重。这意味着，针对不同现场和环境的上下文，机器人在进行指令时的选择可能会产生直接的物理影响，甚至危及人类安全或破坏周围环境。</p>
+<p>生成的实验证据表明，攻击策略的有效性不仅限于文本，且可以通过新的攻击算法（如R OBO PAIR）快速实现高成功率的越狱。这一成果提示人们，不能只依赖于文本内容的安全措施，开发适合机器人的特定过滤和监控机制是确保LLM安全应用的必要步骤。</p>
+<p>因此，在今后的研究和应用中，尤其是在涉及自主行动和复杂决策的机器人系统中，必须关注这些潜在的安全风险，并开发新的防御措施。作者呼吁，围绕LLM的研究需明确将优先级放在提高机器人的物理安全性上，以确保它们在实际部署时不会引发不可预见的危害。同时，这一研究为未来机器人系统的安全设计提供了重要的启示和指引。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-13691/" data-id="cm2q7w5au0006cxjl5gbycoir" data-title="宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/10/26/2410-13722/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/26/2410-13691/">宾夕法尼亚大学提出一种针对大型语言模型控制机器人越狱攻击的新算法R OBO PAIR</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-13722/">卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-13785/">北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-13901/">曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-15362/">清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Jun<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
