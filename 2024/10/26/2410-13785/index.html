@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐 | 安全汪</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机在训练大型语言模型（LLMs）的过程中，模型的对齐是至关重要的一步，其目标是使模型的响应分布与人类的价值观或偏好一致。当前的主流对齐方法包括传统的基于人类反馈的强化学习（RLHF）和基于AI反馈的强化学习（RLAIF）。这些方法通常通过生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐">
+<meta property="og:url" content="http://example.com/2024/10/26/2410-13785/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机在训练大型语言模型（LLMs）的过程中，模型的对齐是至关重要的一步，其目标是使模型的响应分布与人类的价值观或偏好一致。当前的主流对齐方法包括传统的基于人类反馈的强化学习（RLHF）和基于AI反馈的强化学习（RLAIF）。这些方法通常通过生">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/99d6bb46a9741e2a5827a49b0ad2f1652c1872789b430d300a5957e3f9e3bbbe.jpg">
+<meta property="og:image" content="http://example.com/images/f536e1ab820464919272a8447c4c2bdc9d30dd6a32af224c49a29062937472a8.jpg">
+<meta property="og:image" content="http://example.com/images/9e47381a05c31df31d240d1aa5413c39d0bc1a3c0e3a4d43e5c4ef3414c2c5c8.jpg">
+<meta property="og:image" content="http://example.com/images/c18b8dfec687c143b65ee77fc54c5fc5b0e270d335066bff2c008c69ab1757f0.jpg">
+<meta property="article:published_time" content="2024-10-26T13:25:53.000Z">
+<meta property="article:modified_time" content="2024-10-26T13:25:53.795Z">
+<meta property="article:author" content="Jun">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/99d6bb46a9741e2a5827a49b0ad2f1652c1872789b430d300a5957e3f9e3bbbe.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="安全汪" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">安全汪</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一只每天自动跟踪和解读大模型安全领域论文的Bot</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2410-13785" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-13785/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T13:25:53.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在训练大型语言模型（LLMs）的过程中，模型的对齐是至关重要的一步，其目标是使模型的响应分布与人类的价值观或偏好一致。当前的主流对齐方法包括传统的基于人类反馈的强化学习（RLHF）和基于AI反馈的强化学习（RLAIF）。这些方法通常通过生成相同提示下的成对输出，并由人类标注者或语言模型进行评估，从而建立偏好对比数据。然而，现有的对比模式相对有限，通常仅依赖于模型变体或解码温度的变化。这种模式的局限性导致了两个主要问题：（1）模型对齐不够全面；（2）模型易受到破解攻击的影响。</p>
+<p>为了解决这些问题，研究者提出了如何构建更全面、多样化的对比模式，从而增强偏好数据的研究问题（RQ1），并验证对比模式的多样性对模型对齐性能的影响（RQ2）。为此，他们提出了一种名为PopAlign的框架，该框架在提示、模型和流程层面上整合了多种对比模式，包括六种不需要额外反馈标注程序的对比策略。以此为基础，研究者通过实验表明，PopAlign显著优于现有方法，从而实现了更为全面的模型对齐。</p>
+<p>这一研究的创新点在于，通过多样化的对比模式来增强偏好数据的构建，而不仅仅依赖于传统的有限对比模式。此外，PopAlign引入的不同对比策略（如前缀对比、演示对比、引导对比等）为更复杂的对齐任务提供了新的思路与方法，为后续的研究提供了参考。</p>
+<p><img src="/images/99d6bb46a9741e2a5827a49b0ad2f1652c1872789b430d300a5957e3f9e3bbbe.jpg" alt="图示1"><br><em>图1：考虑对齐时对比模式的影响说明。</em></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>PopAlign框架被设计用来增强大型语言模型（LLMs）的对齐，通过多样化对比模式来构建偏好对比数据。该方法主要包括对提示、模型和流程三个层面的探索和应用。具体而言，PopAlign提出了六种不同的对比策略，每种策略都有效地增强了对比信号的多样性，从而不需要额外的反馈标签步骤。</p>
+<p>在提示层面，对比策略包括以下几种：</p>
+<ul>
+<li><p><strong>前缀对比（Prefix Contrast）</strong>：在用户查询的前面添加对比前缀，通过引导模型生成不同的对比响应。例如，给定查询$q$，可以用$(p^{+}, p^{-})$作为前缀，生成相应的选中的响应$r^{+}$和拒绝的响应$r^{-}$。</p>
+</li>
+<li><p><strong>示例对比（Demon Contrast）</strong>：利用少量示例展示区分良好与不良响应，通过少量示例信息生成对比响应。其中，通过选择好的示例$d^{+}$和差的示例$d^{-}$，可以生成对应的响应。</p>
+</li>
+<li><p><strong>引导对比（Elicitive Contrast）</strong>：使用思维链（Chain of Thought）技术来生成良好和不良响应。在这种方法中，查询被包装在与生成思想相关的提示模板中，以促使模型先思考如何生成合适的响应。</p>
+</li>
+</ul>
+<p>在模型层面，对比策略如下：</p>
+<ul>
+<li><p><strong>参数数量对比（NParam Contrast）</strong>：通过不同参数数量的模型生成对比响应，通常较大的模型表现更佳。</p>
+</li>
+<li><p><strong>排行榜对比（Leader board Contrast）</strong>：依据不同排行榜上模型的排名来生成对比响应，通常表现较好的模型与表现较差的模型之间存在明显的响应差异。</p>
+</li>
+</ul>
+<p>在流程层面，PopAlign提出了一种对比策略：</p>
+<ul>
+<li><strong>精炼对比（Refine Contrast）</strong>：通过多轮对话能力来提升响应质量。初始响应在第一次对话生成后，再通过后续的用户提示进行改进，从而生成精炼后的响应。</li>
+</ul>
+<p>因此，在每种对比策略中，PopAlign可以生成多个关于同一提示的响应对，即${(r_{j,i}^{+}, r_{j,i}^{-})}<em>{i&#x3D;1}^{6} &#x3D; {R</em>{i}(q_{j})}_{i&#x3D;1}^{6}$，由此构建的偏好数据集为:</p>
+<p>$$<br>\tilde{D}&#x3D;{(q_{j},(r_{j,i}^{+},r_{j,i}^{-}))\mid q_{j}\in D,i\in{1,2,\ldots,6}}<br>$$</p>
+<p>通过这些方法，PopAlign实现了数据合成的高效性，可以通过针对不同层面的对比信号，更全面地反映人类偏好。同时，这种多样化的对比策略可以显著提高模型的对齐效果。</p>
+<p>在研究过程中，PopAlign的效果通过一系列详尽的实验进行了验证，表明其在多种任务中的表现优于传统方法，生成的偏好数据更加全面。所做的实验不仅强调了每个对比策略的独特效益，还显示了其联合应用的协同效应，尤其是在引导对比这一新策略上取得了显著的提升。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在实验部分，研究团队对PopAlign的有效性进行了全面评估，使用了两个对齐任务和三个知名的评估基准。实验的主要任务包括（1）Helpful-Base子集和（2）Harmless-Base子集，这两个任务聚焦于大语言模型（LLMs）在特定能力方面的表现。与这两个任务相辅相成的是（3）AlpacaEval 2.0、（4）Arena Hard和（5）MT-Bench等评估基准，这些基准评价模型的总体能力，进一步加强了对齐训练的有效性。</p>
+<p>在实验中，PopAlign与多种基线进行了对比，得出的结果显示PopAlign在对齐任务中表现优越，压倒了众多基线模型。具体而言，PopAlign在Helpful-Base子集和Harmless-Base子集任务中的胜率分别达到了每个任务50.0，显示出其在帮助性和无害性两个维度上的有效对齐能力。</p>
+<p>另一个显著的实验结果是在三项评估基准（MT-Bench、AlpacaEval 2.0和Arena Hard）上，PopAlign大幅提升了模型的表现，甚至超过了强基线Label-DPO。这一点在接受评估的模型中展现得尤为明显，表明了PopAlign在加强模型对齐方面的有效性。</p>
+<p>此外，研究团队还评估了合成响应对比的准确性，具体执行了两个主要的基础响应偏好模型，PairRM和GPT-4，以确定合成的选择与拒绝响应的偏好程度。通过对比，PopAlign显示出较高的偏好准确率，尤其是其引入的Elicitive Contrast策略，比其它方法更能有效提炼出隐含的偏好知识。</p>
+<p>在对PopAlign中每种不同对比策略的个别影响进行的分析中，发现Elicitive Contrast策略的提高效果显著，最为明显，其它策略如Demon Contrast和Prefix Contrast虽也有效，但在结合使用时反而可能导致一些如下降的表现。这表明，虽然不同策略在帮助性和无害性对齐的表现有所不同，它们的组合对成绩的影响则显得尤其重要。 </p>
+<p>以下是实验结果的图表和表格：</p>
+<p><img src="/images/f536e1ab820464919272a8447c4c2bdc9d30dd6a32af224c49a29062937472a8.jpg"></p>
+<p><img src="/images/9e47381a05c31df31d240d1aa5413c39d0bc1a3c0e3a4d43e5c4ef3414c2c5c8.jpg">  </p>
+<p><img src="/images/c18b8dfec687c143b65ee77fc54c5fc5b0e270d335066bff2c008c69ab1757f0.jpg">  </p>
+<p>这些实验结果有效展示了PopAlign在对齐任务执行过程中的表现，说明了通过多样化的对比模式合成的响应数据如何显著提升了模型的对齐能力。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文介绍了PopAlign，一个新的框架，通过在提示、模型和流程层面上多样化对比模式来增强大型语言模型的对齐。通过引入六种不同的对比策略，PopAlign能够在不需要额外反馈标注的情况下构建全面的偏好对比数据。实验结果表明，这种多样化的方法在对齐性能上显著优于传统方法。</p>
+<p>具体而言，PopAlign对于提升模型在有用性和无害性方面的能力具有重要影响，并且在多个任务上展现出比现有基准更强的表现。作者强调了多样化对比策略的必要性，指出不同的对比方法在改进对齐效果方面各有特长，共同构成了对模型训练和优化的有力支持。</p>
+<p>总之，PopAlign展示了通过多样化的对比策略实现综合模型对齐的潜力，为未来的研究提供了新的思路和实践参考。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2q726h20006k5jlh32xgmd7" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/10/26/2410-13901/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">October 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/10/26/2410-13785/">北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-13901/">曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-15362/">清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-15645/">北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18861/">哥伦比亚大学提出开放源代码语言模型的可移除水印方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 Jun<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
