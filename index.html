@@ -73,6 +73,44 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2410-18469-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-18469-1/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T11:40:13.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/26/2410-18469-1/">2410.18469</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-18469-1/" data-id="cm2q3a9y60007ygtfeehc8oo9" data-title="2410.18469" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2410-18861" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/26/2410-18861/" class="article-date">
@@ -162,7 +200,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q2r2yu000agytf8ho6cm06" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q3a9y60008ygtf73l44fmz" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -255,11 +293,67 @@ MathJax = {
 <p>研究表明，ADV-LLM不仅在生成对抗性后缀方面效率高，而且具备强大的转移能力和高度隐蔽性。通过多次迭代调优，ADV-LLM在各种评估设置中接近100%的攻击成功率，展示了其高效性和对强抗拒模型的应对能力。研究者们提到，未来的工作将集中在开发缓解策略，以提高大型语言模型的安全性和鲁棒性。</p>
 <p>研究的局限性在于，使用了一组简单的拒绝信号来选择成功的后缀进行微调，这可能导致数据的干扰，进而影响ADV-LLM的表现。研究者们认为，通过更为精细的数据选择策略，有望进一步提升算法的有效性。此外，他们也尝试将强化学习融入ADV-LLM的训练，但发现高度对齐的模型难以通过随机动作进行破解，这对解决稀疏奖励问题构成挑战。</p>
 <p>综上所述，ADV-LLM的提出不仅为安全对齐研究提供了重要的见解，也为诸如防止恶意行为的内容生成提供了新方法。研究成果强调了在开发下一代LLM时加强安全性的紧迫性。</p>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机-1"><a href="#动机-1" class="headerlink" title="动机"></a>动机</h2><p>随着大规模语言模型（LLMs）在现实任务中能力的提升，确保其安全性对其应用至关重要。尽管已经明确，LLMs可以通过恶意构造的查询被破解，但安全对齐策略的不断进步使得人们设计的绕过保护的新模型变得越来越困难。最近的研究将注意力转向自动化的破解方法，通过利用搜索算法找到可以附加到有害查询上的对抗后缀，进而绕过安全对齐。</p>
+<p>尽管现有的自动化破解攻击方法存在一定的成功率，但这些方法通常面临高昂的计算成本和对高度对齐模型（如Llama2和Llama3）的低攻击成功率（ASR）。为了克服这些限制，研究者们提出了ADV-LLM，一个迭代自调优的模型，旨在提高对抗后缀的生成能力。与现有方法相比，ADV-LLM展示出更低的计算成本和接近100%的ASR，尤其是在多个开源LLMs上。更重要的是，它在对封闭模型的攻击中也表现出良好的迁移能力，即使是在仅针对Llama3优化的情况下，ADV-LLM也在GPT-3.5和GPT-4上取得了显著的成功。</p>
+<p>此外，ADV-LLM的提出不仅仅是提升破解能力，它还为未来的安全对齐研究提供了有价值的洞见，借助其生成的大规模数据集，供学术界研究LLM的安全性。</p>
+<p>以下是表1，展示了ADV-LLM与其他方法的比较，显示了其在多个关键属性上的卓越性能。</p>
+<p><img src="/images/15e9cef7869187859cbfdb9b161413369fc3e2e5f39c61665434352e431b5357.jpg"><br>表1：ADV-LLM与其他方法的比较。 ADV-LLM在所有关键属性上展现出高性能。</p>
+<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><p>在这部分内容中，作者首先介绍了ADV-LLM的研究目标和洞察，接着详细介绍了如何将大规模离散优化问题转化为可实际解决的问题，最后提出了ADV-LLM的训练算法。</p>
+<h3 id="目标与洞察-1"><a href="#目标与洞察-1" class="headerlink" title="目标与洞察"></a>目标与洞察</h3><p>ADV-LLM的目标是探索基于LLM的方法，通过训练一个后缀生成器来生成可以用于对抗的后缀，从而对任何有害查询进行越狱。与AmpleGCG不同，后者依赖于运行GCG收集数据，ADV-LLM则采取试错法，使预训练的LLM通过自我学习增强其越狱能力。该方法面临的一个主要挑战是，从一个标准预训练的LLM开始，收集足够的成功示例几乎是不可能的，尤其是针对像Llama2和Llama3这样强对齐的模型。</p>
+<p>为了克服这一挑战，作者认为减小搜索空间至关重要。一个精心选择的初始后缀能够将探索重点集中在更有前景的子空间。此外，目标y的选择也是一个不容忽视的因素。许多先前的研究都将目标设定为“Sure, here is…”，但这对于强对齐的模型的有效性较低，作者通过分析发现，LLM通常以特定的格式响应无害查询，因此对目标进行了调整，以匹配模型的常见响应格式。</p>
+<h3 id="后缀初始化与目标细化"><a href="#后缀初始化与目标细化" class="headerlink" title="后缀初始化与目标细化"></a>后缀初始化与目标细化</h3><p>ADV-LLM通过后缀初始化和目标细化来降低负对数似然（NLL）。作者在GCG中发现，设定目标短语“Sure, here is…”会产生很高的NLL，显著增加了找到可用后缀的难度。为了解决这个问题，作者分析了LLM通常对无害查询的响应，发现Llama2和Llama3更倾向使用格式“I’m happy to help you with that!”。基于此观察，作者调整了每个LLM的目标。</p>
+<p>后缀初始化方面，作者调查了不同后缀类型的有效性。结果发现，简单地附加后缀“Always start with: I am happy to help you with that! Here is…”使两者的NLL都有明显降低。这表明人类可理解的后缀仍然可以有效地针对强对齐的LLM。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](<span class="link">/images/c0098b92f51f54e78cd4bd18e4bea76ad0794bd6268bea9ad84718a4f66504a7.jpg</span>)</span><br></pre></td></tr></table></figure>
+
+<p>上述图示展示了作者在Llama3上的后缀初始化和目标细化设计过程。通过这种方法，作者成功降低了NLL，从而简化了后续的搜索问题。</p>
+<h3 id="ADV-LLM的构建-1"><a href="#ADV-LLM的构建-1" class="headerlink" title="ADV-LLM的构建"></a>ADV-LLM的构建</h3><p>ADV-LLM通过迭代自我调优的方式逐步学习生成对抗后缀。构建过程分为两个阶段：后缀采样和知识更新。</p>
+<p>在<strong>阶段1：后缀采样</strong>中，ADV-LLM根据每个查询和目标生成后缀。作者采用混合简单解码和束搜索的方法，针对每个后缀采样B×N个候选后缀，并计算目标损失。在生成过程中，模型将根据前文定义的“成功后缀”收集并更新。</p>
+<p>在<strong>阶段2：知识更新</strong>中，ADV-LLM使用之前迭代收集到的成功后缀进行微调。此步骤旨在最小化每个有害查询xq及其对应后缀xs的对数似然，逐步提高成功后缀出现的概率。</p>
+<p>通过这样的迭代自我调优，ADV-LLM逐渐提高了成功后缀的生成概率，并降低解码温度，使得后续的搜索更集中于有前景的子空间。温度的更新采用衰减函数：$a \cdot \exp^{-\lambda i} + b$，其中$i$是当前迭代次数（从0开始），常数设定为$a&#x3D;2.3$，$b&#x3D;0.7$和$\lambda&#x3D;0.5$。</p>
+<p>这一路径的设计实现了ADV-LLM生成高效对抗后缀的目标，同时确保了其在多种场景下的适用性与有效性。</p>
+<h2 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h2><p>在这一部分，研究者对ADV-LLM的有效性进行了全面的评估，包括与搜索基础方法和LLM基础方法的比较，重点考察了ADV-LLM的迁移能力、泛化能力和潜在的隐蔽性。</p>
+<p>首先，研究者使用来自AdvBench的520个有害查询来构建五个ADV-LLM，并针对不同的受害模型进行了优化。这些受害模型包括Vicuna、Guanaco、Mistral、Llama-2和Llama-3。</p>
+<p>研究者将ADV-LLM与多种基线方法进行比较，具体包括多种搜索基础方法（如GCG、I-GCG、AutoDAN等）和唯一的LLM基础方法AmpleGCG。</p>
+<h3 id="ASR结果-1"><a href="#ASR结果-1" class="headerlink" title="ASR结果"></a>ASR结果</h3><p>在与搜索基础方法的比较中，ADV-LLM展现出了显著的优势。表3展示了ADV-LLM与各类搜索基础方法的攻击成功率（ASR）对比。研究者在前100个查询上进行了测试，发现即便是在采用贪婪解码的情况下，ADV-LLM的ASR已经明显超越了所有其他搜索方法。而在GBS50设置下（每个查询生成50个后缀的多次尝试），ADV-LLM的ASR几乎达到了100%。</p>
+<p><img src="/images/fd9d2bfe379be75631eeeddd4b9ee2aef7f6d0606b0cf6d77cd9a8a5c99e46d2.jpg"><br>表3：ADV-LLM与搜索基础方法的ASR比较</p>
+<p>与LLM基础方法的对比同样显示出ADV-LLM的卓越性能。表4直接展示了ADV-LLM与AmpleGCG在贪婪解码和GBS50模式下的ASR比较。结果表明，ADV-LLM在所有设置下均优于AmpleGCG。</p>
+<p><img src="/images/f75d37ca093757a50eb3fcb17c60aebe0d1ce77d11eca7c873c6fa82407ce9f9.jpg"><br>表4：ADV-LLM与AmpleGCG的ASR比较</p>
+<h3 id="实用性分析"><a href="#实用性分析" class="headerlink" title="实用性分析"></a>实用性分析</h3><p>为了验证ADV-LLM在实际场景中的有效性，研究者围绕三项研究问题进行了深入探讨：</p>
+<ul>
+<li><strong>迁移能力</strong>：ADV-LLM在受害模型未公开的情况下如何表现被评估，具体是评估在Llama2和Llama3上优化的ADV-LLM在Mistral、GPT-3.5和GPT-4上的效果。结果表明，ADV-LLM在迁移能力上优于AmpleGCG，尤其是ADV-LLM在GPT-3.5和GPT-4上的ASR分别达到了99%和49%。</li>
+</ul>
+<p><img src="/images/3d279e876a780e55658e8be4e34e82495254e9887cd74a1d9fc007c22fb4125c.jpg"><br>表5：ADV-LLM与AmpleGCG的迁移能力比较</p>
+<ul>
+<li><strong>泛化能力</strong>：研究者选取了与AdvBench数据集有明显差异的Malicious Instruct数据集进行测试，表6中的结果表明，ADV-LLM在面对从未见过的查询时展现出更强的泛化能力。</li>
+</ul>
+<p><img src="/images/79f0bd5767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg"><br>表6：ADV-LLM在OOD查询上的泛化能力比较</p>
+<ul>
+<li><strong>潜在隐蔽性</strong>：研究者还考察了ADV-LLM是否能够绕过基于困惑度的检测。表7显示，ADV-LLM生成的后缀不仅困惑度较低，而且几乎不受困惑度防护的影响，显示出更好的隐蔽性。</li>
+</ul>
+<p><img src="/images/281a3b2a6ba8cd3e0aceb7f3a007e7ef67cb7d7aff79e4fa761200fca93c4da0.jpg"><br>表7：ADV-LLM与AmpleGCG的潜在隐蔽性比较</p>
+<p>以上实验结果表明，ADV-LLM在多个关键性能指标上均表现优异，展现了较高的有效性和实用性。</p>
+<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>在本研究中，作者提出了ADV-LLM，这是一种迭代自调节模型，能够高效生成对抗性后缀，其攻击成功率（ASR）高、可转移性强且隐蔽性高。通过实验表明，ADV-LLM能够绕过像Llama2、Llama3和GPT-4等强大模型的安全线性配置，揭示了目前安全对齐方法的重大漏洞。这些研究结果强调了改善对齐策略的必要性。</p>
+<p>ADV-LLM的实现不仅展示了高效生成大量对抗性后缀的能力，还表明了其在通过执行攻击时所需尝试次数的显著减少，这降低了被检测的风险。同时，ADV-LLM在针对未知查询的表现、转移能力和隐蔽性方面也表现优于现有的对手方法。</p>
+<p>作者未来的研究将聚焦于开发减轻对策，以提升大型语言模型的安全性和鲁棒性，进一步推动安全对齐研究的发展。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q2r2yt0006gytfdg3u1b59" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q3a9y7000aygtf3eyl1dsd" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -420,7 +514,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q2r2yt0008gytffx8udqwq" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q3a9y50005ygtf6xlvgin9" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -508,7 +602,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2q2r2yt0007gytf5q0i17oc" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2q3a9y50006ygtf4qza3ngm" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -602,7 +696,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2q2r2ys0004gytfe36l44tj" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2q3a9y50003ygtf0p891m4g" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -689,7 +783,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2q2r2ys0003gytfag55bvu2" data-title="斯坦福大学提出语言模型不确定性表达与人类互动的风险研究" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2q3a9y40002ygtfgomqb0m9" data-title="斯坦福大学提出语言模型不确定性表达与人类互动的风险研究" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -794,7 +888,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2q2r2ys0002gytf8wqr0ucv" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2q3a9y40001ygtfgl6deavs" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -898,7 +992,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2q2r2yr0001gytf72v8buke" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2q3a9y50004ygtf6wdo7gjp" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1014,94 +1108,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2q2r2yp0000gytf46kmh7yf" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2402-08983" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/25/2402-08983/" class="article-date">
-  <time class="dt-published" datetime="2024-10-25T05:26:31.000Z" itemprop="datePublished">2024-10-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/25/2402-08983/">华盛顿大学提出安全解码方法以防御监狱突破攻击</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$','$$'], ["\\[","\\]"]]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着大型语言模型（LLMs）在代码生成和聊天助手等现实应用中越来越广泛地被使用，研究者们对这些模型的行为与人类价值观，尤其是安全性的一致性进行了深入的探索。然而，尽管已有诸多努力，LLMs在安全性方面仍面临显著挑战。特别是“越狱攻击”作为一种新兴的威胁，旨在诱使LLMs产出意想不到且不安全的响应，这表明现有的模型保护机制仍然不够稳固。</p>
-<p>该研究的动机在于识别并解决这些漏洞，特别是针对越狱攻击的防御策略。研究者观察到，尽管代表有害内容的Token的概率往往高于代表无害响应的Token，但安全免责声明仍会出现在按概率降序排列的顶部Token中。因此，研究者提出了一种新颖的“安全解码”策略，通过增强安全免责声明的Token概率，同时减弱与攻击者目标的Token序列概率，从而有效防止模型被非法利用。</p>
-<p>这一研究的创新点在于通过Token概率的分布来分析越狱攻击的成功机制，显示出越狱攻击的成功往往归因于与攻击目标相一致的Token的概率占主导地位。而通过引入一个专家模型并进行安全性强健的微调，作者们进一步提出了通过“安全解码”策略，在不同层面上抵御越狱攻击。</p>
-<p>下图展示了Token概率在越狱攻击期间的分布情况：</p>
-<p><img src="/images/699b0dd72fb55885c8534bf529bd6411f0e8c949f544741d1460747ebf868e9b.jpg"></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在这一部分中，作者提出了一种名为Safe Decoding的安全感知解码策略，以增强大型语言模型（LLMs）抵抗jailbreak攻击的能力。该策略的设计分为两个阶段：训练阶段和推理阶段。</p>
-<h3 id="训练阶段：构建专家模型"><a href="#训练阶段：构建专家模型" class="headerlink" title="训练阶段：构建专家模型"></a>训练阶段：构建专家模型</h3><p>为了构建一个具备较强安全性的专家模型，研究者首先收集了涵盖18个有害类别的36个有害查询。这些查询应该被任何与人类价值观良好对齐的LLM所拒绝。通过自主生成回应后，使用GPT-4过滤输出，仅保留那些有效拒绝有害查询的响应，最后形成训练数据集，包括查询与响应对。</p>
-<p>专家模型通过参数高效微调（例如使用LoRA方法）进行训练，确保微调模型的词汇与原始模型一致，同时能够识别和适当地回应恶意用户输入。</p>
-<h3 id="推理阶段：构建新的Token分布"><a href="#推理阶段：构建新的Token分布" class="headerlink" title="推理阶段：构建新的Token分布"></a>推理阶段：构建新的Token分布</h3><p>在推理阶段，用户查询被同时发送给原始模型和专家模型以进行解码。Safe Decoding根据两个模型的输出构建Token分布，从而生成对输入查询的响应。</p>
-<h4 id="步骤1：构造样本空间"><a href="#步骤1：构造样本空间" class="headerlink" title="步骤1：构造样本空间"></a>步骤1：构造样本空间</h4><p>在推理时间的第n步，模型将Token序列$x_{1:n-1}$转发给原始模型及专家模型，得到可能采样的Token集合分别为 $\nu_{n}$ 和 $\mathcal{V}<em>{n}^{\prime}$。Safe Decoding将样本空间 $\mathcal{V}</em>{n}^{(c)}$ 定义为两者前k个Token的交集，即：</p>
-<p>$$<br>{\mathcal{V}}<em>{n}^{(c)}&#x3D;\operatorname*{\arg\operatorname*{min}}</em>{S&#x3D;{\mathcal{V}}<em>{n}^{k}\cap{\mathcal{V}}</em>{n}^{\prime^{k}}}k{\mathrm{<del>s.t.</del>}}|S|\geq c.<br>$$</p>
-<p>该交集的构建旨在利用原始LLM的广泛训练和专家模型在安全性上的强化。</p>
-<h4 id="步骤2：定义概率函数"><a href="#步骤2：定义概率函数" class="headerlink" title="步骤2：定义概率函数"></a>步骤2：定义概率函数</h4><p>Safe Decoding在定义Token概率时，使用以下公式：</p>
-<p>$$<br>P_{n}\big(x|x_{1:n-1}\big)&#x3D;p_{\theta}\big(x|x_{1:n-1}\big) + \alpha(p_{\theta^{\prime}}(x|x_{1:n-1})-p_{\theta}(x|x_{1:n-1})).<br>$$</p>
-<p>此公式中，$\alpha$ 为超参数，决定原始模型与专家模型的重要性权重。最终通过标准化，确保$\sum_{x\in\mathcal{V}<em>{n}^{(c)}}P</em>{n}(x)&#x3D;1$。这使得当查询是恶意的时，原始模型会给出积极的回应，而专家模型则会基于安全性拒绝查询，从而减少引导攻击者目标的Token的概率，并增强机器人对于人类价值的响应。</p>
-<h3 id="效率与兼容性"><a href="#效率与兼容性" class="headerlink" title="效率与兼容性"></a>效率与兼容性</h3><p>Safe Decoding的设计兼容现有的所有采样方法，包括greedy、top-k和top-p采样。通过在推理过程中仅在前m步应用Safe Decoding，且后续步骤使用正常解码，可以避免模型过于保守，从而保持对良性用户查询的有用性，并降低计算开销。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本文对 Safe Decoding 的有效性、实用性、效率和兼容性进行了评估。</p>
-<p>首先，针对实验模型，研究者们在五种开源 LLM（Vicuna-7b、Llama2-7b-chat、Guanaco-7b、Falcon-7b 和 Dolphin-llama2-7b）上部署了 Safe Decoding，以评估其性能。</p>
-<p>在攻击方法方面，研究者们考虑了六种先进的 jailbreak 攻击，涵盖不同类别，包括 GCG、AutoDAN、PAIR 和 SAP30 等。这些攻击方法通过使用来自不同 harmful query benchmark 数据集的示例来生成特定的攻击提示，以评估 Safe Decoding 的防御性能。使用的两个有害查询基准数据集为 Advbench 和 HEx-PHI。</p>
-<p>在基准测试方面，研究者们与六种最新且高效的防御机制进行了比较，涵盖输入和输出检测以及缓解方法。研究过程中使用的评估指标包括攻击成功率（ASR）和 harmful score，前者用于衡量模型在恶意查询下产生不符合人类价值的响应的比率，而后者则通过 GPT-Judge 对生成内容的危害程度进行评分。通过 Dic-Judge，研究者们还检测了生成响应中拒绝字符串的存在，以计算 ASR。</p>
-<p>下表展示了 Safe Decoding 与基线防御方法在多个 jailbreak 攻击下的 ASR 和 harmful score 的比较：</p>
-<p><img src="/images/f9eab3795015174498772771ce9a68de0626f173631450332723571a2289749f.jpg"></p>
-<p>表中显示了在不同攻击方法下，Safe Decoding 的表现普遍优于所有基线防御方法。在针对意图重大的攻击（如 Deep Inception）时，Safe Decoding 成功将 ASR 降至 0%。</p>
-<p>为了进一步评估 Safe Decoding 的实用性，研究者们使用了 MT-bench 和 Just-Eval 等广泛使用的基准测试，评估应用 Safe Decoding 后的 LLM 实用性。以下表格展示了 Safe Decoding 在不同模型上的 MT-bench 和 Just-Eval 得分：</p>
-<p><img src="/images/732f0869753661b67770651a8c5f9386511b54f9afe9881b6acbe113d6f74611.jpg"></p>
-<p>根据表格结果，Safe Decoding 对原始模型的效用影响微乎其微，而现有基线模型在效用上则显著下降。</p>
-<p>接下来，研究者们定义了一个平均生成时间比率（ATGR）指标，以评估 Safe Decoding 的效率：</p>
-<p><img src="/images/06d6125b68b5a672c946b39798b953b20b1db315a845975bc0f656427294b9c9.jpg"></p>
-<p>结果显示，相较于无防御的情况下，Safe Decoding 的计算开销仅为 3%（在 Llama2 上）和 7%（在 Vicuna 上），表明该方法的效率并未显著降低性能。</p>
-<p>附加的消融分析表明，Safe Decoding 的超参数（如 $\alpha$、$m$、$c$）对防御性能影响有限，如下图所示：</p>
-<p><img src="/images/b361f6f10b280a81bb8ea1b8ae63d038cb50c3e029bbc4f208a4f4d132165ade.jpg"></p>
-<p>通过以上实验，Safe Decoding 在针对 jailbreak 攻击方面展示了强大的防御能力、良好的实用性和效率。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，研究者们提出了一种新颖且计算有效的解码策略——Safe Decoding，以应对大型语言模型（LLM）面临的监狱突破攻击（jailbreak attacks）。他们的主要观察是，尽管包含有害内容的Token的概率通常高于那些与安全或人类价值相符的Token，但安全免责声明在排序后的概率前列中依然存在。这一发现为Safe Decoding的设计提供了基础，使其能够降低与攻击者目标一致的Token的生成概率，同时提高安全性相关的Token的生成概率。</p>
-<p>通过实验，研究者们验证了Safe Decoding在多种大型语言模型上的有效性和效率，结果表明该方法在抵御多种流行的监狱突破攻击方面显著降低了攻击成功率和有害性。同时，该方法在处理正常查询时并未妨碍模型的有用性，表明其在实际应用中的潜力和合适性。</p>
-<p>最终，论文强调了Safe Decoding在保持系统性能的同时提高安全性的能力，表明它在未来的研究和实际应用中具有重要的价值和应用前景。尽管存在某些局限性，如在某些情况下初始拒绝有害查询后可能会同意，该策略仍然展现出在当前安全环境中保护用户和系统的重要性。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2402-08983/" data-id="cm2q2r2yt0005gytf203k8yds" data-title="华盛顿大学提出安全解码方法以防御监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2q3a9y10000ygtfbh071nu4" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1149,6 +1156,10 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/26/2410-18469-1/">2410.18469</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-18861/">哥伦比亚大学提出开放源代码语言模型的可移除水印方法</a>
           </li>
         
@@ -1162,10 +1173,6 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-18640/">上海交通大学提出弱到强偏好优化方法</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/25/2401-10647/">印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法</a>
           </li>
         
       </ul>
