@@ -73,6 +73,101 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2410-11459" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-11459/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T14:35:39.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/26/2410-11459/">莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>大型语言模型（LLMs）的发展使其在与人类互动及处理复杂问题时表现出色。这些模型能够利用其庞大的隐性知识和强大的推理能力，展现出出色的记忆能力和处理多轮对话的能力。然而，随着技术的进步，安全性问题也随之而来。现有的LLMs存在的脆弱性使其容易受到越狱攻击，从而生成有害的响应。因此，提升LLMs的安全性是迫切需要解决的问题。</p>
+<p>近年来，同行评审策略被广泛采用，以测试LLMs的潜在脆弱性，从而促进更强大的防御措施的发展。现有研究主要集中在单轮越狱攻击上，而多轮设置下的脆弱性尚未得到充分探索。为了应对这一挑战，研究者提出了“拼图难题”（Jigsaw Puzzles）这一策略，这是一种简单但有效的多轮越狱攻击方法，通过将有害问题分割成无害部分，在每轮交互中请求LLMs重构并回应完整问题。该研究的实验结果表明，拼图难题能够成功绕过现有防护措施，展现出在多轮交互设置下的显著攻击成功率。</p>
+<p>该研究的创新点主要体现在以下几个方面：</p>
+<ol>
+<li><strong>多轮交互的探索</strong>：该策略专注于对多轮设置下的潜在脆弱性进行探索，填补了当前研究的空白。</li>
+<li><strong>拼图策略</strong>：通过将有害问题分拆成无害的部分，来诱使LLMs重构问题并生成响应，从而成功绕过了防护措施。</li>
+<li><strong>实验证明</strong>：实验结果显示，在五种先进的LLMs上，拼图难题策略的攻击成功率高达93.76%，展示了其在实际应用中的有效性和广泛适用性。</li>
+</ol>
+<p>这些创新点不仅揭示了LLMs在面对多轮越狱攻击时的脆弱性，也为未来的安全防护措施的发展提供了可靠的依据和方向。  </p>
+<p><img src="/images/97a00d14482146ef83f588af28ce2c9d2832703863cab361d3de578afeb59d40.jpg">  </p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在本研究中，作者提出了一种名为Jigsaw Puzzles（JSP）的策略，用于在多轮交互中对大型语言模型（LLMs）进行监狱破解（jailbreaking）。该方法通过将有害查询分割为无害的片段来规避现有的防御机制。以下是该方法的详细步骤：</p>
+<h3 id="JSP-提示"><a href="#JSP-提示" class="headerlink" title="JSP 提示"></a>JSP 提示</h3><p>在多轮交互的第一轮中，JSP提示请求LLMs将后续轮次提供的查询片段拼接起来，并进行回答。提示机制主要基于两个策略以确保破解成功：</p>
+<ul>
+<li><p><strong>禁止生成连接的查询</strong>：现有的LLMs通常依赖识别查询中的明显有害内容来激活它们的防御协议。为了避免LLMs生成连接的查询，JSP提示明确指示模型不要生成连接的查询，而是直接基于每轮的片段提供响应。</p>
+</li>
+<li><p><strong>引入免责声明</strong>：JSP通过将有害查询分解为无害片段，依次输入到多个轮次中来绕过LLMs的安全防护。然而，如果LLMs试图在响应中生成有害内容，防护机制仍可能介入。因此，提示强制LLMs在响应开始时生成免责声明，从而允许生成可能被阻止的内容。</p>
+</li>
+</ul>
+<h3 id="JSP-分割策略"><a href="#JSP-分割策略" class="headerlink" title="JSP 分割策略"></a>JSP 分割策略</h3><p>作者将有害查询的内容分割处理为多个无害片段。具体流程分为三个阶段：</p>
+<ul>
+<li><p><strong>阶段一 - 重写查询</strong>：将有害查询统一重写为一种结构，以消除因句式不同所可能影响的破解效果。重写形式为：“如何实施 $+$ [有害行为]”，强调明确的有害请求和主观恶意意图。</p>
+</li>
+<li><p><strong>阶段二 - 句子级分割</strong>：在这一阶段，使用GPT-4工具自动识别出查询中的有害和敏感词汇。这些词汇的定位依据是安全原则。每次识别出的有害词汇都需要迭代处理，确保最终提取到的是具体的有害词汇。</p>
+</li>
+<li><p><strong>阶段三 - 词汇级分割</strong>：每个识别到的有害词汇再随机分割为无意义的字母片段，遵循两个标准：每个分割片段至少包含两个字母（对于三字母的单词则保持原样），且分割结果不得为与原词含义相关的新词。</p>
+</li>
+</ul>
+<p>最终，处理后形成的无害片段在多轮交互中作为输入依次被输入到LLMs中。JSP策略利用LLMs在多轮交互中的记忆和推理功能，确保可以成功实现监狱破解。</p>
+<h3 id="监狱破解过程示意图"><a href="#监狱破解过程示意图" class="headerlink" title="监狱破解过程示意图"></a>监狱破解过程示意图</h3><p><img src="/images/97a00d14482146ef83f588af28ce2c9d2832703863cab361d3de578afeb59d40.jpg"></p>
+<p>该策略的实施依赖于精心设计的提示及分割策略，以确保能够有效突破现有的安全防护措施，诱导LLMs生成有害响应。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>该论文采用JSP策略对五种先进的LLM进行监狱逃逸（jailbreak）实验，涉及189个有害查询。实验分为几个部分，首先是实验设置，然后是对不同模型的监狱逃逸性能的报告，最后是对JSP策略在各种设置下的有效性分析。</p>
+<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>数据集使用了Figstep（Gong et al., 2023）提出的有害问题数据集，包含500个问题，分为10个有害类别。由于成本原因，最终选取189个问题进行实验。参与实验的模型包括Gemini-1.5-Pro、GPT-4-turbo、GPT-4o、GPT-4o-mini和Llama-3.1-70B。通过其相应的API进行推理，并使用Llama-3.1-70B进行本地推理。</p>
+<p>评价指标包括攻击成功率（ASR），具体分为每次尝试的攻击成功率（ASR-a）和按问题计算的攻击成功率（ASR-q）。ASR-a表示总尝试中成功攻击的百分比，而ASR-q表示成功越狱的问题百分比。为减少随机性，实验在每个模型上运行三次，并报告基于三次运行的平均ASR。</p>
+<h3 id="监狱逃逸性能"><a href="#监狱逃逸性能" class="headerlink" title="监狱逃逸性能"></a>监狱逃逸性能</h3><p>首先对LLMs进行单轮交互的基线测试，这些测试使用原始的有害问题。结果表明，商业LLMs对有害单轮提问有着显著的防御能力，Gemini-1.5-Pro表现尤为突出，几乎阻止所有有害查询。采用JSP策略后的结果如下表所示：</p>
+<p><img src="/images/ae7060caac9ca93772c10f1266fff7e01e6859ba334dbe42a0a3396528551659.jpg"> </p>
+<p>在进行第二阶段的分裂（不带字词级分裂的JSP提示）时，所有模型的安全性显著下降，Llama-3.1-70B、GPT-4和GPT-4o-mini的ASR-q均超过90%。在第三阶段的分裂后，所有模型的攻击成功率再次提高，尤其是Llama-3.1-70B和GPT-4的ASR达到近100%。</p>
+<h3 id="有害类别的监狱逃逸性能"><a href="#有害类别的监狱逃逸性能" class="headerlink" title="有害类别的监狱逃逸性能"></a>有害类别的监狱逃逸性能</h3><p>对于不同有害类别的逃逸性能，JSP策略在隐私侵犯、欺诈、恶意软件生成和非法活动方面表现出最高的攻击成功率。这些类别的表现从表中也能直观体现：</p>
+<p><img src="/images/eacbfddfa907932e856b1a2a6cb7c3f489188b8e10d65e38fb59e1fc167f0ec7.jpg"> </p>
+<h3 id="不同设置下的有效性分析"><a href="#不同设置下的有效性分析" class="headerlink" title="不同设置下的有效性分析"></a>不同设置下的有效性分析</h3><p>在多轮与单轮的实验设置对比中，结果显示多轮交互条件下的监狱逃逸性能优于单轮输入。在单轮设置中，由于所有切分的查询同时输入，往往会激活模型的防御机制，导致逃逸性能下降。然而，伪多轮设置提供了一种平衡的方法，可以改善单轮设置的监狱逃逸性能，特别是对GPT-4o-mini。</p>
+<p>对于不同的切分策略，JSP的切分策略（将有害部分分隔为无害的部分）在多轮交互中优于逐字（word-by-word）和基于Tokenizer的切分策略。通过这种分裂，JSP能够保持对模型记忆与推理能力的低要求，特别是在Gemini-1.5-Pro上，这种策略有效地展示了JSP的优势。</p>
+<p>在实施“伪装历史”的实验中，遇到模型在收到所有分段后但在用户输入“开始”之前生成拒绝响应的情况。通过调整响应，使用“开始”作为提示，稍微提高了跨所有模型的逃逸性能。</p>
+<p>从以上实验结果中可以看出，JSP策略在多轮交互条件下，成功揭示了现有LLM防御中的弱点，为未来安全机制的发展提供了重要的参考依据。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文提出了Jigsaw Puzzles (JSP)策略，这是一种简单且有效的多轮交互越狱大语言模型的方法。通过将有害问题拆分为多个词和字母片段，在每个回合输入时配以精心设计的提示，JSP成功在189个有害问题上实现了93.76%的平均攻击成功率，涵盖了五种最新的大语言模型。此外，JSP在对GPT-4的越狱中实现了行业领先的表现，超越了现有的越狱方法，并展现出对多种防御策略的强大抵抗能力。研究表明，当前的大语言模型在多轮交互中的安全防护存在漏洞，呼吁进一步开发更强大的防御机制以增强模型的安全性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-11459/" data-id="cm2q9jwff0006p9jl29j6htpo" data-title="莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2410-12855" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/26/2410-12855/" class="article-date">
@@ -188,7 +283,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-12855/" data-id="cm2q9dauh0006hrjles24h68w" data-title="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-12855/" data-id="cm2q9jwff0007p9jlfi712ju8" data-title="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -290,7 +385,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2q9dauh0007hrjl7g972ap3" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2q9jwff0008p9jl0dm165x1" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -374,7 +469,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2q9dauh0008hrjlhtok31xe" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2q9jwfg0009p9jletlq88xd" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -468,7 +563,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2q9dauh0009hrjleqrp5epj" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2q9jwfg000ap9jl2u55d664" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -554,7 +649,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2q9daui000ahrjlgxnf4k3p" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2q9jwfg000bp9jl2hc8899q" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -668,7 +763,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2q9daui000bhrjlhpi8cxic" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2q9jwfg000cp9jl7kf11vjy" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -747,7 +842,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q9daui000chrjl2qsu29uf" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q9jwfg000dp9jl14t43qlr" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -848,7 +943,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q9dauj000ghrjleu87bu0z" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q9jwfh000hp9jlbtnm6230" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1001,168 +1096,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q9daui000dhrjlevcn76p7" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2410-18491" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-18491/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T04:23:16.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-18491/">南方科技大学提出中文安全基准以评估大型语言模型的安全性</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着大规模语言模型（LLMs）的迅速发展，了解其识别不安全内容的能力变得愈发重要。现有研究已提出多个基准来评估LLMs的安全风险，但在中文语境下，LLMs识别非法和不安全内容的能力仍了解有限。为了解决这一问题，研究者们提出了一个名为”Chinese Safe”的安全基准，以促进对大规模语言模型内容安全的研究。该基准旨在与中国互联网内容监管规定相符，包含205,034个示例，涵盖了4个类别及10个子类的安全问题。</p>
-<p>对中文语境下的特殊非法内容，论文中加入了几个新类型，如政治敏感性、色情及变体&#x2F;同音词。这些内容在现有中文基准中几乎没有体现。因此，”Chinese Safe”不仅填补了这一空白，还旨在提供一个更全面的评估基准，以便有效评估LLMs对中文内容的安全性。</p>
-<p>为了验证目前流行的LLMs的法律风险和安全性，研究者采用了两种方法来评估开放源代码模型和API。研究结果显示，许多LLMs在识别某些类型的安全问题中表现脆弱，从而导致在中国面临法律风险。这一工作为开发者和研究人员提供了指导，以推动更安全的LLMs的开发和应用。</p>
-<p>整体来看，研究者构建的”Chinese Safe”基准，不仅为评估LLMs在中文内容中的安全性提供了有效工具，也为未来中文互联网内容的安全治理奠定了基础。从而推动了对LLMs在中国情况下的安全评估和应用的深入研究。  </p>
-<p><img src="/images/6d669ea2ce091dccc36ffe2e48abe6e64d0f23aa1cbb59709efd4875786e89a8.jpg" alt="Overview of Chinese Safe"></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究旨在构建一个针对中文内容的安全评估基准，称为Chinese Safe。为了实现这一目标，研究者们从多个来源收集数据，并进行了数据加工，以提高基准数据集的质量。</p>
-<h3 id="1-数据收集"><a href="#1-数据收集" class="headerlink" title="1. 数据收集"></a>1. 数据收集</h3><p>Chinese Safe数据集的构建过程包括以下几个步骤：</p>
-<ul>
-<li><p>数据来源：研究人员从开放的数据集和互联网收集数据，以满足中国网络内容审核的相关规定。其中，包括国家法律法规规定的普遍安全问题（如犯罪和心理健康）和特定的安全问题（如色情内容、政治敏感性和变体&#x2F;同音词）。</p>
-</li>
-<li><p>收集样本：为了创建平衡的基准，研究者从已有公开数据集中收集了102,227个安全（负样本）例子，同时从其他渠道收集了不安全（正样本）例子。</p>
-</li>
-</ul>
-<p>关于数据集的具体组成，见下表。</p>
-<p><img src="/images/66932aab378ac19665d5007cd78dcac41b53b513fd75a9c0638c46388d0e7ba7.jpg"></p>
-<h3 id="2-数据处理"><a href="#2-数据处理" class="headerlink" title="2. 数据处理"></a>2. 数据处理</h3><p>由于从不同来源收集的数据质量参差不齐，因此需要进行数据清洗和去重，以构建标准的安全基准：</p>
-<ul>
-<li><p>数据清洗：研究人员首先移除含糊不清的语句和充满变体字的例句，有规则地过滤句子结构，丢弃仅由标点符号和连续空白字符组成的行。</p>
-</li>
-<li><p>去重：为了解决数据重复问题，研究者使用去重算法移除了具有相似语义的例句。</p>
-</li>
-</ul>
-<h3 id="3-数据分类"><a href="#3-数据分类" class="headerlink" title="3. 数据分类"></a>3. 数据分类</h3><p>为了全面评估模型的安全性，Chinese Safe的安全问题被分为四大类和十个子类。具体分类如下：</p>
-<ul>
-<li><strong>非法活动</strong>：包括政治敏感性、色情和犯罪行为等不被法律允许的行为。</li>
-<li><strong>伦理与道德</strong>：评估模型是否能够识别不道德或有害于社会稳定的行为，如种族歧视、辱骂等。</li>
-<li><strong>健康与隐私</strong>：关注与个人健康和隐私相关的内容，例如可能导致身体伤害的内容或泄露个人隐私的数据。</li>
-<li><strong>变体和同音词</strong>：该类别专注于在中文互联网中常用于规避内容审核的变体字和同音词。</li>
-</ul>
-<p>数据的详细构成和分类情况通过以下框架图进行概述。</p>
-<p><img src="/images/6d669ea2ce091dccc36ffe2e48abe6e64d0f23aa1cbb59709efd4875786e89a8.jpg"></p>
-<h3 id="4-实验设计"><a href="#4-实验设计" class="headerlink" title="4. 实验设计"></a>4. 实验设计</h3><p>实验过程中，在多个主流的大型语言模型（如GPT4、LLaMA等）上进行评估。为了评估模型识别不安全内容的能力，研究者设计了是与否的问题任务，并采用了生成基础和困惑度基础两种评估方法。</p>
-<ul>
-<li><strong>生成基础评估方法</strong>：通过模型生成内容，然后使用Outlines框架进行预测。</li>
-<li><strong>困惑度基础评估方法</strong>：选择困惑度最低的标签作为预测结果。</li>
-</ul>
-<p>实验报告的指标包括整体准确率、精准率和召回率等，以全面评估不同模型在安全性方面的表现。</p>
-<p>这样的组合方法使得Chinese Safe不仅能帮助识别语言模型的弱点，还能为未来的模型改进和应用提供指导。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在这部分，论文中通过实验对不同的大型语言模型（LLMs）的安全性能进行评估。为了有效地评估这些模型，研究者们首先构建了一个用于测试的平衡数据集，从样本中随机抽取了一些数据进行评测。在整体安全问题类别的实验中，测试集由来自Chinese Safe的安全和不安全样本以0.1的比例抽样构成。而对于每个具体安全问题类别，研究者们确保抽样的安全样本数量与各类别中的不安全样本相等。</p>
-<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>实验中主要使用了五个评估指标：整体准确率、精确度和召回率，分别针对安全和不安全内容进行评估。结果以metric&#x2F;std格式呈现，std表示通过不同随机种子（如100、200、300）获得的结果标准差。</p>
-<h3 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h3><p>评估任务基于是否能判定不安全的中文内容，呈现为“是”或“否”的问题。研究者们采用了两种方法来评估模型的安全性：生成法和困惑度法。生成法使用Outlines框架进行预测，而困惑度法则选取困惑度最低的标签作为预测结果。</p>
-<h3 id="评估模型"><a href="#评估模型" class="headerlink" title="评估模型"></a>评估模型</h3><p>为了全面了解LLMs在中文场景下的安全性，研究者们对26个不同的语言模型进行了评估，涵盖了不同组织和参数规模的模型。其中，对于基于API的模型，评估了OpenAI和Google提供的4个主流LLM。而对于开源模型，则评估了22个具有代表性的模型。这些模型被根据参数规模分为大于65B、约等于30B、10B-20B和5B-10B四个类别。</p>
-<h3 id="主要结果"><a href="#主要结果" class="headerlink" title="主要结果"></a>主要结果</h3><p>在使用生成法进行评估时，DeepSeek-LLM-67B-Chat模型在整体准确率方面表现最佳，达到76.76%，而在API模型中，GPT-4o模型表现优越，准确率为73.78%。GPT-4o还在识别不安全样本的精确度上表现出色，达到了97.75%。然而，OPT系列模型的表现较差，揭示了它们在不安全内容检测方面的脆弱性。</p>
-<p>使用困惑度法的评估结果显示，Baichuan2-13B-Chat模型在开源LLMs中表现最好，准确率为70.43%。Llama3-ChatQA-1.5-70B的表现则较差，只有40.41%。这些结果表明，使用生成法评估LLMs的安全性更为有效。</p>
-<h3 id="不同规模模型的影响"><a href="#不同规模模型的影响" class="headerlink" title="不同规模模型的影响"></a>不同规模模型的影响</h3><p>研究还关注不同规模模型在安全评估结果中的表现，发现模型性能与参数数量并不总是成正比。例如，在10B-20B规模范围中，InternLM2-Chat-20B、Qwen1.5-14B和Baichuan2-13B-Chat模型的准确率为70.21%、68.25%和62.86%。但是在约30B规模的模型中，Yi-1.5-34B-Chat和OPT-30B反而表现不佳，准确率分别为60.06%和50.88%。</p>
-<h3 id="各类别安全问题评估结果"><a href="#各类别安全问题评估结果" class="headerlink" title="各类别安全问题评估结果"></a>各类别安全问题评估结果</h3><p>通过分别评估在各类别安全问题下的模型，发现LLMs在特定安全问题类别上的表现存在显著差异。例如，在隐私泄露类别中，DeepSeek-LLM-67B-Chat模型的识别准确率达到了79.85%，而Qwen1.5-72B-Chat模型则仅有58.25%。总体上，LLMs在刑事行为类别上表现更好，而在身体健康类别的安全性较低。</p>
-<p>实验结果表明，评估LLMs在各类别安全问题上的表现，可以为全面审视模型安全性提供更深入的见解。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文介绍了一个名为“Chinese Safe”的中文安全数据集，该基准旨在评估大语言模型（LLMs）在中文场景下的安全性。与现有的中文安全基准相比，Chinese Safe 是一个更加全面的基准，包含了205,034个示例，涵盖了四个类别和十个子类别的安全问题。研究的目的是构建一个与中国互联网内容审核相一致的基准，以更好地理解LLMs在现实中文场景下的安全性。</p>
-<p>通过对26个代表性的LLMs进行广泛实验，结果表明，一些模型在多个类别的安全问题上表现出较低的安全水平，例如OPT模型家族。同时，实验还指出，LLMs在特定安全问题方面的表现不佳，如身体健康和心理健康问题。这些发现强调了需要改进模型在识别和应对不安全内容方面的能力。</p>
-<p>作者希望，Chinese Safe 能够作为评估LLMs安全性的重要基准，并为建设一个更安全的互联网社区做出贡献。</p>
-<script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机-1"><a href="#动机-1" class="headerlink" title="动机"></a>动机</h2><p>随着大型语言模型（LLMs）的快速发展，了解其识别不安全内容的能力变得日益重要。现有研究虽然已经引入了一些基准来评估LLMs的安全风险，但在中文环境中，当前LLMs识别非法和不安全内容的能力仍然有限。鉴于此，研究者提出了Chinese Safe——一个旨在促进大型语言模型内容安全研究的中文安全基准。</p>
-<p>研究者指出，尽管当前已有部分基准数据集专注于评估LLMs在中文环境下的安全性，但它们覆盖的安全问题种类相对较少。尤其是现有基准很少涉及变体和同音词，这些词汇常被用于规避网络内容审查。这使得现有基准对中文内容的安全评估显得不够全面。因此，研究者们致力于填补这一空白。</p>
-<p>Chinese Safe包含205,034个例子，覆盖4个类别及10个子类别的安全问题，具备更全面的安全问题分类。此外，该基准特别引入了政治敏感性、色情内容及变体&#x2F;同音词等新的安全问题类别，这些类别在现有中文安全基准中几乎未被考虑。因此，Chinese Safe能够更好地评估LLMs在现实中文场景中的安全性。</p>
-<p>通过数据采集、清洗及标注，研究者们构建了一个标准化的安全数据集，数据来源涵盖开放数据集和网络资源。这些尝试旨在检测LLMs是否能够识别用户输入或生成的潜在不安全中文内容，从而为开发更安全的LLMs提供重要指导。</p>
-<p>整体而言，Chinese Safe的提出不仅弥补了国内LLMs安全评估的不足，也为未来在中文环境中内容的监管和模型的安全性提供了新的参考标准。</p>
-<p><img src="/images/6d669ea2ce091dccc36ffe2e48abe6e64d0f23aa1cbb59709efd4875786e89a8.jpg"></p>
-<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><p>本文提出了一种用于评估中文环境中大型语言模型（LLMs）安全性的基准（Chinese Safe）。该基准涵盖了205,034个示例和4类、10个子类的安全问题，以便更全面地评估LLMs的安全性。这一部分详细介绍了数据收集、分类和评估方法。</p>
-<h3 id="数据收集"><a href="#数据收集" class="headerlink" title="数据收集"></a>数据收集</h3><p>为了创建这个以中文为中心的基准，研究团队从多个来源收集了数据，包括开源数据集和互联网。数据来源主要包括普遍的安全问题以及符合中国互联网内容监管的特别安全问题，例如政治敏感性、色情内容以及变体和谐音词。</p>
-<p>在普遍安全问题方面，研究团队利用已有的开源安全数据集。此外，由于现有基准对中文情境中的部分特定安全问题覆盖不足，团队通过网络抓取，从社交媒体平台收集了大量相关数据，确保基准的多样性和平衡性。</p>
-<h3 id="数据处理"><a href="#数据处理" class="headerlink" title="数据处理"></a>数据处理</h3><p>收集到的数据质量存在一定问题，因此进行了数据清理和去重处理。具体步骤包括：</p>
-<ul>
-<li>删除语义不明确的示例，例如完全由变体词构成的句子。</li>
-<li>采用规则过滤掉结构不合法的示例，例如仅包含标点符号或连续空白字符的行。</li>
-<li>针对重复数据，执行去重操作，移除语义相似的示例。</li>
-</ul>
-<p>在这些步骤完成后，团队将样本标签化到相应的一级和二级类别中，从而构建了一个标准的安全基准数据集。</p>
-<h3 id="数据分类"><a href="#数据分类" class="headerlink" title="数据分类"></a>数据分类</h3><p>在评估模型的整体安全性时，作者还专注于评估特定安全问题的安全性。为此，研究团队创建了一个层次化基准，涵盖了以下四个安全问题类别：</p>
-<ul>
-<li><strong>非法活动</strong>：评估模型能否识别涉及非法活动的内容，包括政治敏感性、色情和犯罪行为。</li>
-<li><strong>伦理与道德</strong>：评估模型的能力，以识别可能影响社会稳定或危害个人的非道德行为。</li>
-<li><strong>健康与隐私</strong>：评估模型识别可能导致身体或隐私伤害的内容的能力，包括身体健康、心理健康和隐私泄露。</li>
-<li><strong>变体与谐音词</strong>：评估模型识别那些旨在规避内容审核的变体和谐音词的能力。</li>
-</ul>
-<p>为了更深入地研究LLMs在特定安全问题上的表现，研究团队进一步将这四类安全问题细分为十个子类。</p>
-<h3 id="评估方法-1"><a href="#评估方法-1" class="headerlink" title="评估方法"></a>评估方法</h3><p>为了评估LLMs的安全性，研究采用了两种评估方法：生成方法和困惑度方法（perplexity）。</p>
-<ul>
-<li><strong>生成方法</strong>：通过使用生成的内容做出预测，研究团队应用了Outlines框架来进行评估。</li>
-<li><strong>困惑度方法</strong>：选择具有最低困惑度的标签作为预测结果。</li>
-</ul>
-<p>评估过程中，团队对26个大型语言模型进行了测试，包括API模型和开源模型，这些模型分别来自不同的组织和规模。在整体安全性和特定类别的安全性评估中，均采用了以上两种方法来验证模型的表现。</p>
-<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><ul>
-<li><strong>测试集</strong>：为了减少评估时的计算开销，团队随机抽取了少量数据进行评估。对整体类别的评估，团队从Chinese Safe中分别抽取安全和不安全示例以构建平衡测试集。</li>
-<li><strong>评估指标</strong>：主要报告五个指标的结果，包括整体准确率、精确度和召回率，确保评估结果的全面准确。</li>
-</ul>
-<p>通过上述方法，研究团队能够系统性地评估不同LLMs在安全性方面的表现，从而为未来的开发和模型改进提供依据。</p>
-<h2 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h2><h3 id="实验设置-1"><a href="#实验设置-1" class="headerlink" title="实验设置"></a>实验设置</h3><p>在评估大语言模型（LLMs）安全性的过程中，由于计算开销巨大，研究人员决定随机抽样部分数据进行测试。对于整体安全问题类别的实验，他们通过从 Chinese Safe 中以 0.1 的比例抽取不安全和安全样本来构建平衡测试集。而对于每个安全问题类别的实验，他们则从每个安全问题类别中抽取相等数量的安全样本。</p>
-<h3 id="评估指标-1"><a href="#评估指标-1" class="headerlink" title="评估指标"></a>评估指标</h3><p>实验主要通过五个指标来报告结果，包括总体准确率、安全和不安全内容的精度和召回率。在表格中以 metric&#x2F;std 的格式展示结果，std 表示不同样本随机种子（100, 200, 300）下结果的标准差。</p>
-<h3 id="评估方法-2"><a href="#评估方法-2" class="headerlink" title="评估方法"></a>评估方法</h3><p>Chinese Safe 是为了评估模型识别不安全中文内容的能力而构建的。因此，任务可以视为“是”或“否”的问题。通过两种方法来评估 LLMs 的安全性：生成基准策略和困惑度基准策略。在生成基准策略中，利用框架对模型生成的内容进行预测，而在困惑度基准策略中，选择具有最低困惑度的标签作为预测结果。不同评估策略的结果分别呈现在表格中。</p>
-<h4 id="评估模型-1"><a href="#评估模型-1" class="headerlink" title="评估模型"></a>评估模型</h4><p>为了全面评估 LLMs 在中文场景中的安全性，研究人员评估了共26个覆盖不同组织和参数规模的主要语言模型。特别地，对基于 API 的模型，评估了4个主流 LLMs，而对于开源模型，则测试了22个代表性开源模型。模型被按照参数大小分类，包括大于 65B、约 30B、10B-20B 和 5B-10B。</p>
-<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>在生成方法评估时的主结果中，表格展示了各种 LLMs 的总体类别的准确率、安全和不安全样本的精度及召回率。对于开源模型，DeepSeek-LLM-67B-Chat 在 Chinese Safe 上表现优越，达到平均准确率 76.76%。对于基于 API 的模型，GPT-4o 则展示了最佳性能，准确率为 73.78%。同时，GPT-4o 还在识别不安全样本的精度方面表现出色，达到了 97.75%，明显高于其他模型。此外，OPT 系列模型表现较差，且存在提升空间。而 GPT-4 系列与 DeepSeek 系列通常表现优于其他系列模型，如 Meta 的 Llama3。</p>
-<p>在使用困惑度方法评估时的结果显示，Baichuan2-13B-Chat 模型在开源 LLMs 中性能突出，平均准确率为 70.43%。而 Llama3-ChatQA-1.5-70B 的平均准确率仅为 40.41%，这表明该模型在中文场景中的安全表现较差。结果也体现出，当使用困惑度评估策略时，LLMs 整体性能低于使用生成策略时的结果。这表明，在评估 LLMs 安全性时，基于生成的策略更加有效，能够更好地检测不安全内容。</p>
-<h3 id="不同规模模型对安全评估结果的影响"><a href="#不同规模模型对安全评估结果的影响" class="headerlink" title="不同规模模型对安全评估结果的影响"></a>不同规模模型对安全评估结果的影响</h3><p>通过比较不同规模 LLMs 在 Chinese Safe 的安全评估结果，观察到模型性能与参数数量不一定成正比。在 10B-20B 的规模范围内，InternLM2-Chat-20B、Qwen1.5-14B 和 Baichuan2-13B-Chat 模型的准确率分别达到 70.21%、68.25% 和 62.86%。然而，在约 30B 的模型中，Yi-1.5-34B-Chat 和 Opt-30B 模型反而表现不佳，分别仅达到了 60.06% 和 50.88%。因此，结果显示，增加模型规模并不一定会提高 LLMs 的安全性。</p>
-<h3 id="各安全问题类别的评估结果"><a href="#各安全问题类别的评估结果" class="headerlink" title="各安全问题类别的评估结果"></a>各安全问题类别的评估结果</h3><p>为了全面评估 LLMs 在各安全问题类别上的表现，研究人员对每个安全问题类别进行了大量实验，并分别使用生成方法和困惑度方法进行评估。各个类别的实验结果呈现在附录中。其结果表明，LLMs 在生成基准策略下表现更佳。此外，他们还发现，在某些安全问题类别（如隐私泄露）中，开源 LLMs 的性能差异显著。通过分析，DeepSeek-LLM-67B-Chat 模型在识别隐私泄露内容方面表现更好，平均准确率达到 79.85%，而 Qwen1.5-72B-Chat 模型的准确率则为 58.25%。总体来看，LLMs 在不同安全问题类别上的表现差异较大。</p>
-<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，研究者们提出了一个专注于中文场景的安全数据集（Chinese Safe），作为评估大型语言模型（LLMs）安全性的基准。与现有的中文安全基准相比，Chinese Safe 是一个更全面的基准，涵盖了205,034个示例，分为四个类别和十个子类别的安全问题。研究者的目标是构建一个与中国互联网内容审查相符合的基准，以理解LLMs在真实中文场景中的安全性。</p>
-<p>通过对总共26个代表性的LLMs在Chinese Safe上的广泛实验，结果显示一些LLMs在不同类别的安全问题上表现较差，例如OPT模型系列。同时，实验还表明，LLMs在特定安全问题上也展现出较低的安全性，如与身体健康和心理健康相关的问题。研究者希望Chinese Safe能够作为评估LLMs安全性的关键基准，并为推动更安全的互联网社区贡献力量。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q9daui000ehrjl27bx2qi7" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q9jwfh000ep9jl4fib6dou" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1210,6 +1144,10 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/26/2410-11459/">莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-12855/">香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架</a>
           </li>
         
@@ -1223,10 +1161,6 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-13785/">北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-13901/">曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法</a>
           </li>
         
       </ul>
