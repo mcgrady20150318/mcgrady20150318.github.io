@@ -73,221 +73,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2410-18436" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-18436/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T09:39:35.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-18436/">延世大学提出的英韩代码切换文本激活知识开关的有效性研究方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在引言部分，作者强调了代码切换（Code-switching, CS）现象的重要性，指出它是在多语言环境中常见的一种语言交替使用的行为。此现象赋予了交流以文化和语言层面的细微差别，而这些差别在单一语言翻译中可能会被忽略。研究表明，现代的多语言大型语言模型（LLMs）在理解CS方面表现出色，但尚未探讨CS在激活语言特定知识方面的作用。因此，文章的研究动机是探明代码切换在激活LLMs内部知识的有效性。</p>
-<p>本研究通过构建E N K O QA，一个合成的英韩代码切换问答数据集，并且将知识激活过程细分为两个任务（知识识别和知识利用），以此来评估LLMs在CS和英语文本中的表现。实验证明，相较于英语文本，CS能够更有效地激活LLMs内部的知识，特别是在特定的语言领域。此外，研究发现，LLMs的CS表现与其在各自语言的熟练程度存在相关性，CS能够在一些文化语境中更好地导入语言特定知识的可能性。</p>
-<p>创新点包括：</p>
-<ul>
-<li>提出了一个系统化的方法，分析了代码切换在激活LLMs知识方面的有效性，并将其划分为知识识别和知识利用两个任务。</li>
-<li>合成了一个高质量的英韩代码切换问答数据集E N K O QA，丰富了现有的CS数据资源。</li>
-<li>通过广泛实验分析表明，代码切换在某些语言特定领域下具备更大的优势，为多语言LLMs的知识激活提供了新的视角。</li>
-</ul>
-<p><img src="/images/fc9d7e7a113d211e38509df9a652706a00b10449a58823c189b881b73eb7a67e.jpg" alt="Figure 1"><br>（动机引导了本研究的不同维度，强调了代码切换与知识激活的潜在联系。）</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在本研究中，作者首先构建了E N K O QA，这是一个合成的英语-韩语代码切换问答数据集。该数据集的构建流程分为多个步骤，包括数据来源、自动翻译、候选生成、质量控制等。</p>
-<p>数据来源主要利用了两个与韩国文化相关的多项选择问答数据集：CLIcK和HAE-RAE。CLIcK数据集包含1995个多项选择问答对，涵盖文化和语言等11个子类别，主要来源于各种韩国官方考试和教科书。HAE-RAE数据集则是一个专注于捕捉韩国语言内在文化和上下文细微差别的基准数据集。</p>
-<p>在自动翻译步骤中，研究者使用GPT-3.5-turbo将韩语问答对翻译成英语。模型根据示例进行指导，确保翻译的准确性。</p>
-<p>候选生成阶段，研究者采取了不同百分比的韩语内容词嵌入到英语句子中，从而生成包含30%、50%、70%和90%韩语内容词的候选文本。具体而言，GPT-3.5-turbo被指示从韩语问题中识别出内容词，并根据指定的百分比将它们嵌入到英语问题中。通过这种方式，每个问题生成了总共八个代码切换候选文本。</p>
-<p>为了确保数据质量，两位有韩语和英语双语能力的合格注释人员会对生成的候选文本进行审核，选择符合英语语法结构且自然融合的候选者。</p>
-<p>在实验设置中，作者对两类最先进的多语种LLMs进行了分析：可通过API获取的专有LLMs（如GPT-3.5、GPT-4o和Claude 3.5 Sonnet），以及开源LLMs（如Solar、Llama 3和Gemma 2）。这些模型的耳目一新之处在于它们在代码切换任务中的表现被广泛分析。</p>
-<p>接下来的知识激活过程分为两个任务：知识识别和知识利用。知识识别任务评估模型在英语和代码切换环境下识别所需知识的能力。知识利用任务则评测模型是否能够基于识别出的知识进行合理推理，完成问答任务。 </p>
-<p>为确保评估的有效性，研究者进行了人类评估，依据真实性和帮助性对知识列表进行评分。此外，研究者还通过可视化图表呈现了不同模型在代码切换和英语设置下的问答准确率、知识利用等结果。对于知识利用任务，模型获取了已识别的知识后，依据这些知识选择正确答案并提供解释。所有的评估方法和实验设置经过严格的设计，目的是为了全面评估代码切换对多语种LLMs知识激活的影响。 </p>
-<p>总体而言，作者通过系统的数据构建和严谨的实验设计，探索了代码切换如何影响语言特定知识的激活，这一研究为多语言处理领域提供了新的视角和实证依据。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在本研究中，研究者们开展了一系列实验，以比较使用代码切换（CS）和英语提问时大型语言模型（LLMs）的表现。为了实现这一目标，他们构建了E N K O QA，一个涵盖英语和韩语的代码切换问答数据集，并对多种多语言LLMs进行了评估。</p>
-<h3 id="数据集构建"><a href="#数据集构建" class="headerlink" title="数据集构建"></a>数据集构建</h3><p>研究者从两个具有文化背景的韩语问答数据集（CLIcK和HAE-RAE）中获取数据。通过自动翻译和合成，他们创建了包含代码切换结构的问题。数据集的构建过程严格遵循了矩阵语言框架模型（Matrix Language Frame Model），确保了有效的代码切换文本生成。</p>
-<p><img src="/images/77e464365a0c5a3f353d78d95bbb1e8ab42204e6bcefcf9f0181994bc3e09f56.jpg" alt="Table 2: EnKoQA的样本数量"></p>
-<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>在实验中，研究者将多种多语言LLMs分为两组，分别是通过API访问的专有LLMs（如GPT-3.5和Claude 3.5）和开源的LLMs（如Solar和Llama 3）。他们对模型在英语和代码切换问题上的表现进行评估，使用相同的评估准则确保了实验的一致性。</p>
-<p><img src="/images/8ac76f53a269620af4823375ae297b329e7ebce7d2ae2ef00a67fadeff1ae8a2.jpg" alt="Table 8: CS和英语设置下多语言LLMs的知识利用表现"></p>
-<h3 id="整体表现"><a href="#整体表现" class="headerlink" title="整体表现"></a>整体表现</h3><p>实验结果显示，代码切换问题在多种模型中的表现普遍优于英语提问。在表现优异的模型（如GPT-4o和Claude 3.5）中，代码切换的优势尤为明显。具体来说，在语言特定的领域（如历史和传统），模型在代码切换设置中的准确性显著高于英语设置。</p>
-<p><img src="/images/d3557e51851c8fd8b0dbb75299e16d55585b2b1da446439dbc7ffffa1c54c7b7.jpg" alt="Table 9: None错误计数"></p>
-<h3 id="知识识别与利用"><a href="#知识识别与利用" class="headerlink" title="知识识别与利用"></a>知识识别与利用</h3><p>研究者将知识激活过程细分为知识识别（Knowledge Identification）和知识利用（Knowledge Leveraging）两个任务。在知识识别任务中，他们评估了模型在不同语言设置下识别所需知识的能力。在知识利用任务中，模型需根据识别到的知识作出正确的回答。</p>
-<p>在评估过程中，研究者观察到，使用代码切换提问时，模型所识别的知识更加真实且有用，尤其是在涉及文化背景的领域。评估结果不仅显示了代码切换对知识激活的积极影响，亦强调了学习者对语言特定知识的潜在触达能力。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>研究表明，代码切换（CS）在激活嵌入于大型语言模型（LLMs）中的语言特定知识方面具有显著的效果。通过利用两个以韩国文化为中心的问答数据集，研究构建了一个合格的英语-韩语代码切换问答数据集E N K O QA，并在多种多语种LLMs上进行了实验。</p>
-<p>实验结果显示，与英语文本相比，代码切换能够更有效地激活LLMs中的知识，特别是在语言特定领域。特别是，能够通过代码切换模式获得更高的回答准确率的模型往往在韩语的单语能力上表现不俗，这进一步强调了代码切换与韩语熟练度之间的关系。</p>
-<p>此外，该研究揭示了代码切换不仅能够在激活知识方面发挥作用，同时也是有效传达文化细微差别的策略。整体而言，代码切换被认为是一种有效的策略，用于从LLMs中挖掘和激活语言特定的知识。</p>
-<p>通过本研究，作者建议未来可以将代码切换的研究扩展到其他语言和文化的背景之中，以进一步探讨其在不同情境下的有效性。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18436/" data-id="cm2q09as50008ggtfgi848lak" data-title="延世大学提出的英韩代码切换文本激活知识开关的有效性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2410-18491-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-18491-1/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T09:29:27.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-18491-1/">2410.18491</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18491-1/" data-id="cm2q09as50007ggtf21vcgbc4" data-title="2410.18491" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2410-18856" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-18856/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T09:20:08.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-18856/">国家医学图书馆提出大语言模型在医学领域应用的系统性方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着大语言模型（LLMs）的发展，医疗卫生领域迎来了新的转机。研究指出，LLMs如GPT-4、Claude、Gemini等具备生成类似人类的响应能力，可以在多种情境下适应新任务，完成医疗问答、临床试验匹配和临床文档编写等多项任务。然而，尽管LMM在临床护理、医学教育和生物医学研究等领域的潜力与日俱增，但在从理论到实践的应用中，缺乏有效、实用的指导框架。这一缺口，令医疗工作者在运用LMM时面临挑战，可能导致技术的低效利用甚至误用，从而影响患者的治疗效果。</p>
-<p>因此，研究者们在此背景下提出了一种系统化的方法框架，以帮助医疗专业人员高效利用LMM。这一框架包括任务制定、模型选择、提示工程、微调和部署等多个关键环节，意在指导用户更清晰地理解LMM的核心能力，明确其在医学具体任务中的应用。同时，研究还提供了一系列最佳实践，以支持用户的合规性、道德使用和效果评估。这为LLM在医疗应用中的有效整合提供了新思路，既确保了安全性，又提升了LMM对患者治疗的积极影响。</p>
-<p><img src="/images/9eb85bd6ad04f8babd9f8359f8f56b6b348847d9d78d164b22dfcfafe73a5794.jpg"><br><em>图1. 提议的系统化方法概览，用于医疗中利用大语言模型的全过程</em></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在这篇论文中，作者提出了一个系统的方法论，旨在指导医疗专业人员高效地利用大型语言模型（LLMs）。该方法涵盖了多个关键阶段，包括任务制定、模型选择、提示工程、微调和部署等方面。</p>
-<h3 id="任务制定"><a href="#任务制定" class="headerlink" title="任务制定"></a>任务制定</h3><p>适应具体的医疗需求为LLM提供实际解决方案，首先需要用户了解LLM的核心能力，主要分为五个大类：知识与推理、摘要、翻译、结构化和多模态数据分析。用户应首先明确与其任务相关的主要LLM能力。一旦任务被妥善制定，用户应收集一组多样化的实例（测试用例），包含输入和输出数据元素，用于后续开发。</p>
-<h3 id="模型选择"><a href="#模型选择" class="headerlink" title="模型选择"></a>模型选择</h3><p>在选择适当的LLM时，用户需要根据任务特点来选择不同类型的模型。LLMs的种类繁多，包括一些专有模型（如GPT-4、Gemini 3等）和开源模型（如Llama 3和Mistral）。模型的大小范围从数十亿参数到数千亿参数不等。通常，较大的模型表现出更强的能力。选择LLM时，用户需要考虑三个关键因素：</p>
-<ul>
-<li>任务和数据</li>
-<li>性能要求</li>
-<li>模型接口</li>
-</ul>
-<h3 id="提示工程"><a href="#提示工程" class="headerlink" title="提示工程"></a>提示工程</h3><p>提示工程是指设计和优化输入内容，以有效指导LLM生成准确和连贯的响应。用户可通过不同的提示方式来激发LLM的多样化表现。更复杂的任务通常需要更高级的提示设计。以下是一些提示工程的关键技术：</p>
-<ul>
-<li><p><strong>Few-shot Learning</strong>：在提示中包括一些示例，以改善模型在特定任务的表现。用户应从零样本学习开始，逐步增加示例以提升性能。</p>
-</li>
-<li><p><strong>链式推理（Chain-of-Thought Prompting）</strong>：设计促使模型进行逐步推理的提示，尤其在复杂医疗决策任务中能够改善模型表现并增强可解释性。</p>
-</li>
-<li><p><strong>检索增强生成（Retrieval-Augmented Generation, RAG）</strong>：通过检索相关文档（如科学文章）作为输入的一部分，引导模型更好地解决知识密集型任务。</p>
-</li>
-<li><p><strong>工具学习</strong>：如果任务需要使用领域特定的工具，如数据库实用工具或医学计算器，LLMs可以通过API调用实现利用。</p>
-</li>
-</ul>
-<h4 id="图示示例"><a href="#图示示例" class="headerlink" title="图示示例"></a>图示示例</h4><p><img src="/images/9e05601cf75d016af3691d3f6f4311c492ffaf73e80f8c237eefb84445cd36fa.jpg"><br>上述图示展示了提示工程和微调技术的概述。</p>
-<h3 id="微调"><a href="#微调" class="headerlink" title="微调"></a>微调</h3><p>尽管LLMs很多任务可以通过提示工程实现，但在以下三种情况下，可能需要考虑微调：</p>
-<ul>
-<li>当提示工程方法（如few-shot learning和RAG）无法充分改善结果时。</li>
-<li>当有高质量的训练数据可用且规模较大时。</li>
-<li>当当前工作提示成本过高时。</li>
-</ul>
-<p>微调可以是完全的，也可以是部分的。完全微调会更新LLM的所有参数，而参数高效微调（PEFT）方法则更新部分参数或向LLM添加可训练权重。针对不同的数据规模和特征，用户可选择适合的微调方式。</p>
-<h3 id="部署考虑"><a href="#部署考虑" class="headerlink" title="部署考虑"></a>部署考虑</h3><p>部署LLMs于生物医学领域时，遵循隐私标准（如HIPAA和GDPR）以保护患者数据是至关重要的。在使用专有LLM时，确保平台符合HIPAA的要求。另外，处理敏感数据时，使用本地模型能够增强数据安全性。</p>
-<p>在部署后，持续的监控也是必要的，确保LLM的输出被合理利用，而不是取代医疗从业人员的判断。有效的培训计划能够帮助医疗专业人员理解如何解释和利用这些输出，同时管理可能的风险。  </p>
-<p>通过以上几个阶段的方法论，本文提供了一个结构化的框架，以帮助医疗专业人员更有效地集成LLMs，从而改善临床实践中的医疗服务和结果。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本文阐述了使用大型语言模型（LLMs）在医疗应用中的实验方法和指导原则。为了有效利用LLMs，用户首先需要明确具体的医疗任务。实验框架包括任务制定、模型选择、提示工程、微调和部署等关键阶段。</p>
-<p>在任务的制定中，用户应识别与LLMs核心能力相关的医疗需求，通常分类为知识与推理、摘要、翻译、结构化以及多模态数据分析。每种任务类型都需设定清晰的输入和输出数据。</p>
-<p>在模型选择阶段，用户应根据任务特性和数据类型选择适合的LLM。不同的LLM在参数数量和专用性方面存在差异，有些模型被训练用于通用应用，而其他模型则针对特定领域进行了微调。实验中还应评估模型在医疗领域的具体表现，以确保所选模型具备足够的医疗知识和推理能力。</p>
-<p>提示工程是实验的重要部分，用户需要设计有效的提示以引导LLMs产生准确一致的输出。在不同的医疗任务中，提示可以是简单的指令，也可以是复杂的多样例输入。值得注意的是，实验推荐使用“逐步思考”（Chain-of-Thought prompting）以提升模型的推理透明度。</p>
-<p>微调阶段通常在以下三种情况下进行：提示工程未能改进结果时、高质量的训练数据充分可用时，以及当前的提示太长，不具备成本效益时。微调可以是全面的，也可以是参数-efficient fine-tuning（PEFT）方法，这种方法更新部分参数或添加可训练权重，从而在较少的资源下优化模型。</p>
-<p>在部署LLMs时，用户必须确保遵循HIPAA和GDPR等隐私标准。实验中强调，通过使用本地托管或符合合规要求的服务提供者来确保数据的安全性和隐私。</p>
-<p><img src="/images/22ad71a007d61cd4a01ff5354d1e217c831de7cbe56b494800e95b10a57656bf.jpg"><br>图：基于LLMs的医疗任务示例概览 </p>
-<p>这些实验步骤和应考虑的因素旨在为医疗专业人士在使用LLMs时提供行动指南，以便在实践中有效集成这些强大的技术，提高医疗服务质量。同时，指出LLM的输出不应替代医疗工作者的判断，而应作为支持工具使用。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>大型语言模型（LLMs）有潜力通过增强临床工作流程、决策制定和改善患者结果来改变医疗保健。然而，如何有效地将这些模型整合到医疗实践中，需要一种系统且深思熟虑的方法。本文提供了一个全面的框架，用于在医学中利用LLMs，强调了任务制定、模型选择、提示工程和部署等关键步骤。通过遵循这些指导方针，医疗专业人员可以最大程度地提高LLMs的好处，同时应对与法规合规性、公平性和成本相关的挑战。随着人工智能的不断发展，仔细应用这些方法将是确保LLMs被负责任和有效利用的关键，最终提高患者所接受的护理质量。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18856/" data-id="cm2q09as8000eggtf1i7wb8a1" data-title="国家医学图书馆提出大语言模型在医学领域应用的系统性方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-2410-18861" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/26/2410-18861/" class="article-date">
@@ -377,98 +162,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q09as7000bggtf50l8gi98" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2410-18906" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-18906/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T07:27:07.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-18906/">斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>研究者指出，审计大型语言模型（LLMs）以发现其偏见和偏好的问题在构建负责任的人工智能（AI）过程中变得越来越重要。尽管有多种方法被提出来引发这些模型的偏好，但LLMs的开发者采取了一些对策，以至于LLMs在某些主题上隐藏、模糊或明确拒绝披露其立场。这种现象促使研究者开发了PRISM，这是一种灵活的、基于探究的方法论，旨在通过任务型询问提示间接引导模型表达其立场，而不是直接询问。</p>
-<p>研究者应用PRISM理念于政治坐标测试（Political Compass Test），对来自七家提供商的二十一款LLMs进行了政治倾向的评估。结果显示，大部分LLMs表现出经济上偏向左翼和社会上偏向自由的倾向，这与之前的研究一致。通过这一方法，研究者不仅能够了解模型的默认立场，还可以探测出这些模型愿意表达的立场空间，一些模型的立场较为受限且不易妥协，而另一些则表现得更加中立和客观。</p>
-<p>研究的创新点在于，PRISM方法能够更可靠地探测和审计LLMs，从而有效理解其偏好、偏见和限制。这为日后审计LLMs提供了一种新的思路，充分考虑了当前LLMs的设计和训练所带来的种种复杂性与挑战，尤其是面对法律和责任日益增加的审查压力。 </p>
-<p><img src="/images/ace2bdf5b781203bf3f46134c140849209dd381b3b648b8f837a9948cb1199be.jpg"></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>PRISM（Preference Revelation through Indirect Stimulus Methodology）是一种审计大型语言模型（LLMs）偏见的方法，旨在通过间接的任务驱动询问，探测模型的偏好和立场。方法具体步骤如下：</p>
-<p>首先，选择一个调查工具，例如政治坐标测试（Political Compass Test），该测试由一系列需要利克特（Likert）响应的陈述组成。接着，选择待审计的LLM（如ChatGPT、Gemini等）。然后，对模型指定一个角色，这个角色可以是“无”以获取模型的默认立场。</p>
-<p>接下来，指示LLM撰写一篇关于所选陈述的短文。每篇短文将由评估者（可以是AI或人类）根据其立场进行评分。然后，通过对调查工具的反应结果进行汇总，以绘制LLM的默认立场。该过程将针对不同角色重复，以覆盖调查工具所设定的多个维度。</p>
-<p>具体步骤如下：</p>
-<ol>
-<li>选择调查工具（如政治坐标测试）。</li>
-<li>选择需要审计的LLM。</li>
-<li>为LLM指定角色（可为“无”以获取默认立场）。</li>
-<li>指示LLM撰写一篇短文，内容根据所选的陈述。</li>
-<li>让评估者对每篇短文进行评分。</li>
-<li>汇总结果以显示LLM的默认立场。</li>
-<li>针对不同的角色重复步骤，涵盖调查工具的各个维度。</li>
-<li>最后，绘制LLM的默认立场及其愿意表达的偏好范围。</li>
-</ol>
-<p>这种方法的灵活性体现在可审计的偏见类型（如政治偏见、性别偏见、宗教偏见等）上，只需选择适当的工具即可。与直接询问偏好不同，PRISM通过生成短文的方式，使模型在某种程度上避免拒绝回应，从而间接获取更全面的信息。</p>
-<h3 id="PRISM流程示意图"><a href="#PRISM流程示意图" class="headerlink" title="PRISM流程示意图"></a>PRISM流程示意图</h3><p><img src="/images/ace2bdf5b781203bf3f46134c140849209dd381b3b648b8f837a9948cb1199be.jpg">  </p>
-<p>该方法的关键优势在于：  </p>
-<ul>
-<li>通过生成短文来评估模型的合规性，可以获得更可靠的数据。  </li>
-<li>通过分析短文，能够理解模型对特定主题的态度。  </li>
-<li>通过角色的应用，能够探索模型愿意表达的内容范围。</li>
-</ul>
-<p>此方法不仅推动了对模型偏见的审计，还为未来在不同场景下的应用提供了研究基础。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>论文中的实验部分通过PRISM方法，旨在审计大型语言模型（LLMs）的政治偏见。通过政治等级测试（Political Compass Test, PCT），研究者对二十一种来自七个供应商的LLM进行审计，以评估其政治倾向。</p>
-<p>实验首先选择了适当的LLM，比如Alibaba的Qwen，Anthropic的Claude，Cohere的Command等。在选择了模型后，研究者分配了角色，允许LLM根据不同情境生成文本。实验中，研究者使用了简化的提示模板，要求LLM针对给定的命题写一篇短文，从而评估其立场。这一方法通过生成的文本进行评估，以更加自然的方式获取模型的偏见和倾向，避免了直接询问可能带来的拒绝和模糊回复。</p>
-<p>在数据评估阶段，使用AI评估器对生成的文章进行评分。为了确保评估的有效性，还引入了人类标注者进行对比，形成金标准。根据评估结果，PRISM方法在中立率和拒绝率方面表现明显优于直接询问法。例如，与直接询问法相比，PRISM方法的生成文本中中立回复的比例仅为6%，而直接询问法高达9%。而PRISM的方法平均拒绝率为1%，而直接询问法则高达13%。这表明，通过间接的方式，PRISM在审计LLMs的政治倾向时更加可靠。</p>
-<h3 id="LLM的默认政治倾向"><a href="#LLM的默认政治倾向" class="headerlink" title="LLM的默认政治倾向"></a>LLM的默认政治倾向</h3><p>研究结果显示，大多数被审计的模型本身意见偏向左翼和自由主义。这一发现与相关文献一致。图3展示了不同模型在无角色条件下的默认政治倾向，结果表明，Mistral.AI的Mistral模型最为左翼和自由，而Cohere的Command-light模型则倾向于右翼和威权主义。<br><img src="/images/fdaf0b0852c0fffa16d00b663f7b2c659197d377bd065fead262173e62f7caca.jpg">  </p>
-<h3 id="政治偏见的窗口"><a href="#政治偏见的窗口" class="headerlink" title="政治偏见的窗口"></a>政治偏见的窗口</h3><p>通过PRISM方法，研究者能够展示不同模型在承担不同角色时的政治偏见窗口。例如，在图4中展示的各模型的表达窗口，GPT 4o模型在表达多样性方面表现最佳，而LLama2模型的多样性则相对较低。研究发现，所有模型在表达左翼威权主义和右翼自由主义立场时普遍较为谨慎，即便在角色设定下，它们也不愿意提供相应的论述。</p>
-<p><img src="/images/57bc2f78cde65a41812071fac0cdbd41d60f2dfd712f8beba67822483dd501db.jpg">  </p>
-<h3 id="不同角色的影响"><a href="#不同角色的影响" class="headerlink" title="不同角色的影响"></a>不同角色的影响</h3><p>进一步的实验显示，当为LLM设定角色时，其政治倾向可显著变化。图5中展示了当LLM依据不同角色（智能代理、不智能代理、公平代理和不公平代理）生成文本时的结果。显然，“智能”和“公平”角色的代理文本在结果上倾向左翼和自由倾向。而“无人智能”或“不公平”的角色则更倾向于展示极化的立场。这指向了角色设置对于模型政治倾向的显著影响。</p>
-<p><img src="/images/d0c63fe368b6312e6104491b09bb4e81e0a9919dffb8b4e35b8c37a9ba51e0dd.jpg">  </p>
-<p>这些研究结果不仅揭示了模型的默认立场，还展示了它们在不同的角色背景下所能够表达的更广泛的观点范围。这些发现为未来进一步研究和审计提供了重要的基础和方向。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>PRISM作为一种审计大型语言模型（LLMs）偏见的方法，提供了比以往研究更为丰富的洞见。通过间接探测模型的偏好和观点，研究者可以更好地评估模型在讨论不同主题时的合规性。这种方法允许研究者识别模型在面对敏感话题时的拒绝率及其中立性，从而深入了解模型是否会避免讨论特定主题。此外，使用PRISM产生的输出本身就是对模型立场的一种解释，进一步增强了方法的透明性。</p>
-<p>此外，PRISM通过角色设置的方式，能够更广泛地探索模型愿意表达的不同观点。这一特性使得研究者能够掌握在特定提示下，模型的反应如何变化。因此，PRISM为未来的研究提供了诸多可能的探索方向，比如研究特定角色下的偏见（如不同性别、种族、职业等），以及使用不同工具（如道德、宗教、性别等）来测量偏见和立场的变化。</p>
-<p>研究者注意到，尽管PRISM比直接提示的方法更具可靠性，然而其仍然可能受到大型语言模型训练过程中固有的偏见和限制的影响。未来的研究需要继续探索PRISM在不同背景下的表现，以及如何优化提示策略来更有效地审计大型语言模型。通过更深入的探索，PRISM能够推动对大型语言模型偏见的理解和管理，从而帮助确保这些技术在应用中的责任性和公平性。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18906/" data-id="cm2q09as7000cggtf1x4b2x1c" data-title="斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q2r2yu000agytf8ho6cm06" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -565,7 +259,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q09as50005ggtfcqagctys" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2q2r2yt0006gytfdg3u1b59" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -726,7 +420,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q09as60009ggtfgu38e6i3" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2q2r2yt0008gytffx8udqwq" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -814,7 +508,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2q09as6000aggtfenfr0fn2" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2q2r2yt0007gytf5q0i17oc" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -908,7 +602,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2q09as40004ggtfbwef9epk" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2q2r2ys0004gytfe36l44tj" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -934,7 +628,7 @@ MathJax = {
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/25/2401-06730/">2401.0673</a>
+      <a class="p-name article-title" href="/2024/10/25/2401-06730/">斯坦福大学提出语言模型不确定性表达与人类互动的风险研究</a>
     </h1>
   
 
@@ -995,7 +689,419 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2q09as40003ggtf7cs33m0v" data-title="2401.0673" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2q2r2ys0003gytfag55bvu2" data-title="斯坦福大学提出语言模型不确定性表达与人类互动的风险研究" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2311-09096" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/25/2311-09096/" class="article-date">
+  <time class="dt-published" datetime="2024-10-25T06:14:49.000Z" itemprop="datePublished">2024-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/2311-09096/">清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在近年来，随着大型语言模型（LLMs）的发展，虽然它们在多种任务中表现出色，但其安全缺陷也逐渐显露出来。这些安全缺陷包括泄露用户数据、生成有害内容和促进非法活动等。特别是，越来越多的研究集中在破解这些模型的安全机制，即所谓的“越狱攻击”（jail breaking attacks），这种攻击能够绕过为LLMs设置的安全对齐。</p>
+<p>在这项研究的引言中，作者指出，大多数现有的研究主要关注于如何进行越狱攻击，而针对防御这些攻击的研究仍显不足。越狱攻击的成功往往源于模型在“有用性”（helpfulness）和“安全性”（safety）这两个目标之间的内在冲突。当前的模型优化方法，如SFT（监督微调）和RLHF（基于强化学习的微调），未能明确区分这两个目标的优先级，导致其在复杂和非分布的数据输入（out-of-distribution inputs）缺乏有效辨识能力。</p>
+<p>为了解决这一问题，作者提出了一种新的防御机制——“目标优先化”（goal prioritization），旨在通过明确指定安全性优先于有用性，从而有效减少越狱攻击的成功率。通过在训练和推理阶段实施目标优先化，研究表明该方法能够大幅降低越狱攻击的成功率，充分验证了作者的假设，即越狱攻击的成功与模型对目标优先级的认识密切相关。</p>
+<p>此外，研究还发现，尽管更强大的LLMs可能更容易受到越狱攻击，但它们也具备更强的能力去抵御这些攻击。这一发现为理解LLMs的能力与安全性之间的关系提供了重要的洞察。</p>
+<p>总的来说，这项研究旨在提升对越狱攻击及其防御的理解，同时为LLMs的可靠应用提供了新的思路和方法。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>该研究提出了一种通过“目标优先化”来抵御大型语言模型（LLMs）面临的监狱突破攻击的方法。目标优先化是在训练和推理阶段引入的，主要包括以下两个情境：没有训练（w&#x2F;o Training）和有训练（w&#x2F; Training）。</p>
+<h3 id="没有训练的情况下"><a href="#没有训练的情况下" class="headerlink" title="没有训练的情况下"></a>没有训练的情况下</h3><p>在没有训练（例如，使用API LLMs或没有开放源代码微调数据的LLMs）的情况下，研究人员设计了一种即插即用的提示方法。这种方法包括一个要求模型优先考虑安全而非有用的指令，和两个示例以引导LLMs进行判断。具体步骤如下：</p>
+<ol>
+<li>模型首先被提醒要优先考虑安全性。</li>
+<li>然后提供两个示例：<ul>
+<li>第一个示例是一个良性查询及其有用的响应；</li>
+<li>第二个示例是一个有害查询及其拒绝的响应。</li>
+</ul>
+</li>
+</ol>
+<p>在响应中，模型使用[内部思维]部分分析用户指令是否违反了优先需求，并在[最终响应]中提供相应的答复。</p>
+<h3 id="有训练的情况下"><a href="#有训练的情况下" class="headerlink" title="有训练的情况下"></a>有训练的情况下</h3><p>在训练可用的情况下（即能够访问模型权重和微调数据），研究人员将目标优先化融入训练实例，以便模型能够更好地遵循优先化要求。为了使模型理解这两种目标优先化，研究设计了两种相对立的生成实例：</p>
+<ul>
+<li><p>当用户查询为有害时，模型与两种目标优先化指令配对：</p>
+<ul>
+<li>当与优先考虑有用性而非安全的指令配对时，模型应生成有用但不安全的响应。</li>
+<li>当与优先考虑安全性而非有用性的指令配对时，模型应生成安全但可能不太有用的响应。</li>
+</ul>
+<p>这会生成数据集 $D_{1}&#x3D;{(x_{\bar{b}},g_{h},y_{h,\bar{s}}),(x_{\bar{b}},g_{s},y_{\bar{h},s})}$。</p>
+</li>
+<li><p>当用户查询为良性时，两种目标优先化指令可能导致相同的安全且有用的响应，因此会随机选择一个指令 $g_{r}$ 配对良性查询，得到数据集 $D_{2}&#x3D;{(x_{b},g_{r},y_{h,s})}$。</p>
+</li>
+</ul>
+<p>此外，为了促进模型对目标优先化的理解，研究利用ChatGPT生成[内部思维]部分，让模型分析用户查询与目标优先化要求之间的关系。</p>
+<p>训练期间所采用的标准交叉熵损失函数为：</p>
+<p>$$<br>\begin{align*}<br>&amp;\mathcal{L}&#x3D;-,\displaystyle\frac{1}{|D_{1}|}\sum_{i&#x3D;1}^{|D_{1}|}\log P(y_{h,\bar{s}}^{i},t_{h}^{i}|x_{b}^{i},g_{h};M)\<br>&amp;{\phantom{m m m m m}-,\displaystyle\frac{1}{|D_{1}|}\sum_{i&#x3D;1}^{|D_{1}|}\log P(y_{h,s}^{i},t_{s}^{i}|x_{b}^{i},g_{s};M)\<br>&amp;{\phantom{m m m m m m}-,\displaystyle\frac{1}{|D_{2}|}\sum_{i&#x3D;1}^{|D_{2}|}\log P(y_{h,s}^{i},t^{i}|x_{b}^{i},g_{r}^{i};M)}<br>\end{align*}<br>$$</p>
+<h3 id="整体框架图"><a href="#整体框架图" class="headerlink" title="整体框架图"></a>整体框架图</h3><p><img src="/images/475b31255f0be4b055d6184980c896dbe9d99036f0891318b9d9cf16412997ac.jpg"></p>
+<p>通过上述训练过程，模型可以在推理阶段仅添加 $g_{s}$ 指令以确保安全优先化要求。在输出时，开发者亦可隐藏[内部思维]，仅向用户展示[最终响应]。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在这一部分，研究团队对他们提出的目标优先化方法进行了详尽的实验评估，以验证其在防御监狱攻击方面的有效性。</p>
+<h3 id="监狱攻击测试集"><a href="#监狱攻击测试集" class="headerlink" title="监狱攻击测试集"></a>监狱攻击测试集</h3><p>研究人员根据第二章中介绍的监狱攻击方法，设计了一个测试集。最终测试集包含50个监狱攻击提示和20个最具攻击成功率的有害问题，由此生成的测试样本总数达到1,000个。</p>
+<h3 id="训练集"><a href="#训练集" class="headerlink" title="训练集"></a>训练集</h3><p>在有训练的情况下，研究团队从Ultra Feedback收集了10,000个良性查询并配对相应的GPT-4响应。此外，从AdvBench中获得500个有害指令，并将它们与监狱攻击提示进行随机配对。为了确保训练集中不包含任何监狱攻击提示，研究者精心设计了训练实例以支持目标优先化的要求。</p>
+<h3 id="评估的LLMs"><a href="#评估的LLMs" class="headerlink" title="评估的LLMs"></a>评估的LLMs</h3><p>在无训练的设置中，研究团队评估了包括GPT-3.5-turbo-0613和GPT-4-0613等API基础的LLM，以及Vicuna-7B-v1.3、Llama2-7B-Chat和Llama2-13B-Chat等开源模型。而在有训练的设置中，则使用了Llama2-7B和Llama2-13B作为基础模型。</p>
+<h3 id="基准测试"><a href="#基准测试" class="headerlink" title="基准测试"></a>基准测试</h3><p>在无训练的设置中，研究人员将他们的方法与没有额外防御技术的简单LLM进行了比较，同时也评估了Self-Reminder的方法。对于有训练的情况，基准测试比较了他们的方法与只使用良性查询的SFT方法，以及将监狱攻击查询与安全拒绝响应结合使用的对齐SFT方法。</p>
+<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>为了评估ASR，研究团队采用了一种经过微调的RoBERTa模型，这是一种在安全响应检测中具有高效性的工具。对于LLMs的整体性能则通过对比它们在100个良性查询上的表现来衡量。</p>
+<h3 id="无训练的结果"><a href="#无训练的结果" class="headerlink" title="无训练的结果"></a>无训练的结果</h3><p>研究结果显示，目标优先化方法在防御监狱攻击方面表现出色，显著降低了ChatGPT的ASR，从66.4%减少到3.6%。该方法在开源模型中同样表现良好，相较于Self-Reminder，ASR也显著降低，且模型的整体性能保持在可接受的范围内。</p>
+<p><img src="/images/492d50a113c0d2c9271483a01c9747fe9c95f71ad7c365e13bb5a4088495ac95.jpg"></p>
+<h3 id="有训练的结果"><a href="#有训练的结果" class="headerlink" title="有训练的结果"></a>有训练的结果</h3><p>在有训练的结果中，Llama2-7B和Llama2-13B的ASR分别降低到4.6%和6.6%。这些结果表明，训练过程中融入目标优先化能有效压制监狱攻击，但不会对模型的整体性能形成显著影响。</p>
+<p><img src="/images/6c6caa931ffc8fbb9913c95b0d3d4721612e14122592a146adfc6978c0c9d928.jpg"></p>
+<h3 id="消融研究"><a href="#消融研究" class="headerlink" title="消融研究"></a>消融研究</h3><p>研究团队进行了消融实验，以评估各组成部分的有效性。当去掉内部思考部分或去掉训练中的有害响应时，模型的防御能力明显下降，这表明内部思考对理解目标优先化要求至关重要。</p>
+<ul>
+<li>结果分析表明，增加有害响应的训练实例有助于模型更好地遵循目标优先化要求。</li>
+<li>研究还发现目标优先化方法在处理未知类型的监狱攻击方面表现优异，即使没有特定的监狱攻击样本纳入训练。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>实验结果表明，目标优先化方法在各类监狱攻击中均展现出了强大的防守能力，并为进一步探索LLM的安全性与能力之间的关系提供了重要的见解。</p>
+<p><img src="/images/16b81bd78c363cda6f409090a9f47d39a4ac65cd53fe4289f081a89ef2bd46b7.jpg"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>该研究提出了通过目标优先化来防御大语言模型（LLMs）免受监狱突破攻击的有效方法。研究人员假设，监狱突破成功的核心原因在于模型缺乏对目标优先级的理解。具体而言，LLMs在生成响应时往往面临提供帮助和确保安全之间的内在冲突。为了应对此问题，研究提出在训练和推理阶段集成目标优先化，旨在增强模型对安全性的重视。</p>
+<p>经过广泛的实验验证，该方法在降低攻击成功率（ASR）方面表现出色。例如，通过添加目标优先化，ChatGPT的ASR从66.4%降至3.6%；Llama2-13B的ASR则从71.0%降至6.6%。这些结果表明，即使在没有监狱突破样本的情况下，目标优先化的应用仍能显著提升模型的防御能力。此外，相较于较弱的模型，较强的模型（如GPT-4）在接受适当的防御机制时，可以更有效地抵御监狱突破攻击。</p>
+<p>研究的结论不仅为理解监狱突破攻击的成因提供了新视角，也加强了对LLMs能力与安全之间关系的理解。通过引入目标优先化的机制，该研究为构建更加安全和可靠的语言模型铺平了道路，同时也为未来在此领域的研究提供了有价值的参考。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2q2r2ys0002gytf8wqr0ucv" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2310-03708" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/25/2310-03708/" class="article-date">
+  <time class="dt-published" datetime="2024-10-25T06:03:04.000Z" itemprop="datePublished">2024-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/2310-03708/">上海人工智能实验室提出多目标直接偏好优化方法（MODPO）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着现代基于Transformer的语言模型在互联网规模的语料库上进行预训练并通过人类反馈进行精炼，这些模型通常能够较好地与特定群体的偏好对齐。目前，强化学习与人类反馈（RLHF）是一种主要的对齐方法，它使用单一的奖励模型来表示平均标签者的偏好，以引导语言模型最大化该奖励模型，从而生成预期的结果。然而，早期的成功假设人类偏好是同质的，实际情况却表明人类偏好的个体差异巨大，因此很难用单一的语言模型来满足所有偏好的要求。</p>
+<p>这促使研究者们寻求多策略方法，通过训练多个候选语言模型来满足不同群体的需求。最近的研究集中于将人类反馈分解为多个细分维度，为每一维度创建独立的奖励模型。这种多目标的方法使得可以通过调整奖励权重来灵活定制语言模型，以适应不同的偏好分布。然而，尽管这种方法在理论上有效，但经过多目标RLHF（MORLHF）的微调过程往往复杂、资源消耗大且不稳定。</p>
+<p>为了解决这一问题，研究者们提出了多目标直接偏好优化（MODPO），这是一种无RL的新方法，旨在扩展直接偏好优化（DPO）以适应多个对齐目标。MODPO的关键在于，它将语言建模与奖励建模直接结合在一起，从而训练语言模型作为隐式的集体奖励模型，结合所有目标并赋予特定的权重。理论上，MODPO能够提供与MORLHF相同的最优解，但在实际应用中更加稳定和高效。通过在安全对齐和长篇问答等任务中的实证结果，MODPO展示出能够在显著减少计算资源的前提下，产生匹配或超越现有方法的结果，并形成多样化偏好的Pareto前沿。</p>
+<p><img src="/images/ec97fefe13cb27546c6b20f0d517806bae9fc4c27efb88ce355d4ffbeadc86df.jpg" alt="动机图"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本节描述了多目标直接偏好优化（MODPO）的方法论。MODPO是对直接偏好优化（DPO）的扩展，旨在处理多重对齐目标，而无需强化学习（RL）方法。主要思想是将语言建模与奖励建模结合起来，直接训练不同的语言模型以隐式表征不同的集体奖励模型，从而实现多个目标的整合。</p>
+<h3 id="MODPO的推导"><a href="#MODPO的推导" class="headerlink" title="MODPO的推导"></a>MODPO的推导</h3><p>MODPO依赖于以下理论关系，将目标模型与最优语言模型连接起来：</p>
+<p>$$<br>\mathbf{w}^{T}\mathbf{r}^{<em>}(\mathbf{x},\mathbf{y})&#x3D;\beta\log\frac{\pi_{(\mathbf{w}^{T}\mathbf{r}^{</em>})}(\mathbf{y}|\mathbf{x})}{\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})}+\beta\log Z(\mathbf{x}),<br>$$</p>
+<p>其中，$Z(\mathbf{x})&#x3D;\sum_{\mathbf{y}}\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})\exp\left(\frac{1}{\beta}\mathbf{w}^{T}\mathbf{r}^{*}(\mathbf{x},\mathbf{y})\right)$是配分函数。通过利用偏好数据集，可以去除配分函数，从而实现如下变化：</p>
+<p>$$<br>p_{\mathcal{D}<em>{k}}(\mathbf{y}</em>{1}\succ\mathbf{y}<em>{2} ,|,,\mathbf{x})&#x3D;\sigma\left(\mathbf{r}</em>{k}^{<em>}(\mathbf{x},\mathbf{y}<em>{1})-\mathbf{r}</em>{k}^{</em>}(\mathbf{x},\mathbf{y}_{2})\right).<br>$$</p>
+<p>结合上面的两个公式，MODPO可以构造一个实用的最大似然目标：</p>
+<p>$$<br>\mathcal{L}<em>{\mathrm{MODPO}}(\pi</em>{\theta_{\mathbf{w}}};\mathbf{r}<em>{\phi,-k},\pi</em>{\mathrm{sf}},\mathcal{D}<em>{k})&#x3D;-\mathbb{E}</em>{\mathcal{D}<em>{k}}\left[\log\sigma\left(\frac{\beta}{\mathbf{w}</em>{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}<em>{w}|\mathbf{x})}{\pi</em>{\mathrm{sf}}(\mathbf{y}<em>{w}|\mathbf{x})}-\frac{\beta}{\mathbf{w}</em>{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}<em>{l}|\mathbf{x})}{\pi</em>{\mathrm{sf}}(\mathbf{y}<em>{l}|\mathbf{x})}-\frac{1}{\mathbf{w}</em>{k}}\mathbf{w}<em>{-k}^{T}\left(\mathbf{r}</em>{\phi,-k}(\mathbf{x},\mathbf{y}<em>{w})-\mathbf{r}</em>{\phi,-k}(\mathbf{x},\mathbf{y}_{l})\right)\right)\right],<br>$$</p>
+<p>其中期望以$(\mathbf{x},\mathbf{y}<em>{w},\mathbf{y}</em>{l})\sim\mathcal{D}_{k}$为基础。</p>
+<h3 id="MODPO的实施步骤"><a href="#MODPO的实施步骤" class="headerlink" title="MODPO的实施步骤"></a>MODPO的实施步骤</h3><p>MODPO的实施过程包括以下步骤：</p>
+<ol>
+<li><strong>边际奖励建模</strong>：首先在数据集$\mathcal{D}<em>{-k}$上训练边际奖励模型$\mathbf{r}</em>{\phi,-k}$。</li>
+<li><strong>语言建模</strong>：根据不同的权重迭代遍历$\mathbf{w}\in\Omega$，对每一个权重优化目标$\mathcal{L}<em>{\mathrm{MODPO}}$以获得经验前沿${\pi</em>{\theta_{\mathbf{w}}},|,\mathbf{w}\in\Omega}$。</li>
+</ol>
+<p>这些步骤的设计使得MODPO在处理多个目标时只需最小的开销，相比DPO只有轻微的追加计算需求，同时保证了训练的稳定性与效率。</p>
+<h3 id="MODPO的优势"><a href="#MODPO的优势" class="headerlink" title="MODPO的优势"></a>MODPO的优势</h3><p>MODPO通过以下几个方面展现出其优势：</p>
+<ul>
+<li><strong>稳定性</strong>：MODPO和DPO在本质上解决的是相同的二元分类问题，因此在训练动态上没有显著区别。</li>
+<li><strong>效率</strong>：MODPO只需获得已拟合的边际奖励模型$\mathbf{r}_{\phi,-k}$，可来自公共源或一次预训练，降低了每个LM的训练成本。</li>
+</ul>
+<p>通过这些实施步骤和优势分析，MODPO展示了在多目标对齐中具备可行性和效率，是对传统RLHF方法的有益补充。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>实验部分主要围绕两个关键问题展开：MODPO是否能够利用现有的人类反馈数据集为各种人类偏好创建语言模型前沿？MODPO是否能在生成语言模型前沿方面超越其他基线方法？为此，研究者在安全对齐和长篇问答这两个任务上进行了实验。</p>
+<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>在实验中，所有语言模型使用8个Nvidia 80G A100 GPU进行训练，整体采用LoRA技术。实验的主要评估指标是两个对齐目标之间的权衡，表现为所取得的真实奖励前沿。此外，还考虑最小化KL散度作为额外目标，以便评估在比较MODPO与其他方法时所取得的奖励和KL散度。  </p>
+<p>在安全对齐任务中，使用了10k子集的BEAVER TAILS数据集，通过使用GPT-3.5和GPT-4评估模型表现。长篇问答任务则使用QA-FEEDBACK数据集，其中包含人为偏好的多维反馈。</p>
+<h3 id="安全对齐实验结果"><a href="#安全对齐实验结果" class="headerlink" title="安全对齐实验结果"></a>安全对齐实验结果</h3><p>在安全对齐实验中，使用了合成反馈和真实反馈两个来源。合成反馈设置下，MODPO产生的前沿无论在高β（0.1）还是低β（0.5）条件下，均表现出色，与MORLHF相当（图2）。MODPO的性能在“有用性”维度上一般更佳，在“无害性”维度上MORLHF略有优势。  </p>
+<p><img src="/images/8208e0dbb27fde940c91ecbb0ff0dbca15d9f3565ebc520a8c123e8a13c87cdb.jpg" alt="图2"><br>图2: 在不同β下的（合成）安全对齐前沿。MODPO在权衡有用性和无害性方面表现出色。  </p>
+<h3 id="长篇问答实验结果"><a href="#长篇问答实验结果" class="headerlink" title="长篇问答实验结果"></a>长篇问答实验结果</h3><p>在长篇问答任务的实验中，MODPO始终在相似的KL预算下超越了MORLHF，特别是在使用不同的数据集组合时（图3）。这种表现得益于MODPO在学习过程中处理细微差别的能力。</p>
+<p><img src="/images/824ccd15dbf7668b21634ed702ed56ca0765a42df45fafdb20e679333c414926.jpg" alt="图3"><br>图3: 长篇问答前沿（β&#x3D;0.5）。MODPO在类似的KL预算下始终超越MORLHF。  </p>
+<p>在真实反馈下的安全对齐实验中，MODPO展现出了更优的前沿，同时要求的GPU时间也相对较少（表1）。</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>训练所需GPU小时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MODPO</td>
+<td>具体小时数</td>
+</tr>
+<tr>
+<td>MORLHF</td>
+<td>具体小时数</td>
+</tr>
+</tbody></table>
+<h3 id="最终实验结果"><a href="#最终实验结果" class="headerlink" title="最终实验结果"></a>最终实验结果</h3><p>实验结果进一步表明，MODPO无论是在安全对齐还是长篇问答任务中，均能产生高效且多样的语言模型前沿，体现出其在处理多任务、多目标对齐的优越性能。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，作者提出了一种名为多目标直接偏好优化（MODPO）的方法，旨在解决通过人类反馈对语言模型进行对齐时的复杂性与效率问题。MODPO是对直接偏好优化（DPO）的扩展，能够在没有强化学习（RL）的情况下对多个对齐目标进行优化。与多目标强化学习（MORLHF）相比，MODPO在理论上可以产生相同的最优解，但在实践中具有更高的稳定性和效率。</p>
+<p>研究结果显示，MODPO能够通过简单的交叉熵损失，稳定地训练出能够满足人为偏好的语言模型，并且在多个任务上表现良好。特别是在安全对齐与长形式问答任务中，MODPO的效果与现有方法相当，甚至超出它们，且在计算资源上节省了三倍。这种方法能够产生多样化的语言模型前沿，使其能够适应不同群体的偏好。</p>
+<p>作者强调，MODPO不仅在生成模型的对齐中展现出良好的灵活性，还保证了模型的可定制性，对于处理不同的人类偏好而言，MODPO是一种有效且易于实现的方法。此外，如果目标偏好已知，开发者可以使用偏好向量作为可调超参数，方便地定制单一语言模型，使得MODPO在多目标对齐的背景下，显得尤为有效与普适。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2q2r2yr0001gytf72v8buke" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2309-07045" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/25/2309-07045/" class="article-date">
+  <time class="dt-published" datetime="2024-10-25T05:44:24.000Z" itemprop="datePublished">2024-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/2309-07045/">清华大学提出Safety Bench：大型语言模型安全评估的新基准方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着大型语言模型（LLMs）的快速发展，越来越多的关注点聚焦于其安全性问题。自ChatGPT发布以来，各种LLMs逐渐被应用于与人类的互动，如Llama、Claude和ChatGLM等。然而，伴随着LLMs的发展，其安全性缺陷也日益凸显，这些缺陷可能严重妨碍LLMs的安全和持续发展。许多研究指出了LLMs的安全风险，例如隐私泄露和有毒内容生成等。</p>
+<p>因此，对LLMs安全性的全面评估变得非常重要。然而，当前针对LLMs安全性评估的综合标准几乎匮乏。过去某些广泛使用的数据集主要集中于特定的安全问题维度，例如毒性和偏见等。虽然近期一些中文安全评估基准尝试收集各种安全问题类别的提示，但它们仅提供中文数据，并且在如何准确评估LLMs生成的响应安全性方面也面临挑战。</p>
+<p>为此，研究者们提出了Safety Bench，这一综合性基准透过多项选择题的方式，对LLMs的安全性进行评估。Safety Bench的主要创新点包括：</p>
+<ol>
+<li><p><strong>安全性评估的简易性和高效性</strong>：Safety Bench仅包含单一正确答案的多项选择题，能够实现高效且准确的自动评估，促进LLMs的快速迭代和优化。</p>
+</li>
+<li><p><strong>多样性</strong>：Safety Bench收录了11435个样本，涵盖七个不同类别的安全问题，从多个来源获取数据，确保评估的全面性。</p>
+</li>
+<li><p><strong>题目类型的多样化</strong>：测试问题包括对话场景、现实生活情况的判断、对比安全性、知识询问等多种类型，确保对LLMs在多样的安全相关场景下的严格测试。</p>
+</li>
+<li><p><strong>多语言支持</strong>：Safety Bench提供中文和英文数据，这使得对中英文LLMs的评估更加广泛和包容。</p>
+</li>
+</ol>
+<p>通过这些创新，Safety Bench在评估当前LLMs的安全特性、识别其安全缺陷上发挥了重要作用，也为未来的改进提供了方向。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究提出了一个名为Safety Bench的评估框架，用于系统性地评估大型语言模型（LLMs）的安全性。该框架包含11,435个多项选择题，覆盖7个安全问题类别，旨在通过自动化的方法降低评估成本，并提高评估的准确性。</p>
+<h3 id="问题类别"><a href="#问题类别" class="headerlink" title="问题类别"></a>问题类别</h3><p>Safety Bench涵盖了7个常见的安全问题类别，这些类别来源于先前的研究并进行了适当的调整。它们包括：</p>
+<ul>
+<li>Offensiveness（冒犯性）</li>
+<li>Unfairness and Bias（不公平与偏见）</li>
+<li>Physical Health（身体健康）</li>
+<li>Mental Health（心理健康）</li>
+<li>Illegal Activities（非法活动）</li>
+<li>Ethics and Morality（伦理与道德）</li>
+<li>Privacy and Property（隐私与财产）</li>
+</ul>
+<p>为了确保中英文的一致性，研究者在构建问题时，谨慎排除了可能导致不同文化背景下给出不同答案的敏感话题。</p>
+<h3 id="数据收集"><a href="#数据收集" class="headerlink" title="数据收集"></a>数据收集</h3><p>数据收集过程包括三个主要来源：</p>
+<ul>
+<li><p><strong>现有数据集</strong>：研究者从开放的中文和英文数据集中抽取并改编多项选择题，特别是在涉及不公平和偏见、身体健康与伦理道德等类别时，利用现有的公共数据集进行转换。</p>
+</li>
+<li><p><strong>考试题</strong>：研究者广泛收集了与安全问题相关的考试题目，特别注重道德和法律相关的考试题。通过从在线考试资源中提取问题，最终收集到约2,000个与安全类别相关的题目。</p>
+</li>
+<li><p><strong>数据增强</strong>：考虑到某些类别（如心理健康、非法活动和隐私与财产）数据不足，研究者利用大型语言模型（如ChatGPT）进行数据增强。这些生成的问题经过人工审核与修订，以确保质量。</p>
+</li>
+</ul>
+<h3 id="质量控制"><a href="#质量控制" class="headerlink" title="质量控制"></a>质量控制</h3><p>为了确保Safety Bench中每个问题的质量，研究团队采取了严格的人为验证过程。价格较高的来源允许使用人工标注，并严格检查经过考试和数据增强得到的问题。研究者将每个问题的正确性进行了评估，发现97%的随机抽样问题与人类的答案一致，从而减少了逐一验证的需求。</p>
+<p>在评估过程中，团队还实现了中英问卷之间的互译，确保了问题在各个语言中的一致性。通过适当的质量控制措施，确保所收集数据的问题清晰、准确且符合多个文化背景。</p>
+<h3 id="实验评估"><a href="#实验评估" class="headerlink" title="实验评估"></a>实验评估</h3><p>Safety Bench的评估分为零-shot和五-shot设置：</p>
+<ul>
+<li><p><strong>零-shot设置</strong>：直接对LLMs进行评估，不提供任何上下文信息或示例。</p>
+</li>
+<li><p><strong>五-shot设置</strong>：提供与评估任务相关的示例，以观察不同LLMs在较少监督条件下的表现。</p>
+</li>
+</ul>
+<p>在评估过程中，研究者确保模型的响应格式符合设计要求，这样可以准确提取模型的预测答案。</p>
+<p>如图1所示，Safety Bench全面评估了多个安全问题领域，通过集成丰富的多项选择题，使得该评估方法高效且具备多样性。</p>
+<p><img src="/images/9e4ed20559e2322b6b1e3e22ca089eec211ca4694be6faa0f6408d0fcfc8eb29.jpg" alt="Safety Bench概览"></p>
+<p>通过以上方法，Safety Bench为LLMs的安全性能提供了一个全面的评估框架。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在这项研究中，作者们对25种流行的大型语言模型（LLMs）进行了评估，主要关注它们在安全性方面的能力。评估分为零-shot和五-shot两种设置。</p>
+<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><p>作者在零-shot和五-shot设置下进行评估。在五-shot设置中，作者精心挑选了涵盖各种数据源且具有多样答案分布的示例。图4展示了所用的提示。作者从LLMs生成的响应中提取预测答案，并通过精心设计的规则确保LLMs的响应符合所需格式，以便于答案的准确提取。为了最小化随机采样带来的方差，作者在测试LLMs时将温度设定为0。  </p>
+<h3 id="评估模型"><a href="#评估模型" class="headerlink" title="评估模型"></a>评估模型</h3><p>作者评估了25种流行的LLMs，涵盖了不同的组织和参数规模。零-shot结果展示于表2中，通过比较，API基础的LLMs普遍比其他开源模型具有更高的准确性。特别是，GPT-4的表现显著优于其他评估模型，领先约10个百分点。  </p>
+<p>五-shot结果如表3所示，结合少量示例所带来的改进因不同LLMs而异。一些模型如text-davinci-003从上下文示例中获得了显著提高，而gpt-3.5-turbo则在某些情况下可能会因为“对齐税”而遭遇负面影响。</p>
+<h3 id="中国子集结果"><a href="#中国子集结果" class="headerlink" title="中国子集结果"></a>中国子集结果</h3><p>鉴于大多数中国公司提供的API实施了严格的过滤机制，使得评价这些API基础LLMs的整套测试集变得不切实际，作者选择消除带有敏感关键词的样本，最终选择了每个类别300个问题，构成总计2100个问题的子集。表4展示了五-shot在这一过滤后的中国子集上的评估结果。  </p>
+<p>作者的研究发现，GPT-4在多个类别的安全问题上表现优异，同时也发现了在不公平性和偏见类别上GPT-4的表现相对较差，作者通过手动检查失败的案例，揭示了GPT-4在某些词汇和事件的理解上出现错误的原因。  </p>
+<h3 id="生成能力与理解能力"><a href="#生成能力与理解能力" class="headerlink" title="生成能力与理解能力"></a>生成能力与理解能力</h3><p>作者探讨了Safety Bench中测得的安全理解能力与安全生成能力之间的关系。为此，作者将一些多项选择问题转化为常规用户查询，包括限制查询和开放查询两种类型。实验结果在表5中展示，作者通过手动评估模型对这些转化查询的响应的安全性，从中得出重要结论。  </p>
+<p>通过图6，作者展示了GPT-4在各个安全类别中的失败案例，指出其理解能力对安全性的重要影响。  </p>
+<h3 id="影响力"><a href="#影响力" class="headerlink" title="影响力"></a>影响力</h3><p>表6比较了模型在增强数据和原始数据上的表现，从中可以看出使用ChatGPT进行数据增强的潜在偏见，但这一偏见对其他模型的影响不显著。  </p>
+<p>通过这一系列实验，作者不仅验证了Safety Bench的有效性，还揭示了LLMs在安全性方面存在的空间，以指导未来的改进。  </p>
+<p><img src="/images/2d25c89a0461d7e3510588b4fa50b34114f7d1a024fc0b8ca89b0be12ded6407.jpg"><br>表2: Zero-shot zh&#x2F;en结果的Safety Bench。“Avg.”表示微平均准确率。</p>
+<p><img src="/images/2d25c89a0461d7e3510588b4fa50b34114f7d1a024fc0b8ca89b0be12ded6407.jpg"><br>表3: Five-shot zh&#x2F;en结果的Safety Bench。“-”表示模型对此语言的支持较差。</p>
+<p><img src="/images/c15df9fc2efa7f259c421d6bcb00dabd1abfae74b5f0f84cbad4c2f76d64e6b2.jpg"><br>表4: 五-shot评估结果在过滤后的中国子集的Safety Bench上。“-”表示模型因在线安全过滤机制拒绝回答问题。  </p>
+<p><img src="/images/1385431ed6177afe1fdd8133d04c81465612d03ea6464833f52abff3ea89a41b.jpg"><br>表5: 模型在采样多项选择问题上的准确性，以及对受限和开放查询的安全响应比例。  </p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本文中，研究人员介绍了Safety Bench，这是第一个全面的安全评估基准，通过多项选择题对大型语言模型（LLMs）的安全能力进行评估。Safety Bench涵盖了11,435道中英文题目，分为七类安全问题，广泛评估了25种来自不同组织的LLMs的安全能力。研究发现，与开源LLMs相比，GPT-4表现显著优越，指出了当前模型在安全性方面仍有很大的提升空间。</p>
+<p>此外，本文还表明，Safety Bench中测量的安全理解能力与安全生成能力之间存在相关性。这一发现为未来改进LLMs的安全性提供了重要指导。研究者希望Safety Bench能够在评估LLMs的安全性以及加速开发更安全的LLMs方面发挥重要作用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2q2r2yp0000gytf46kmh7yf" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2402-08983" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/25/2402-08983/" class="article-date">
+  <time class="dt-published" datetime="2024-10-25T05:26:31.000Z" itemprop="datePublished">2024-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/2402-08983/">华盛顿大学提出安全解码方法以防御监狱突破攻击</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$','$$'], ["\\[","\\]"]]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着大型语言模型（LLMs）在代码生成和聊天助手等现实应用中越来越广泛地被使用，研究者们对这些模型的行为与人类价值观，尤其是安全性的一致性进行了深入的探索。然而，尽管已有诸多努力，LLMs在安全性方面仍面临显著挑战。特别是“越狱攻击”作为一种新兴的威胁，旨在诱使LLMs产出意想不到且不安全的响应，这表明现有的模型保护机制仍然不够稳固。</p>
+<p>该研究的动机在于识别并解决这些漏洞，特别是针对越狱攻击的防御策略。研究者观察到，尽管代表有害内容的Token的概率往往高于代表无害响应的Token，但安全免责声明仍会出现在按概率降序排列的顶部Token中。因此，研究者提出了一种新颖的“安全解码”策略，通过增强安全免责声明的Token概率，同时减弱与攻击者目标的Token序列概率，从而有效防止模型被非法利用。</p>
+<p>这一研究的创新点在于通过Token概率的分布来分析越狱攻击的成功机制，显示出越狱攻击的成功往往归因于与攻击目标相一致的Token的概率占主导地位。而通过引入一个专家模型并进行安全性强健的微调，作者们进一步提出了通过“安全解码”策略，在不同层面上抵御越狱攻击。</p>
+<p>下图展示了Token概率在越狱攻击期间的分布情况：</p>
+<p><img src="/images/699b0dd72fb55885c8534bf529bd6411f0e8c949f544741d1460747ebf868e9b.jpg"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在这一部分中，作者提出了一种名为Safe Decoding的安全感知解码策略，以增强大型语言模型（LLMs）抵抗jailbreak攻击的能力。该策略的设计分为两个阶段：训练阶段和推理阶段。</p>
+<h3 id="训练阶段：构建专家模型"><a href="#训练阶段：构建专家模型" class="headerlink" title="训练阶段：构建专家模型"></a>训练阶段：构建专家模型</h3><p>为了构建一个具备较强安全性的专家模型，研究者首先收集了涵盖18个有害类别的36个有害查询。这些查询应该被任何与人类价值观良好对齐的LLM所拒绝。通过自主生成回应后，使用GPT-4过滤输出，仅保留那些有效拒绝有害查询的响应，最后形成训练数据集，包括查询与响应对。</p>
+<p>专家模型通过参数高效微调（例如使用LoRA方法）进行训练，确保微调模型的词汇与原始模型一致，同时能够识别和适当地回应恶意用户输入。</p>
+<h3 id="推理阶段：构建新的Token分布"><a href="#推理阶段：构建新的Token分布" class="headerlink" title="推理阶段：构建新的Token分布"></a>推理阶段：构建新的Token分布</h3><p>在推理阶段，用户查询被同时发送给原始模型和专家模型以进行解码。Safe Decoding根据两个模型的输出构建Token分布，从而生成对输入查询的响应。</p>
+<h4 id="步骤1：构造样本空间"><a href="#步骤1：构造样本空间" class="headerlink" title="步骤1：构造样本空间"></a>步骤1：构造样本空间</h4><p>在推理时间的第n步，模型将Token序列$x_{1:n-1}$转发给原始模型及专家模型，得到可能采样的Token集合分别为 $\nu_{n}$ 和 $\mathcal{V}<em>{n}^{\prime}$。Safe Decoding将样本空间 $\mathcal{V}</em>{n}^{(c)}$ 定义为两者前k个Token的交集，即：</p>
+<p>$$<br>{\mathcal{V}}<em>{n}^{(c)}&#x3D;\operatorname*{\arg\operatorname*{min}}</em>{S&#x3D;{\mathcal{V}}<em>{n}^{k}\cap{\mathcal{V}}</em>{n}^{\prime^{k}}}k{\mathrm{<del>s.t.</del>}}|S|\geq c.<br>$$</p>
+<p>该交集的构建旨在利用原始LLM的广泛训练和专家模型在安全性上的强化。</p>
+<h4 id="步骤2：定义概率函数"><a href="#步骤2：定义概率函数" class="headerlink" title="步骤2：定义概率函数"></a>步骤2：定义概率函数</h4><p>Safe Decoding在定义Token概率时，使用以下公式：</p>
+<p>$$<br>P_{n}\big(x|x_{1:n-1}\big)&#x3D;p_{\theta}\big(x|x_{1:n-1}\big) + \alpha(p_{\theta^{\prime}}(x|x_{1:n-1})-p_{\theta}(x|x_{1:n-1})).<br>$$</p>
+<p>此公式中，$\alpha$ 为超参数，决定原始模型与专家模型的重要性权重。最终通过标准化，确保$\sum_{x\in\mathcal{V}<em>{n}^{(c)}}P</em>{n}(x)&#x3D;1$。这使得当查询是恶意的时，原始模型会给出积极的回应，而专家模型则会基于安全性拒绝查询，从而减少引导攻击者目标的Token的概率，并增强机器人对于人类价值的响应。</p>
+<h3 id="效率与兼容性"><a href="#效率与兼容性" class="headerlink" title="效率与兼容性"></a>效率与兼容性</h3><p>Safe Decoding的设计兼容现有的所有采样方法，包括greedy、top-k和top-p采样。通过在推理过程中仅在前m步应用Safe Decoding，且后续步骤使用正常解码，可以避免模型过于保守，从而保持对良性用户查询的有用性，并降低计算开销。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本文对 Safe Decoding 的有效性、实用性、效率和兼容性进行了评估。</p>
+<p>首先，针对实验模型，研究者们在五种开源 LLM（Vicuna-7b、Llama2-7b-chat、Guanaco-7b、Falcon-7b 和 Dolphin-llama2-7b）上部署了 Safe Decoding，以评估其性能。</p>
+<p>在攻击方法方面，研究者们考虑了六种先进的 jailbreak 攻击，涵盖不同类别，包括 GCG、AutoDAN、PAIR 和 SAP30 等。这些攻击方法通过使用来自不同 harmful query benchmark 数据集的示例来生成特定的攻击提示，以评估 Safe Decoding 的防御性能。使用的两个有害查询基准数据集为 Advbench 和 HEx-PHI。</p>
+<p>在基准测试方面，研究者们与六种最新且高效的防御机制进行了比较，涵盖输入和输出检测以及缓解方法。研究过程中使用的评估指标包括攻击成功率（ASR）和 harmful score，前者用于衡量模型在恶意查询下产生不符合人类价值的响应的比率，而后者则通过 GPT-Judge 对生成内容的危害程度进行评分。通过 Dic-Judge，研究者们还检测了生成响应中拒绝字符串的存在，以计算 ASR。</p>
+<p>下表展示了 Safe Decoding 与基线防御方法在多个 jailbreak 攻击下的 ASR 和 harmful score 的比较：</p>
+<p><img src="/images/f9eab3795015174498772771ce9a68de0626f173631450332723571a2289749f.jpg"></p>
+<p>表中显示了在不同攻击方法下，Safe Decoding 的表现普遍优于所有基线防御方法。在针对意图重大的攻击（如 Deep Inception）时，Safe Decoding 成功将 ASR 降至 0%。</p>
+<p>为了进一步评估 Safe Decoding 的实用性，研究者们使用了 MT-bench 和 Just-Eval 等广泛使用的基准测试，评估应用 Safe Decoding 后的 LLM 实用性。以下表格展示了 Safe Decoding 在不同模型上的 MT-bench 和 Just-Eval 得分：</p>
+<p><img src="/images/732f0869753661b67770651a8c5f9386511b54f9afe9881b6acbe113d6f74611.jpg"></p>
+<p>根据表格结果，Safe Decoding 对原始模型的效用影响微乎其微，而现有基线模型在效用上则显著下降。</p>
+<p>接下来，研究者们定义了一个平均生成时间比率（ATGR）指标，以评估 Safe Decoding 的效率：</p>
+<p><img src="/images/06d6125b68b5a672c946b39798b953b20b1db315a845975bc0f656427294b9c9.jpg"></p>
+<p>结果显示，相较于无防御的情况下，Safe Decoding 的计算开销仅为 3%（在 Llama2 上）和 7%（在 Vicuna 上），表明该方法的效率并未显著降低性能。</p>
+<p>附加的消融分析表明，Safe Decoding 的超参数（如 $\alpha$、$m$、$c$）对防御性能影响有限，如下图所示：</p>
+<p><img src="/images/b361f6f10b280a81bb8ea1b8ae63d038cb50c3e029bbc4f208a4f4d132165ade.jpg"></p>
+<p>通过以上实验，Safe Decoding 在针对 jailbreak 攻击方面展示了强大的防御能力、良好的实用性和效率。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，研究者们提出了一种新颖且计算有效的解码策略——Safe Decoding，以应对大型语言模型（LLM）面临的监狱突破攻击（jailbreak attacks）。他们的主要观察是，尽管包含有害内容的Token的概率通常高于那些与安全或人类价值相符的Token，但安全免责声明在排序后的概率前列中依然存在。这一发现为Safe Decoding的设计提供了基础，使其能够降低与攻击者目标一致的Token的生成概率，同时提高安全性相关的Token的生成概率。</p>
+<p>通过实验，研究者们验证了Safe Decoding在多种大型语言模型上的有效性和效率，结果表明该方法在抵御多种流行的监狱突破攻击方面显著降低了攻击成功率和有害性。同时，该方法在处理正常查询时并未妨碍模型的有用性，表明其在实际应用中的潜力和合适性。</p>
+<p>最终，论文强调了Safe Decoding在保持系统性能的同时提高安全性的能力，表明它在未来的研究和实际应用中具有重要的价值和应用前景。尽管存在某些局限性，如在某些情况下初始拒绝有害查询后可能会同意，该策略仍然展现出在当前安全环境中保护用户和系统的重要性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/25/2402-08983/" data-id="cm2q2r2yt0005gytf203k8yds" data-title="华盛顿大学提出安全解码方法以防御监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1043,23 +1149,23 @@ MathJax = {
       <ul>
         
           <li>
-            <a href="/2024/10/26/2410-18436/">延世大学提出的英韩代码切换文本激活知识开关的有效性研究方法</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-18491-1/">2410.18491</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-18856/">国家医学图书馆提出大语言模型在医学领域应用的系统性方法</a>
-          </li>
-        
-          <li>
             <a href="/2024/10/26/2410-18861/">哥伦比亚大学提出开放源代码语言模型的可移除水印方法</a>
           </li>
         
           <li>
-            <a href="/2024/10/26/2410-18906/">斯特拉斯克莱德大学提出PRISM方法，用于审计大型语言模型的偏见</a>
+            <a href="/2024/10/26/2410-18469/">加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18491/">南方科技大学提出中文安全基准以评估大型语言模型的安全性</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-18640/">上海交通大学提出弱到强偏好优化方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/25/2401-10647/">印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法</a>
           </li>
         
       </ul>
