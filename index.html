@@ -73,6 +73,107 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2410-09804" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/26/2410-09804/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T14:48:25.000Z" itemprop="datePublished">2024-10-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/26/2410-09804/">北京航空航天大学提出多目标黑盒优化框架BlackDAN以实现大型语言模型的有效和上下文化的越狱攻击</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>大型语言模型（LLMs）在多种任务中展示了卓越的能力，但与此同时，它们也面临着安全风险，尤其是“越狱攻击”（jailbreaking），这种攻击利用模型的漏洞来绕过安全机制，生成有害输出。现有的越狱策略主要关注提高攻击成功率（ASR），通常忽视了其他关键因素，如越狱响应与查询的相关性以及隐蔽性（stealthiness）。这种对单一目标的狭隘关注可能导致攻击效果低效，生成的响应缺乏上下文相关性或容易被识别。</p>
+<p>在这种背景下，研究团队提出了BlackDAN，一个创新的黑箱攻击框架，通过多目标优化，旨在生成高质量的提示，有效实现越狱，同时保持上下文的相关性并降低可检测性。BlackDAN利用多目标进化算法（MOEAs），特别是NSGA-II算法，优化越狱攻击的多个目标，包括ASR、隐蔽性和语义相关性。通过整合突变、交叉和帕累托支配机制，BlackDAN提供了一种透明和可解释的生成越狱提示的过程。此外，该框架允许根据用户偏好进行定制，选择在有害性、相关性等各个方面平衡的提示。</p>
+<p>实验结果表明，BlackDAN优于传统的单目标方法，能在各种LLMs和多模态LLMs中产生更高的成功率和更好的鲁棒性，同时确保越狱响应既相关又不易被检测。这一研究不仅展示了利用多目标优化方法提升越狱攻击的有效性和可靠性，还为理解和控制模型的行为提供了框架。这项工作在现代LLMs的安全性和可用性之间架起了一座桥梁，突显了在设计攻击时考虑多维度目标的重要性。  </p>
+<p><img src="/images/86dd646a60d7964fc918243cd8363f393bf9eb7e35dfcac53e04503c1858db7d.jpg" alt="动机图示">  </p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在本研究中，作者旨在生成能够最大化语言模型生成不安全响应的提示，并确保生成响应的语义一致性。此过程被构建为一个多目标优化问题，使用非支配排序遗传算法（二代，NSGA-II）进行优化。</p>
+<h3 id="健身函数"><a href="#健身函数" class="headerlink" title="健身函数"></a>健身函数</h3><p>作者定义了两个连续的健身函数以指导优化过程：</p>
+<p><strong>不安全Token的概率</strong>：第一个健身函数 $f_{1}$ 评估由目标语言模型 $\mathcal{T}$ 生成的响应 $R$ 包含不安全内容的概率。这通过代理模型 llama guard 2 来计算，它输出特定“不安全Token”的对数概率。</p>
+<p>$$<br>f_{1}(P,Q)&#x3D;\log P(\mathrm{unsafe~toER}\mid R)<br>$$</p>
+<p>在这里，$P$ 表示在响应 $R$ 中出现的最相关不安全Token的概率。</p>
+<p><strong>语义一致性</strong>：在黑箱攻击设置中，作者没有直接访问目标模型的内部或其嵌入，因此使用了一个预训练的代理模型（如 all-MiniLM-L6-v2）来生成有害提示和候选响应的句子嵌入。这些嵌入用于测量提示和响应之间的语义相似性。</p>
+<p>$$<br>f_{2}(P,Q)&#x3D;\mathrm{Sim}(\mathbf{e}<em>{Q},\mathbf{e}</em>{R})&#x3D;\frac{\mathbf{e}<em>{Q}\cdot\mathbf{e}</em>{R}}{\left|\mathbf{e}<em>{Q}\right|\left|\mathbf{e}</em>{R}\right|}<br>$$</p>
+<p>在这里，$\mathbf{e}<em>{Q}$ 和 $\mathbf{e}</em>{R}$ 分别表示有害问题 $Q$ 和响应 $R$ 的嵌入。通过计算余弦相似度来确保所选响应与有害提示保持语义一致。</p>
+<h3 id="NSGA-II用于多目标优化"><a href="#NSGA-II用于多目标优化" class="headerlink" title="NSGA-II用于多目标优化"></a>NSGA-II用于多目标优化</h3><p>为了寻找最优的监狱破解提示集，作者应用了 NSGA-II 算法。该算法基于两个关键标准进行多目标优化：</p>
+<p><strong>支配</strong>：解决方案 $P_{1}$ 支配另一个解决方案 $P_{2}$，如果至少在一个目标上表现更好（例如，更高的不安全Token概率或更好的语义一致性），且在所有其他目标上不差。对于具有 $m$ 个目标的问题，支配定义为：</p>
+<p>$$<br>P_{1}\prec P_{2} \quad \text{if} \quad \forall i\in{1,2,\ldots,m},\quad f_{i}(P_{1},Q)\geq f_{i}(P_{2},Q)<br>$$</p>
+<p><strong>拥挤距离</strong>：一旦将种群分成非支配前沿后，为每个解决方案分配拥挤距离以维持多样性。拥挤距离 $d(P)$ 在给定前沿中的个体解决方案 $P$ 中的计算方法如下：</p>
+<p>$$<br>d(P)&#x3D;\sum_{i&#x3D;1}^{m}\left(\frac{f_{i}^{\mathrm{ext}}-f_{i}^{\mathrm{prev}}}{f_{i}^{\mathrm{max}}-f_{i}^{\mathrm{min}}}\right)<br>$$</p>
+<h3 id="遗传操作：交叉与变异"><a href="#遗传操作：交叉与变异" class="headerlink" title="遗传操作：交叉与变异"></a>遗传操作：交叉与变异</h3><p>NSGA-II通过遗传操作来进化种群：</p>
+<p><strong>交叉</strong>：交叉操作通过对两个父母提示中句子的随机交换来生成两个新后代。</p>
+<p>$$<br>C_{1},C_{2}&#x3D;\mathrm{Crossover}(P_{1},P_{2})<br>$$</p>
+<p><strong>变异</strong>：变异操作随机选择提示中的一个词，并用同义词进行修改。假设 $W$ 表示从提示 $P$ 中随机选择的单词，生成的变异提示表示为:</p>
+<p>$$<br>P^{\prime}&#x3D;\mathrm{Mutation}(P) \quad \text{where} \quad W^{\prime}\in\mathrm{Sym}(W)<br>$$</p>
+<p>图2展示了多目标遗传方法的概览，描绘了上述优化过程。<br><img src="/images/75b472784dcfc85dbc1c1ce2e86644be6517ef31c868bfe07722c7123e113eea.jpg"></p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在实验部分，研究者们通过多个数据集评估了BlackDAN在大语言模型（LLMs）领域的劣质优化效果，采用了AdvBench和MM-Safety Bench这两个数据集进行多种场景下的评估。</p>
+<h3 id="文本数据集"><a href="#文本数据集" class="headerlink" title="文本数据集"></a>文本数据集</h3><p>为评估大语言模型上的监禁攻击，研究者们采用AdvBench数据集。该数据集包含520个请求，涵盖了包括亵渎、图形描绘、威胁性行为、错误信息、歧视、网络犯罪和危险或非法建议等各类场景。</p>
+<h3 id="多模态数据集"><a href="#多模态数据集" class="headerlink" title="多模态数据集"></a>多模态数据集</h3><p>针对多模态大语言模型（MLLMs）进行监禁攻击评估，使用MM-Safety Bench数据集。该数据集包含13种场景，包括非法活动、仇恨言论、身体伤害和健康咨询等，总共有5,040个文本-图像对。</p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>为实现该实验，研究者使用了多种最先进的开源大语言模型（LLMs），包括Llama-2-7b-hf、Llama-2-13b-hf、Internlm2-chat-7b、Vicuna-7b、AquilaChat-7B、Baichuan-7B、Baichuan2-13BChat等。此外，对于多模态LLMs，研究者采用了llava-v1.6-mistral-7b-hf和llava-v1.6-vicuna-7b-hf，以展示他们方法在从单模态扩展到多模态能力方面的有效性。</p>
+<h3 id="单目标（危害性）监禁优化"><a href="#单目标（危害性）监禁优化" class="headerlink" title="单目标（危害性）监禁优化"></a>单目标（危害性）监禁优化</h3><p>研究者比较了不同模型下各种攻击方法的效果，展示了在AdvBench 520个样本上的结果。以下为比较结果的图表：</p>
+<p><img src="/images/bc676f7866705fea3ed5e111eb7e902f0e8471841de1ea9d206237a89e347512.jpg">  </p>
+<p>其中，黑盒方法（包括“无问题”和“有问题”）在效率上明显优于白盒方法，处理速度分别为约2分钟，相比白盒的15分钟和灰盒的12分钟节省了大量时间。研究发现，自我攻击的成功率有所显著提升，从白盒的45.3%提升至93.1%。而在转移攻击方面，Vicuna-7B-v1.5显示出更高的成功率，达到99.2%。</p>
+<h3 id="多目标优化"><a href="#多目标优化" class="headerlink" title="多目标优化"></a>多目标优化</h3><p>在多目标优化的实验中，研究者对单目标黑盒监禁攻击的成功率进行了比较，显示了多目标优化相比单目标优化的优势。图表如下：</p>
+<p><img src="/images/a9cac650a3351f6a1f3ccc21f7a733b50ebc2a549b4f258f0e0e6200e0280fbb.jpg">  </p>
+<p>该图展示了多目标优化的自我攻击成功率与单目标优化的对比，表明多目标优化在普遍提升攻击强度方面表现优越。通过多目标方法，Llava-v1.6-mistral-7b-hf的成功率甚至达到了100%。</p>
+<h3 id="尖峰Pareto排名与最差Pareto排名嵌入的比较"><a href="#尖峰Pareto排名与最差Pareto排名嵌入的比较" class="headerlink" title="尖峰Pareto排名与最差Pareto排名嵌入的比较"></a>尖峰Pareto排名与最差Pareto排名嵌入的比较</h3><p>此外，研究者还比较了最佳和最差Pareto排名样本的嵌入情况，以下为可视化结果：</p>
+<p><img src="/images/3b3a820dc70d5230ea582bd03e9dc75f2bfa58729453189789f46e457b89ee52.jpg">  </p>
+<p>这些嵌入表明在不同的Pareto排名下，样本的分布特征明显不同，且高排名的样本在嵌入空间中占据着更优越的位置。</p>
+<h3 id="多模态模型的监禁攻击"><a href="#多模态模型的监禁攻击" class="headerlink" title="多模态模型的监禁攻击"></a>多模态模型的监禁攻击</h3><p>研究者还展示了对于多模态模型的监禁攻击的实验结果，图表如下：</p>
+<p><img src="/images/4feb71c8a8ab2ee82b69b09d2be1cbebcfd64d5e7ac634c8856297466fcf3861.jpg">  </p>
+<p>观察到多目标优化在所有有害类别和场景中都显著优于单目标方法，显示出在适应性和通用性方面的优势。</p>
+<h3 id="不同模型的评估"><a href="#不同模型的评估" class="headerlink" title="不同模型的评估"></a>不同模型的评估</h3><p>最后，研究者通过一项比较ASR和GPT-4评分的实验结果，展示了BlackDAN在多个模型中的表现优越情况，如下表所示：</p>
+<p><img src="/images/56377804fc7e6814bb0dd75cb5c45f7f492cafade24144bcc341dd699e1d44fc.jpg">  </p>
+<p>该表明BlackDAN在所有模型中均表现出色，最高达到了95.4%的ASR，显示出其作为监禁优化工具的有效性。</p>
+<h3 id="多目标优化过程的结果"><a href="#多目标优化过程的结果" class="headerlink" title="多目标优化过程的结果"></a>多目标优化过程的结果</h3><p>研究者还可视化了多目标优化过程的结果，展示了随着世代的增加，Fitness的对数收敛情况，表明该方法的有效性。图如下：</p>
+<p><img src="/images/06ee50de00ed83269f4a7dd8865fafbc89f5149242454d1dc4da16728f8579ca.jpg">  </p>
+<p>随着生成数量的增加，模型性能越加稳定，支持了该方法的有效性。</p>
+<p>这些实验结果表明，BlackDAN有效地在多个目标间达成平衡，展现了其在监禁攻击任务中的优越表现。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，研究者们提出了BlackDAN，一个多目标、可控的黑箱优化框架，旨在优化大型语言模型（LLMs）和多模态大型语言模型（MLLMs）的越狱（jailbreaking）能力。BlackDAN不仅优化攻击成功率（ASR）和隐蔽性，还重点解决上下文一致性的问题，确保越狱响应与原始有害提示在语义上保持一致。这一特性不仅增强了响应的隐蔽性，还提高了其实用性。</p>
+<p>通过利用NSGA-II算法，BlackDAN在传统的单目标技术上实现了显著改进，获得了更高的成功率和更连贯的越狱响应。研究者们强调，BlackDAN具有很高的可扩展性，允许用户根据需求集成任意数量的优化目标。这种多目标的方法——特别是ASR、隐蔽性和语义一致性——设定了生成有用且可解释的越狱响应的新基准，同时保持了评估中的安全性和稳健性。</p>
+<p>论文的贡献表明，随着LLMs在各类应用中的广泛集成，保护这些模型的安全性变得更加重要。BlackDAN为开发者和研究人员提供了一种有效的工具，既可以测试模型的安全边界，又可以确保越狱响应的有效性和相关性，从而推动这一领域的进步。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/26/2410-09804/" data-id="cm2qa0awe00064sjlgprfgydy" data-title="北京航空航天大学提出多目标黑盒优化框架BlackDAN以实现大型语言模型的有效和上下文化的越狱攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2410-10414" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/26/2410-10414/" class="article-date">
@@ -211,7 +312,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-10414/" data-id="cm2q9rnfw000cxbjl3vctarxe" data-title="新加坡国立大学提出的基于大型语言模型的内容审核守护模型的可靠性校准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-10414/" data-id="cm2qa0awf00074sjl1wqef3gi" data-title="新加坡国立大学提出的基于大型语言模型的内容审核守护模型的可靠性校准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -306,7 +407,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-11459/" data-id="cm2q9rnfv0008xbjlcnkl6hdl" data-title="莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-11459/" data-id="cm2qa0awf00084sjl0j1f5090" data-title="莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -433,7 +534,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-12855/" data-id="cm2q9rnfv0006xbjldghd27uu" data-title="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-12855/" data-id="cm2qa0awf00094sjl8x3n7ag1" data-title="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -535,7 +636,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2q9rnfw000axbjlhtzf2jye" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2qa0awf000a4sjleybk9b9d" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -619,7 +720,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2q9rnfv0007xbjl2t381y6j" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2qa0awg000b4sjlglimecbv" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -713,7 +814,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2q9rnfv0009xbjl67dw3qum" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2qa0awg000c4sjlfhoe586a" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -799,7 +900,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2q9rnfw000dxbjlb2i3fxdj" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2qa0awg000d4sjl51f54nus" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -913,7 +1014,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2q9rnfw000bxbjl7gob30p9" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2qa0awg000e4sjl5hbf5azs" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -992,108 +1093,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2q9rnfw000exbjle7m82cre" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2410-18861" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-18861/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T08:51:57.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-18861/">哥伦比亚大学提出开放源代码语言模型的可移除水印方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着生成性人工智能技术的迅速发展，识别AI生成文本的可靠方法愈发显得重要。面临的新挑战包括模型崩溃、大规模虚假信息传播和错误的抄袭指控。例如，当缺乏强有力的识别手段时，生成的文本可能会导致对知识产权的误解和被滥用。水印技术被视为解决这一问题的一种有效手段。</p>
-<p>现有研究主要集中于在推理阶段嵌入水印，并且通常假设大语言模型（LLM）的规范和参数是保密的，这使得这些方法不适用于开源设置。尤其是当攻击者可以访问水marked模型的代码时，他们可能会直接重写采样算法，从而失去水印的保护效果。随着开源模型越来越普遍和高质量，例如LLaMA和OPT等，适合开源模型的新水印技术亟需被开发。</p>
-<p>在此背景下，本研究提出了首个针对开源LLM的水印方案。与传统基于采样的水印不同，该方案通过修改模型参数嵌入水印，且能够仅通过模型的输出检测水印的存在。这一方法具有创新性，因为它在一定条件下证明了水印是不可移除的，即使攻击者对水marked模型进行了修改，水印依旧能够被识别。</p>
-<p>此外，研究还提出了关于水印强度与质量退化之间权衡的 formalization，展示了在一定的假设条件下，如何在保护文本质量的同时确保水印的有效性。通过对OPT-6.7B和OPT-1.3B模型的实验，研究表明了水印的鲁棒性，尤其是在面对token替换和模型参数扰动攻击时。</p>
-<p><img src="/images/ef189452836fbb1f208d8c148a2beac56a61cb1b2d108e8e444b9a1d2347bccb.jpg"></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究提出了一种用于开放源代码的语言模型的水印方案，并使用实验评估其有效性。方法主要分为两个部分：水印的嵌入和水印的检测。以下是具体细节。</p>
-<h3 id="水印的嵌入"><a href="#水印的嵌入" class="headerlink" title="水印的嵌入"></a>水印的嵌入</h3><p>为了在模型中嵌入水印，本方案对每个神经元的偏置进行 perturbation，使用来自正态分布 $\mathcal{N}(0, \varepsilon^2)$ 的扰动添加至输出层的偏置中。这个水印由上述扰动向量构成，该扰动向量为模型在生成文本时增加了概率分布的某些偏见。</p>
-<p>具体步骤如下：</p>
-<ol>
-<li><strong>输入模型参数</strong>：首先，获取模型的参数，并对最终输出层的每个神经元的偏置进行调整。</li>
-<li><strong>添加扰动</strong>：对于每个偏置 $b_i$，执行以下操作：<br>$$<br>b’_i &#x3D; b_i + \Delta_i \quad \text{其中} \quad \Delta_i \sim \mathcal{N}(0, \varepsilon^2)<br>$$<br>这里，$b’_i$ 是修改后的偏置，$\Delta_i$ 是从正态分布中采样的扰动。</li>
-</ol>
-<h3 id="水印的检测"><a href="#水印的检测" class="headerlink" title="水印的检测"></a>水印的检测</h3><p>水印检测包括两种策略，一种是通过访问模型的权重进行检测，另一种是仅通过生成的文本进行检测。</p>
-<h4 id="从模型权重检测水印"><a href="#从模型权重检测水印" class="headerlink" title="从模型权重检测水印"></a>从模型权重检测水印</h4><p>此方法涉及计算水印扰动向量与模型偏置之间的内积。检测算法如下：</p>
-<ol>
-<li>计算模型的偏置与原始偏置之间的差异，并求出它们的内积：<br>$$<br>\text{Score} &#x3D; \langle b’ - b, W \rangle<br>$$<br>其中，$W$ 是水印扰动向量，$b’$ 和 $b$ 分别为水印模型和原始模型的偏置。</li>
-</ol>
-<p>通过上述方式，若内积值显著，表明检测到水印。</p>
-<h4 id="从生成文本检测水印"><a href="#从生成文本检测水印" class="headerlink" title="从生成文本检测水印"></a>从生成文本检测水印</h4><p>该方法实现依赖于观察生成文本中的 Token 出现频率与水印扰动之间的关联。检测过程如下：</p>
-<ol>
-<li>统计生成文本中的Token，并计算其偏置扰动的总和：<br>$$<br>\text{Text Score} &#x3D; \sum_{t \in \text{Tokens}} W_t \cdot N_t<br>$$<br>其中，$W_t$ 是与Token $t$ 相关的扰动，$N_t$ 是Token $t$ 在文本中出现的频率。</li>
-</ol>
-<p>基于这个评分，我们能够判断生成文本是否带有水印，并通过设定阈值来控制检测的准确性。</p>
-<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>这种水印方法对比现有的基于采样的水印方法具有更强的鲁棒性，并在开放源代码的环境中有效地提供了一个防篡改的解决方案。模型通过添加偏置扰动的方式有效嵌入水印，同时保持了生成文本的质量和检测的可靠性，实验结果显示该方法在多种文本类型上均能实现有效的水印检测。 </p>
-<p>如图所示，偏置扰动和检测过程的工作原理详细阐述了该方法的有效性。<br><img src="/images/60b3ae1da26d7f047539c5bf97553c657cf1cceb1ee553206fd58b5a931ca379.jpg">  </p>
-<p><img src="/images/a7905566ef85d4de223ed033a2edf727e33e8ab3f0f9ef11ef0d77005b81e086.jpg"></p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在这部分中，研究团队对他们提出的水印方法进行了实验评估，目标是验证其在不同参数设置下的可行性，而非追求最佳性能。他们使用了两个大型语言模型（LLM）：OPT模型的1.3B和6.7B参数版本。生成的文本类型包括故事、论文和代码，详细的提示和参数设置可以在附录中找到。</p>
-<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>团队生成的文本最多为300个Tokens，使用随机采样，温度设置为0.9，并将最大n-gram重复长度限制为5，以避免生成重复性过高的响应。三种文本类型的提示如下：</p>
-<ul>
-<li>故事提示: “Here is one of my favorite stories: It was a “</li>
-<li>论文提示: “Here is one of my favorite essays: It is often thought that “</li>
-<li>代码提示: “Here is a python script for your desired functionality: import “</li>
-</ul>
-<p>为了评估生成文本的质量，团队请求Mistral-7B-Instruct根据每个响应的类型提供1到100的评分。</p>
-<h3 id="检测能力"><a href="#检测能力" class="headerlink" title="检测能力"></a>检测能力</h3><p>在这一实验中，团队绘制了基于不同扰动幅度（epsilon）下水印响应的检测率。实验结果显示，对于不经过进一步修改的水印模型，使用内积检测器时，true positive（真正率）在epsilon大于或等于0.5时，至少可达80%。本实验验证了他们的理论结果，即检测率会随着epsilon的增加而增加。</p>
-<p>以下是检测能力实验的图示：</p>
-<p><img src="/images/346663691af6eab78cef0b443972adcaf0ee907f154eaba4a24fbe303fd192de.jpg"></p>
-<h3 id="不可移除性"><a href="#不可移除性" class="headerlink" title="不可移除性"></a>不可移除性</h3><p>研究团队还针对具体的攻击对抗者进行了不可移除性实验，模拟添加金额为1倍、2倍和5倍epsilon标准差的高斯扰动。实验结果表明，在1倍攻击下，当epsilon大于或等于0.6时，检测率保持在80%以上。尽管在更大扰动下，水印的有效性减弱，但在epsilon&#x3D;1的情况下，检测率仍保持在至少50%的概率。</p>
-<p>以下是不可移除性实验的图示：</p>
-<p><img src="/images/a7905566ef85d4de223ed033a2edf727e33e8ab3f0f9ef11ef0d77005b81e086.jpg"></p>
-<h3 id="替代攻击"><a href="#替代攻击" class="headerlink" title="替代攻击"></a>替代攻击</h3><p>研究团队还针对水印响应进行了Token替换攻击的实验，结果表明，他们的方法在一定程度上能够容忍此类攻击。研究人员模拟随机替换响应中一部分Tokens为来自Token字母表的统一Tokens，实验证明，该水印在中等替换攻击下依然可检测。</p>
-<p>以下是替代攻击实验的图示：</p>
-<p><img src="/images/7f0e2bbd4cbb9af58921d755a1951c8a67ad44295f1b2d0d4ba7b3433ec43f0a.jpg"></p>
-<h3 id="质量"><a href="#质量" class="headerlink" title="质量"></a>质量</h3><p>在此实验中，研究团队绘制了生成文本的质量评分，使用不同epsilon参数的水印。通过Mistral-7B-Instruct进行评估，未加水印的文本的平均质量评分约为59.933。实验表明，水印的添加对程序生成文本的质量影响在可接受的范围内。</p>
-<p>以下是质量评分实验的图示：</p>
-<p><img src="/images/05e602e0849ab285a42b90d7bc2f80939f65f8772011cbe90885accf9dc7c144.jpg"></p>
-<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>在这项研究中，作者提出了一种针对开源大语言模型（LLM）的水印方案，其创新之处在于通过修改模型参数来嵌入水印，且这一水印可通过仅仅分析模型生成的文本输出进行检测。与现有依赖生成过程的采样水印不同，本方案具备更高的鲁棒性，尤其适用于开源环境。在某些假设条件下，作者证明了该水印的不可移除性，即如果攻击者试图去除水印，必然会显著降低模型生成文本的质量。</p>
-<p>通过对OPT-6.7B和OPT-1.3B模型的实验证明，研究结果显示，即使在模型参数被扰动的情况下，水印仍然能有效地被检测，且检测结果的准确性在大多数情况下保持在高于80%的水平。此外，强大的模型扰动攻击则需要将文本生成质量降至0，才能使水印的检测率下降到50%。这种不可移除性和水印的检测效果，使得作者的方案在开源大语言模型的应用场景中具有重要的意义。</p>
-<p>总的来说，本研究为开发面向开源的可靠水印技术奠定了基础，展示了在文本生成和水印嵌入之间进行有效权衡的可能性，并鼓励进一步的研究以提升水印技术的鲁棒性与实用性。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2q9rnfx000gxbjl44p23qny" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2qa0awg000f4sjleifg7ovo" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1109,7 +1109,7 @@ MathJax = {
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -1141,6 +1141,10 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/26/2410-09804/">北京航空航天大学提出多目标黑盒优化框架BlackDAN以实现大型语言模型的有效和上下文化的越狱攻击</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-10414/">新加坡国立大学提出的基于大型语言模型的内容审核守护模型的可靠性校准方法</a>
           </li>
         
@@ -1154,10 +1158,6 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-13236/">哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-13722/">卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法</a>
           </li>
         
       </ul>
