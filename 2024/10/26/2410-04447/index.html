@@ -17,8 +17,13 @@
 <meta property="og:image" content="http://example.com/images/7a5a3251f0891abd98f912ebc0d4c758a5b68954cd08f23a2af2a626ab655aae.jpg">
 <meta property="og:image" content="http://example.com/images/9ae72bae28550ca9a6da0606d809b1404dedcfb05260a4c9a68c14aca1a12978.jpg">
 <meta property="og:image" content="http://example.com/images/d5d6bf22cd25db58e7ae53b950dbd3be68fe4b3864e9b9ab38071e5754637250.jpg">
+<meta property="og:image" content="http://example.com/images/059c0f671976945399361fbcd44b4236d6d2790886e1411eaf64693e87da0619.jpg">
+<meta property="og:image" content="http://example.com/images/bd9211b0152635b4b073ec42680f75bb3e9af03f6daf23bc1ebc28f3a0dc7b4c.jpg">
+<meta property="og:image" content="http://example.com/images/9ae72bae28550ca9a6da0606d809b1404dedcfb05260a4c9a68c14aca1a12978.jpg">
+<meta property="og:image" content="http://example.com/images/cb6fe9f6d580a5be6426f9a2cd48f950bbf8b2979a129fb8220f7490b73c5b7b.jpg">
+<meta property="og:image" content="http://example.com/images/d5d6bf22cd25db58e7ae53b950dbd3be68fe4b3864e9b9ab38071e5754637250.jpg">
 <meta property="article:published_time" content="2024-10-26T15:36:14.000Z">
-<meta property="article:modified_time" content="2024-10-26T15:36:15.018Z">
+<meta property="article:modified_time" content="2024-10-26T15:40:14.018Z">
 <meta property="article:author" content="Jun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/bd9211b0152635b4b073ec42680f75bb3e9af03f6daf23bc1ebc28f3a0dc7b4c.jpg">
@@ -138,11 +143,63 @@ MathJax = {
 <p>通过精准的提示验证和关注重加权，作者们的方法能够动态调整跨注意力图，以降低不安全内容的生成可能性，而不影响安全概念的生成。实验结果表明，他们的方法比传统的消融方法在保护生成内容质量方面表现更佳，尤其是在处理容易被越狱的提示时。</p>
 <p>然而，研究也认识到该方法的局限性，尤其是其对大语言模型（LLM）准确性的依赖，可能导致对不安全提示的检测和修改出现误判。此外，研究在明确处理显性有害内容的同时，也意识到对潜在隐性偏见内容的监管不足。因此，作者们呼吁未来的研究应提高对隐性偏见的防范能力，推动安全内容生成的广泛标准化评估。</p>
 <p>总之，本研究不仅展示了通过新方法减少生成模型不安全内容的潜力，也呼应了在快速发展的生成性AI领域中需要更严格、更全面的内容监控与伦理审查的必要性。</p>
+<script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机-1"><a href="#动机-1" class="headerlink" title="动机"></a>动机</h2><p>本研究旨在探讨当前最先进的生成模型在生成不安全或有害内容方面的表现，重点关注限制此类生成内容的方法。近年来，文本到图像的扩散模型显示出生成不当或露骨图像的趋势，尤其是在特定输入的推动下。这些模型在接收到与裸体或裸露个体相关的提示时，往往会对描绘女性表现出明显的偏见。这样的系统性偏见是有害的，因为它使得不当内容变得更加容易获取，从而在社会中传播了不良影响。</p>
+<p>研究中识别出几个主要的因素：</p>
+<ol>
+<li><p><strong>现有安全过滤器的低效性</strong>：诸如Stable Diffusion等模型通过将生成的图像与一组预定义的“敏感概念”进行比较来阻止图像的生成。然而，这种对CLIP嵌入向量的依赖可能导致对安全内容的误分类或未能在特定上下文中识别不安全内容。例如，一幅裸体人物的经典画作可能被标记为不当，而一张穿着得体但姿势暗示的图像却未被检测到。</p>
+</li>
+<li><p><strong>对对抗性提示的脆弱性</strong>：生成模型也容易受到专门设计的“越狱”提示的影响，这些提示旨在规避安全机制。例如，一个类似“穿着暴露的吸引人”的提示可能会绕过过滤器，同时仍可能生成不当内容。</p>
+</li>
+<li><p><strong>概念去除方法的局限性</strong>：现有的去除技术在彻底消除特定概念方面表现不佳，特别是对于那些在语义上有所相似但尚未在微调阶段被去除的提示。</p>
+</li>
+</ol>
+<p>鉴于以上护理，针对生成模型的安全使用，迫切需要更稳健且可扩展的方法。</p>
+<p>本研究提出了一种新颖的训练无关的方法，利用Token的注意力重加权技术，在推理过程中去除不安全概念，而无需进行额外的训练。此方法通过对直接提示和对抗性“越狱”提示的定量与定性评估，与现存的消融方法进行比较，从而展示了其有效性。此外，研究还探讨了内容限制的潜在原因、局限性及其更广泛的影响。  </p>
+<p><img src="/images/059c0f671976945399361fbcd44b4236d6d2790886e1411eaf64693e87da0619.jpg" alt="生成图像示例"></p>
+<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><p>本研究提出了一种基于注意力重加权的训练无关方法，旨在动态调整生成模型的注意力映射，以抑制不安全内容的生成，同时保持安全概念的生成表现。该方法包括两个主要部分：提示验证和局部编辑。</p>
+<p>在提示验证阶段，研究者选择了Mistral-8x7B模型来判断输入提示是否安全。如果发现提示包含不安全内容，则该模型需要对其进行修改。具体的提示修改细节记录在附录中。</p>
+<p>接下来进入注意力重加权阶段，一旦处理完修改过的提示，研究者将提升与安全概念相关的Token的重要性。例如，“一个携带机枪的孩子”被修改为“一个携带玩具枪的孩子”，此时将Token“玩具”的权重增加到10倍，以强调这个安全概念的重要性。该重加权通过对嵌入向量进行归一化并按定义的因子进行缩放来实现。</p>
+<p>这一方法的设计旨在支持多概念的删除，因此能够同时处理多种类型的不安全内容，而无需显著的计算资源或任何形式的微调。</p>
+<p> <img src="/images/bd9211b0152635b4b073ec42680f75bb3e9af03f6daf23bc1ebc28f3a0dc7b4c.jpg"><br>图：流程概述。研究者首先用安全Token替换不安全Token，然后对新的安全提示进行注意力图的修改，最后在去噪过程中使用最终修改并重加权的交叉注意力图。</p>
+<h2 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h2><p>实验部分主要对比了不同的方法在生成直接和监狱式(jailbreak)提示下的表现。直接提示包括“带枪的孩子”和“裸体女性”，而监狱式提示则不直接提及枪支或裸体，但仍可能导致不安全内容的生成。为了解释扩散去噪过程中的随机性，对每个指标的评估均基于从目标域提示中采样的100幅图像，最后结果为100幅图像的平均值。</p>
+<p>实验的基线方法最初是对Stable Diffusion v1-4模型进行微调，但由于该方法对生成图像的影响严重，导致图像高度失真。因此，实验基线采用了标准的Stable Diffusion模型，禁用了安全过滤器。</p>
+<p>在评估指标和结果方面，本研究使用了多个量化标准，包括CLIP Score、Image Reward Score、FID Score以及由人类评估者进行的评价。这些指标用以评估不同消融方法的成功程度。具体如下：</p>
+<ul>
+<li><strong>Image Reward Score</strong>：模型对图像的评估，考虑了与提示的一致性、连贯性和美学吸引力。分数越高，表示提示与生成图像的一致性越好，因此较低的分数表明消融效果较好。</li>
+<li><strong>CLIP Score</strong>：测量生成图像中目标概念的相关性。对不安全概念得分较低则表示成功消融。</li>
+<li><strong>FID Score</strong>：评估生成的安全图像与原始图像之间的相似性。得分越低，表示图像质量的保留越好。</li>
+<li><strong>人类评价</strong>：直接评估消融的成功程度，提供了自动化指标可能未能完整捕捉的信息。</li>
+</ul>
+<p>实验还包括了一次用户研究，邀请了50名具有不同背景的参与者。研究中展示了40幅图像，均分为四类：暴力、暴力（监狱式）、裸体和裸体（监狱式）。参与者需判断每幅图像是否包含被移除的概念，评估结果如表3所示。</p>
+<p>以下是部分实验结果的示例图和表格：</p>
+<p><img src="/images/9ae72bae28550ca9a6da0606d809b1404dedcfb05260a4c9a68c14aca1a12978.jpg">  </p>
+<p>表2：一些“安全”提示，扩散模型在安全过滤器下生成黑色图像  </p>
+<p><img src="/images/cb6fe9f6d580a5be6426f9a2cd48f950bbf8b2979a129fb8220f7490b73c5b7b.jpg">  </p>
+<p>表3：图像生成方法的人类评价  </p>
+<p>此外，还提供了一些使用不同技术生成的图像比较结果，这些图像都是在同一随机种子下生成的，旨在展示不同方法对结果的影响。以下是示例图：</p>
+<p><img src="/images/d5d6bf22cd25db58e7ae53b950dbd3be68fe4b3864e9b9ab38071e5754637250.jpg"><br>图5：不同状态下的模型生成可视化消融结果。</p>
+<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>在这项研究中，作者探讨了在最先进的生成模型中生成不安全或有害内容的现象，并提出了一种创新的训练无关方法：通过注意力重标定技术来限制此类内容的生成。研究表明，现有的安全过滤器在应对不安全内容方面的效果较差，容易被针对性“越狱”提示所绕过。此外，作者指出，传统的消融方法难以完全去除目标概念，尤其是在面对表达相似含义但未在微调阶段被移除的提示时。</p>
+<p>通过提出基于大语言模型（LLM）安全验证的注意力重标定方法，研究者成功地在不进行额外训练的情况下，动态调整生成过程中的交叉注意力图。这种方法可以增强对于安全概念的生成，同时有效压制不安全内容的生成。实验结果显示，该方法在处理直接和越狱提示时，较现有消融技术表现出更高的优越性，并且还显示出对于多种不安全内容的可扩展性。</p>
+<p>尽管研究显示了该方法在安全内容生成方面的积极前景，但仍然存在一些局限性，例如对LLM在识别不安全提示时的依赖以及缺乏有效的基准来评估生成内容的偏见。未来的研究需要在更广泛的伤害内容及潜在偏见方面进行深入探索，以进一步完善生成模型的安全性。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-04447/" data-id="cm2qbqgjv00063pjlacq86sjd" data-title="印度理工学院鲁尔基分校提出无训练的注意力重加权方法以减少生成模型中的不安全内容" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-04447/" data-id="cm2qbuxsf00067zjlh5yl25dr" data-title="印度理工学院鲁尔基分校提出无训练的注意力重加权方法以减少生成模型中的不安全内容" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
