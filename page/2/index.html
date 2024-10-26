@@ -73,85 +73,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2410-15645" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-15645/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T11:45:26.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-15645/">北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在引言部分，研究者强调大型语言模型（LLMs）在语言理解和生成、机器翻译以及代码生成等多个领域的卓越性能。然而，尽管在提高LLMs的安全性方面做出了显著努力，研究表明，旨在保护这些模型的对齐机制仍然容易受到复杂的对抗性监狱攻击的影响。这些监狱攻击通过精心设计的提示绕过安全措施，诱导模型生成有害的响应。</p>
-<p>研究者指出，与其他监狱攻击方法相比，基于优化的技术通常能实现更好的攻击效果，并且被广泛研究和应用。然而，这些方法一般依赖于简单的目标模板来生成监狱后缀，这在某种程度上限制了它们的效果。它们往往忽视特别针对恶意内容的优化，导致生成的有害模板不足以真正引发有害响应。即使模型的初始输出契合优化目标，生成的监狱后缀也可能无法有效诱导模型生成有害内容。因此，研究者认为，单纯优化目标模板远不足以实现有效的监狱攻击。</p>
-<p>为解决这一问题，研究者提出了一种新颖的方法，同时考虑恶意问题上下文和目标模板在监狱后缀优化中的作用。他们设计了固定的有害模板，以处理恶意问题，并通过这一方法增强了对LLMs的误导性影响，力求通过恶意问题和目标句子共同作用，增强对模型的影响力。此外，在每个优化步骤中，他们评估前五个具有最小损失值的后缀，以选择最有效的一个进行下一次更新。这种方法结合了各种优化技术，包括重附后缀攻击机制，以最大化避免生成不一致内容，确保生成输出的一致性及有效性。</p>
-<p>综上所述，研究者的创新点主要体现在以下几个方面：考虑恶意问题上下文与目标模板的整合、采用多后缀评估策略强化更新过程，以及引入重附后缀机制确保有效序列生成。这些改进方法不仅提升了监狱攻击的成功率，还提高了模型的转移能力，使得该方法在各种基准测试中表现出色，近乎100%的成功率，标志着对LLMs安全性研究的重要进展。 </p>
-<p><img src="/images/8d4f0ffab1afa409d26970f28db610565a76ea6741cfa78dbff1875e3b339d03.jpg" alt="Figure 1"></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在这篇论文中，作者提出了一种名为SI-GCG的改进方法，旨在增强对大型语言模型（LLMs）的监狱越狱攻击的效果，尤其是针对恶意问题上下文和目标模板的优化。方法的主要步骤概述如下。</p>
-<h3 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h3><p>首先，作者定义了输入Token的形式，表示为 $x_{1:n},&#x3D;,{x_{1},x_{2},.,.,.,,x_{n}}$，其中 $x_{i},\in,{1,.,.,.,,V}$，$V$ 表示词汇表的大小。大型语言模型将Token序列映射到下一个Token的分布上，其表达形式为：</p>
-<p>$$<br>p\left(x_{n+1}\mid x_{1:n}\right)<br>$$  </p>
-<p>响应Token序列的概率可以表示为：</p>
-<p>$$<br>p\left(x_{n+1:n+H}\mid x_{1:n}\right)&#x3D;\prod_{i&#x3D;1}^{H}p\left(x_{n+i}\mid x_{1:n+i-1}\right)<br>$$  </p>
-<p>在这个过程里，恶意问题 $x_{1:n}$ 被简化为 $x^{Q}$，越狱 $x_{n+1:n+m}$ 被表示成 $x^{S}$，而整个越狱提示 $x_{1:n}\oplus x_{n+1:n+m}$ 表示为 $x^{Q}\oplus x^{S}$。此外，预定义的目标模板表示为 $x_{n+m+1:n+m+k}^{R}$，简记为 $x^{R}$。</p>
-<h3 id="SI-GCG攻击方法"><a href="#SI-GCG攻击方法" class="headerlink" title="SI-GCG攻击方法"></a>SI-GCG攻击方法</h3><p>作者的SI-GCG方法考虑了恶意问题和目标模板，以便于更有效地进行攻击。具体而言，作者建立了一个固定的有害模板来处理恶意问题，如图1所示。该过程被表示为 $x^{H Q}\oplus x^{Q}$，其中 $x^{H Q}$ 表示有害问题模板，而 $x^{Q}$ 表示初始恶意问题。</p>
-<p>相应的，有害响应的优化过程如下：</p>
-<p>$$<br>\mathcal{L}\Bigl((x^{H Q}\oplus x^{Q})\oplus x^{S}\Bigr)&#x3D;-l o g p\bigl(x^{H R}\oplus x^{R}\vert(x^{H Q}\oplus x^{Q})\oplus x^{S}\bigr)<br>$$  </p>
-<p>在生成的每个越狱后缀的更新迭代中，作者的方法包括了两个阶段的优化过程：第一阶段旨在寻找一个成功的攻击后缀及其对应的有害输出；第二阶段利用这一成功后缀作为新的初始化点，以优化其他对抗后缀。</p>
-<h3 id="自动最佳后缀选择策略"><a href="#自动最佳后缀选择策略" class="headerlink" title="自动最佳后缀选择策略"></a>自动最佳后缀选择策略</h3><p>为了提升更新效率，作者提出了一种自动最佳后缀选择策略。该策略不仅使用最小损失标准，还评估前五个最小损失的后缀生成的内容害性。这样做的目的是确保后缀更新始终在生成有害内容的方向上前进。这一过程可以被表达为：</p>
-<p>$$<br>C h e c k\big(G\big((x^{H Q}\oplus x^{Q})\oplus x^{S_{i}}\big)\big)<br>$$  </p>
-<p>其中 $\mathbf{G}(\cdot)$ 表示大型语言模型生成的内容判别函数，Check 函数用于判断生成的内容是否有害。当没有任何生成内容被认定为有害时，选择损失最小的后缀进行更新。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>SI-GCG方法通过结合恶意问题上下文与目标模板，显著提高了对大型语言模型的监狱越狱攻击的成功率，同时也提升了攻击的转移能力。通过采用优化更新策略和引入重后缀攻击机制，确保了每次更新都能够有效地生成有害输出，从而实现了接近100%的攻击成功率。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>实验部分使用了AI Singapore提供的数据集，数据集中包含50个恶意问题，所有结果均来自于在比赛网站上报告的分数。作为受害者模型，研究者使用了两种大型语言模型（LLM）：LLAMA2-7B-CHAT和VICUNA-7B-1.5。</p>
-<h3 id="攻击成功率在Track-1a"><a href="#攻击成功率在Track-1a" class="headerlink" title="攻击成功率在Track 1a"></a>攻击成功率在Track 1a</h3><p>在Track 1a阶段，研究者确保比较算法在设置迭代次数和批次大小方面性能良好。他们发现，GCG和I-GCG并未使用他们的问题模板，而是使用了其他不同的响应模板。Table 1展示了对于这两个模型的攻击成功率，结果显示，提出的SI-GCG方法明显领先于其他恶意破解方法。</p>
-<h3 id="攻击成功率在Track-1b"><a href="#攻击成功率在Track-1b" class="headerlink" title="攻击成功率在Track 1b"></a>攻击成功率在Track 1b</h3><p>在Track 1b阶段，由于比赛组织方对计算资源的限制，研究者将批次大小调整为32，并将最大迭代次数限制为100。在此阶段，由于某些问题被视为不可触碰，并引入了更多黑箱模型，研究者仅能从LLAMA2-7B-CHAT中获得结果。在结果中，SI-GCG方法继续在排行榜上领先，证明了其良好的攻击转移能力。以下是Track 1b的结果展示。</p>
-<p><img src="/images/9f94b5bf4fea74554792a05c6550b9e0b6c2b6f7f852206c310c7e285d1ec141.jpg" alt="Track 1b Attack Success Rates"></p>
-<h3 id="消融研究"><a href="#消融研究" class="headerlink" title="消融研究"></a>消融研究</h3><p>研究者提出了三种增强技术，以提高破解性能：有害问题和响应模板、更新的最佳后缀选择策略，以及重新后缀攻击机制。为了验证每个组件的有效性，他们在Track 1a的50个恶意问题上进行消融实验，使用LLAMA2-7B-CHAT和VICUNA-7B-1.5模型，GCG则作为基线。结果总结在Table 3中。分析结果表明，使用有害模板显著提高了两种模型的攻击成功率，特别是在攻击转移能力方面，同时还减少了平均步骤。</p>
-<h3 id="可变感叹号的攻击成功率"><a href="#可变感叹号的攻击成功率" class="headerlink" title="可变感叹号的攻击成功率"></a>可变感叹号的攻击成功率</h3><p>研究者发现，向优化后的后缀前加“!”可以显著增强攻击的转移能力。为了验证这一点，他们在优化后进行了对比测试，分析了使用的“!”数量对成功率的影响。结果显示，附加10个感叹号可最大化攻击的转移能力，但超过这个数量则会降低两种模型的成功率。以下是不同感叹号数量下的成功率结果。</p>
-<p><img src="/images/f9ec1c2015bdeaf3705559af3a73cfaf641043048ae73a61bc5f31261bf5aa44.jpg" alt="Variable Exclamation Marks Attack Success Rates"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在总结中，提出的SI-GCG方法为利用恶意问题背景和目标模板进行大型语言模型的越狱攻击提供了一种强有力的策略。该方法通过采用创新机制，如在每次迭代中评估前五个损失值以及整合重新后缀攻击机制，确保了可靠和有效的更新。SI-GCG在多个大型语言模型上达到了几乎完美的成功率，超越了现有的越狱技术。其与其他优化方法的兼容性进一步增强了其灵活性和影响力，标志着在大型语言模型安全研究领域的一项重要进展。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2qag6pj000hmxjldm7zhtgo" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-2410-18861" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/26/2410-18861/" class="article-date">
@@ -241,7 +162,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2qag6pj000jmxjl79xl8tzj" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2qauxac000j6bjl20k84ks7" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -394,7 +315,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2qag6pj000gmxjldllg6f21" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2qauxab000h6bjl1ki35iha" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -555,7 +476,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2qag6pj000imxjlbvd6guh3" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2qauxab000g6bjl1voi2mva" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -643,7 +564,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2qag6pj000kmxjl0fgt4ivz" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2qauxac000i6bjlckcy1her" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -737,7 +658,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2qag6pg0004mxjl0nq7eg5l" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2qauxa900046bjl6no30e7v" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -824,7 +745,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2qag6pg0002mxjlbjobbjl8" data-title="斯坦福大学提出语言模型不确定性表达与人类互动的风险研究" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2qauxa900036bjl32x87tta" data-title="斯坦福大学提出语言模型不确定性表达与人类互动的风险研究" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -929,7 +850,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2qag6pg0003mxjl08cthc08" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2qauxa900026bjl5ctc2g6q" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1033,7 +954,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2qag6pf0001mxjlci5c6e19" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2qauxa800016bjl20gealn4" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1149,7 +1070,94 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2qag6pd0000mxjlara58pyq" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2qauxa600006bjlb4pe1ov2" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2402-08983" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/25/2402-08983/" class="article-date">
+  <time class="dt-published" datetime="2024-10-25T05:26:31.000Z" itemprop="datePublished">2024-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/2402-08983/">华盛顿大学提出安全解码方法以防御监狱突破攻击</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$','$$'], ["\\[","\\]"]]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着大型语言模型（LLMs）在代码生成和聊天助手等现实应用中越来越广泛地被使用，研究者们对这些模型的行为与人类价值观，尤其是安全性的一致性进行了深入的探索。然而，尽管已有诸多努力，LLMs在安全性方面仍面临显著挑战。特别是“越狱攻击”作为一种新兴的威胁，旨在诱使LLMs产出意想不到且不安全的响应，这表明现有的模型保护机制仍然不够稳固。</p>
+<p>该研究的动机在于识别并解决这些漏洞，特别是针对越狱攻击的防御策略。研究者观察到，尽管代表有害内容的Token的概率往往高于代表无害响应的Token，但安全免责声明仍会出现在按概率降序排列的顶部Token中。因此，研究者提出了一种新颖的“安全解码”策略，通过增强安全免责声明的Token概率，同时减弱与攻击者目标的Token序列概率，从而有效防止模型被非法利用。</p>
+<p>这一研究的创新点在于通过Token概率的分布来分析越狱攻击的成功机制，显示出越狱攻击的成功往往归因于与攻击目标相一致的Token的概率占主导地位。而通过引入一个专家模型并进行安全性强健的微调，作者们进一步提出了通过“安全解码”策略，在不同层面上抵御越狱攻击。</p>
+<p>下图展示了Token概率在越狱攻击期间的分布情况：</p>
+<p><img src="/images/699b0dd72fb55885c8534bf529bd6411f0e8c949f544741d1460747ebf868e9b.jpg"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在这一部分中，作者提出了一种名为Safe Decoding的安全感知解码策略，以增强大型语言模型（LLMs）抵抗jailbreak攻击的能力。该策略的设计分为两个阶段：训练阶段和推理阶段。</p>
+<h3 id="训练阶段：构建专家模型"><a href="#训练阶段：构建专家模型" class="headerlink" title="训练阶段：构建专家模型"></a>训练阶段：构建专家模型</h3><p>为了构建一个具备较强安全性的专家模型，研究者首先收集了涵盖18个有害类别的36个有害查询。这些查询应该被任何与人类价值观良好对齐的LLM所拒绝。通过自主生成回应后，使用GPT-4过滤输出，仅保留那些有效拒绝有害查询的响应，最后形成训练数据集，包括查询与响应对。</p>
+<p>专家模型通过参数高效微调（例如使用LoRA方法）进行训练，确保微调模型的词汇与原始模型一致，同时能够识别和适当地回应恶意用户输入。</p>
+<h3 id="推理阶段：构建新的Token分布"><a href="#推理阶段：构建新的Token分布" class="headerlink" title="推理阶段：构建新的Token分布"></a>推理阶段：构建新的Token分布</h3><p>在推理阶段，用户查询被同时发送给原始模型和专家模型以进行解码。Safe Decoding根据两个模型的输出构建Token分布，从而生成对输入查询的响应。</p>
+<h4 id="步骤1：构造样本空间"><a href="#步骤1：构造样本空间" class="headerlink" title="步骤1：构造样本空间"></a>步骤1：构造样本空间</h4><p>在推理时间的第n步，模型将Token序列$x_{1:n-1}$转发给原始模型及专家模型，得到可能采样的Token集合分别为 $\nu_{n}$ 和 $\mathcal{V}<em>{n}^{\prime}$。Safe Decoding将样本空间 $\mathcal{V}</em>{n}^{(c)}$ 定义为两者前k个Token的交集，即：</p>
+<p>$$<br>{\mathcal{V}}<em>{n}^{(c)}&#x3D;\operatorname*{\arg\operatorname*{min}}</em>{S&#x3D;{\mathcal{V}}<em>{n}^{k}\cap{\mathcal{V}}</em>{n}^{\prime^{k}}}k{\mathrm{<del>s.t.</del>}}|S|\geq c.<br>$$</p>
+<p>该交集的构建旨在利用原始LLM的广泛训练和专家模型在安全性上的强化。</p>
+<h4 id="步骤2：定义概率函数"><a href="#步骤2：定义概率函数" class="headerlink" title="步骤2：定义概率函数"></a>步骤2：定义概率函数</h4><p>Safe Decoding在定义Token概率时，使用以下公式：</p>
+<p>$$<br>P_{n}\big(x|x_{1:n-1}\big)&#x3D;p_{\theta}\big(x|x_{1:n-1}\big) + \alpha(p_{\theta^{\prime}}(x|x_{1:n-1})-p_{\theta}(x|x_{1:n-1})).<br>$$</p>
+<p>此公式中，$\alpha$ 为超参数，决定原始模型与专家模型的重要性权重。最终通过标准化，确保$\sum_{x\in\mathcal{V}<em>{n}^{(c)}}P</em>{n}(x)&#x3D;1$。这使得当查询是恶意的时，原始模型会给出积极的回应，而专家模型则会基于安全性拒绝查询，从而减少引导攻击者目标的Token的概率，并增强机器人对于人类价值的响应。</p>
+<h3 id="效率与兼容性"><a href="#效率与兼容性" class="headerlink" title="效率与兼容性"></a>效率与兼容性</h3><p>Safe Decoding的设计兼容现有的所有采样方法，包括greedy、top-k和top-p采样。通过在推理过程中仅在前m步应用Safe Decoding，且后续步骤使用正常解码，可以避免模型过于保守，从而保持对良性用户查询的有用性，并降低计算开销。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本文对 Safe Decoding 的有效性、实用性、效率和兼容性进行了评估。</p>
+<p>首先，针对实验模型，研究者们在五种开源 LLM（Vicuna-7b、Llama2-7b-chat、Guanaco-7b、Falcon-7b 和 Dolphin-llama2-7b）上部署了 Safe Decoding，以评估其性能。</p>
+<p>在攻击方法方面，研究者们考虑了六种先进的 jailbreak 攻击，涵盖不同类别，包括 GCG、AutoDAN、PAIR 和 SAP30 等。这些攻击方法通过使用来自不同 harmful query benchmark 数据集的示例来生成特定的攻击提示，以评估 Safe Decoding 的防御性能。使用的两个有害查询基准数据集为 Advbench 和 HEx-PHI。</p>
+<p>在基准测试方面，研究者们与六种最新且高效的防御机制进行了比较，涵盖输入和输出检测以及缓解方法。研究过程中使用的评估指标包括攻击成功率（ASR）和 harmful score，前者用于衡量模型在恶意查询下产生不符合人类价值的响应的比率，而后者则通过 GPT-Judge 对生成内容的危害程度进行评分。通过 Dic-Judge，研究者们还检测了生成响应中拒绝字符串的存在，以计算 ASR。</p>
+<p>下表展示了 Safe Decoding 与基线防御方法在多个 jailbreak 攻击下的 ASR 和 harmful score 的比较：</p>
+<p><img src="/images/f9eab3795015174498772771ce9a68de0626f173631450332723571a2289749f.jpg"></p>
+<p>表中显示了在不同攻击方法下，Safe Decoding 的表现普遍优于所有基线防御方法。在针对意图重大的攻击（如 Deep Inception）时，Safe Decoding 成功将 ASR 降至 0%。</p>
+<p>为了进一步评估 Safe Decoding 的实用性，研究者们使用了 MT-bench 和 Just-Eval 等广泛使用的基准测试，评估应用 Safe Decoding 后的 LLM 实用性。以下表格展示了 Safe Decoding 在不同模型上的 MT-bench 和 Just-Eval 得分：</p>
+<p><img src="/images/732f0869753661b67770651a8c5f9386511b54f9afe9881b6acbe113d6f74611.jpg"></p>
+<p>根据表格结果，Safe Decoding 对原始模型的效用影响微乎其微，而现有基线模型在效用上则显著下降。</p>
+<p>接下来，研究者们定义了一个平均生成时间比率（ATGR）指标，以评估 Safe Decoding 的效率：</p>
+<p><img src="/images/06d6125b68b5a672c946b39798b953b20b1db315a845975bc0f656427294b9c9.jpg"></p>
+<p>结果显示，相较于无防御的情况下，Safe Decoding 的计算开销仅为 3%（在 Llama2 上）和 7%（在 Vicuna 上），表明该方法的效率并未显著降低性能。</p>
+<p>附加的消融分析表明，Safe Decoding 的超参数（如 $\alpha$、$m$、$c$）对防御性能影响有限，如下图所示：</p>
+<p><img src="/images/b361f6f10b280a81bb8ea1b8ae63d038cb50c3e029bbc4f208a4f4d132165ade.jpg"></p>
+<p>通过以上实验，Safe Decoding 在针对 jailbreak 攻击方面展示了强大的防御能力、良好的实用性和效率。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，研究者们提出了一种新颖且计算有效的解码策略——Safe Decoding，以应对大型语言模型（LLM）面临的监狱突破攻击（jailbreak attacks）。他们的主要观察是，尽管包含有害内容的Token的概率通常高于那些与安全或人类价值相符的Token，但安全免责声明在排序后的概率前列中依然存在。这一发现为Safe Decoding的设计提供了基础，使其能够降低与攻击者目标一致的Token的生成概率，同时提高安全性相关的Token的生成概率。</p>
+<p>通过实验，研究者们验证了Safe Decoding在多种大型语言模型上的有效性和效率，结果表明该方法在抵御多种流行的监狱突破攻击方面显著降低了攻击成功率和有害性。同时，该方法在处理正常查询时并未妨碍模型的有用性，表明其在实际应用中的潜力和合适性。</p>
+<p>最终，论文强调了Safe Decoding在保持系统性能的同时提高安全性的能力，表明它在未来的研究和实际应用中具有重要的价值和应用前景。尽管存在某些局限性，如在某些情况下初始拒绝有害查询后可能会同意，该策略仍然展现出在当前安全环境中保护用户和系统的重要性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/25/2402-08983/" data-id="cm2qauxa900056bjl70cq6asn" data-title="华盛顿大学提出安全解码方法以防御监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1197,11 +1205,7 @@ MathJax = {
       <ul>
         
           <li>
-            <a href="/2024/10/26/2410-09040/">2410.0904</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-09804/">北京航空航天大学提出多目标黑盒优化框架BlackDAN以实现大型语言模型的有效和上下文化的越狱攻击</a>
+            <a href="/2024/10/26/2410-09040/">加州大学圣克鲁斯分校提出提高大语言模型越狱攻击的注意力操控方法</a>
           </li>
         
           <li>
@@ -1214,6 +1218,10 @@ MathJax = {
         
           <li>
             <a href="/2024/10/26/2410-12855/">香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/26/2410-13236/">哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性</a>
           </li>
         
       </ul>
