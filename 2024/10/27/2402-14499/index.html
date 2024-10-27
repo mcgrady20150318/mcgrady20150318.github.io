@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题">
+<meta property="og:url" content="http://example.com/2024/10/27/2402-14499/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/77ce0b9f28d5f84e19d3c71aed8a136a55a8360967ec1b567eff8668f0ccd9c8.jpg">
+<meta property="og:image" content="http://example.com/images/e72be52cbb523eaed8f741cdcb6269b8fafde5a8dafa69ceaa373a7322c50452.jpg">
+<meta property="og:image" content="http://example.com/images/e72be52cbb523eaed8f741cdcb6269b8fafde5a8dafa69ceaa373a7322c50452.jpg">
+<meta property="og:image" content="http://example.com/images/90391c7309a9b5986ad6e4d5fa3db0aa78fb61b50f348b6eaef20826f8433513.jpg">
+<meta property="og:image" content="http://example.com/images/0385ba4a9216737e5964ad8c353fa3d8442ee37eaf9b9950fd6c018af6307ba1.jpg">
+<meta property="article:published_time" content="2024-10-27T11:21:19.000Z">
+<meta property="article:modified_time" content="2024-10-27T11:21:19.406Z">
+<meta property="article:author" content="anquanwang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/77ce0b9f28d5f84e19d3c71aed8a136a55a8360967ec1b567eff8668f0ccd9c8.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/10/27/2402-12343/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/10/27/2403-13213/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/27/2402-14499/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/27/2402-14499/&text=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/27/2402-14499/&title=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/27/2402-14499/&is_video=false&description=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题&body=Check out this article: http://example.com/2024/10/27/2402-14499/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/27/2402-14499/&title=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/27/2402-14499/&title=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/27/2402-14499/&title=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/27/2402-14499/&title=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/27/2402-14499/&name=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/27/2402-14499/&t=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text"> 提示格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="toc-number">2.2.</span> <span class="toc-text"> 模型评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%96%E4%B8%AAtoken%E8%AF%84%E4%BC%B0"><span class="toc-number">2.3.</span> <span class="toc-text"> 首个Token评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E8%BE%93%E5%87%BA%E8%AF%84%E4%BC%B0"><span class="toc-number">2.4.</span> <span class="toc-text"> 文本输出评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86"><span class="toc-number">2.5.</span> <span class="toc-text"> 数据收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E5%9B%BE%E7%A4%BA"><span class="toc-number">2.6.</span> <span class="toc-text"> 重要图示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE"><span class="toc-number">3.1.</span> <span class="toc-text"> 数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA%E6%A0%BC%E5%BC%8F-2"><span class="toc-number">3.2.</span> <span class="toc-text"> 提示格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%96%E4%B8%AAtoken%E8%AF%84%E4%BC%B0-2"><span class="toc-number">3.3.</span> <span class="toc-text"> 首个Token评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E8%BE%93%E5%87%BA%E8%AF%84%E4%BC%B0-2"><span class="toc-number">3.4.</span> <span class="toc-text"> 文本输出评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%8C%B9%E9%85%8D%E7%8E%87"><span class="toc-number">3.5.</span> <span class="toc-text"> 不匹配率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%92%E7%BB%9D%E7%8E%87"><span class="toc-number">3.6.</span> <span class="toc-text"> 拒绝率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%94%E6%A1%88%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">3.7.</span> <span class="toc-text"> 答案一致性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">anquanwang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-27T11:21:19.000Z" class="dt-published" itemprop="datePublished">2024-10-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\(', right: '\)', display: false},
+              {left: '\[', right: '\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+<h2 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h2>
+<p>在引言部分，研究者们提出了对大规模语言模型（LLMs）进行评估的挑战，特别是当使用多项选择题（MCQ）这种评估格式时。以往的评估通常依赖于模型对第一个Token的概率预测，而这一方法在开放式生成任务中的适用性受到质疑。这是因为在与用户互动时，模型的回答风格多样，可能在答案前添加诸如“当然”这样的前言，或者拒绝回答特定问题，这使得第一个Token的概率并不能准确反映最终的响应内容。</p>
+<p>研究的驱动因素之一是探索这种评价方式的可靠性，尤其是在评估针对道德观点或公共问题的句子生成时，模型的表现可能与期望存在显著差异。研究显示，在六个指令调优的模型中，采用第一Token评价的结果常常与文本输出的实际答案不一致，差异超过60%。同时，对于那些在对话或安全数据上进行大量微调的模型，影响尤为显著。</p>
+<p>创新点在于，该研究不仅对第一Token评价与文本输出之间的不一致性进行了定量分析，还对多个维度进行了深入评估，包括最终选项的选择、拒绝率、选择分布和模型对提示扰动的鲁棒性。这种综合分析提供了更全面的视角，提醒研究者们在评估模型时，除了依赖第一Token评价外，还应重视对文本输出的直接检查，以更真实地反映模型在真实场景下的表现。</p>
+<p><img src="/images/77ce0b9f28d5f84e19d3c71aed8a136a55a8360967ec1b567eff8668f0ccd9c8.jpg" alt="图1" /></p>
+<h2 id="方法"><a class="markdownIt-Anchor" href="#方法"></a> 方法</h2>
+<p>在本研究中，作者评估了六种指令调优的语言模型，主要使用两个数据集：MMLU和OpinionQA。OpinionQA数据集是由Pew Research Center的调查问题整理而成，并在此基础上构建了一个关注于公共问题的子集，包含414个问题。</p>
+<h3 id="提示格式"><a class="markdownIt-Anchor" href="#提示格式"></a> 提示格式</h3>
+<p>每个问题由一般指令、问题文本和一组答案选项组成，简要展示如图1所示。研究者设计了不同约束级别的一般指令以评估模型的响应一致性及对选项顺序的敏感性。参与评估的指令类型包括低约束（Low Constraint）、示例模板（Example Template）、中约束（Medium Constraint）和高约束（High Constraint）。</p>
+<h3 id="模型评估"><a class="markdownIt-Anchor" href="#模型评估"></a> 模型评估</h3>
+<p>研究者评估了六种指令调优的语言模型：Llama2-Chat-7b、13b、70b、Mistral-Instruct-v0.1、v0.2，以及Mixtral8x7b-Instruct-v0.1。实验中，大多数结果以贪婪采样（greedy sampling）进行解码。</p>
+<h3 id="首个token评估"><a class="markdownIt-Anchor" href="#首个token评估"></a> 首个Token评估</h3>
+<p>在多项选择问题中，对首个Token的对数概率进行评估是一个常用的方法。具体流程是计算模型对每一个答案选项（如’A’、‘B’、'C’等）赋予的对数概率，选取最高概率的选项作为模型的回答。与前人的研究不同，本文将“拒绝”（Refused）作为一个潜在选项，从而使得结果更具全面性。</p>
+<h3 id="文本输出评估"><a class="markdownIt-Anchor" href="#文本输出评估"></a> 文本输出评估</h3>
+<p>为从模型的响应中提取选择，研究者使用分类器将文本输出分类到可用的答案选项之一。对于MMLU数据集，使用由Wang等人提供的已训练分类器，而对于OpinionQA，分类器是通过对2070个响应样本进行人工标注后微调得到的，通过QloRA进行参数高效微调。</p>
+<h3 id="数据收集"><a class="markdownIt-Anchor" href="#数据收集"></a> 数据收集</h3>
+<p>为了评估模型的输入输出一致性，模型的每个问题被呈现十次，且每次的答案选项顺序随机打乱。研究者记录并计算不同约束级别下的首个Token评估与文本输出之间的失配率和拒绝率。</p>
+<h3 id="重要图示"><a class="markdownIt-Anchor" href="#重要图示"></a> 重要图示</h3>
+<p>图2展示了不同模型在不同约束级别下的失配率和拒绝率情况。这显示出模型的拒绝反应和选择分布的影响，以及如何影响评估可靠性。</p>
+<p><img src="/images/e72be52cbb523eaed8f741cdcb6269b8fafde5a8dafa69ceaa373a7322c50452.jpg" alt="" /><br />
+图2：不同模型在不同约束下的失配率和拒绝率统计。</p>
+<p>本研究的结果体现出，单凭首个Token的概率评估不足以准确反映模型的真实能力，特别是在涉及敏感话题的情况下。因此，必须结合直接的文本输出评估，以更好地理解模型在实际场景下的表现。</p>
+<h2 id="实验"><a class="markdownIt-Anchor" href="#实验"></a> 实验</h2>
+<p>本部分对六个指令调优的大型语言模型（LLM）进行评估，分别是Llama2-Chat-7b、Llama2-Chat-13b、Llama2-Chat-70b、Mistral-Instruct-v0.1、Mistral-Instruct-v0.2和Mixtral 8x7b-Instruct-v0.1。模型的评估工作主要基于两个数据集：MMLU和OpinionQA。</p>
+<h3 id="数据"><a class="markdownIt-Anchor" href="#数据"></a> 数据</h3>
+<p>评估所使用的数据集包括MMLU（大型多任务语言理解评估）和OpinionQA。OpinionQA数据集经过整理，格式化为关于公共问题的调查问题，共包含414个问题。这些问题直接向模型提出，并提供了一系列答案选项。</p>
+<h3 id="提示格式-2"><a class="markdownIt-Anchor" href="#提示格式-2"></a> 提示格式</h3>
+<p>每个问题由一个一般指令、一道问题和一组答案选项组成。为研究一般指令对模型指令跟随能力的影响，设计了不同约束水平的提示，如表1所示。每个问题被展示十次，答案选项的顺序在每次迭代中随机打乱，以此来检验模型的响应一致性并减少选择偏差。</p>
+<h3 id="首个token评估-2"><a class="markdownIt-Anchor" href="#首个token评估-2"></a> 首个Token评估</h3>
+<p>对模型的首个Token评估是本实验的核心内容。通过计算特定答案选项（如‘A’，‘B’，‘C’）的日志概率，选取概率最高的选项作为模型的回答。与Santurkar等人（2023年）的做法不同，本实验还将“拒绝”作为潜在回答之一，这使得对模型响应光谱有了更全面的了解。</p>
+<h3 id="文本输出评估-2"><a class="markdownIt-Anchor" href="#文本输出评估-2"></a> 文本输出评估</h3>
+<p>在对文本输出进行选择时，利用分类器将模型的响应分为答案选项。针对MMLU，我们直接使用Wang等人（2024年）提供的训练分类器，而针对OpinionQA，则利用经过微调的Mistral-7b-Instruct-v0.2构建分类器，基于2070个回应样本进行了手动标注。</p>
+<h3 id="不匹配率"><a class="markdownIt-Anchor" href="#不匹配率"></a> 不匹配率</h3>
+<p>在OpinionQA数据集的评估中，Llama2模型通常显示出更高的不匹配率。例如，Llama2-7b-Chat模型的不匹配率达到66.2%。随着模型规模从7B增加到70B，其不匹配率显著下降。表3展示了MMLU评估中不匹配率和准确率的对比，显示Llama2-7b-Chat模型的准确度在首个Token评估中严重低估。</p>
+<p><img src="/images/e72be52cbb523eaed8f741cdcb6269b8fafde5a8dafa69ceaa373a7322c50452.jpg" alt="Mismatch Rate" /></p>
+<h3 id="拒绝率"><a class="markdownIt-Anchor" href="#拒绝率"></a> 拒绝率</h3>
+<p>分析中指出，模型在处理敏感主题时的拒绝行为对于不匹配起到了重要作用。如图2(b)所示，Llama2-7b-Chat模型的拒绝率高达51.4%。模型规模的增加通常会导致拒绝率逐渐降低，而更高约束的指令则会减少拒绝响应。</p>
+<p><img src="/images/90391c7309a9b5986ad6e4d5fa3db0aa78fb61b50f348b6eaef20826f8433513.jpg" alt="Refusal Rate" /></p>
+<h3 id="答案一致性"><a class="markdownIt-Anchor" href="#答案一致性"></a> 答案一致性</h3>
+<p>对答案一致性进行的评估显示，文本输出的稳定性通常优于首个Token评估。表4中的结果表明，除了Mixtral 8x7b模型外，所有模型在不同指令约束下的文本输出表现出更好的一致性。</p>
+<p><img src="/images/0385ba4a9216737e5964ad8c353fa3d8442ee37eaf9b9950fd6c018af6307ba1.jpg" alt="Answer Consistency" /></p>
+<p>整体来看，通过综合评估不匹配率、拒绝率和答案一致性，揭示了指令调优模型在多选题的首个Token评估与文本输出之间的显著差异。这些实验结果为理解和评估LLM的性能提供了重要依据。</p>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<p>该研究比较了基于首个Token的评估方法与文本输出在多项选择题中的表现，结果表明，基于首个Token的评估严重误导了关于指令调优模型的文本输出。研究显示，基于首个Token的评估方法在许多情况下并不能准确反映模型在真实场景中的行为，尤其是在与敏感话题相关的问题中，其评估往往会低估模型的能力。</p>
+<p>在评估过程中，发现模型的拒绝率是影响评估准确性的重要因素。研究揭示，针对敏感话题的提问，模型倾向于拒绝回答，这进一步加剧了首个Token评估与文本输出之间的差异。此外，首个Token评估对提示格式更为敏感，且容易出现选择偏差，而文本输出的评估则更加稳健，表现出更好的抗干扰能力。</p>
+<p>因此，研究者建议，仅依赖于基于首个Token的评估方法来衡量模型性能是不可行的，直接检查模型的文本答案能够提供更直观和真实的模型行为理解，从而为评估语言模型提供更合理和有效的指导。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text"> 提示格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="toc-number">2.2.</span> <span class="toc-text"> 模型评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%96%E4%B8%AAtoken%E8%AF%84%E4%BC%B0"><span class="toc-number">2.3.</span> <span class="toc-text"> 首个Token评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E8%BE%93%E5%87%BA%E8%AF%84%E4%BC%B0"><span class="toc-number">2.4.</span> <span class="toc-text"> 文本输出评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86"><span class="toc-number">2.5.</span> <span class="toc-text"> 数据收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E8%A6%81%E5%9B%BE%E7%A4%BA"><span class="toc-number">2.6.</span> <span class="toc-text"> 重要图示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE"><span class="toc-number">3.1.</span> <span class="toc-text"> 数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA%E6%A0%BC%E5%BC%8F-2"><span class="toc-number">3.2.</span> <span class="toc-text"> 提示格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%96%E4%B8%AAtoken%E8%AF%84%E4%BC%B0-2"><span class="toc-number">3.3.</span> <span class="toc-text"> 首个Token评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E8%BE%93%E5%87%BA%E8%AF%84%E4%BC%B0-2"><span class="toc-number">3.4.</span> <span class="toc-text"> 文本输出评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%8C%B9%E9%85%8D%E7%8E%87"><span class="toc-number">3.5.</span> <span class="toc-text"> 不匹配率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%92%E7%BB%9D%E7%8E%87"><span class="toc-number">3.6.</span> <span class="toc-text"> 拒绝率</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%94%E6%A1%88%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">3.7.</span> <span class="toc-text"> 答案一致性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/27/2402-14499/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/27/2402-14499/&text=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/27/2402-14499/&title=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/27/2402-14499/&is_video=false&description=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题&body=Check out this article: http://example.com/2024/10/27/2402-14499/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/27/2402-14499/&title=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/27/2402-14499/&title=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/27/2402-14499/&title=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/27/2402-14499/&title=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/27/2402-14499/&name=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/27/2402-14499/&t=LMU慕尼黑提出基于文本输出的多选问题评估方法，探讨语言模型预测与实际回答的不匹配问题"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    anquanwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

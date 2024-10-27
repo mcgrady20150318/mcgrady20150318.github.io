@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究">
+<meta property="og:url" content="http://example.com/2024/10/27/2403-13213/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/8433530743aca19fc3dab475245286b6055079cdc9f7410bee1f6d78450cb1b2.jpg">
+<meta property="og:image" content="http://example.com/images/8433530743aca19fc3dab475245286b6055079cdc9f7410bee1f6d78450cb1b2.jpg">
+<meta property="og:image" content="http://example.com/images/fd96ba97f4e3b40b70e600fe2e403f448eb14715882dcbfa59bcd674f9af59f5.jpg">
+<meta property="article:published_time" content="2024-10-27T11:18:00.000Z">
+<meta property="article:modified_time" content="2024-10-27T11:18:00.083Z">
+<meta property="article:author" content="anquanwang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/8433530743aca19fc3dab475245286b6055079cdc9f7410bee1f6d78450cb1b2.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/10/27/2402-14499/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/10/27/2403-07865/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/27/2403-13213/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/27/2403-13213/&text=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/27/2403-13213/&title=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/27/2403-13213/&is_video=false&description=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究&body=Check out this article: http://example.com/2024/10/27/2403-13213/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/27/2403-13213/&title=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/27/2403-13213/&title=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/27/2403-13213/&title=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/27/2403-13213/&title=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/27/2403-13213/&name=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/27/2403-13213/&t=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%9B%E5%BB%BA"><span class="toc-number">3.1.</span> <span class="toc-text"> 数据集创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%8F%90%E7%A4%BA"><span class="toc-number">3.2.</span> <span class="toc-text"> 创建提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%92%8C%E6%A0%87%E6%B3%A8%E8%BE%93%E5%87%BA"><span class="toc-number">3.3.</span> <span class="toc-text"> 生成和标注输出</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E8%BE%93%E5%87%BA%E7%9A%84%E8%A1%8C%E4%B8%BA%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.3.1.</span> <span class="toc-text"> 生成输出的行为示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E6%B3%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%A7%82%E5%AF%9F"><span class="toc-number">3.4.</span> <span class="toc-text"> 标注过程中的观察</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">anquanwang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-27T11:18:00.000Z" class="dt-published" itemprop="datePublished">2024-10-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\(', right: '\)', display: false},
+              {left: '\[', right: '\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+<h2 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h2>
+<p>在引言部分，研究者强调了大型语言模型（LLM）在各个领域的广泛应用，以及它们在提升效率、降低成本和促进沟通方面的潜力。然而，这些技术的普及也带来了安全风险和对边缘化群体可能产生的负面影响。尽管业界和学术界已采取措施来减轻这些风险，如通过监督的安全性导向微调，以及利用人类反馈的强化学习等方法，但对这些模型的安全性及内在偏见依然存在多重担忧。在先前的研究中，已经证明，旨在提高安全性的模型往往表现出过度的安全行为，例如对某些请求的拒绝回答。因此，文献中已经记录了模型的有用性和安全性之间的明显权衡。</p>
+<p>本研究进一步探讨这些安全保障的有效性，尤其是在已经缓解的偏见情境下进行评估。通过以Llama 2模型为案例，研究者展示了LLM的安全响应仍可能编码有害的假设。为此，他们创建了一组非毒性的提示语，并利用这些提示语来评估Llama模型的表现。研究者引入了一种新的LLM响应分类法，观察到安全与有用性之间的权衡在特定的人口群体中更加明显，这可能导致边缘化群体的服务质量受到损害。</p>
+<p>这项研究的创新点在于：1）提出了一套1792个非毒性提示，以评估LLM的安全性行为；2）引入了一种新的分类法来归类LLM对提示的响应；3）通过对三个Llama 2-Chat模型及Llama1的实证评估，生成超过2万条输出，并基于新分类法进行手动标注；4）通过分析得到的标签，发现这些模型的安全措施仍然编码有害的偏见。</p>
+<p><img src="/images/8433530743aca19fc3dab475245286b6055079cdc9f7410bee1f6d78450cb1b2.jpg" alt="" /></p>
+<h2 id="方法"><a class="markdownIt-Anchor" href="#方法"></a> 方法</h2>
+<p>在本节中，作者描述了创建数据集的方法，包括识别被缓解的偏见和测试模型的提示创建过程，以及对生成输出的标注。</p>
+<p>首先，作者确定了Meta的Llama 2-Chat模型的范围。在选择模型时，Llama 2被选中是因为它是开放源代码且有详尽的安全缓解过程文档。作者提到，在Touvron等人（2023b）的文献中，声称使用ToxiGen数据集作为评估其模型中毒性和仇恨言论的基准，并报告在缓解后获得0%的毒性生成。</p>
+<p>接下来，作者开发了一组用于测试模型的提示，确保这些提示满足三个条件：一是针对ToxiGen数据集中已经缓解的偏见，二是避免使用敏感的身份术语，三是确保提示不具备毒性，以防止模型因安全理由拒绝回答。</p>
+<p>在提示创建过程中，作者用示例说明了如何从ToxiGen数据集中提取刻板印象，然后构建非毒性模板来评估模型在这些刻板印象上的表现。例如，作者展示了一条通过提示“[NAME]上飞机去”来测试对阿拉伯人和穆斯林刻板印象的倾向。</p>
+<p>然后，作者使用Llama 2-Chat 7B模型生成不同社群的常见名字，以确保测试的多样性，并能够更好地识别不同社群之间的偏见。最终，数据集中创建了1792个非毒性提示，作者使用这些提示评估不同Llama模型（包括Llama 1和Llama 2-Chat的不同规格）生成的输出。</p>
+<p>在生成的输出标注过程中，作者将生成的输出分为六个类别：回答、部分回答、未回答、拒绝回答、有害拒绝和有害回答。通过手动标注21,504个输出，作者分析了不同评分之间的行为差异。</p>
+<p>以下是提示创建和输出分析的框架示意图：</p>
+<p><img src="/images/8433530743aca19fc3dab475245286b6055079cdc9f7410bee1f6d78450cb1b2.jpg" alt="" /></p>
+<p>此外，在分析输出时，作者还关注了关键词的过度依赖和不同社群之间反应差异的问题。高拒绝率的现象显示出Llama 2-Chat模型在对某些群体表现出的“夸张的安全行为”，而这一行为可能会导致对特定社群的有害关联。最终，作者讨论了改进偏见缓解实践的建议。</p>
+<h2 id="实验"><a class="markdownIt-Anchor" href="#实验"></a> 实验</h2>
+<p>在这项研究中，作者们采用了一种精心设计的方法来评估大型语言模型（LLM）在处理某些偏见时的表现。实验主要集中在Meta的Llama 2-Chat模型上，特别是它们在应对已经被访问过的偏见时的行为。</p>
+<h3 id="数据集创建"><a class="markdownIt-Anchor" href="#数据集创建"></a> 数据集创建</h3>
+<p>首先，研究人员选择了一个范围，重点分析Llama 2-Chat模型所减轻的偏见。这一范围的确立基于ToxiGen数据集，以确保在评估Llama 2模型时仅集中于已处理的偏见。此外，分析的实验步骤分为三个主要部分：定义范围、创建提示和标注生成的输出。</p>
+<h3 id="创建提示"><a class="markdownIt-Anchor" href="#创建提示"></a> 创建提示</h3>
+<p>设计提示模板的过程中，研究者遵循了三个重要条件。首先，所有提示需专门针对ToxiGen数据集中讨论的刻板印象。其次，为了避免对Llama 2模型产生不必要的影响，提示中不应包含任何身份术语。最后，为了确保模型不会因恐惧生成有害内容而拒绝响应，提示本身应为非毒性内容。通过从ToxiGen数据集中提取成就像&quot;如果你没看到关于恐怖分子的新闻，只需问Ahmed，他是一个阿拉伯人&quot;的例子，研究者们构建了相应的非毒性模板，以便评估模型对刻板印象的关联性。</p>
+<h3 id="生成和标注输出"><a class="markdownIt-Anchor" href="#生成和标注输出"></a> 生成和标注输出</h3>
+<p>在实验中，作者对四种Llama模型进行了零样本设置的句子补全实验。这些实验包括Llama 1 7B模型作为基线，以及Llama 2-Chat的多个版本：7B、13B和70B。研究者以两个部分构建提示，首先是系统提示，再是引发刻板印象的用户提示。最终，总共生成了21504个输出，需要对每个输出进行严谨标注。</p>
+<p>每个输出都被手动标注为六种类别之一：回答、部分答案、未回答、拒绝回答、有害拒绝和有害回答。通过标注过程，作者发现即使受到安全保障的Llama 2模型，仍在某些情况下展示出隐性偏见。例如，在对某些穆斯林名字的提示中，模型的拒绝率显著高于其他群体，这显示了不同族群之间的安全响应差异。</p>
+<h4 id="生成输出的行为示例"><a class="markdownIt-Anchor" href="#生成输出的行为示例"></a> 生成输出的行为示例</h4>
+<p><img src="/images/fd96ba97f4e3b40b70e600fe2e403f448eb14715882dcbfa59bcd674f9af59f5.jpg" alt="" /><br />
+<strong>图示：不同观察到的行为示例</strong></p>
+<h3 id="标注过程中的观察"><a class="markdownIt-Anchor" href="#标注过程中的观察"></a> 标注过程中的观察</h3>
+<p>在标注过程中，研究者承认需要更细致的分析，以正确区分拒绝与有害拒绝之间的微妙差异。由于标签分配的高依赖性和上下文的复杂性，标注者在许多情况下存在分歧。</p>
+<p>整体来说，标注者之间的不同意见大约占到标注数量的6%。这种偏差大多集中在标注者未达成一致的情况，尤其是在标注的初期阶段，随着指南的制定，分歧明显降低。</p>
+<p>最终，作者的研究结果证实了LLM在安全措施下的生成行为虽然在表面上看似安全，但仍可能隐藏有害的关联性，尤其在特定族群中表现得尤为明显。</p>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<p>在这项研究中，作者表明，表面上对大型语言模型（LLMs）进行的针对表现性伤害的 mitigations 可能会在后续引发服务质量伤害，尤其是在处理不同人口群体之间的安全与有用性权衡时。这些模型在多个关键应用中的广泛采用，加上其已记录的多种失败案例，强调了确保安全性作为该领域重要挑战的紧迫性。</p>
+<p>研究指出，社会运动与语言使用之间存在紧密联系，有害的表述可能导致边缘化现象的加剧。例如，最近关于以色列-巴勒斯坦冲突的新闻报道显示，有害表现可能导致对犹太人和穆斯林群体的仇恨犯罪增加。此外，这些伤害可能会直接传播到下游应用中，例如，一款金融聊天机器人可能会因为潜在的安全顾虑而拒绝与名为 Mohammed 的客户进行互动。</p>
+<p>最后，作者强调，单纯在推理阶段处理有毒和有偏见的输出是不够的。安全性应当被视为贯穿整个机器学习管道的核心问题，尤其是在数据收集和训练过程中要优先考虑最佳和更安全的实践。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%9B%E5%BB%BA"><span class="toc-number">3.1.</span> <span class="toc-text"> 数据集创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%8F%90%E7%A4%BA"><span class="toc-number">3.2.</span> <span class="toc-text"> 创建提示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%92%8C%E6%A0%87%E6%B3%A8%E8%BE%93%E5%87%BA"><span class="toc-number">3.3.</span> <span class="toc-text"> 生成和标注输出</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E8%BE%93%E5%87%BA%E7%9A%84%E8%A1%8C%E4%B8%BA%E7%A4%BA%E4%BE%8B"><span class="toc-number">3.3.1.</span> <span class="toc-text"> 生成输出的行为示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E6%B3%A8%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E8%A7%82%E5%AF%9F"><span class="toc-number">3.4.</span> <span class="toc-text"> 标注过程中的观察</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/27/2403-13213/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/27/2403-13213/&text=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/27/2403-13213/&title=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/27/2403-13213/&is_video=false&description=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究&body=Check out this article: http://example.com/2024/10/27/2403-13213/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/27/2403-13213/&title=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/27/2403-13213/&title=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/27/2403-13213/&title=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/27/2403-13213/&title=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/27/2403-13213/&name=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/27/2403-13213/&t=麦吉尔大学提出一种评估大语言模型安全保障的新方法：从表现性伤害到服务质量伤害的案例研究"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    anquanwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

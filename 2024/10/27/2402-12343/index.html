@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！">
+<meta property="og:url" content="http://example.com/2024/10/27/2402-12343/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/0c218d5740a99b286e708ffa0198b1d239a1a63d7efb81c7b34d323e830ab5ae.jpg">
+<meta property="og:image" content="http://example.com/images/802a8032c07d7ac8556aed686d8f99e15734157cf56e1ec1d504d531c38a4f91.jpg">
+<meta property="article:published_time" content="2024-10-27T11:29:24.000Z">
+<meta property="article:modified_time" content="2024-10-27T11:29:24.633Z">
+<meta property="article:author" content="anquanwang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/0c218d5740a99b286e708ffa0198b1d239a1a63d7efb81c7b34d323e830ab5ae.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/10/27/2402-14499/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/27/2402-12343/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/27/2402-12343/&text=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/27/2402-12343/&title=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/27/2402-12343/&is_video=false&description=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！&body=Check out this article: http://example.com/2024/10/27/2402-12343/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/27/2402-12343/&title=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/27/2402-12343/&title=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/27/2402-12343/&title=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/27/2402-12343/&title=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/27/2402-12343/&name=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/27/2402-12343/&t=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">2.1.</span> <span class="toc-text"> 概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5"><span class="toc-number">2.2.</span> <span class="toc-text"> 关键概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.3.</span> <span class="toc-text"> 公式描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ed%E7%9A%84%E9%87%87%E6%A0%B7%E5%88%86%E5%B8%83"><span class="toc-number">2.4.</span> <span class="toc-text"> ED的采样分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.5.</span> <span class="toc-text"> 实验设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E8%A7%89%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.6.</span> <span class="toc-text"> 视觉示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E5%B7%A5%E7%A8%8B%E7%9A%84%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="toc-number">2.7.</span> <span class="toc-text"> 反向工程的示意图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">2.8.</span> <span class="toc-text"> 小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE-2"><span class="toc-number">3.1.</span> <span class="toc-text"> 实验设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E5%87%86"><span class="toc-number">3.2.</span> <span class="toc-text"> 基准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8E%E6%8C%87%E6%A0%87"><span class="toc-number">3.3.</span> <span class="toc-text"> 评估数据集与指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">3.4.</span> <span class="toc-text"> 实验结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E5%8F%82%E6%95%B0%E5%BD%B1%E5%93%8D"><span class="toc-number">3.5.</span> <span class="toc-text"> 超参数影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%A8%E5%AE%B6%E6%97%8F%E6%A8%A1%E5%9E%8B%E6%94%BB%E5%87%BB"><span class="toc-number">3.6.</span> <span class="toc-text"> 跨家族模型攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%A4%A7%E5%B0%8F%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">3.7.</span> <span class="toc-text"> 模型大小一致性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ed%E4%B8%8E%E7%9B%B4%E6%8E%A5d-is-alignment%E5%AF%B9%E6%AF%94"><span class="toc-number">3.8.</span> <span class="toc-text"> ED与直接d is alignment对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">anquanwang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-27T11:29:24.000Z" class="dt-published" itemprop="datePublished">2024-10-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\(', right: '\)', display: false},
+              {left: '\[', right: '\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+<h2 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h2>
+<p>随着大型语言模型（LLMs）在聊天助手应用中的普及，这些模型展现出极强的推理和遵循指令的能力。然而，LLMs的广泛应用也带来了生成有害内容的风险，因此对其进行安全对齐（safety alignment）显得尤为重要。安全对齐通过微调过程旨在最大限度地减少有害内容的产生，使模型在回应查询时表现得既有用又安全。</p>
+<p>尽管安全对齐的重要性得到广泛认可，但研究发现，这些模型在安全对齐后仍存在脆弱性。例如，已有研究证明，经过安全对齐的语言模型可以在几乎没有额外微调的情况下被利用，实现危害内容的生成。因此，作者提出了一种名为“模拟不对齐”（Emulated D is alignment, ED）的方法，旨在进一步揭示安全对齐的潜在风险。</p>
+<p>ED方法的创新点在于，它通过对比安全对齐模型和其预训练版本的输出Token分布，能够高效地产生有害内容，而无需进行额外的训练。这种方法利用了以下直觉：越是投入精力进行安全对齐的语言模型，若对齐方向被对手反转，则潜在危害越大。通过这种对比，ED不仅能够获取更加有害的输出，而且在多种模型家庭和数据集上展示出显著的有效性。</p>
+<p>该研究结果表明，安全对齐的语言模型在面对ED攻击时，其开放性和可访问性需要重新评估。即使模型经过了安全对齐，仍可能在未经授权的情况下被用于生成有害内容，从而对社会带来危害。研究者们希望引起学术界和产业界对大型语言模型开放使用的谨慎态度，以防潜在的滥用风险。</p>
+<p><img src="/images/0c218d5740a99b286e708ffa0198b1d239a1a63d7efb81c7b34d323e830ab5ae.jpg" alt="Harmful rates (%) of language model responses. Emulated d is alignment (ED) exposes the latent risks within each pre-trained and safety-aligned language model pair, simply by combining their output token distributions at inference time." /></p>
+<h2 id="方法"><a class="markdownIt-Anchor" href="#方法"></a> 方法</h2>
+<h3 id="概述"><a class="markdownIt-Anchor" href="#概述"></a> 概述</h3>
+<p>emulated d is alignment (ED)是一种无需训练的攻击方法，旨在通过对比安全对齐语言模型和其预训练版本的输出Token分布，从而逆转安全对齐效果，生成有害内容。该方法不依赖于需计算资源的训练，而是通过纯样本生成来实现对齐效果的模拟。</p>
+<h3 id="关键概念"><a class="markdownIt-Anchor" href="#关键概念"></a> 关键概念</h3>
+<p>ED方法的核心理论基础在于以下三个见解：</p>
+<ul>
+<li><strong>安全奖励函数的反向工程</strong>：安全对齐模型的日志似然性和预训练模型之间的差异反映了一个安全奖励函数。该函数对应于惩罚有害响应，并鼓励安全查询的有用响应。</li>
+<li><strong>d is alignment的定义</strong>：通过最小化安全奖励，预训练模型的对抗性微调会导致生成有害响应的语言模型。</li>
+<li><strong>通过纯样本模仿d is alignment</strong>：ED并不需要直接优化，而是通过对输出分布的联合处理，利用预训练模型与安全对齐模型之间的对比性分布，达到模拟d is alignment的效果。</li>
+</ul>
+<h3 id="公式描述"><a class="markdownIt-Anchor" href="#公式描述"></a> 公式描述</h3>
+<p>ED通过以下公式来转化模型的输出，使其生成更有害的内容：</p>
+<p>[<br />
+\pi_{\mathrm{disalign}}(\mathbf{y}|\mathbf{x}) \propto \frac{\pi_{\mathrm{base}}(\mathbf{y}|\mathbf{x})<sup>{\alpha+1}}{\pi_{\mathrm{align}}(\mathbf{y}|\mathbf{x})</sup>{\alpha}}<br />
+]</p>
+<p>其中，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>π</mi><mrow><mi mathvariant="normal">b</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">e</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\pi_{\mathrm{base}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">b</span><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">s</span><span class="mord mathrm mtight">e</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>是预训练模型，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>π</mi><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">g</mi><mi mathvariant="normal">n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\pi_{\mathrm{align}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.716668em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">l</span><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight" style="margin-right:0.01389em;">g</span><span class="mord mathrm mtight">n</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>是安全对齐模型，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span></span></span></span>是正的超参数，用以控制生成内容的偏向性。</p>
+<h3 id="ed的采样分布"><a class="markdownIt-Anchor" href="#ed的采样分布"></a> ED的采样分布</h3>
+<p>为获得有害的语言模型<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>π</mi><mrow><mi mathvariant="normal">d</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">s</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">i</mi><mi mathvariant="normal">g</mi><mi mathvariant="normal">n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\pi_{\mathrm{disalign}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.716668em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">d</span><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight">s</span><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">l</span><span class="mord mathrm mtight">i</span><span class="mord mathrm mtight" style="margin-right:0.01389em;">g</span><span class="mord mathrm mtight">n</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>，ED通过采样自以下递归分布的一部分，避免了需要重训练的复杂性：</p>
+<p>[<br />
+\pi_{\mathrm{emitted-dislocation}}(\mathbf{y}<em>{t}|\mathbf{x},\mathbf{y}</em>{&lt;t})<br />
+]</p>
+<p>采用这一方法，ED能在保持高效的同时，随时针对新输入进行有害内容的生成。</p>
+<h3 id="实验设置"><a class="markdownIt-Anchor" href="#实验设置"></a> 实验设置</h3>
+<p>实验中，ED将多个开源模型对比，包括Llama-1系列、Llama-2系列、Mistral系列和Alpaca系列，评估其生成有害内容的能力。在不同模型和数据集上重复实验，确保结果的可靠性和可重复性。</p>
+<h3 id="视觉示例"><a class="markdownIt-Anchor" href="#视觉示例"></a> 视觉示例</h3>
+<h3 id="反向工程的示意图"><a class="markdownIt-Anchor" href="#反向工程的示意图"></a> 反向工程的示意图</h3>
+<p><img src="/images/802a8032c07d7ac8556aed686d8f99e15734157cf56e1ec1d504d531c38a4f91.jpg" alt="" /></p>
+<p>该图展示了ED方法的整体框架，其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold">x</mi></mrow><annotation encoding="application/x-tex">\mathbf{x}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">x</span></span></span></span></span>是用户查询，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold">y</mi></mrow><annotation encoding="application/x-tex">\mathbf{y}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.63888em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathbf" style="margin-right:0.01597em;">y</span></span></span></span></span>是语言模型的响应。通过调整预训练模型与安全对齐模型之间的相对位置，ED能够有效逼近有害响应的生成。</p>
+<h3 id="小结"><a class="markdownIt-Anchor" href="#小结"></a> 小结</h3>
+<p>通过上述方法，ED展现了在无额外训练条件下，如何利用安全对齐与预训练模型的输出Token分布之间的对比，成功逆转安全对齐，生成有害内容。这一发现有助于对开源语言模型的安全性进行重新评估，并提示未来在发布和使用时需要更小心的考量。</p>
+<h2 id="实验"><a class="markdownIt-Anchor" href="#实验"></a> 实验</h2>
+<p>在本节中，研究者评估了ED（emulated d is alignment）结合开源预训练模型和安全对齐模型生成有害内容的能力。他们在四个广泛使用的模型家族和三个用户查询数据集上进行评估。</p>
+<h3 id="实验设置-2"><a class="markdownIt-Anchor" href="#实验设置-2"></a> 实验设置</h3>
+<p>研究者对四个开源模型家族进行了评估，每个家族包含一个预训练模型和其安全对齐版本。这些家族分别是Llama-1（Llama-1-7b, Vicuna-7b）、Llama-2（Llama-2-7b, Llama-2-7b-chat）、Mistral（Mistral-7b, Mistral-7b-Instruct）和Alpaca（Alpaca-7b, Beaver-7b）。在这些安全对齐模型中，只有Llama-2-7b-chat是特别优化过以确保安全，而其他三个模型也因使用了大量安全相关的微调数据，具备一定的安全对话能力。</p>
+<p>研究者使用零样本提示法（zero-shot prompting）对预训练模型进行推理，模板包括系统提示和用户查询。</p>
+<p>在ED图示中，研究者将预训练模型与带有恶意系统提示的实例结合，以生成有害反馈。安全对齐模型使用其默认提示进行推理。</p>
+<h3 id="基准"><a class="markdownIt-Anchor" href="#基准"></a> 基准</h3>
+<p>研究者考虑了三种无训练的基准与ED进行比较：</p>
+<ul>
+<li><strong>base_{MP}</strong>：使用恶意系统提示的预训练模型。</li>
+<li><strong>Align_{MP}</strong>：使用恶意系统提示的安全对齐模型。</li>
+<li><strong>ED_{base}</strong>：仅使用预训练模型的ED，使用良性系统提示替换安全对齐模型。</li>
+</ul>
+<h3 id="评估数据集与指标"><a class="markdownIt-Anchor" href="#评估数据集与指标"></a> 评估数据集与指标</h3>
+<p>实验中使用的三个用户查询数据集为Anthropic Helpful-Harmless (HH)、ToxicChat和OpenAI Moderation Eval Set。研究者将查询分为安全（S）和有害（H）两类，每类随机选择200条查询，评估语言模型对这些查询响应时的有害率（harmful rate）。评估工具包括OpenAI Moderation和Llama-Guard，这两者在安全准则和评估方法上存在差异。</p>
+<h3 id="实验结果"><a class="markdownIt-Anchor" href="#实验结果"></a> 实验结果</h3>
+<p>ED有效地产生了有害响应。表1展示了在48个评估子集中，ED在43个子集上实现了最高的有害率。</p>
+<p>研究者从表1中总结了三点关键观察：</p>
+<ul>
+<li>ED相较于ED_{base}的改善显示安全对齐模型对ED至关重要。</li>
+<li>当对预训练模型进行恶意提示时，ED倾向于初步输出一些有害标记，即便是在响应安全查询时。输入模型的组合会将安全查询变为有害查询，这解释了为何ED也增加了安全查询的响应有害性。</li>
+<li>调整α值不会对ED的结果产生重要影响，很多实验都是在未显著调试α值的条件下进行的。</li>
+</ul>
+<h3 id="超参数影响"><a class="markdownIt-Anchor" href="#超参数影响"></a> 超参数影响</h3>
+<p>为了解α对ED输出有害性的影响，研究者进行了多个不同α值的取样实验。图4展示了不同模型家族和数据集下，α值与有害率之间的关系。发现：</p>
+<ul>
+<li>增加α值通常会初步提高有害率，随后可能下降，呈现出直接微调中常见的过优化问题。</li>
+<li>不同评估工具对此现象的观察结果相对一致，显示了这些趋势可能具有广泛的普适性。</li>
+</ul>
+<h3 id="跨家族模型攻击"><a class="markdownIt-Anchor" href="#跨家族模型攻击"></a> 跨家族模型攻击</h3>
+<p>研究者测试了ED在不同家族模型对之间的有效性，表2显示，尽管不同家族的模型有效性较低，但仍然证明了ED能够成功攻击不同模型家族中的模型。</p>
+<h3 id="模型大小一致性"><a class="markdownIt-Anchor" href="#模型大小一致性"></a> 模型大小一致性</h3>
+<p>尽管本研究主要关注7B模型，但其他实验确认ED在不同模型大小（从7B到70B）上表现一致，详细结果在附录A.4中提供。</p>
+<h3 id="ed与直接d-is-alignment对比"><a class="markdownIt-Anchor" href="#ed与直接d-is-alignment对比"></a> ED与直接d is alignment对比</h3>
+<p>在这一部分中，研究者通过合成实验探讨了ED和直接d is alignment的比较。通过使用Anthropic Helpful-Harmless数据集，对具有不同安全水平的模型进行评估。图5展示了S（安全对齐）、D（直接d is alignment）和ED（emulated d is alignment）在安全评分上的均值。</p>
+<p>研究者观察到，越安全的安全对齐模型在经过ED后产生的有害性越强，并且与直接d is alignment相比，ED的表现意外地更好。</p>
+<p>这些调查结果展示了在不同之下的相对危险性，对于用户和社会的影响是值得深思的。</p>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<p>这项研究提出了“模仿不对齐”（Emulated D is alignment，简称ED）方法，这是一种基于推理阶段的攻击方式，通过将安全对齐语言模型的输出Token分布与其预训练版本进行对比，有效地在没有额外训练的情况下生成有害的语言模型。研究发现，安全对齐可能在简单的对抗性操控下意外促进有害内容的生成，这一发现应促使社区重新考虑开源语言模型的开放可访问性，尽管这些模型已进行安全对齐。</p>
+<p>总的来说，ED通过操控Token输出的对比，揭示了在进行安全对齐时可能存在的潜在风险。这种攻击方式的简单性和有效性提示了在确保模型安全性时所需的额外谨慎，尤其是在开源环境中，其中安全对齐模型仍有可能被恶意利用。研究的结果强调了在研发和部署语言模型时，需要仔细考虑安全性和可用性之间的平衡。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0"><span class="toc-number">2.1.</span> <span class="toc-text"> 概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5"><span class="toc-number">2.2.</span> <span class="toc-text"> 关键概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.3.</span> <span class="toc-text"> 公式描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ed%E7%9A%84%E9%87%87%E6%A0%B7%E5%88%86%E5%B8%83"><span class="toc-number">2.4.</span> <span class="toc-text"> ED的采样分布</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.5.</span> <span class="toc-text"> 实验设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%86%E8%A7%89%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.6.</span> <span class="toc-text"> 视觉示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E5%B7%A5%E7%A8%8B%E7%9A%84%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="toc-number">2.7.</span> <span class="toc-text"> 反向工程的示意图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">2.8.</span> <span class="toc-text"> 小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE-2"><span class="toc-number">3.1.</span> <span class="toc-text"> 实验设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E5%87%86"><span class="toc-number">3.2.</span> <span class="toc-text"> 基准</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8E%E6%8C%87%E6%A0%87"><span class="toc-number">3.3.</span> <span class="toc-text"> 评估数据集与指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">3.4.</span> <span class="toc-text"> 实验结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E5%8F%82%E6%95%B0%E5%BD%B1%E5%93%8D"><span class="toc-number">3.5.</span> <span class="toc-text"> 超参数影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%A8%E5%AE%B6%E6%97%8F%E6%A8%A1%E5%9E%8B%E6%94%BB%E5%87%BB"><span class="toc-number">3.6.</span> <span class="toc-text"> 跨家族模型攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%A4%A7%E5%B0%8F%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">3.7.</span> <span class="toc-text"> 模型大小一致性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ed%E4%B8%8E%E7%9B%B4%E6%8E%A5d-is-alignment%E5%AF%B9%E6%AF%94"><span class="toc-number">3.8.</span> <span class="toc-text"> ED与直接d is alignment对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/27/2402-12343/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/27/2402-12343/&text=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/27/2402-12343/&title=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/27/2402-12343/&is_video=false&description=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！&body=Check out this article: http://example.com/2024/10/27/2402-12343/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/27/2402-12343/&title=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/27/2402-12343/&title=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/27/2402-12343/&title=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/27/2402-12343/&title=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/27/2402-12343/&name=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/27/2402-12343/&t=上海人工智能实验室提出的“模拟失调”方法：大型语言模型的安全对齐可能适得其反！"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    anquanwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
