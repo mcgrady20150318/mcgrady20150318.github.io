@@ -131,34 +131,34 @@ MathJax = {
 <h3 id="适应度函数"><a href="#适应度函数" class="headerlink" title="适应度函数"></a>适应度函数</h3><p>作者定义了两个连续的适应度函数以指导优化过程：</p>
 <ul>
 <li><p><strong>不安全标记概率（使用 llama guard 2）</strong>：第一个适应度函数 $f_{1}$ 评估目标模型 $T$ 生成的响应 $R$ 包含不安全内容的概率。此概率由代理模型 llama guard 2 计算，该模型输出特定“不安全标记”的对数概率。</p>
-<p><img src="/images/75b472784dcfc85dbc1c1ce2e86644be6517ef31c868bfe07722c7123e113eea.jpg" alt=""></p>
-<p>对于给定的提示 $P$ 和有害问题 $Q$，生成的响应 $R=\mathcal T(P,Q)$ 的不安全标记概率计算为：</p>
-<script type="math/tex; mode=display">
-f_{1}(P,Q)=\log P(\mathrm{unsafe~toER}\mid R)</script></li>
+<p><img src="/images/75b472784dcfc85dbc1c1ce2e86644be6517ef31c868bfe07722c7123e113eea.jpg"></p>
+<p>对于给定的提示 $P$ 和有害问题 $Q$，生成的响应 $R&#x3D;\mathcal T(P,Q)$ 的不安全标记概率计算为：</p>
+<p>$$<br>f_{1}(P,Q)&#x3D;\log P(\mathrm{unsafe~toER}\mid R)<br>$$</p>
+</li>
 <li><p><strong>语义一致性（使用 all-MiniLM-L6-v2）</strong>：在黑箱攻击的环境下，研究者没有直接访问目标模型内部或其嵌入的能力。因此，作者采用了预训练的代理模型，例如 all-MiniLM-L6-v2，来生成有害提示与候选响应的句子嵌入。这些嵌入允许测量提示和响应之间的语义相似度。</p>
 <p>第二个适应度函数 $f_{2}$ 测量生成的响应 $R$ 与有害问题 $Q$ 的语义一致性。通过计算余弦相似度，得到：</p>
-<script type="math/tex; mode=display">
-f_{2}(P,Q)=\mathrm{Sim}(\mathbf{e}_{Q},\mathbf{e}_{R})=\frac{\mathbf{e}_{Q}\cdot\mathbf{e}_{R}}{\left\|\mathbf{e}_{Q}\right\|\left\|\mathbf{e}_{R}\right\|},</script><p>其中 $\cdot$ 代表点积，$\lVert\mathbf e\rVert$ 是嵌入向量的欧几里得范数。作者选择具有较高相似度分数的响应作为越狱输出，确保所选响应在语义上与有害提示对齐。</p>
+<p>$$<br>f_{2}(P,Q)&#x3D;\mathrm{Sim}(\mathbf{e}<em>{Q},\mathbf{e}</em>{R})&#x3D;\frac{\mathbf{e}<em>{Q}\cdot\mathbf{e}</em>{R}}{\left|\mathbf{e}<em>{Q}\right|\left|\mathbf{e}</em>{R}\right|},<br>$$</p>
+<p>其中 $\cdot$ 代表点积，$\lVert\mathbf e\rVert$ 是嵌入向量的欧几里得范数。作者选择具有较高相似度分数的响应作为越狱输出，确保所选响应在语义上与有害提示对齐。</p>
 </li>
 </ul>
 <h3 id="NSGA-II进行多目标越狱提示优化"><a href="#NSGA-II进行多目标越狱提示优化" class="headerlink" title="NSGA-II进行多目标越狱提示优化"></a>NSGA-II进行多目标越狱提示优化</h3><p>为了找到最佳的越狱提示集合，作者应用了NSGA-II算法。该算法基于两个关键标准进行多目标优化：</p>
 <ul>
-<li><p><strong>支配关系</strong>：如果解决方案 $P<em>{1}$ 在至少一个目标上优于解决方案 $P</em>{2}$ 且在所有其他目标上不劣于 $P<em>{2}$，则称 $P</em>{1}$ 支配 $P_{2}$。其支配关系定义为：</p>
-<script type="math/tex; mode=display">
-\begin{array}{r}{P_{1}\prec P_{2}\quad\mathrm{if}\quad\forall i\in\{1,2,\ldots,m\},\quad f_{i}(P_{1},Q)\geq f_{i}(P_{2},Q)}\\ {\quad\mathrm{and}\quad\exists j\in\{1,2,\ldots,m\},\quad f_{j}(P_{1},Q)>f_{j}(P_{2},Q),}\end{array}</script></li>
+<li><p><strong>支配关系</strong>：如果解决方案 $P_{1}$ 在至少一个目标上优于解决方案 $P_{2}$ 且在所有其他目标上不劣于 $P_{2}$，则称 $P_{1}$ 支配 $P_{2}$。其支配关系定义为：</p>
+<p>$$<br>\begin{array}{r}{P_{1}\prec P_{2}\quad\mathrm{if}\quad\forall i\in{1,2,\ldots,m},\quad f_{i}(P_{1},Q)\geq f_{i}(P_{2},Q)}\ {\quad\mathrm{and}\quad\exists j\in{1,2,\ldots,m},\quad f_{j}(P_{1},Q)&gt;f_{j}(P_{2},Q),}\end{array}<br>$$</p>
+</li>
 <li><p><strong>拥挤距离</strong>：一旦种群根据非支配前沿进行排序，就会为每个解决方案分配拥挤距离，以保持多样性。拥挤距离 $d(P)$ 的计算涉及所有 $m$ 个目标函数。对于每个目标 $f_{i}$，拥挤距离的计算如下：</p>
-<script type="math/tex; mode=display">
-d(P)=\sum_{i=1}^{m}\left(\frac{f_{i}^{\mathrm{ext}}-f_{i}^{\mathrm{prev}}}{f_{i}^{\mathrm{max}}-f_{i}^{\mathrm{min}}}\right)</script></li>
+<p>$$<br>d(P)&#x3D;\sum_{i&#x3D;1}^{m}\left(\frac{f_{i}^{\mathrm{ext}}-f_{i}^{\mathrm{prev}}}{f_{i}^{\mathrm{max}}-f_{i}^{\mathrm{min}}}\right)<br>$$</p>
+</li>
 </ul>
 <p>通过这种方式，选择来自每个非支配前沿的解决方案时，不仅考虑多个目标的最优性，也考虑每个目标的多样性。</p>
 <h3 id="遗传操作：交叉和变异"><a href="#遗传操作：交叉和变异" class="headerlink" title="遗传操作：交叉和变异"></a>遗传操作：交叉和变异</h3><p>NSGA-II使用遗传操作进化种群：  </p>
 <ul>
-<li><p><strong>交叉</strong>：该操作通过重新组合两个父代提示生成两个新的后代。设 $P<em>{1}$ 和 $P</em>{2}$ 为父代提示。后代 $C<em>{1}$ 和 $C</em>{2}$ 是通过随机交换两个父代提示的句子生成的：</p>
-<script type="math/tex; mode=display">
-C_{1},C_{2}=\mathrm{Crossover}(P_{1},P_{2}).</script></li>
+<li><p><strong>交叉</strong>：该操作通过重新组合两个父代提示生成两个新的后代。设 $P_{1}$ 和 $P_{2}$ 为父代提示。后代 $C_{1}$ 和 $C_{2}$ 是通过随机交换两个父代提示的句子生成的：</p>
+<p>$$<br>C_{1},C_{2}&#x3D;\mathrm{Crossover}(P_{1},P_{2}).<br>$$</p>
+</li>
 <li><p><strong>变异</strong>：变异操作通过用同义词修改提示中的随机选定单词来引入多样性。设 $W$ 为提示 $P$ 中随机选择的单词，$\operatorname{Sym}(W)$ 表示 $W$ 的同义词集合。变异后的提示生成如下：</p>
-<script type="math/tex; mode=display">
-P^{\prime}=\mathrm{Mutation}(P)\quad\mathrm{where}\quad W^{\prime}\in\mathrm{Sym}(W).</script></li>
+<p>$$<br>P^{\prime}&#x3D;\mathrm{Mutation}(P)\quad\mathrm{where}\quad W^{\prime}\in\mathrm{Sym}(W).<br>$$</p>
+</li>
 </ul>
 <p>完整的算法提供在附录中的算法 1 和 2，由于空间限制未详述。 </p>
 <p>整体上，BlackDAN框架及其方法论为生成有效且可解释的越狱提示提供了一种系统化的方案，同时确保在不断优化的过程中，保持各种目标之间的平衡。</p>
@@ -166,27 +166,27 @@ P^{\prime}=\mathrm{Mutation}(P)\quad\mathrm{where}\quad W^{\prime}\in\mathrm{Sym
 <p>在多模态数据集方面，研究使用了MM-Safety Bench。该数据集涵盖了13种场景，包括非法活动、仇恨言论、身体伤害和健康咨询，总共包含5,040个文本-图像对。  </p>
 <p>研究使用了多种最先进的开源大型语言模型（LLMs），包括Llama-2-7b-hf、Llama-2-13b-hf、Internlm2-chat-7b、Vicuna-7b、AquilaChat-7B、Baichuan-7B、Baichuan2-13BChat、GPT-2-XL、Minitron-8B-Base、Yi-1.5-9B-Chat等。对于多模态LLMs，研究还使用了llava-v1.6-mistral-7b-hf和llava-v1.6-vicuna-7b-hf，以展示所提方法在从单模态到多模态能力扩展中的有效性。  </p>
 <h3 id="单目标（有害性）破解优化"><a href="#单目标（有害性）破解优化" class="headerlink" title="单目标（有害性）破解优化"></a>单目标（有害性）破解优化</h3><p>下表比较了不同模型在不同条件下的攻击方法（AdvBench 520个样本）。  </p>
-<p><img src="/images/bc676f7866705fea3ed5e111eb7e902f0e8471841de1ea9d206237a89e347512.jpg" alt="">  </p>
+<p><img src="/images/bc676f7866705fea3ed5e111eb7e902f0e8471841de1ea9d206237a89e347512.jpg">  </p>
 <p>时间效率方面，黑箱方法（“不使用问题”和“使用问题”）相比于白箱方法显著更快，使用问题和响应时平均每个样本处理时间约为2分钟，而白箱方法处理时间约为15分钟，灰箱方法约为12分钟。在Llama2-7b-chat模型中，利用有害问题的“使用问题”方法的成功率显著提高，从白箱的45.3%增加到黑箱的93.1%。  </p>
 <p>传递攻击方面，Vicuna-7B-v1.5展示了最高的成功率，从白箱场景的13.7%增加到黑箱场景的99.2%。所有模型（如Vicuna-7B-v1.5）均通过迁移学习从Llama2-7b-chat衍生而来。其他模型也呈现类似趋势，但Llama3-8B在包含有害问题时显示出轻微下降。  </p>
 <h3 id="多目标优化"><a href="#多目标优化" class="headerlink" title="多目标优化"></a>多目标优化</h3><p>下图比较了各种模型的单目标黑箱监狱破解攻击的成功率及这些攻击的传递能力。  </p>
-<p><img src="/images/a9cac650a3351f6a1f3ccc21f7a733b50ebc2a549b4f258f0e0e6200e0280fbb.jpg" alt="">  </p>
+<p><img src="/images/a9cac650a3351f6a1f3ccc21f7a733b50ebc2a549b4f258f0e0e6200e0280fbb.jpg">  </p>
 <p>最终行展示了多目标自我攻击优化的结果，结果表明其始终优于或与自我攻击相比相当，表明这种方法提供了更强、更具通用性的攻击能力。  </p>
 <p>传递成功率因模型而异，某些模型（如GPT-2-XL和Baichuan2-13B-Chat）表现出更高的脆弱性，而Llama-2-7b-hf和Llama-2-13b-hf的抵抗能力更强，基于列均值的评估（不含自我攻击）。  </p>
 <p>下图展示了跨不同场景的多模态模型破解。  </p>
-<p><img src="/images/3b3a820dc70d5230ea582bd03e9dc75f2bfa58729453189789f46e457b89ee52.jpg" alt="">  </p>
+<p><img src="/images/3b3a820dc70d5230ea582bd03e9dc75f2bfa58729453189789f46e457b89ee52.jpg">  </p>
 <p>结果表明，多目标优化在所有有害类别和情景下都显著优于单目标（SO）方法。多目标（MO）方法在攻击成功率（ASR）上始终取得更高的成绩，llava-v1.6-mistral-7b-hf MO在许多情况下达到了100%的成功率。整体而言，多目标优化在所有模型和条件下均证明其优于单目标方法的效果。  </p>
 <h3 id="最佳Pareto等级与最差Pareto等级嵌入比较"><a href="#最佳Pareto等级与最差Pareto等级嵌入比较" class="headerlink" title="最佳Pareto等级与最差Pareto等级嵌入比较"></a>最佳Pareto等级与最差Pareto等级嵌入比较</h3><p>下图比较了使用三种可视化技术（PCA 2D、PCA 3D和UMAP）获得的最佳和最差Pareto等级样本的嵌入。  </p>
-<p><img src="/images/d35ec1d1b4c2bc310dbbf5a22f56e0089c03c3d60b77ffee2d6d05429a5b6013.jpg" alt="">  </p>
+<p><img src="/images/d35ec1d1b4c2bc310dbbf5a22f56e0089c03c3d60b77ffee2d6d05429a5b6013.jpg">  </p>
 <p>PCA图中，支持向量机（SVM）决策边界有效地区分了两个组别，展现出不同等级占据嵌入空间的不同区域。此外，该UMAP可视化展示了最佳和最差等级的样本的明确和紧凑集群。这些结果强烈表明，Pareto排序不仅能够区分监狱破解提示的质量，还对提示在嵌入空间中的表现具有显著的影响。  </p>
 <h3 id="Pareto等级和嵌入空间"><a href="#Pareto等级和嵌入空间" class="headerlink" title="Pareto等级和嵌入空间"></a>Pareto等级和嵌入空间</h3><p>下图展示了跨多个数据集的不同Pareto等级类别之间的关系，通过将嵌入投影到一个二维球面上。  </p>
-<p><img src="/images/06ee50de00ed83269f4a7dd8865fafbc89f5149242454d1dc4da16728f8579ca.jpg" alt="">  </p>
+<p><img src="/images/06ee50de00ed83269f4a7dd8865fafbc89f5149242454d1dc4da16728f8579ca.jpg">  </p>
 <p>每个子图代表特定模型，数据点根据Pareto等级进行颜色编码，较大的点表示每个等级的Fréchet均值。Fréchet均值通过绿色测地线连接，展示了均值随着Pareto等级降低而平滑变化的趋势，这表明更好的数据点。在每个Fréchet均值处，应用切线PCA分析数据的局部变异，捕捉围绕每个均值点的主要变化方向。该可视化方法展示了嵌入的全局几何结构和局部变异，为如何通过多目标优化平衡竞争目标及增强文本嵌入的结构提供了新的见解。  </p>
 <h3 id="性能比较"><a href="#性能比较" class="headerlink" title="性能比较"></a>性能比较</h3><p>下表展示了不同模型在ASR和GPT-4 Metric评分上的比较。  </p>
-<p><img src="/images/56377804fc7e6814bb0dd75cb5c45f7f492cafade24144bcc341dd699e1d44fc.jpg" alt="">  </p>
+<p><img src="/images/56377804fc7e6814bb0dd75cb5c45f7f492cafade24144bcc341dd699e1d44fc.jpg">  </p>
 <p>结果表明，BlackDAN（我们的多目标方法）在所有模型中均表现优异，达到最高的ASR和GPT-4 Metric评分。尤其在Llama2-7b上，ASR达到了95.4%，而在Vicuna-7b上达到了97.5%，相比于传统方法Deep Inception在Llama2-7b上的77.5%和在Vicuna-7b上的92.7%都有了显著提升。GPT-4模型整体上显示出最低的ASR（71.4%），但相较于其他方法，BlackDAN在GPT-4上的表现依然相对稳健。此外，GPT-4 Metric评估的生成输出中的伦理违规程度表明，BlackDAN生成的最有害响应在Llama2-7b和Vicuna-7b上分别达到了93.8和96.0的最高评分，超过了其他技术。  </p>
 <h3 id="适应性分析"><a href="#适应性分析" class="headerlink" title="适应性分析"></a>适应性分析</h3><p>下图展示了随着代数增加而收敛的适应性（fitness）结果。  </p>
-<p><img src="/images/06ee50de00ed83269f4a7dd8865fafbc89f5149242454d1dc4da16728f8579ca.jpg" alt="">  </p>
+<p><img src="/images/06ee50de00ed83269f4a7dd8865fafbc89f5149242454d1dc4da16728f8579ca.jpg">  </p>
 <p>结果表明，随着代数的增加，适应性评分趋于稳定，指示收敛到一个稳定状态。在这一过程中，依据适应性评价的模型性能显著改善，进一步支持所提方法的有效性。大约在第50代，大多数最先进的（SOTA）大型语言模型（LLMs）达到了收敛，进一步突显了所提方法的效率。  </p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本文中，研究者们介绍了BlackDAN，这是一种多目标、可控的监狱破解优化框架，适用于大型语言模型（LLMs）和多模态大型语言模型（MLLMs）。BlackDAN的主要创新在于不仅优化攻击成功率（ASR），还关注上下文一致性，确保监狱破解的响应在语义上与原始的有害提示保持一致。这样，不仅确保了响应的隐秘性，还提高了其实用性。</p>
 <p>通过利用NSGA-II算法，BlackDAN显著改善了传统单目标技术的效果，在多个模型上实现了更高的成功率和更连贯的监狱破解响应。此外，BlackDAN具有高度的可扩展性，允许集成任意数量的用户定义目标，使其成为一个广泛适用的优化框架。</p>
@@ -195,7 +195,7 @@ P^{\prime}=\mathrm{Mutation}(P)\quad\mathrm{where}\quad W^{\prime}\in\mathrm{Sym
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-09804/" data-id="cm2qy3vc600099djlha3ke339" data-title="北京航空航天大学提出一种多目标黑箱优化框架BlackDAN用于有效的上下文劫持大型语言模型" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-09804/" data-id="cm2r0grn60009j2tfhwiu6zww" data-title="北京航空航天大学提出一种多目标黑箱优化框架BlackDAN用于有效的上下文劫持大型语言模型" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

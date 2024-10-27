@@ -120,19 +120,19 @@ MathJax = {
 <p>下方是对研究动机的可视化图示，进一步阐明了模型的注意力分配如何影响监禁破解的成功。</p>
 <p><img src="/images/56b6ccf6d3f57bd844d3a4abdb4cf674b3233f530053a1d3800c6b93db41ef8d.jpg" alt="注意力得分"></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本部分主要介绍AttnGCG的设计方法及其核心贡献，即引入注意力损失，以增强对抗后缀的有效性。</p>
-<h3 id="背景：贪婪坐标梯度（GCG）"><a href="#背景：贪婪坐标梯度（GCG）" class="headerlink" title="背景：贪婪坐标梯度（GCG）"></a>背景：贪婪坐标梯度（GCG）</h3><p>GCG方法是通过离散的Token级别优化，从 aligned LLMs中引导恶意文本输出。该方法将LLM视为从一系列 Token ( x<em>{1:N} ) 映射到下一个Token ( x</em>{N+1} ) 的分布。在监禁突破场景中，前N个Token ( x<em>{\mathcal{T}}=x</em>{1:N} ) 包括三部分：系统提示 ( x<em>{\mathcal{Z}</em>{\mathrm{sys}}} )、用户请求 ( x<em>{\mathcal{Z}</em>{\mathrm}} ) 和需要优化的对抗后缀 ( x<em>{\mathcal{Z}</em>{\mathrm{adv}}} )。GCG的目标是找到一个对抗后缀 ( x<em>{\mathcal{T}</em>{\mathrm{adv}}} )，使得生成目标Token序列 ( x_{\mathcal{O}}^{*} ) 的负对数概率最小化，其目标损失函数定义为：</p>
-<script type="math/tex; mode=display">
-\mathcal{L}_{t}(x_{\mathcal{I}})=-\log p(x_{\mathcal{O}}^{*}|x_{\mathcal{I}}),</script><p>GCG的优化目标可表示为：</p>
-<script type="math/tex; mode=display">
-\operatorname*{min}_{\substack{x_{\mathscr{T}_{\mathrm{adv}}}\in V^{|\mathscr{T}_{\mathrm{adv}}|}}}\mathscr{L}_{t}(x_{\mathscr{T}}),</script><h3 id="注意力得分与注意力损失"><a href="#注意力得分与注意力损失" class="headerlink" title="注意力得分与注意力损失"></a>注意力得分与注意力损失</h3><p>由于当前的LLM大多采用基于注意力的架构，因此在生成下一个Token时，模型会生成一个注意力矩阵，指示所有先前Token ( x<em>{1:N} ) 对下一个Token ( x</em>{N+1} ) 的重要性。在计算损失时，我们可以从最后一个解码层获取注意力矩阵，并定义输入组件 ( x<em>{\mathcal{T}} ) 的相应注意力得分 ( s</em>{\mathcal{Z}} ) 为：</p>
-<script type="math/tex; mode=display">
-s_{\mathcal{Z}}=\sum_{i\in\mathcal{Z}}\frac{s_{i}}{|\mathcal{Z}|},</script><p>在与Llama-2-Chat-7B模型的实验中，我们发现对“后缀”的注意力得分与攻击成功率（ASR）之间存在强正相关。随着GCG攻击过程的进行，对“后缀”的注意力得分持续增加，而对“目标”和“系统”提示的注意力得分则一般呈负相关。这表明，增加对对抗“后缀”的注意力，可以有效分散模型对原始“系统”和“目标”输入的关注，从而增强攻击的有效性。</p>
+<h3 id="背景：贪婪坐标梯度（GCG）"><a href="#背景：贪婪坐标梯度（GCG）" class="headerlink" title="背景：贪婪坐标梯度（GCG）"></a>背景：贪婪坐标梯度（GCG）</h3><p>GCG方法是通过离散的Token级别优化，从 aligned LLMs中引导恶意文本输出。该方法将LLM视为从一系列 Token ( x_{1:N} ) 映射到下一个Token ( x_{N+1} ) 的分布。在监禁突破场景中，前N个Token ( x_{\mathcal{T}}&#x3D;x_{1:N} ) 包括三部分：系统提示 ( x_{\mathcal{Z}<em>{\mathrm{sys}}} )、用户请求 ( x</em>{\mathcal{Z}<em>{\mathrm}} ) 和需要优化的对抗后缀 ( x</em>{\mathcal{Z}<em>{\mathrm{adv}}} )。GCG的目标是找到一个对抗后缀 ( x</em>{\mathcal{T}<em>{\mathrm{adv}}} )，使得生成目标Token序列 ( x</em>{\mathcal{O}}^{*} ) 的负对数概率最小化，其目标损失函数定义为：</p>
+<p>$$<br>\mathcal{L}<em>{t}(x</em>{\mathcal{I}})&#x3D;-\log p(x_{\mathcal{O}}^{*}|x_{\mathcal{I}}),<br>$$  </p>
+<p>GCG的优化目标可表示为：</p>
+<p>$$<br>\operatorname*{min}<em>{\substack{x</em>{\mathscr{T}<em>{\mathrm{adv}}}\in V^{|\mathscr{T}</em>{\mathrm{adv}}|}}}\mathscr{L}<em>{t}(x</em>{\mathscr{T}}),<br>$$  </p>
+<h3 id="注意力得分与注意力损失"><a href="#注意力得分与注意力损失" class="headerlink" title="注意力得分与注意力损失"></a>注意力得分与注意力损失</h3><p>由于当前的LLM大多采用基于注意力的架构，因此在生成下一个Token时，模型会生成一个注意力矩阵，指示所有先前Token ( x_{1:N} ) 对下一个Token ( x_{N+1} ) 的重要性。在计算损失时，我们可以从最后一个解码层获取注意力矩阵，并定义输入组件 ( x_{\mathcal{T}} ) 的相应注意力得分 ( s_{\mathcal{Z}} ) 为：</p>
+<p>$$<br>s_{\mathcal{Z}}&#x3D;\sum_{i\in\mathcal{Z}}\frac{s_{i}}{|\mathcal{Z}|},<br>$$  </p>
+<p>在与Llama-2-Chat-7B模型的实验中，我们发现对“后缀”的注意力得分与攻击成功率（ASR）之间存在强正相关。随着GCG攻击过程的进行，对“后缀”的注意力得分持续增加，而对“目标”和“系统”提示的注意力得分则一般呈负相关。这表明，增加对对抗“后缀”的注意力，可以有效分散模型对原始“系统”和“目标”输入的关注，从而增强攻击的有效性。</p>
 <p>为验证这一假设，我们引入一个新的注意力损失，直接优化对抗后缀的注意力得分：</p>
-<script type="math/tex; mode=display">
-\operatorname*{min}_{\substack{x_{\mathcal{I}_{\mathrm{adv}}}\in V^{|\mathcal{I}_{\mathrm{adv}}|}}}\mathcal{L}_{a}(x_{\mathcal{I}})=-\operatorname*{max}_{\substack{x_{\mathcal{I}_{\mathrm{adv}}}\in V^{|\mathcal{I}_{\mathrm{adv}}|}}}s_{\mathcal{I}_{\mathrm{adv}}}.</script><p>最终，AttnGCG的整体优化目标为：</p>
-<script type="math/tex; mode=display">
-\operatorname*{min}_{\substack{x_{\mathscr{Z}_{\mathrm{adv}}}\in V^{|\mathscr{Z}_{\mathrm{adv}}|}}}\mathscr{L}_{t+a}(x_{\mathscr{Z}}).</script><p>GCG算法被用来优化包含注意力损失的新目标。</p>
-<p><img src="/images/65d1240a98c4b157e636d55f8600b79394355c91d2be9d303bc695d4e5b24696.jpg" alt=""></p>
+<p>$$<br>\operatorname*{min}<em>{\substack{x</em>{\mathcal{I}<em>{\mathrm{adv}}}\in V^{|\mathcal{I}</em>{\mathrm{adv}}|}}}\mathcal{L}<em>{a}(x</em>{\mathcal{I}})&#x3D;-\operatorname*{max}<em>{\substack{x</em>{\mathcal{I}<em>{\mathrm{adv}}}\in V^{|\mathcal{I}</em>{\mathrm{adv}}|}}}s_{\mathcal{I}_{\mathrm{adv}}}.<br>$$  </p>
+<p>最终，AttnGCG的整体优化目标为：</p>
+<p>$$<br>\operatorname*{min}<em>{\substack{x</em>{\mathscr{Z}<em>{\mathrm{adv}}}\in V^{|\mathscr{Z}</em>{\mathrm{adv}}|}}}\mathscr{L}<em>{t+a}(x</em>{\mathscr{Z}}).<br>$$  </p>
+<p>GCG算法被用来优化包含注意力损失的新目标。</p>
+<p><img src="/images/65d1240a98c4b157e636d55f8600b79394355c91d2be9d303bc695d4e5b24696.jpg"></p>
 <h3 id="AttnGCG与GCG的比较"><a href="#AttnGCG与GCG的比较" class="headerlink" title="AttnGCG与GCG的比较"></a>AttnGCG与GCG的比较</h3><p>AttnGCG在推进过程中，有效引导模型将更多注意力集中在对抗后缀上，从而提高了攻击的成功率。通过将注意力损失整合到原始GCG损失中，AttnGCG提升了对抗后缀的优化效率，能够生成更具挑战性的对抗输入，从而更有效地绕过LLM的安全协议。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在这一部分，研究者首先介绍了实验设置，随后分析了AttnGCG在多种白盒LLM上的表现，并将其与原始的GCG进行比较。同时，研究者验证了该方法的普适性，展示了其在其他越狱方法中的应用表现。最后，他们针对未见过的攻击目标和黑盒LLM的转移攻击能力进行了评估。</p>
 <h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>数据集方面，研究者采用了AdvBench Harmful Behaviors基准（Zou等，2023）来评估越狱攻击的效果。该数据集包含520个请求，涵盖了不当行为如亵渎、图形描绘、威胁行为、虚假信息、歧视、网络犯罪以及危险或非法建议。在评估中，随机抽取了100个不当行为进行测试。</p>
@@ -150,7 +150,7 @@ s_{\mathcal{Z}}=\sum_{i\in\mathcal{Z}}\frac{s_{i}}{|\mathcal{Z}|},</script><p>�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-09040/" data-id="cm2qy3vc500089djl9o6rc78i" data-title="加州大学圣克鲁斯分校提出了一种基于注意力操控的增强型大语言模型越狱攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-09040/" data-id="cm2r0grn60008j2tf6yoc05xf" data-title="加州大学圣克鲁斯分校提出了一种基于注意力操控的增强型大语言模型越狱攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

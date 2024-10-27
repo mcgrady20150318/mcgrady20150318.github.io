@@ -125,7 +125,7 @@ MathJax = {
 <li><strong>实验证明</strong>：实验结果显示，在五种先进的LLMs上，拼图难题策略的攻击成功率高达93.76%，展示了其在实际应用中的有效性和广泛适用性。</li>
 </ol>
 <p>这些创新点不仅揭示了LLMs在面对多轮越狱攻击时的脆弱性，也为未来的安全防护措施的发展提供了可靠的依据和方向。  </p>
-<p><img src="/images/97a00d14482146ef83f588af28ce2c9d2832703863cab361d3de578afeb59d40.jpg" alt="">  </p>
+<p><img src="/images/97a00d14482146ef83f588af28ce2c9d2832703863cab361d3de578afeb59d40.jpg">  </p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在本研究中，作者提出了一种名为Jigsaw Puzzles（JSP）的策略，用于在多轮交互中对大型语言模型（LLMs）进行监狱破解（jailbreaking）。该方法通过将有害查询分割为无害的片段来规避现有的防御机制。以下是该方法的详细步骤：</p>
 <h3 id="JSP-提示"><a href="#JSP-提示" class="headerlink" title="JSP 提示"></a>JSP 提示</h3><p>在多轮交互的第一轮中，JSP提示请求LLMs将后续轮次提供的查询片段拼接起来，并进行回答。提示机制主要基于两个策略以确保破解成功：</p>
 <ul>
@@ -144,16 +144,16 @@ MathJax = {
 </li>
 </ul>
 <p>最终，处理后形成的无害片段在多轮交互中作为输入依次被输入到LLMs中。JSP策略利用LLMs在多轮交互中的记忆和推理功能，确保可以成功实现监狱破解。</p>
-<h3 id="监狱破解过程示意图"><a href="#监狱破解过程示意图" class="headerlink" title="监狱破解过程示意图"></a>监狱破解过程示意图</h3><p><img src="/images/97a00d14482146ef83f588af28ce2c9d2832703863cab361d3de578afeb59d40.jpg" alt=""></p>
+<h3 id="监狱破解过程示意图"><a href="#监狱破解过程示意图" class="headerlink" title="监狱破解过程示意图"></a>监狱破解过程示意图</h3><p><img src="/images/97a00d14482146ef83f588af28ce2c9d2832703863cab361d3de578afeb59d40.jpg"></p>
 <p>该策略的实施依赖于精心设计的提示及分割策略，以确保能够有效突破现有的安全防护措施，诱导LLMs生成有害响应。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>该论文采用JSP策略对五种先进的LLM进行监狱逃逸（jailbreak）实验，涉及189个有害查询。实验分为几个部分，首先是实验设置，然后是对不同模型的监狱逃逸性能的报告，最后是对JSP策略在各种设置下的有效性分析。</p>
 <h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>数据集使用了Figstep（Gong et al., 2023）提出的有害问题数据集，包含500个问题，分为10个有害类别。由于成本原因，最终选取189个问题进行实验。参与实验的模型包括Gemini-1.5-Pro、GPT-4-turbo、GPT-4o、GPT-4o-mini和Llama-3.1-70B。通过其相应的API进行推理，并使用Llama-3.1-70B进行本地推理。</p>
 <p>评价指标包括攻击成功率（ASR），具体分为每次尝试的攻击成功率（ASR-a）和按问题计算的攻击成功率（ASR-q）。ASR-a表示总尝试中成功攻击的百分比，而ASR-q表示成功越狱的问题百分比。为减少随机性，实验在每个模型上运行三次，并报告基于三次运行的平均ASR。</p>
 <h3 id="监狱逃逸性能"><a href="#监狱逃逸性能" class="headerlink" title="监狱逃逸性能"></a>监狱逃逸性能</h3><p>首先对LLMs进行单轮交互的基线测试，这些测试使用原始的有害问题。结果表明，商业LLMs对有害单轮提问有着显著的防御能力，Gemini-1.5-Pro表现尤为突出，几乎阻止所有有害查询。采用JSP策略后的结果如下表所示：</p>
-<p><img src="/images/ae7060caac9ca93772c10f1266fff7e01e6859ba334dbe42a0a3396528551659.jpg" alt=""> </p>
+<p><img src="/images/ae7060caac9ca93772c10f1266fff7e01e6859ba334dbe42a0a3396528551659.jpg"> </p>
 <p>在进行第二阶段的分裂（不带字词级分裂的JSP提示）时，所有模型的安全性显著下降，Llama-3.1-70B、GPT-4和GPT-4o-mini的ASR-q均超过90%。在第三阶段的分裂后，所有模型的攻击成功率再次提高，尤其是Llama-3.1-70B和GPT-4的ASR达到近100%。</p>
 <h3 id="有害类别的监狱逃逸性能"><a href="#有害类别的监狱逃逸性能" class="headerlink" title="有害类别的监狱逃逸性能"></a>有害类别的监狱逃逸性能</h3><p>对于不同有害类别的逃逸性能，JSP策略在隐私侵犯、欺诈、恶意软件生成和非法活动方面表现出最高的攻击成功率。这些类别的表现从表中也能直观体现：</p>
-<p><img src="/images/eacbfddfa907932e856b1a2a6cb7c3f489188b8e10d65e38fb59e1fc167f0ec7.jpg" alt=""> </p>
+<p><img src="/images/eacbfddfa907932e856b1a2a6cb7c3f489188b8e10d65e38fb59e1fc167f0ec7.jpg"> </p>
 <h3 id="不同设置下的有效性分析"><a href="#不同设置下的有效性分析" class="headerlink" title="不同设置下的有效性分析"></a>不同设置下的有效性分析</h3><p>在多轮与单轮的实验设置对比中，结果显示多轮交互条件下的监狱逃逸性能优于单轮输入。在单轮设置中，由于所有切分的查询同时输入，往往会激活模型的防御机制，导致逃逸性能下降。然而，伪多轮设置提供了一种平衡的方法，可以改善单轮设置的监狱逃逸性能，特别是对GPT-4o-mini。</p>
 <p>对于不同的切分策略，JSP的切分策略（将有害部分分隔为无害的部分）在多轮交互中优于逐字（word-by-word）和基于Tokenizer的切分策略。通过这种分裂，JSP能够保持对模型记忆与推理能力的低要求，特别是在Gemini-1.5-Pro上，这种策略有效地展示了JSP的优势。</p>
 <p>在实施“伪装历史”的实验中，遇到模型在收到所有分段后但在用户输入“开始”之前生成拒绝响应的情况。通过调整响应，使用“开始”作为提示，稍微提高了跨所有模型的逃逸性能。</p>
@@ -163,7 +163,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-11459/" data-id="cm2qy3vc6000b9djl12zu51t2" data-title="莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-11459/" data-id="cm2r0grn7000bj2tf5bjbhweh" data-title="莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

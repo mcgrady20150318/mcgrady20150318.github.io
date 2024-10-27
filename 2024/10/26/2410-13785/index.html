@@ -141,9 +141,9 @@ MathJax = {
 <ul>
 <li><strong>精炼对比（Refine Contrast）</strong>：通过多轮对话能力来提升响应质量。初始响应在第一次对话生成后，再通过后续的用户提示进行改进，从而生成精炼后的响应。</li>
 </ul>
-<p>因此，在每种对比策略中，PopAlign可以生成多个关于同一提示的响应对，即${(r<em>{j,i}^{+}, r</em>{j,i}^{-})}<em>{i=1}^{6} = {R</em>{i}(q<em>{j})}</em>{i=1}^{6}$，由此构建的偏好数据集为:</p>
-<script type="math/tex; mode=display">
-\tilde{D}=\{(q_{j},(r_{j,i}^{+},r_{j,i}^{-}))\mid q_{j}\in D,i\in\{1,2,\ldots,6\}\}</script><p>通过这些方法，PopAlign实现了数据合成的高效性，可以通过针对不同层面的对比信号，更全面地反映人类偏好。同时，这种多样化的对比策略可以显著提高模型的对齐效果。</p>
+<p>因此，在每种对比策略中，PopAlign可以生成多个关于同一提示的响应对，即${(r_{j,i}^{+}, r_{j,i}^{-})}<em>{i&#x3D;1}^{6} &#x3D; {R</em>{i}(q_{j})}_{i&#x3D;1}^{6}$，由此构建的偏好数据集为:</p>
+<p>$$<br>\tilde{D}&#x3D;{(q_{j},(r_{j,i}^{+},r_{j,i}^{-}))\mid q_{j}\in D,i\in{1,2,\ldots,6}}<br>$$</p>
+<p>通过这些方法，PopAlign实现了数据合成的高效性，可以通过针对不同层面的对比信号，更全面地反映人类偏好。同时，这种多样化的对比策略可以显著提高模型的对齐效果。</p>
 <p>在研究过程中，PopAlign的效果通过一系列详尽的实验进行了验证，表明其在多种任务中的表现优于传统方法，生成的偏好数据更加全面。所做的实验不仅强调了每个对比策略的独特效益，还显示了其联合应用的协同效应，尤其是在引导对比这一新策略上取得了显著的提升。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在实验部分，研究团队对PopAlign的有效性进行了全面评估，使用了两个对齐任务和三个知名的评估基准。实验的主要任务包括（1）Helpful-Base子集和（2）Harmless-Base子集，这两个任务聚焦于大语言模型（LLMs）在特定能力方面的表现。与这两个任务相辅相成的是（3）AlpacaEval 2.0、（4）Arena Hard和（5）MT-Bench等评估基准，这些基准评价模型的总体能力，进一步加强了对齐训练的有效性。</p>
 <p>在实验中，PopAlign与多种基线进行了对比，得出的结果显示PopAlign在对齐任务中表现优越，压倒了众多基线模型。具体而言，PopAlign在Helpful-Base子集和Harmless-Base子集任务中的胜率分别达到了每个任务50.0，显示出其在帮助性和无害性两个维度上的有效对齐能力。</p>
@@ -151,9 +151,9 @@ MathJax = {
 <p>此外，研究团队还评估了合成响应对比的准确性，具体执行了两个主要的基础响应偏好模型，PairRM和GPT-4，以确定合成的选择与拒绝响应的偏好程度。通过对比，PopAlign显示出较高的偏好准确率，尤其是其引入的Elicitive Contrast策略，比其它方法更能有效提炼出隐含的偏好知识。</p>
 <p>在对PopAlign中每种不同对比策略的个别影响进行的分析中，发现Elicitive Contrast策略的提高效果显著，最为明显，其它策略如Demon Contrast和Prefix Contrast虽也有效，但在结合使用时反而可能导致一些如下降的表现。这表明，虽然不同策略在帮助性和无害性对齐的表现有所不同，它们的组合对成绩的影响则显得尤其重要。 </p>
 <p>以下是实验结果的图表和表格：</p>
-<p><img src="/images/f536e1ab820464919272a8447c4c2bdc9d30dd6a32af224c49a29062937472a8.jpg" alt=""></p>
-<p><img src="/images/9e47381a05c31df31d240d1aa5413c39d0bc1a3c0e3a4d43e5c4ef3414c2c5c8.jpg" alt="">  </p>
-<p><img src="/images/c18b8dfec687c143b65ee77fc54c5fc5b0e270d335066bff2c008c69ab1757f0.jpg" alt="">  </p>
+<p><img src="/images/f536e1ab820464919272a8447c4c2bdc9d30dd6a32af224c49a29062937472a8.jpg"></p>
+<p><img src="/images/9e47381a05c31df31d240d1aa5413c39d0bc1a3c0e3a4d43e5c4ef3414c2c5c8.jpg">  </p>
+<p><img src="/images/c18b8dfec687c143b65ee77fc54c5fc5b0e270d335066bff2c008c69ab1757f0.jpg">  </p>
 <p>这些实验结果有效展示了PopAlign在对齐任务执行过程中的表现，说明了通过多样化的对比模式合成的响应数据如何显著提升了模型的对齐能力。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文介绍了PopAlign，一个新的框架，通过在提示、模型和流程层面上多样化对比模式来增强大型语言模型的对齐。通过引入六种不同的对比策略，PopAlign能够在不需要额外反馈标注的情况下构建全面的偏好对比数据。实验结果表明，这种多样化的方法在对齐性能上显著优于传统方法。</p>
 <p>具体而言，PopAlign对于提升模型在有用性和无害性方面的能力具有重要影响，并且在多个任务上展现出比现有基准更强的表现。作者强调了多样化对比策略的必要性，指出不同的对比方法在改进对齐效果方面各有特长，共同构成了对模型训练和优化的有力支持。</p>
@@ -162,7 +162,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2qy3vc7000f9djl8w22e95o" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2r0grn7000fj2tf7fb912it" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

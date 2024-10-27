@@ -131,7 +131,7 @@ MathJax = {
 <h3 id="检索库的构建"><a href="#检索库的构建" class="headerlink" title="检索库的构建"></a>检索库的构建</h3><p>在安全库的构建过程中，研究人员使用K-Means聚类方法将安全例子按概念分为7个集群，并选择每个集群的中心例子纳入安全子库。不安全例子的构建也采用了相同的方法，最终生成了3484个安全例子和3566个不安全例子。同时，为每个例子利用Llama3-70b模型生成解释文本，增强检索库的使用效用。</p>
 <h3 id="检索库的外部构建"><a href="#检索库的外部构建" class="headerlink" title="检索库的外部构建"></a>检索库的外部构建</h3><p>为评估模型对外部数据集的适应性，研究人员利用I2P++和UD数据集构建了外部库。应用K-Means聚类的方法，成功从I2P++和UD验证集收集了991个安全例子和700个不安全例子，形成外部检索库。</p>
 <p>下图展示了Class-RAG系统的架构：</p>
-<p><img src="/images/6027457ad494b77ded786f10a249dd1d10e0ded1ff3e22eec8f84b380ceb5ebd.jpg" alt="">  </p>
+<p><img src="/images/6027457ad494b77ded786f10a249dd1d10e0ded1ff3e22eec8f84b380ceb5ebd.jpg">  </p>
 <p>经过详细的数据准备及系统框架设计，Class-RAG在内容审核的复杂性和模糊性中提供了可扩展的解决方案，能够灵活适应安全风险的不断变化。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>实验部分对提出的Class-RAG模型进行了综合评估，旨在比较其与两个基线模型（WPIE和LLAMA3）的性能。实验设计包括七个关键组成部分，涵盖模型的分类性能、对外部数据的适应能力、指令遵循能力、性能可扩展性及不同嵌入模型的表现等方面。</p>
 <h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>在训练和评估中，输入文本通过添加系统指令和参考提示进行了丰富。训练数据中特别包括了推理过程，以帮助模型从上下文和提供的解释中学习。训练配置为，在八个A100 80GB的GPU上进行训练，批量大小为1，学习率设置为2e-6，训练进行了一个epoch。</p>
@@ -142,15 +142,15 @@ MathJax = {
 <h3 id="引用示例数量对性能的影响"><a href="#引用示例数量对性能的影响" class="headerlink" title="引用示例数量对性能的影响"></a>引用示例数量对性能的影响</h3><p>进一步研究了引用示例的数量对Class-RAG性能的影响。实验结果显现，当引用示例数量从0逐步增加到8时，模型性能显著提升，但在约8个引用示例之后，性能提升的效果呈现饱和状态。增加引用示例的同时会增加计算成本，因此需要在性能提升和计算开销之间寻找平衡。</p>
 <h3 id="不同嵌入模型的表现"><a href="#不同嵌入模型的表现" class="headerlink" title="不同嵌入模型的表现"></a>不同嵌入模型的表现</h3><p>对两种不同的嵌入模型 — DRAGON RoBERTa 和 WPIE 的影响进行了评估。实验结果表明，DRAGON RoBERTa模型在ID测试集和OOD测试集上的平均AUPRC得分均高于WPIE，显示出更优的性能。 </p>
 <p>以下是实验结果的相关图表：</p>
-<p><img src="/images/ebd83f960ef70204418ec7379d5c83cd78e9270efc2760d60b23e0257ae1d4e0.jpg" alt=""></p>
-<p><img src="/images/d022deb744e1e9551e504656cdf4460174a066cb961b5add8471c23883448ebe.jpg" alt=""></p>
-<p><img src="/images/ed8fcb32c77255502f3bc21d0b40ae91d92d7fa4f72aac4daf96a9ecc5a81888.jpg" alt=""></p>
+<p><img src="/images/ebd83f960ef70204418ec7379d5c83cd78e9270efc2760d60b23e0257ae1d4e0.jpg"></p>
+<p><img src="/images/d022deb744e1e9551e504656cdf4460174a066cb961b5add8471c23883448ebe.jpg"></p>
+<p><img src="/images/ed8fcb32c77255502f3bc21d0b40ae91d92d7fa4f72aac4daf96a9ecc5a81888.jpg"></p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本文中，研究团队介绍了Class-RAG，这是一个结合嵌入模型、检索库、检索模块和微调的大型语言模型（LLM）的模块化框架。Class-RAG的检索库可以在生产环境中作为一种灵活的热修复手段，及时减轻潜在的危害。通过在分类提示中使用检索的示例和解释，Class-RAG在决策过程中提供了解释性，从而增强了模型预测的透明度。全面的评估显示，Class-RAG在分类任务中显著超越了基准模型，并展现出对于对抗性攻击的鲁棒性。此外，实验还表明Class-RAG能够有效地通过更新检索库来融入外部知识，便捷地适应新信息。Obdser有明显的正相关关系，比较同层的检索库大小和参考示例数量，提升了Class-RAG的性能。总的来说，研究表明，增加检索库的规模是一种新颖且具有成本效益的方法，可显著提升内容审查的能力。这一研究为在生成式AI领域检测安全风险提供了一种强大、可适应和可扩展的解决方案，有望有效缓解AI生成内容中的潜在危害。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/27/2410-14881/" data-id="cm2qy3vc7000h9djlchzw9bit" data-title="Meta提出了一种基于检索增强生成的内容审核方法Class-RAG" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/27/2410-14881/" data-id="cm2r0grn8000hj2tfe55zbpro" data-title="Meta提出了一种基于检索增强生成的内容审核方法Class-RAG" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

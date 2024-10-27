@@ -121,16 +121,16 @@ MathJax = {
 <p><img src="/images/ec97fefe13cb27546c6b20f0d517806bae9fc4c27efb88ce355d4ffbeadc86df.jpg" alt="动机图"></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本节描述了多目标直接偏好优化（MODPO）的方法论。MODPO是对直接偏好优化（DPO）的扩展，旨在处理多重对齐目标，而无需强化学习（RL）方法。主要思想是将语言建模与奖励建模结合起来，直接训练不同的语言模型以隐式表征不同的集体奖励模型，从而实现多个目标的整合。</p>
 <h3 id="MODPO的推导"><a href="#MODPO的推导" class="headerlink" title="MODPO的推导"></a>MODPO的推导</h3><p>MODPO依赖于以下理论关系，将目标模型与最优语言模型连接起来：</p>
-<script type="math/tex; mode=display">
-\mathbf{w}^{T}\mathbf{r}^{*}(\mathbf{x},\mathbf{y})=\beta\log\frac{\pi_{(\mathbf{w}^{T}\mathbf{r}^{*})}(\mathbf{y}|\mathbf{x})}{\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})}+\beta\log Z(\mathbf{x}),</script><p>其中，$Z(\mathbf{x})=\sum<em>{\mathbf{y}}\pi</em>{\mathrm{sf}}(\mathbf{y}|\mathbf{x})\exp\left(\frac{1}{\beta}\mathbf{w}^{T}\mathbf{r}^{*}(\mathbf{x},\mathbf{y})\right)$是配分函数。通过利用偏好数据集，可以去除配分函数，从而实现如下变化：</p>
-<script type="math/tex; mode=display">
-p_{\mathcal{D}_{k}}(\mathbf{y}_{1}\succ\mathbf{y}_{2} \,|\,\,\mathbf{x})=\sigma\left(\mathbf{r}_{k}^{*}(\mathbf{x},\mathbf{y}_{1})-\mathbf{r}_{k}^{*}(\mathbf{x},\mathbf{y}_{2})\right).</script><p>结合上面的两个公式，MODPO可以构造一个实用的最大似然目标：</p>
-<script type="math/tex; mode=display">
-\mathcal{L}_{\mathrm{MODPO}}(\pi_{\theta_{\mathbf{w}}};\mathbf{r}_{\phi,-k},\pi_{\mathrm{sf}},\mathcal{D}_{k})=-\mathbb{E}_{\mathcal{D}_{k}}\left[\log\sigma\left(\frac{\beta}{\mathbf{w}_{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}_{w}|\mathbf{x})}{\pi_{\mathrm{sf}}(\mathbf{y}_{w}|\mathbf{x})}-\frac{\beta}{\mathbf{w}_{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}_{l}|\mathbf{x})}{\pi_{\mathrm{sf}}(\mathbf{y}_{l}|\mathbf{x})}-\frac{1}{\mathbf{w}_{k}}\mathbf{w}_{-k}^{T}\left(\mathbf{r}_{\phi,-k}(\mathbf{x},\mathbf{y}_{w})-\mathbf{r}_{\phi,-k}(\mathbf{x},\mathbf{y}_{l})\right)\right)\right],</script><p>其中期望以$(\mathbf{x},\mathbf{y}<em>{w},\mathbf{y}</em>{l})\sim\mathcal{D}_{k}$为基础。</p>
+<p>$$<br>\mathbf{w}^{T}\mathbf{r}^{<em>}(\mathbf{x},\mathbf{y})&#x3D;\beta\log\frac{\pi_{(\mathbf{w}^{T}\mathbf{r}^{</em>})}(\mathbf{y}|\mathbf{x})}{\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})}+\beta\log Z(\mathbf{x}),<br>$$</p>
+<p>其中，$Z(\mathbf{x})&#x3D;\sum_{\mathbf{y}}\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})\exp\left(\frac{1}{\beta}\mathbf{w}^{T}\mathbf{r}^{*}(\mathbf{x},\mathbf{y})\right)$是配分函数。通过利用偏好数据集，可以去除配分函数，从而实现如下变化：</p>
+<p>$$<br>p_{\mathcal{D}<em>{k}}(\mathbf{y}</em>{1}\succ\mathbf{y}<em>{2} ,|,,\mathbf{x})&#x3D;\sigma\left(\mathbf{r}</em>{k}^{<em>}(\mathbf{x},\mathbf{y}<em>{1})-\mathbf{r}</em>{k}^{</em>}(\mathbf{x},\mathbf{y}_{2})\right).<br>$$</p>
+<p>结合上面的两个公式，MODPO可以构造一个实用的最大似然目标：</p>
+<p>$$<br>\mathcal{L}<em>{\mathrm{MODPO}}(\pi</em>{\theta_{\mathbf{w}}};\mathbf{r}<em>{\phi,-k},\pi</em>{\mathrm{sf}},\mathcal{D}<em>{k})&#x3D;-\mathbb{E}</em>{\mathcal{D}<em>{k}}\left[\log\sigma\left(\frac{\beta}{\mathbf{w}</em>{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}<em>{w}|\mathbf{x})}{\pi</em>{\mathrm{sf}}(\mathbf{y}<em>{w}|\mathbf{x})}-\frac{\beta}{\mathbf{w}</em>{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}<em>{l}|\mathbf{x})}{\pi</em>{\mathrm{sf}}(\mathbf{y}<em>{l}|\mathbf{x})}-\frac{1}{\mathbf{w}</em>{k}}\mathbf{w}<em>{-k}^{T}\left(\mathbf{r}</em>{\phi,-k}(\mathbf{x},\mathbf{y}<em>{w})-\mathbf{r}</em>{\phi,-k}(\mathbf{x},\mathbf{y}_{l})\right)\right)\right],<br>$$</p>
+<p>其中期望以$(\mathbf{x},\mathbf{y}<em>{w},\mathbf{y}</em>{l})\sim\mathcal{D}_{k}$为基础。</p>
 <h3 id="MODPO的实施步骤"><a href="#MODPO的实施步骤" class="headerlink" title="MODPO的实施步骤"></a>MODPO的实施步骤</h3><p>MODPO的实施过程包括以下步骤：</p>
 <ol>
 <li><strong>边际奖励建模</strong>：首先在数据集$\mathcal{D}<em>{-k}$上训练边际奖励模型$\mathbf{r}</em>{\phi,-k}$。</li>
-<li><strong>语言建模</strong>：根据不同的权重迭代遍历$\mathbf{w}\in\Omega$，对每一个权重优化目标$\mathcal{L}<em>{\mathrm{MODPO}}$以获得经验前沿${\pi</em>{\theta_{\mathbf{w}}}\,|\,\mathbf{w}\in\Omega}$。</li>
+<li><strong>语言建模</strong>：根据不同的权重迭代遍历$\mathbf{w}\in\Omega$，对每一个权重优化目标$\mathcal{L}<em>{\mathrm{MODPO}}$以获得经验前沿${\pi</em>{\theta_{\mathbf{w}}},|,\mathbf{w}\in\Omega}$。</li>
 </ol>
 <p>这些步骤的设计使得MODPO在处理多个目标时只需最小的开销，相比DPO只有轻微的追加计算需求，同时保证了训练的稳定性与效率。</p>
 <h3 id="MODPO的优势"><a href="#MODPO的优势" class="headerlink" title="MODPO的优势"></a>MODPO的优势</h3><p>MODPO通过以下几个方面展现出其优势：</p>
@@ -145,9 +145,8 @@ p_{\mathcal{D}_{k}}(\mathbf{y}_{1}\succ\mathbf{y}_{2} \,|\,\,\mathbf{x})=\sigma\
 <h3 id="安全对齐实验结果"><a href="#安全对齐实验结果" class="headerlink" title="安全对齐实验结果"></a>安全对齐实验结果</h3><p>在安全对齐实验中，使用了合成反馈和真实反馈两个来源。合成反馈设置下，MODPO产生的前沿无论在高β（0.1）还是低β（0.5）条件下，均表现出色，与MORLHF相当（图2）。MODPO的性能在“有用性”维度上一般更佳，在“无害性”维度上MORLHF略有优势。  </p>
 <p><img src="/images/8208e0dbb27fde940c91ecbb0ff0dbca15d9f3565ebc520a8c123e8a13c87cdb.jpg" alt="图2"><br>图2: 在不同β下的（合成）安全对齐前沿。MODPO在权衡有用性和无害性方面表现出色。  </p>
 <h3 id="长篇问答实验结果"><a href="#长篇问答实验结果" class="headerlink" title="长篇问答实验结果"></a>长篇问答实验结果</h3><p>在长篇问答任务的实验中，MODPO始终在相似的KL预算下超越了MORLHF，特别是在使用不同的数据集组合时（图3）。这种表现得益于MODPO在学习过程中处理细微差别的能力。</p>
-<p><img src="/images/824ccd15dbf7668b21634ed702ed56ca0765a42df45fafdb20e679333c414926.jpg" alt="图3"><br>图3: 长篇问答前沿（β=0.5）。MODPO在类似的KL预算下始终超越MORLHF。  </p>
+<p><img src="/images/824ccd15dbf7668b21634ed702ed56ca0765a42df45fafdb20e679333c414926.jpg" alt="图3"><br>图3: 长篇问答前沿（β&#x3D;0.5）。MODPO在类似的KL预算下始终超越MORLHF。  </p>
 <p>在真实反馈下的安全对齐实验中，MODPO展现出了更优的前沿，同时要求的GPU时间也相对较少（表1）。</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -155,8 +154,7 @@ p_{\mathcal{D}_{k}}(\mathbf{y}_{1}\succ\mathbf{y}_{2} \,|\,\,\mathbf{x})=\sigma\
 <th>训练所需GPU小时</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>MODPO</td>
 <td>具体小时数</td>
 </tr>
@@ -164,9 +162,7 @@ p_{\mathcal{D}_{k}}(\mathbf{y}_{1}\succ\mathbf{y}_{2} \,|\,\,\mathbf{x})=\sigma\
 <td>MORLHF</td>
 <td>具体小时数</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h3 id="最终实验结果"><a href="#最终实验结果" class="headerlink" title="最终实验结果"></a>最终实验结果</h3><p>实验结果进一步表明，MODPO无论是在安全对齐还是长篇问答任务中，均能产生高效且多样的语言模型前沿，体现出其在处理多任务、多目标对齐的优越性能。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，作者提出了一种名为多目标直接偏好优化（MODPO）的方法，旨在解决通过人类反馈对语言模型进行对齐时的复杂性与效率问题。MODPO是对直接偏好优化（DPO）的扩展，能够在没有强化学习（RL）的情况下对多个对齐目标进行优化。与多目标强化学习（MORLHF）相比，MODPO在理论上可以产生相同的最优解，但在实践中具有更高的稳定性和效率。</p>
 <p>研究结果显示，MODPO能够通过简单的交叉熵损失，稳定地训练出能够满足人为偏好的语言模型，并且在多个任务上表现良好。特别是在安全对齐与长形式问答任务中，MODPO的效果与现有方法相当，甚至超出它们，且在计算资源上节省了三倍。这种方法能够产生多样化的语言模型前沿，使其能够适应不同群体的偏好。</p>
@@ -175,7 +171,7 @@ p_{\mathcal{D}_{k}}(\mathbf{y}_{1}\succ\mathbf{y}_{2} \,|\,\,\mathbf{x})=\sigma\
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2qy3vc300019djlhs8je9si" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2r0grn40001j2tf7jtdcet6" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

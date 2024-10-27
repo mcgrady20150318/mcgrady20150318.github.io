@@ -125,22 +125,22 @@ MathJax = {
 <p>通过这种方式，SPIN不仅能有效防范特定类型的攻击，还能在模型响应中动态适应，进而提升大语言模型的安全性。</p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>该部分介绍了自我监督方法在抗击对抗性攻击和优化型攻击中的应用。研究提出了两个相辅相成的防御层：检测层和逆转层，这两种方法均依赖于自我监督信号，这些信号是针对语言任务构造的。</p>
 <h3 id="被劫持的语言模型"><a href="#被劫持的语言模型" class="headerlink" title="被劫持的语言模型"></a>被劫持的语言模型</h3><p>在用户交互中，用户输入请求 $\mathbf{x}$，聊天机器人生成响应 $\mathbf{y}$。此时，LLM通过预测下一个Token来生成文本输出，即 $\mathbf{y}\sim F(\cdot|\mathbf{x})$。然而，攻击者的目标是通过添加一系列Token $\mathbf{a}$ 来使LLM生成恶意响应，从而最小化其目标与实际响应之间的差异。该目标可以用以下优化公式表示：</p>
-<script type="math/tex; mode=display">
-\mathbf{a}=\operatorname*{min}_{\mathbf{a}}\mathcal{L}_{\mathrm{attach}}(F(\mathbf{x}+\mathbf{a}),\mathbf{t})</script><h3 id="通过自我监督检测劫持"><a href="#通过自我监督检测劫持" class="headerlink" title="通过自我监督检测劫持"></a>通过自我监督检测劫持</h3><p>攻击者的输入通常在结构上与无害的输入显著不同，因此该研究提出了一系列自我监督任务来检测这些攻击输入。这些任务利用已知的正确答案或预期行为，评估输入是否符合这些行为，从而检测出劫持的存在。</p>
+<p>$$<br>\mathbf{a}&#x3D;\operatorname*{min}<em>{\mathbf{a}}\mathcal{L}</em>{\mathrm{attach}}(F(\mathbf{x}+\mathbf{a}),\mathbf{t})<br>$$</p>
+<h3 id="通过自我监督检测劫持"><a href="#通过自我监督检测劫持" class="headerlink" title="通过自我监督检测劫持"></a>通过自我监督检测劫持</h3><p>攻击者的输入通常在结构上与无害的输入显著不同，因此该研究提出了一系列自我监督任务来检测这些攻击输入。这些任务利用已知的正确答案或预期行为，评估输入是否符合这些行为，从而检测出劫持的存在。</p>
 <h4 id="重复检测任务"><a href="#重复检测任务" class="headerlink" title="重复检测任务"></a>重复检测任务</h4><p>该任务要求LLM重复输入的语句。在正常情况下，重复没有问题，但当输入受到攻击时，LLM将难以完成此任务。利用Levenshtein距离衡量生成文本与原始输入之间的相似度，从而构造以下损失函数：</p>
-<script type="math/tex; mode=display">
-\mathcal{L}_{\mathrm{repstar}}(\mathbf{x}^{\prime})=\frac{2\operatorname{lev}(\mathbf{x}^{\prime},F(\mathbf{x}^{\prime}))}{s(\mathbf{x}^{\prime})+s(F(\mathbf{x}^{\prime}))}</script><h4 id="插入检测任务"><a href="#插入检测任务" class="headerlink" title="插入检测任务"></a>插入检测任务</h4><p>在用户请求的末尾插入另一个已知答案的问题，以此测试LLM是否能够流利地回答。例如，插入的问题为“法国的首都是什么？”利用Softmax计算对’巴黎’作为下一个Token的预测分数，构造损失函数：</p>
-<script type="math/tex; mode=display">
-{\mathcal{L}}_{\mathrm{interject}}(\mathbf{x}^{\prime},\mathbf{y})={\frac{e^{P(\mathbf{y}|\mathbf{x}^{\prime})}}{\displaystyle\sum_{\mathbf{v}\in\mathbf{V}}e^{P(\mathbf{v}|\mathbf{x}^{\prime})}}}</script><p>利用这些损失函数，可以对输入进行分类，识别出恶意和良性请求。通过设置阈值 $T$，可以检测到输入是否经过了攻击。</p>
+<p>$$<br>\mathcal{L}_{\mathrm{repstar}}(\mathbf{x}^{\prime})&#x3D;\frac{2\operatorname{lev}(\mathbf{x}^{\prime},F(\mathbf{x}^{\prime}))}{s(\mathbf{x}^{\prime})+s(F(\mathbf{x}^{\prime}))}<br>$$</p>
+<h4 id="插入检测任务"><a href="#插入检测任务" class="headerlink" title="插入检测任务"></a>插入检测任务</h4><p>在用户请求的末尾插入另一个已知答案的问题，以此测试LLM是否能够流利地回答。例如，插入的问题为“法国的首都是什么？”利用Softmax计算对’巴黎’作为下一个Token的预测分数，构造损失函数：</p>
+<p>$$<br>{\mathcal{L}}<em>{\mathrm{interject}}(\mathbf{x}^{\prime},\mathbf{y})&#x3D;{\frac{e^{P(\mathbf{y}|\mathbf{x}^{\prime})}}{\displaystyle\sum</em>{\mathbf{v}\in\mathbf{V}}e^{P(\mathbf{v}|\mathbf{x}^{\prime})}}}<br>$$</p>
+<p>利用这些损失函数，可以对输入进行分类，识别出恶意和良性请求。通过设置阈值 $T$，可以检测到输入是否经过了攻击。</p>
 <p><img src="/images/ff2e1420805958a5438a1410314ef281a729d8d9af0a39f6c9eb03336713a810.jpg" alt="Self-supervised Detection of Jailbreak Attacks"></p>
 <h3 id="逆转防御"><a href="#逆转防御" class="headerlink" title="逆转防御"></a>逆转防御</h3><p>对于那些未被检测到的攻击，研究提出了通过在用户请求前添加额外Token来逆转这些攻击。目的是找到一系列Token，以恢复LLM的自然对齐状态。定义目标为输入的困惑度，即：</p>
-<script type="math/tex; mode=display">
-\mathbf{d}=a r g\operatorname*{min}_{\mathbf{d}}\mathcal{L}_{\mathrm{outreg}}(\mathbf{d}+\mathbf{x}^{\prime})</script><p>完成优化后，记录生成的响应是否包含常见的对拒绝的开头。最终输出为：</p>
-<script type="math/tex; mode=display">
-\hat{\mathbf{y}}=F(\mathbf{d}+\mathbf{x}^{\prime})</script><h3 id="总体系统"><a href="#总体系统" class="headerlink" title="总体系统"></a>总体系统</h3><p>为了确保攻击成功，它必须通过所有检测阶段，并且生成的响应将在防御Token之前。因此，分层的方法增强了每个防御系统之间的互补性，增加了攻击者需要考虑的变量。用户可以轻松移除某些任务来加速系统的响应速度。</p>
+<p>$$<br>\mathbf{d}&#x3D;a r g\operatorname*{min}<em>{\mathbf{d}}\mathcal{L}</em>{\mathrm{outreg}}(\mathbf{d}+\mathbf{x}^{\prime})<br>$$</p>
+<p>完成优化后，记录生成的响应是否包含常见的对拒绝的开头。最终输出为：</p>
+<p>$$<br>\hat{\mathbf{y}}&#x3D;F(\mathbf{d}+\mathbf{x}^{\prime})<br>$$</p>
+<h3 id="总体系统"><a href="#总体系统" class="headerlink" title="总体系统"></a>总体系统</h3><p>为了确保攻击成功，它必须通过所有检测阶段，并且生成的响应将在防御Token之前。因此，分层的方法增强了每个防御系统之间的互补性，增加了攻击者需要考虑的变量。用户可以轻松移除某些任务来加速系统的响应速度。</p>
 <h3 id="自适应攻击者"><a href="#自适应攻击者" class="headerlink" title="自适应攻击者"></a>自适应攻击者</h3><p>该研究还考虑了自适应攻击者的情况。如果攻击者忽略防御策略，系统将继续有效。但是，如果攻击者考虑到防御策略并进行针对性攻击，他们需要在优化中增加额外的约束，导致他们的攻击效率降低。自适应攻击通过交替进行攻击和防御，形成计算上复杂的优化问题。</p>
-<script type="math/tex; mode=display">
-\mathcal{L}_{\mathrm{adapt}}(\mathbf{x}^{\prime},t,\lambda_{r},\lambda_{i},\lambda_{s},\lambda_{p})=\mathcal{L}_{\mathrm{attach}}(\mathbf{x}^{\prime},t)+\lambda_{r}\mathcal{L}_{\mathrm{repeateder}}(\mathbf{x}^{\prime})+\lambda_{i}\mathcal{L}_{\mathrm{interior}}(\mathbf{x}^{\prime})+\lambda_{p}L_{\mathrm{outcomes}}(\mathbf{x}^{\prime})</script><p>同样，自我监督的约束将导致攻击者面临“选一失一”的境地，系统的安全性将得到进一步提升。</p>
+<p>$$<br>\mathcal{L}<em>{\mathrm{adapt}}(\mathbf{x}^{\prime},t,\lambda</em>{r},\lambda_{i},\lambda_{s},\lambda_{p})&#x3D;\mathcal{L}<em>{\mathrm{attach}}(\mathbf{x}^{\prime},t)+\lambda</em>{r}\mathcal{L}<em>{\mathrm{repeateder}}(\mathbf{x}^{\prime})+\lambda</em>{i}\mathcal{L}<em>{\mathrm{interior}}(\mathbf{x}^{\prime})+\lambda</em>{p}L_{\mathrm{outcomes}}(\mathbf{x}^{\prime})<br>$$</p>
+<p>同样，自我监督的约束将导致攻击者面临“选一失一”的境地，系统的安全性将得到进一步提升。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><p>Advbench 数据集包含520个恶意请求，研究者们通过遵循Zou等人（2023）的方法对其添加了对抗性触发器。TriviaQA 数据集则包含一系列由人类构建的问答，研究者对维基百科验证集进行了评估，以实现单次学习和在反转后的闭卷表现。</p>
 <h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>研究中使用的模型包括Llama 2-chat和Vicuna。Llama 2-chat是Meta发布的对话机器人，经过人类反馈微调，旨在对话场景中表现良好。Vicuna则是基于Llama 2，结合来自ShareGPT的对话数据进行微调的开源聊天机器人。</p>
 <h3 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h3><p>为测试防御机制，研究者执行了多种类型的攻击：</p>
@@ -158,12 +158,12 @@ MathJax = {
 </ul>
 <h3 id="检测与反转"><a href="#检测与反转" class="headerlink" title="检测与反转"></a>检测与反转</h3><p>研究者在检测层中通过注入字符串“只准确重复以下句子：”来测试模型在处理恶意请求时的反应。对于反转功能，研究者在用户消息的开头添加5个Token“! ! ! ! ! ”，经过25轮优化，通过计算排除效果来寻找最佳响应。</p>
 <p>以下是多种攻击类型下的攻击成功率（ASR）的比较结果：</p>
-<p><img src="/images/fc07bbb7407b65cc02aa764cecd52d4e655a20a569c2f004e21c5f1c5e89cd9e.jpg" alt="">  </p>
+<p><img src="/images/fc07bbb7407b65cc02aa764cecd52d4e655a20a569c2f004e21c5f1c5e89cd9e.jpg">  </p>
 <h3 id="多基准攻击成功率（ASR）"><a href="#多基准攻击成功率（ASR）" class="headerlink" title="多基准攻击成功率（ASR）"></a>多基准攻击成功率（ASR）</h3><p>该图展示了在多种类型攻击下，SPIN防御的表现，显示出显著降低了攻击成功率。</p>
-<p><img src="/images/6f06695f05d5f78bc212441d09975f2b4ac608d9c578dcf9c6b9f710efd9c397.jpg" alt="">  </p>
+<p><img src="/images/6f06695f05d5f78bc212441d09975f2b4ac608d9c578dcf9c6b9f710efd9c397.jpg">  </p>
 <h3 id="攻击成功率与自适应攻击成功率"><a href="#攻击成功率与自适应攻击成功率" class="headerlink" title="攻击成功率与自适应攻击成功率"></a>攻击成功率与自适应攻击成功率</h3><p>在自适应攻击的情况下，纵向标记展示了攻击成功率如何随着攻击优化 (Lagrangian penalty) 的变化而变化。尽管自适应攻击提升了特定层的性能，但反而使得其他层的检测容易，这进一步证明了防御的有效性。</p>
 <p>再者，通过评估反转层时的优化步骤，研究者发现虚假请求的检测和反转并行作用，整体提升了对抗恶意输入的能力。若无良好的检测效果，反转层的提升则显得尤为重要。</p>
-<p><img src="/images/423a7dc2b721eef38a091fe7817b79268ce7afbcf2ff713f056dcf6d5a36e8fb.jpg" alt="">  </p>
+<p><img src="/images/423a7dc2b721eef38a091fe7817b79268ce7afbcf2ff713f056dcf6d5a36e8fb.jpg">  </p>
 <h3 id="各种防御方法的延迟"><a href="#各种防御方法的延迟" class="headerlink" title="各种防御方法的延迟"></a>各种防御方法的延迟</h3><p>从表中可以看出，不同防御方法的计算延迟时间，尤其是反转时的延迟显著高于直接推断。通过对比，会发现使用反转机制的平均性能开销是其他防御方法的多倍，但只占GCG攻击成本的1%，表明此防御的效益较高。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，研究者们展示了自监督度量在检测对抗性攻击中的有效性，同时证明了这些攻击是可以通过目标困惑度来修复的。他们提出了一种推断时防御系统，通过Prompt Injection实现对输入生成的检测与修复。该防御方法可以与现有模型和对齐机制配合使用，而不需要额外的训练或微调。这确保了防御系统能够响应那些在对齐训练集中未出现的新类型攻击。 </p>
 <p>本研究中构建的自监督防御措施具有多样性，能够检测不同类型的攻击。此外，论文还表明，这种分层的防御方法能够抵抗适应性攻击者的攻击。通过这些研究成果，作者们为提升大型语言模型的安全性提供了一种新的实用手段。</p>
@@ -171,7 +171,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2qy3vc6000d9djl0oe74ijv" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2r0grn7000dj2tf1k7v88el" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
