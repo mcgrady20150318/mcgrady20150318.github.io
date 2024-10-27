@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战">
+<meta property="og:url" content="http://example.com/2024/10/27/2403-07865/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/c9c75e0990f8d841afa96ccdeed4cdd81b79050ec84a5dcb49533acc3dbb51c5.jpg">
+<meta property="og:image" content="http://example.com/images/e08d1f00d6e91c923a444d99a34b0255a02bb35dec797b2637c60a530408a26e.jpg">
+<meta property="og:image" content="http://example.com/images/05242e065cabac69a3b5eeaeee47465a973c2fe827f94b7f837a60ef5d4f3a58.jpg">
+<meta property="og:image" content="http://example.com/images/5fde8ec87b81066b519e784f1c8b1398ee8253a5fbfc45be245535aeb83df41d.jpg">
+<meta property="article:published_time" content="2024-10-27T07:30:58.000Z">
+<meta property="article:modified_time" content="2024-10-27T07:30:58.536Z">
+<meta property="article:author" content="anquanwang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/c9c75e0990f8d841afa96ccdeed4cdd81b79050ec84a5dcb49533acc3dbb51c5.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/10/27/2407-06851/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/27/2403-07865/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/27/2403-07865/&text=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/27/2403-07865/&title=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/27/2403-07865/&is_video=false&description=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战&body=Check out this article: http://example.com/2024/10/27/2403-07865/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/27/2403-07865/&title=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/27/2403-07865/&title=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/27/2403-07865/&title=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/27/2403-07865/&title=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/27/2403-07865/&name=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/27/2403-07865/&t=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E7%BC%96%E7%A0%81"><span class="toc-number">2.1.</span> <span class="toc-text"> 输入编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%90%86%E8%A7%A3"><span class="toc-number">2.2.</span> <span class="toc-text"> 任务理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E8%A7%84%E8%8C%83"><span class="toc-number">2.3.</span> <span class="toc-text"> 输出规范</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.1.</span> <span class="toc-text"> 实验设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">3.2.</span> <span class="toc-text"> 实验结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E5%88%86%E6%9E%90"><span class="toc-number">3.3.</span> <span class="toc-text"> 影响分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">anquanwang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-27T07:30:58.000Z" class="dt-published" itemprop="datePublished">2024-10-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\(', right: '\)', display: false},
+              {left: '\[', right: '\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+<h2 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h2>
+<p>随着大型语言模型（LLMs）的快速发展，例如Meta的Llama-2和OpenAI的GPT系列，人工智能在自然语言理解、生成和摘要等多种应用中表现出卓越的能力。然而，这些生成能力也可能被滥用，导致生成不安全内容或泄露私密信息等问题。为了解决这些问题，研究者们提出了多种策略来使LLMs更好地与人类价值观对齐，包括监督微调和基于人类反馈的强化学习等。这些方法虽有助于增强模型的安全性，但主要针对自然语言输入，可能无法有效推广到其他领域。</p>
+<p>初步的研究表明，LLMs的安全对齐存在匹配不良的泛化问题，攻击者可以利用这种问题进行“越狱”攻击，并构造针对模型安全对齐机制的输入。这些研究主要集中在文本环境中，诸如使用Base64编码或各种密码对自然语言文本进行编码，从而使得模型的安全防护失效。然而，对于LLMs来说，编码后的输入与原始自然语言输入传达了类似的含义，这表明这些转化后的输入与安全训练分布的差距可能没有想象中那么大。</p>
+<p>为此，研究者们提出了一个全新的框架——CodeAttack，旨在探索LLMs在面对代码输入时的安全泛化挑战。该框架将自然语言输入转化为代码输入，通过一种代码模板的方式进行重组。这种方法尤其创新地将文本完成任务重新定义为代码完成任务，利用代码在LLMs训练中的广泛应用和其与自然语言的显著差异。通过研究多个最新的LLMs，包括GPT-4、Claude-2和Llama-2系列，作者们发现CodeAttack能够在80%以上的情况下绕过这些模型的安全防护，这揭示了在代码输入下存在的普遍安全漏洞。</p>
+<p>总的来说，研究揭示了现有安全机制在处理非自然语言输入时的缺陷，强调了开发能够适应新领域的 robust safety alignment 算法的必要性。希望这项研究的发现能够引发更多的研究，促进集成LLMs时的更安全应用。</p>
+<p><img src="/images/c9c75e0990f8d841afa96ccdeed4cdd81b79050ec84a5dcb49533acc3dbb51c5.jpg" alt="CodeAttack框架概览" /><br />
+<em>图1：CodeAttack框架概览</em></p>
+<h2 id="方法"><a class="markdownIt-Anchor" href="#方法"></a> 方法</h2>
+<p>本研究提出了一个名为CodeAttack的框架，用于系统性地调查大型语言模型（LLMs）在代码输入场景下的安全泛化挑战。CodeAttack旨在将文本完成任务转化为代码完成任务，以便更好地评估当输入为代码时LLMs的安全性。其框架包含三个重要组成部分：</p>
+<h3 id="输入编码"><a class="markdownIt-Anchor" href="#输入编码"></a> 输入编码</h3>
+<p>输入编码将自然语言输入转换为语义上等效但显著偏离训练数据分布的形式，采用常见的数据结构（如栈和队列）来实现输入的重构。这种方法可以有效地把输入与安全训练分布拉开距离，从而提高攻击的成功率。下图展示了不同数据结构在输入编码中的应用：</p>
+<p><img src="/images/e08d1f00d6e91c923a444d99a34b0255a02bb35dec797b2637c60a530408a26e.jpg" alt="" /></p>
+<p>在编码过程中，所选数据结构及其初始化方法决定了编码输入与自然语言的相似程度。例如，可以将整个自然语言查询封装在Python字符串中，也可以使用队列和栈这两种数据结构，后者涉及通过单词分割原查询进行初始化。栈的初始化方式是以相反的顺序进行，这使得其输入与自然语言的相似度变得更低。</p>
+<h3 id="任务理解"><a class="markdownIt-Anchor" href="#任务理解"></a> 任务理解</h3>
+<p>任务理解组件使得大型语言模型能够从多种编码输入中提取目标任务。此处利用一个名为<code>decode()</code>的函数，模型在该函数内需要编写代码来重构原始输入，从而识别出目标任务。这一功能的设计使得模型在处理不同数据结构时需实施不同的代码逻辑，这为攻击的成功提供了潜在的可能性。</p>
+<h3 id="输出规范"><a class="markdownIt-Anchor" href="#输出规范"></a> 输出规范</h3>
+<p>输出规范利用常见的数据结构来指示所需输出。通过将任务分解为执行步骤，输出规范引导LLMs将任务所需的步骤填入输出结构。这一方法有助于模型聚焦在特定的输出构造上，从而增加其从编码输入中生成恶意内容的概率。</p>
+<p>综上所述，CodeAttack通过上述三大组成部分，构建了一个代码完成任务的框架，以探讨LLMs在面对代码输入时的安全性泛化问题。</p>
+<h2 id="实验"><a class="markdownIt-Anchor" href="#实验"></a> 实验</h2>
+<p>在这一部分，研究者们对8种流行的大型语言模型（LLMs）进行了实验，评估其在CodeAttack框架下的安全性表现。这些模型包括Llama-2-7b、Llama-2-70b、CodeLlama-70b、GPT-3.5、GPT-4、Claude-1和Claude-2。为了确保实验的可重复性，研究者将所有模型的温度参数设置为0。</p>
+<p>在实验中，使用的主要数据集是AdvBench，这是一种包含520个有害行为实例的数据集，旨在评估大型语言模型的安全性能。</p>
+<h3 id="实验设置"><a class="markdownIt-Anchor" href="#实验设置"></a> 实验设置</h3>
+<p>为了构建有效的攻击，研究者们将CodeAttack适应到多种编程语言，如Python、C++和Go。实验主要基于Python实现，其它语言的转换由GPT-4自动完成。研究者们选取了五个代表性的基线攻击方法进行比较，包括GCG、ARCA、AutoDAN、PAIR以及CipherChat。</p>
+<p>通过评估攻击成功率（Attack Success Rate, ASR）作为衡量指标，研究者们选用GPT-4作为评估工具，以确保结果的准确性。通过分析模型输出内容，研究者进一步验证了GPT-4评估工具的有效性，在人类评估与GPT-4评估之间的一致性达到了95%。</p>
+<h3 id="实验结果"><a class="markdownIt-Anchor" href="#实验结果"></a> 实验结果</h3>
+<p>实验结果显示，CodeAttack能够有效利用编码输入绕过所有模型的安全防护，攻击成功率普遍高于80%。特别是，在Claude系列模型中，成功率更是高达89%和84%。这些结果强调了当前主流LLMs在处理代码输入时存在的普遍安全漏洞。</p>
+<p>此外，实验还发现：</p>
+<ul>
+<li>
+<p>输入的编码数据结构对攻击成功率有显著影响。随着输入编码方式的不同，攻击成功率显示出从51%到78%的提升，尤其是从字符串编码转变为队列和栈，后者的相似性更低，导致模型更易产生不安全内容。</p>
+</li>
+<li>
+<p>更强大的模型并不一定表现出更好的安全行为，比如GPT-4和Claude-2在应对CodeAttack时仍然频繁出现不安全行为。</p>
+</li>
+<li>
+<p>编程语言的分布不均也是导致安全表现不佳的重要因素。当使用Go而不是Python作为输入编码时，Claude-2的攻击成功率从24%跃升至74%。</p>
+</li>
+</ul>
+<h3 id="影响分析"><a class="markdownIt-Anchor" href="#影响分析"></a> 影响分析</h3>
+<p>为进一步分析CodeAttack的有效性，研究者们进行了消融实验。结果表明，使用decode()函数提取任务的有效性显著高于仅通过注释提取，以及常用数据结构的输出规范化对模型行为的影响也显著提升了攻击效果。例如，使用common data structures规范化输出的CodeAttack成功率高于简单依赖注释的方法。</p>
+<p>通过对不同编程语言的实验，研究者发现小众语言（如Go）的攻击成功率明显高于主流语言（如Python），这表明了编程语言受欢迎程度对模型安全行为的影响，以及在代码领域进行全面“红队”评估的重要性。</p>
+<p>结合上述实验结果和分析，研究者们强调了当前大型语言模型在代码领域的安全性评估存在的问题。</p>
+<p><img src="/images/05242e065cabac69a3b5eeaeee47465a973c2fe827f94b7f837a60ef5d4f3a58.jpg" alt="" /><br />
+表1：基线攻击和CodeAttack在AdvBench数据集上的攻击成功率（ASR）的比较。CodeAttack能有效击穿当前主流LLMs的安全防护。</p>
+<p><img src="/images/5fde8ec87b81066b519e784f1c8b1398ee8253a5fbfc45be245535aeb83df41d.jpg" alt="" /><br />
+表3：输出规范化对CodeAttack攻击成功率的影响。使用常见数据结构的输出规范化显著提高了攻击效果。</p>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<p>本研究揭示了大型语言模型（LLMs）在面对新场景（如代码）的安全机制泛化问题。研究团队提出了CodeAttack，这一新颖的框架将文本补全任务重新构造为代码补全任务。实验结果显示，CodeAttack在所有测试的高级LLMs（包括GPT-4、Claude-2和Llama-2系列）中，其攻击成功率超过80%，突显了当前安全机制的普遍脆弱性。</p>
+<p>进一步的消融分析表明，当CodeAttack与自然语言分布的偏差增大时，LLMs的安全对齐效果下降，这意味着在代码分布的情境下，当前的安全训练技术的泛化能力不足。因此，全面的红队评估是评估LLMs安全对齐的重要手段，特别是在面对长尾分布的情况下。此外，CodeAttack在构建后可高效使用，不需要对其代码模板进行进一步修改，这使得其在成本上比许多基线方法更具优势，因为后者通常需要多次优化步骤。</p>
+<p>研究强烈建议进一步深入研究，以开发更具鲁棒性的安全对齐技术，从而增进LLMs在未知领域中的安全性。这一发现不仅揭示了代码领域的新安全风险，还强调了当前安全机制在处理非自然语言输入时面临的挑战。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E7%BC%96%E7%A0%81"><span class="toc-number">2.1.</span> <span class="toc-text"> 输入编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E7%90%86%E8%A7%A3"><span class="toc-number">2.2.</span> <span class="toc-text"> 任务理解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E8%A7%84%E8%8C%83"><span class="toc-number">2.3.</span> <span class="toc-text"> 输出规范</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.1.</span> <span class="toc-text"> 实验设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%BB%93%E6%9E%9C"><span class="toc-number">3.2.</span> <span class="toc-text"> 实验结果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%B1%E5%93%8D%E5%88%86%E6%9E%90"><span class="toc-number">3.3.</span> <span class="toc-text"> 影响分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/27/2403-07865/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/27/2403-07865/&text=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/27/2403-07865/&title=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/27/2403-07865/&is_video=false&description=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战&body=Check out this article: http://example.com/2024/10/27/2403-07865/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/27/2403-07865/&title=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/27/2403-07865/&title=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/27/2403-07865/&title=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/27/2403-07865/&title=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/27/2403-07865/&name=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/27/2403-07865/&t=上海交通大学提出CodeAttack方法，揭示大型语言模型在代码输入下的安全泛化挑战"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    anquanwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
