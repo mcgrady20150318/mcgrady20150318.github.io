@@ -73,6 +73,302 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2401-06730" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/25/2401-06730/" class="article-date">
+  <time class="dt-published" datetime="2024-10-25T06:25:34.000Z" itemprop="datePublished">2024-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/2401-06730/">斯坦福大学提出语言模型不确定性表达与人类互动的风险研究</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着自然语言成为人与人工智能系统交互的默认接口，无论是在信息搜索、摘要生成还是图像描述中，都需要语言模型（LM）适当地传达其不确定性。在此背景下，研究者们对语言模型如何通过自然语言来表达信心以及用户如何响应LM所表达的不确定性进行了深入探讨。</p>
+<p>研究显示，当前公开部署的语言模型在回答问题时对表达不确定性表现得十分犹豫，即使在生成的答案不正确时也不例外。虽然可以通过明确提示使语言模型表达信心，但即使在这些情况下，模型往往仍显得过于自信，导致其高置信度回答的错误率高达47%。因此，这些模型在表达不确定性时不仅缺乏适当性，还可能对用户决策造成潜在的风险。</p>
+<p>该研究还展示了用户在面对LM生成的表达时（无论是标记为确定性还是不确定性的表达）仍高度依赖于语言模型的生成结果。此外，研究指出，对后期训练对齐所用偏好标注数据集的分析，揭示了人类对不确定性文本的偏见。研究者们强调，这一现象不仅突显了在人机交互中存在的新安全隐患，同时也提出了设计建议和减轻潜在问题的策略，从而为未来的研究和实践提供了新的起点。</p>
+<p><img src="/images/5d4618f74cccd81141f69c491d9bc3660b19124501256ccb6fa7f4b2e6872c5d.jpg" alt="图1"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究的目标是评估广泛使用的公开部署模型（如GPT、LLaMA-2、Claude）在生成表达不确定性时的潜在危害和安全风险。为此，研究者使用了多种方法来探讨语言模型（LM）如何运用表述不确定性的语言标记。</p>
+<h3 id="数据集与问题选择"><a href="#数据集与问题选择" class="headerlink" title="数据集与问题选择"></a>数据集与问题选择</h3><p>研究人员从大规模的多任务语言理解基准（MMLU）中选取了多种问题。MMLU是一个涵盖57个主题的四项选择数据集，旨在评估语言模型的知识和问题解决能力。选定的问题内容统一限制为国家首都相关的难题，以确保用户对AI生成的不确定性标记的评估主要源于LM的生成，而不是用户自身的先验知识。</p>
+<h3 id="提示设计"><a href="#提示设计" class="headerlink" title="提示设计"></a>提示设计</h3><p>研究人员设计了三种类型的开放式提示指令，以系统性地引导LM生成不确定性的表达：</p>
+<ul>
+<li><strong>EpiM</strong>：请回答问题并提供你的确定程度。</li>
+<li><strong>CoT</strong>（链式推理）：逐步解释你的思考过程。</li>
+<li>**Epi_{M+CoT}**：使用不确定性的表达，逐步解释你的思考过程。</li>
+</ul>
+<p>通过对这些指令的设计，研究人员旨在促进模型生成的不确定性标记，模拟真实用户可能与LM的互动方式。</p>
+<h3 id="生成与分类不确定性标记"><a href="#生成与分类不确定性标记" class="headerlink" title="生成与分类不确定性标记"></a>生成与分类不确定性标记</h3><p>研究团队首先实施开放式生成，与以往研究中要求模型生成预定义的确定性表达方式不同。此方法允许研究者进行自下而上的定性分析，以理解LM如何生成不确定性标记。生成的回应通过正则表达式模式匹配进行分类，识别为“增强型”（表示确定性）和“减弱型”（表示不确定性）。这些生成的标记经过手动编码和定量分析以确认其准确性。</p>
+<h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><p>研究人员使用了九种模型，包括不同版本的GPT、LLaMA-2和Claude，每种模型使用49个提示共发出了125,244个查询。为了评估生成的表达类型，研究者对每一条生成的表达都进行了详细的定性编码，最终形成了76种增强型和105种减弱型表达，见表7和表8。</p>
+<p>通过系统的提示设计及分类方法，研究者能够深入理解LM在生成表达不确定性时的表现，及其在实际使用中的潜在影响和风险。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在此部分，研究人员设立了一系列实验来调查语言模型（LM）如何表达不确定性，以及用户如何对LM生成的表达的不确定性做出反应。</p>
+<h3 id="设置1：控制设置"><a href="#设置1：控制设置" class="headerlink" title="设置1：控制设置"></a>设置1：控制设置</h3><p>研究人员创建了一项任务，以评估用户在没有查看实际答案时对LM生成的不确定性标记的依赖。参与者需要回答一系列国家首都的问答，且每个问题的开头都包含来自LM的表达。例如，Marvin的回答可能是“我认为……”。参与者只能根据这些不确定性标记作出依赖或查找答案的决定。</p>
+<h3 id="设置2：互动设置"><a href="#设置2：互动设置" class="headerlink" title="设置2：互动设置"></a>设置2：互动设置</h3><p>互动设置由多个回合构成，参与者必须在每一轮中做出决策并接受反馈。每个回合的步骤如下：</p>
+<ul>
+<li>显示问题；</li>
+<li>显示Marvin的预测响应，其中包括不确定性的标记；</li>
+<li>参与者根据这些标记作出决定；</li>
+<li>提供决策反馈。</li>
+</ul>
+<p>这种设置允许研究人员观察用户如何依赖LM提供的反馈和不确定性表达。</p>
+<h3 id="设置2A：校准设置"><a href="#设置2A：校准设置" class="headerlink" title="设置2A：校准设置"></a>设置2A：校准设置</h3><p>在校准设置中，Marvin的回答根据用户在控制设置中的预期解读进行校准，即“加强语”与正确答案同时出现，“减弱语”与错误答案同时出现。参与者在最初的20轮中依赖“加强语”的比例为94%，而对“减弱语”的依赖仅为7%。经过20轮，参与者能够近乎完美地利用Marvin的不确定性标记，达到99%的准确率。</p>
+<h3 id="设置2B：过度自信设置"><a href="#设置2B：过度自信设置" class="headerlink" title="设置2B：过度自信设置"></a>设置2B：过度自信设置</h3><p>在过度自信设置的前20轮中，Marvin生成的错误答案使用“加强语”。参与者依赖“加强语”的频率达到了81%，而这些表达的正确率仅为66%。由于参与者通常不知道答案，结果表明他们误信了这些错误且自信的生成，约73%的时间误赖于错误的、充满自信的生成。即使在经过校准的回合中，这种不良影响依旧存在。</p>
+<h3 id="设置2C：缺乏自信设置"><a href="#设置2C：缺乏自信设置" class="headerlink" title="设置2C：缺乏自信设置"></a>设置2C：缺乏自信设置</h3><p>在缺乏自信的设置中，Marvin在生成正确答案时使用“减弱语”。尽管初始的错误回合表现不佳（平均66%），但在经过后续的校准设置后，参与者的表现回升至与校准设置相当的98%。相比之下，在过度自信设置中，用户的心理模型始终未能完全修正。</p>
+<h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>实验结果显示，用户对“加强语”和纯粹陈述的依赖程度极高，几乎达到90%。即便在“减弱语”出现的情况下，用户依然倾向于查找答案，呈现出显著的依赖倾向。</p>
+<h4 id="图表与数据"><a href="#图表与数据" class="headerlink" title="图表与数据"></a>图表与数据</h4><p><img src="/images/0fd9a531e689b338b7dbe42e748acc3b0369b8a5dcf23f3d89860c8b88186351.jpg"><br>表2：人类实验中的计分表。依赖Marvin的生成并且Marvin正确时将得分1分，否则扣分-1分。查找答案不记分。</p>
+<p><img src="/images/9290b9079ac92dd4656256fb28833ed8040c37c738dd4648a2c5fd799aecd527.jpg"><br>图5：参与者在校准、过度自信和缺乏自信设置中的结果。可以看到，在错误校准回合中得分较低。过度自信设置在随后校准回合中也持续得分较低。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>研究表明，语言模型在生成内容时表现出过于自信，这种现象加剧了用户在面对错误或不确定答案时的依赖性。尽管用户在模型生成的内容中通常依赖于隐含或显式的信心表达，研究追溯了模型过度自信的根源，发现这种现象主要源于后期训练对齐过程中的人类反馈偏差，具体来说，注释者对不确定性语言的偏见。  </p>
+<p>在与语言模型的互动中，用户可能会错误地将缺乏不确定性表达解读为高信心，这种情况不仅使得模型的错误回答看起来更加可信，也可能进一步影响用户的决策过程。研究建议，应该对模型的训练过程进行改进，增加不确定性表达的自发生成，确保用户能够准确理解模型的信心程度，从而降低过度依赖的风险。</p>
+<p>此外，研究还指出，需要对多样化数据源进行探索，以拓宽模型对各种不确定性标记的理解，并应根据不同的上下文进行相应的模型校准。总的来说，语言模型当前在表达信心和不确定性方面的不足，可能对人类-人工智能协作造成严重后果，从而亟需寻找有效的设计和改进方案，以促进更可靠的交互。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2qxu62x00034bjl9ryga5ez" data-title="斯坦福大学提出语言模型不确定性表达与人类互动的风险研究" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2311-09096" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/25/2311-09096/" class="article-date">
+  <time class="dt-published" datetime="2024-10-25T06:14:49.000Z" itemprop="datePublished">2024-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/2311-09096/">清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在近年来，随着大型语言模型（LLMs）的发展，虽然它们在多种任务中表现出色，但其安全缺陷也逐渐显露出来。这些安全缺陷包括泄露用户数据、生成有害内容和促进非法活动等。特别是，越来越多的研究集中在破解这些模型的安全机制，即所谓的“越狱攻击”（jail breaking attacks），这种攻击能够绕过为LLMs设置的安全对齐。</p>
+<p>在这项研究的引言中，作者指出，大多数现有的研究主要关注于如何进行越狱攻击，而针对防御这些攻击的研究仍显不足。越狱攻击的成功往往源于模型在“有用性”（helpfulness）和“安全性”（safety）这两个目标之间的内在冲突。当前的模型优化方法，如SFT（监督微调）和RLHF（基于强化学习的微调），未能明确区分这两个目标的优先级，导致其在复杂和非分布的数据输入（out-of-distribution inputs）缺乏有效辨识能力。</p>
+<p>为了解决这一问题，作者提出了一种新的防御机制——“目标优先化”（goal prioritization），旨在通过明确指定安全性优先于有用性，从而有效减少越狱攻击的成功率。通过在训练和推理阶段实施目标优先化，研究表明该方法能够大幅降低越狱攻击的成功率，充分验证了作者的假设，即越狱攻击的成功与模型对目标优先级的认识密切相关。</p>
+<p>此外，研究还发现，尽管更强大的LLMs可能更容易受到越狱攻击，但它们也具备更强的能力去抵御这些攻击。这一发现为理解LLMs的能力与安全性之间的关系提供了重要的洞察。</p>
+<p>总的来说，这项研究旨在提升对越狱攻击及其防御的理解，同时为LLMs的可靠应用提供了新的思路和方法。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>该研究提出了一种通过“目标优先化”来抵御大型语言模型（LLMs）面临的监狱突破攻击的方法。目标优先化是在训练和推理阶段引入的，主要包括以下两个情境：没有训练（w&#x2F;o Training）和有训练（w&#x2F; Training）。</p>
+<h3 id="没有训练的情况下"><a href="#没有训练的情况下" class="headerlink" title="没有训练的情况下"></a>没有训练的情况下</h3><p>在没有训练（例如，使用API LLMs或没有开放源代码微调数据的LLMs）的情况下，研究人员设计了一种即插即用的提示方法。这种方法包括一个要求模型优先考虑安全而非有用的指令，和两个示例以引导LLMs进行判断。具体步骤如下：</p>
+<ol>
+<li>模型首先被提醒要优先考虑安全性。</li>
+<li>然后提供两个示例：<ul>
+<li>第一个示例是一个良性查询及其有用的响应；</li>
+<li>第二个示例是一个有害查询及其拒绝的响应。</li>
+</ul>
+</li>
+</ol>
+<p>在响应中，模型使用[内部思维]部分分析用户指令是否违反了优先需求，并在[最终响应]中提供相应的答复。</p>
+<h3 id="有训练的情况下"><a href="#有训练的情况下" class="headerlink" title="有训练的情况下"></a>有训练的情况下</h3><p>在训练可用的情况下（即能够访问模型权重和微调数据），研究人员将目标优先化融入训练实例，以便模型能够更好地遵循优先化要求。为了使模型理解这两种目标优先化，研究设计了两种相对立的生成实例：</p>
+<ul>
+<li><p>当用户查询为有害时，模型与两种目标优先化指令配对：</p>
+<ul>
+<li>当与优先考虑有用性而非安全的指令配对时，模型应生成有用但不安全的响应。</li>
+<li>当与优先考虑安全性而非有用性的指令配对时，模型应生成安全但可能不太有用的响应。</li>
+</ul>
+<p>这会生成数据集 $D_{1}&#x3D;{(x_{\bar{b}},g_{h},y_{h,\bar{s}}),(x_{\bar{b}},g_{s},y_{\bar{h},s})}$。</p>
+</li>
+<li><p>当用户查询为良性时，两种目标优先化指令可能导致相同的安全且有用的响应，因此会随机选择一个指令 $g_{r}$ 配对良性查询，得到数据集 $D_{2}&#x3D;{(x_{b},g_{r},y_{h,s})}$。</p>
+</li>
+</ul>
+<p>此外，为了促进模型对目标优先化的理解，研究利用ChatGPT生成[内部思维]部分，让模型分析用户查询与目标优先化要求之间的关系。</p>
+<p>训练期间所采用的标准交叉熵损失函数为：</p>
+<p>$$<br>\begin{align*}<br>&amp;\mathcal{L}&#x3D;-,\displaystyle\frac{1}{|D_{1}|}\sum_{i&#x3D;1}^{|D_{1}|}\log P(y_{h,\bar{s}}^{i},t_{h}^{i}|x_{b}^{i},g_{h};M)\<br>&amp;{\phantom{m m m m m}-,\displaystyle\frac{1}{|D_{1}|}\sum_{i&#x3D;1}^{|D_{1}|}\log P(y_{h,s}^{i},t_{s}^{i}|x_{b}^{i},g_{s};M)\<br>&amp;{\phantom{m m m m m m}-,\displaystyle\frac{1}{|D_{2}|}\sum_{i&#x3D;1}^{|D_{2}|}\log P(y_{h,s}^{i},t^{i}|x_{b}^{i},g_{r}^{i};M)}<br>\end{align*}<br>$$</p>
+<h3 id="整体框架图"><a href="#整体框架图" class="headerlink" title="整体框架图"></a>整体框架图</h3><p><img src="/images/475b31255f0be4b055d6184980c896dbe9d99036f0891318b9d9cf16412997ac.jpg"></p>
+<p>通过上述训练过程，模型可以在推理阶段仅添加 $g_{s}$ 指令以确保安全优先化要求。在输出时，开发者亦可隐藏[内部思维]，仅向用户展示[最终响应]。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在这一部分，研究团队对他们提出的目标优先化方法进行了详尽的实验评估，以验证其在防御监狱攻击方面的有效性。</p>
+<h3 id="监狱攻击测试集"><a href="#监狱攻击测试集" class="headerlink" title="监狱攻击测试集"></a>监狱攻击测试集</h3><p>研究人员根据第二章中介绍的监狱攻击方法，设计了一个测试集。最终测试集包含50个监狱攻击提示和20个最具攻击成功率的有害问题，由此生成的测试样本总数达到1,000个。</p>
+<h3 id="训练集"><a href="#训练集" class="headerlink" title="训练集"></a>训练集</h3><p>在有训练的情况下，研究团队从Ultra Feedback收集了10,000个良性查询并配对相应的GPT-4响应。此外，从AdvBench中获得500个有害指令，并将它们与监狱攻击提示进行随机配对。为了确保训练集中不包含任何监狱攻击提示，研究者精心设计了训练实例以支持目标优先化的要求。</p>
+<h3 id="评估的LLMs"><a href="#评估的LLMs" class="headerlink" title="评估的LLMs"></a>评估的LLMs</h3><p>在无训练的设置中，研究团队评估了包括GPT-3.5-turbo-0613和GPT-4-0613等API基础的LLM，以及Vicuna-7B-v1.3、Llama2-7B-Chat和Llama2-13B-Chat等开源模型。而在有训练的设置中，则使用了Llama2-7B和Llama2-13B作为基础模型。</p>
+<h3 id="基准测试"><a href="#基准测试" class="headerlink" title="基准测试"></a>基准测试</h3><p>在无训练的设置中，研究人员将他们的方法与没有额外防御技术的简单LLM进行了比较，同时也评估了Self-Reminder的方法。对于有训练的情况，基准测试比较了他们的方法与只使用良性查询的SFT方法，以及将监狱攻击查询与安全拒绝响应结合使用的对齐SFT方法。</p>
+<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>为了评估ASR，研究团队采用了一种经过微调的RoBERTa模型，这是一种在安全响应检测中具有高效性的工具。对于LLMs的整体性能则通过对比它们在100个良性查询上的表现来衡量。</p>
+<h3 id="无训练的结果"><a href="#无训练的结果" class="headerlink" title="无训练的结果"></a>无训练的结果</h3><p>研究结果显示，目标优先化方法在防御监狱攻击方面表现出色，显著降低了ChatGPT的ASR，从66.4%减少到3.6%。该方法在开源模型中同样表现良好，相较于Self-Reminder，ASR也显著降低，且模型的整体性能保持在可接受的范围内。</p>
+<p><img src="/images/492d50a113c0d2c9271483a01c9747fe9c95f71ad7c365e13bb5a4088495ac95.jpg"></p>
+<h3 id="有训练的结果"><a href="#有训练的结果" class="headerlink" title="有训练的结果"></a>有训练的结果</h3><p>在有训练的结果中，Llama2-7B和Llama2-13B的ASR分别降低到4.6%和6.6%。这些结果表明，训练过程中融入目标优先化能有效压制监狱攻击，但不会对模型的整体性能形成显著影响。</p>
+<p><img src="/images/6c6caa931ffc8fbb9913c95b0d3d4721612e14122592a146adfc6978c0c9d928.jpg"></p>
+<h3 id="消融研究"><a href="#消融研究" class="headerlink" title="消融研究"></a>消融研究</h3><p>研究团队进行了消融实验，以评估各组成部分的有效性。当去掉内部思考部分或去掉训练中的有害响应时，模型的防御能力明显下降，这表明内部思考对理解目标优先化要求至关重要。</p>
+<ul>
+<li>结果分析表明，增加有害响应的训练实例有助于模型更好地遵循目标优先化要求。</li>
+<li>研究还发现目标优先化方法在处理未知类型的监狱攻击方面表现优异，即使没有特定的监狱攻击样本纳入训练。</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>实验结果表明，目标优先化方法在各类监狱攻击中均展现出了强大的防守能力，并为进一步探索LLM的安全性与能力之间的关系提供了重要的见解。</p>
+<p><img src="/images/16b81bd78c363cda6f409090a9f47d39a4ac65cd53fe4289f081a89ef2bd46b7.jpg"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>该研究提出了通过目标优先化来防御大语言模型（LLMs）免受监狱突破攻击的有效方法。研究人员假设，监狱突破成功的核心原因在于模型缺乏对目标优先级的理解。具体而言，LLMs在生成响应时往往面临提供帮助和确保安全之间的内在冲突。为了应对此问题，研究提出在训练和推理阶段集成目标优先化，旨在增强模型对安全性的重视。</p>
+<p>经过广泛的实验验证，该方法在降低攻击成功率（ASR）方面表现出色。例如，通过添加目标优先化，ChatGPT的ASR从66.4%降至3.6%；Llama2-13B的ASR则从71.0%降至6.6%。这些结果表明，即使在没有监狱突破样本的情况下，目标优先化的应用仍能显著提升模型的防御能力。此外，相较于较弱的模型，较强的模型（如GPT-4）在接受适当的防御机制时，可以更有效地抵御监狱突破攻击。</p>
+<p>研究的结论不仅为理解监狱突破攻击的成因提供了新视角，也加强了对LLMs能力与安全之间关系的理解。通过引入目标优先化的机制，该研究为构建更加安全和可靠的语言模型铺平了道路，同时也为未来在此领域的研究提供了有价值的参考。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2qxu62w00014bjl84mpfkn1" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2310-03708" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/25/2310-03708/" class="article-date">
+  <time class="dt-published" datetime="2024-10-25T06:03:04.000Z" itemprop="datePublished">2024-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/2310-03708/">上海人工智能实验室提出多目标直接偏好优化方法（MODPO）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着现代基于Transformer的语言模型在互联网规模的语料库上进行预训练并通过人类反馈进行精炼，这些模型通常能够较好地与特定群体的偏好对齐。目前，强化学习与人类反馈（RLHF）是一种主要的对齐方法，它使用单一的奖励模型来表示平均标签者的偏好，以引导语言模型最大化该奖励模型，从而生成预期的结果。然而，早期的成功假设人类偏好是同质的，实际情况却表明人类偏好的个体差异巨大，因此很难用单一的语言模型来满足所有偏好的要求。</p>
+<p>这促使研究者们寻求多策略方法，通过训练多个候选语言模型来满足不同群体的需求。最近的研究集中于将人类反馈分解为多个细分维度，为每一维度创建独立的奖励模型。这种多目标的方法使得可以通过调整奖励权重来灵活定制语言模型，以适应不同的偏好分布。然而，尽管这种方法在理论上有效，但经过多目标RLHF（MORLHF）的微调过程往往复杂、资源消耗大且不稳定。</p>
+<p>为了解决这一问题，研究者们提出了多目标直接偏好优化（MODPO），这是一种无RL的新方法，旨在扩展直接偏好优化（DPO）以适应多个对齐目标。MODPO的关键在于，它将语言建模与奖励建模直接结合在一起，从而训练语言模型作为隐式的集体奖励模型，结合所有目标并赋予特定的权重。理论上，MODPO能够提供与MORLHF相同的最优解，但在实际应用中更加稳定和高效。通过在安全对齐和长篇问答等任务中的实证结果，MODPO展示出能够在显著减少计算资源的前提下，产生匹配或超越现有方法的结果，并形成多样化偏好的Pareto前沿。</p>
+<p><img src="/images/ec97fefe13cb27546c6b20f0d517806bae9fc4c27efb88ce355d4ffbeadc86df.jpg" alt="动机图"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本节描述了多目标直接偏好优化（MODPO）的方法论。MODPO是对直接偏好优化（DPO）的扩展，旨在处理多重对齐目标，而无需强化学习（RL）方法。主要思想是将语言建模与奖励建模结合起来，直接训练不同的语言模型以隐式表征不同的集体奖励模型，从而实现多个目标的整合。</p>
+<h3 id="MODPO的推导"><a href="#MODPO的推导" class="headerlink" title="MODPO的推导"></a>MODPO的推导</h3><p>MODPO依赖于以下理论关系，将目标模型与最优语言模型连接起来：</p>
+<p>$$<br>\mathbf{w}^{T}\mathbf{r}^{<em>}(\mathbf{x},\mathbf{y})&#x3D;\beta\log\frac{\pi_{(\mathbf{w}^{T}\mathbf{r}^{</em>})}(\mathbf{y}|\mathbf{x})}{\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})}+\beta\log Z(\mathbf{x}),<br>$$</p>
+<p>其中，$Z(\mathbf{x})&#x3D;\sum_{\mathbf{y}}\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})\exp\left(\frac{1}{\beta}\mathbf{w}^{T}\mathbf{r}^{*}(\mathbf{x},\mathbf{y})\right)$是配分函数。通过利用偏好数据集，可以去除配分函数，从而实现如下变化：</p>
+<p>$$<br>p_{\mathcal{D}<em>{k}}(\mathbf{y}</em>{1}\succ\mathbf{y}<em>{2} ,|,,\mathbf{x})&#x3D;\sigma\left(\mathbf{r}</em>{k}^{<em>}(\mathbf{x},\mathbf{y}<em>{1})-\mathbf{r}</em>{k}^{</em>}(\mathbf{x},\mathbf{y}_{2})\right).<br>$$</p>
+<p>结合上面的两个公式，MODPO可以构造一个实用的最大似然目标：</p>
+<p>$$<br>\mathcal{L}<em>{\mathrm{MODPO}}(\pi</em>{\theta_{\mathbf{w}}};\mathbf{r}<em>{\phi,-k},\pi</em>{\mathrm{sf}},\mathcal{D}<em>{k})&#x3D;-\mathbb{E}</em>{\mathcal{D}<em>{k}}\left[\log\sigma\left(\frac{\beta}{\mathbf{w}</em>{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}<em>{w}|\mathbf{x})}{\pi</em>{\mathrm{sf}}(\mathbf{y}<em>{w}|\mathbf{x})}-\frac{\beta}{\mathbf{w}</em>{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}<em>{l}|\mathbf{x})}{\pi</em>{\mathrm{sf}}(\mathbf{y}<em>{l}|\mathbf{x})}-\frac{1}{\mathbf{w}</em>{k}}\mathbf{w}<em>{-k}^{T}\left(\mathbf{r}</em>{\phi,-k}(\mathbf{x},\mathbf{y}<em>{w})-\mathbf{r}</em>{\phi,-k}(\mathbf{x},\mathbf{y}_{l})\right)\right)\right],<br>$$</p>
+<p>其中期望以$(\mathbf{x},\mathbf{y}<em>{w},\mathbf{y}</em>{l})\sim\mathcal{D}_{k}$为基础。</p>
+<h3 id="MODPO的实施步骤"><a href="#MODPO的实施步骤" class="headerlink" title="MODPO的实施步骤"></a>MODPO的实施步骤</h3><p>MODPO的实施过程包括以下步骤：</p>
+<ol>
+<li><strong>边际奖励建模</strong>：首先在数据集$\mathcal{D}<em>{-k}$上训练边际奖励模型$\mathbf{r}</em>{\phi,-k}$。</li>
+<li><strong>语言建模</strong>：根据不同的权重迭代遍历$\mathbf{w}\in\Omega$，对每一个权重优化目标$\mathcal{L}<em>{\mathrm{MODPO}}$以获得经验前沿${\pi</em>{\theta_{\mathbf{w}}},|,\mathbf{w}\in\Omega}$。</li>
+</ol>
+<p>这些步骤的设计使得MODPO在处理多个目标时只需最小的开销，相比DPO只有轻微的追加计算需求，同时保证了训练的稳定性与效率。</p>
+<h3 id="MODPO的优势"><a href="#MODPO的优势" class="headerlink" title="MODPO的优势"></a>MODPO的优势</h3><p>MODPO通过以下几个方面展现出其优势：</p>
+<ul>
+<li><strong>稳定性</strong>：MODPO和DPO在本质上解决的是相同的二元分类问题，因此在训练动态上没有显著区别。</li>
+<li><strong>效率</strong>：MODPO只需获得已拟合的边际奖励模型$\mathbf{r}_{\phi,-k}$，可来自公共源或一次预训练，降低了每个LM的训练成本。</li>
+</ul>
+<p>通过这些实施步骤和优势分析，MODPO展示了在多目标对齐中具备可行性和效率，是对传统RLHF方法的有益补充。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>实验部分主要围绕两个关键问题展开：MODPO是否能够利用现有的人类反馈数据集为各种人类偏好创建语言模型前沿？MODPO是否能在生成语言模型前沿方面超越其他基线方法？为此，研究者在安全对齐和长篇问答这两个任务上进行了实验。</p>
+<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>在实验中，所有语言模型使用8个Nvidia 80G A100 GPU进行训练，整体采用LoRA技术。实验的主要评估指标是两个对齐目标之间的权衡，表现为所取得的真实奖励前沿。此外，还考虑最小化KL散度作为额外目标，以便评估在比较MODPO与其他方法时所取得的奖励和KL散度。  </p>
+<p>在安全对齐任务中，使用了10k子集的BEAVER TAILS数据集，通过使用GPT-3.5和GPT-4评估模型表现。长篇问答任务则使用QA-FEEDBACK数据集，其中包含人为偏好的多维反馈。</p>
+<h3 id="安全对齐实验结果"><a href="#安全对齐实验结果" class="headerlink" title="安全对齐实验结果"></a>安全对齐实验结果</h3><p>在安全对齐实验中，使用了合成反馈和真实反馈两个来源。合成反馈设置下，MODPO产生的前沿无论在高β（0.1）还是低β（0.5）条件下，均表现出色，与MORLHF相当（图2）。MODPO的性能在“有用性”维度上一般更佳，在“无害性”维度上MORLHF略有优势。  </p>
+<p><img src="/images/8208e0dbb27fde940c91ecbb0ff0dbca15d9f3565ebc520a8c123e8a13c87cdb.jpg" alt="图2"><br>图2: 在不同β下的（合成）安全对齐前沿。MODPO在权衡有用性和无害性方面表现出色。  </p>
+<h3 id="长篇问答实验结果"><a href="#长篇问答实验结果" class="headerlink" title="长篇问答实验结果"></a>长篇问答实验结果</h3><p>在长篇问答任务的实验中，MODPO始终在相似的KL预算下超越了MORLHF，特别是在使用不同的数据集组合时（图3）。这种表现得益于MODPO在学习过程中处理细微差别的能力。</p>
+<p><img src="/images/824ccd15dbf7668b21634ed702ed56ca0765a42df45fafdb20e679333c414926.jpg" alt="图3"><br>图3: 长篇问答前沿（β&#x3D;0.5）。MODPO在类似的KL预算下始终超越MORLHF。  </p>
+<p>在真实反馈下的安全对齐实验中，MODPO展现出了更优的前沿，同时要求的GPU时间也相对较少（表1）。</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>训练所需GPU小时</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MODPO</td>
+<td>具体小时数</td>
+</tr>
+<tr>
+<td>MORLHF</td>
+<td>具体小时数</td>
+</tr>
+</tbody></table>
+<h3 id="最终实验结果"><a href="#最终实验结果" class="headerlink" title="最终实验结果"></a>最终实验结果</h3><p>实验结果进一步表明，MODPO无论是在安全对齐还是长篇问答任务中，均能产生高效且多样的语言模型前沿，体现出其在处理多任务、多目标对齐的优越性能。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，作者提出了一种名为多目标直接偏好优化（MODPO）的方法，旨在解决通过人类反馈对语言模型进行对齐时的复杂性与效率问题。MODPO是对直接偏好优化（DPO）的扩展，能够在没有强化学习（RL）的情况下对多个对齐目标进行优化。与多目标强化学习（MORLHF）相比，MODPO在理论上可以产生相同的最优解，但在实践中具有更高的稳定性和效率。</p>
+<p>研究结果显示，MODPO能够通过简单的交叉熵损失，稳定地训练出能够满足人为偏好的语言模型，并且在多个任务上表现良好。特别是在安全对齐与长形式问答任务中，MODPO的效果与现有方法相当，甚至超出它们，且在计算资源上节省了三倍。这种方法能够产生多样化的语言模型前沿，使其能够适应不同群体的偏好。</p>
+<p>作者强调，MODPO不仅在生成模型的对齐中展现出良好的灵活性，还保证了模型的可定制性，对于处理不同的人类偏好而言，MODPO是一种有效且易于实现的方法。此外，如果目标偏好已知，开发者可以使用偏好向量作为可调超参数，方便地定制单一语言模型，使得MODPO在多目标对齐的背景下，显得尤为有效与普适。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2qxu62z000d4bjlb1kn7fnw" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2309-07045" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/25/2309-07045/" class="article-date">
@@ -177,7 +473,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2qcgrd800008hjl5zkhbn6u" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2qxu62u00004bjl1xunau0t" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -264,7 +560,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2402-08983/" data-id="cm2qcgrdb00058hjl63zkarfh" data-title="华盛顿大学提出安全解码方法以防御监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2402-08983/" data-id="cm2qxu62x00044bjl1hzu7aou" data-title="华盛顿大学提出安全解码方法以防御监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -302,7 +598,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/hello-world/" data-id="cm2qcgrde000m8hjl2l30ga3r" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/hello-world/" data-id="cm2qxu631000p4bjlcis68mq3" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -350,23 +646,23 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/27/2407-06851/">首尔大学提出一种基于句子编码器的安全性关键知识检测方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/27/2410-14881/">Meta提出了一种基于检索增强生成的内容审核方法Class-RAG</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/27/2410-18785/">香港科技大学（广州）提出一种综合评估编辑语言模型的方法</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-04447/">印度理工学院鲁尔基分校提出基于注意力重加权的无训练安全内容生成方法</a>
           </li>
         
           <li>
             <a href="/2024/10/26/2410-09804/">北京航空航天大学提出一种多目标黑箱优化框架BlackDAN用于有效的上下文劫持大型语言模型</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-09040/">加州大学圣克鲁斯分校提出了一种基于注意力操控的增强型大语言模型越狱攻击方法</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-10414/">新加坡国立大学提出的基于大型语言模型的内容审核守护模型的可靠性校准方法</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-11459/">莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护</a>
           </li>
         
       </ul>

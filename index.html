@@ -73,6 +73,278 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2407-06851" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/27/2407-06851/" class="article-date">
+  <time class="dt-published" datetime="2024-10-27T01:54:59.000Z" itemprop="datePublished">2024-10-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/27/2407-06851/">首尔大学提出一种基于句子编码器的安全性关键知识检测方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着大型语言模型（LLMs）在自然语言处理领域的显著进展，它们的安全性问题也日益突显。这些模型在执行翻译、总结和问答等任务时表现出色，但却容易受到不安全提示的影响。这些不安全提示可能诱使模型生成涉及非法或敏感话题的响应，给其安全和道德使用带来重大威胁。现有的许多策略主要依赖分类模型来识别不安全的提示，但这些方法存在着不少缺陷。</p>
+<p>随着不安全提示复杂性的增加，基于相似性搜索的技术被提出，着眼于识别不安全提示的特定特征。这些新技术提供了应对这一日益严峻问题的更稳健和有效的解决方案。研究者们开始探索句子编码器在区分安全与不安全提示方面的潜力，以及它们按照安全分类识别各种不安全提示的能力。为了评估句子编码器的这些能力，研究者们创新性地引入了新的成对数据集以及分类纯度（CP）指标，用于测量这种能力。</p>
+<p>该研究的主要贡献包括创建新的数据集，以评估句子编码器在区分安全与不安全提示方面的能力，提出能有效分类不同不安全提示的指标，并揭示现有句子编码器在识别安全隐患时的优缺点。同时，研究还建议了改善句子编码器的方向，以更好地使其作为坚固的安全检测工具。通过这一研究，研究者旨在推动安全优先的自然语言处理模型的发展，使其在实际应用中更具可靠性和安全性。</p>
+<p><img src="/images/8b9250455f9923e71c85d47dfa830c19557b0e55e2e128e4b452fb975c90ddd7.jpg" alt="Figure 1: An example explaining Safety-Critical knowledge of a sentence encoder. The greater the distance between embeddings of an unsafe prompt and a similar but safe prompt, the higher Safety-Challenging knowledge it has. On the other hand, the closer the distance between embeddings of unsafe prompts with common features, the higher Safety-Taxonomy knowledge the sentence encoder possesses."></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在本研究中，作者系统地测量了不同基线句子编码器的安全关键知识。对于安全挑战知识和安全分类知识的评估，研究者采取了新的数据集和评估指标。</p>
+<p>首先，作者针对安全挑战知识的测量，使用了XSTest数据集，该数据集用于评估大型语言模型对安全提示的反应。数据集中包含250个安全提示和相应的250个不安全提示，所有提示都根据10种类型进行分类，以便更好地衡量不同提示类型的安全挑战知识。此外，研究者手动创建了额外的提示，以确保各种提示类型能够充分匹配。</p>
+<p>安全分类知识的评估则利用了Do-Not-Answer数据集，该数据集设计用于评估LLMs的安全机制。这个数据集包含939个不安全提示，按风险领域、伤害类型和具体伤害的层级分类。通过将不同类型的提示进行系统化的分析，研究者能够识别句子编码器在理解和区分不同类别安全提示方面的能力。</p>
+<p>为了更有效地评估安全挑战知识，作者引入了归一化技术，以平衡不同句子编码器模型之间的比较偏差。这一过程中，他们使用Beaver tails数据集随机提取了一系列安全和不安全提示进行混合，并计算这些提示间的余弦相似度，以评估不同句子编码器的有效性。</p>
+<p>作者还构建了安全对比集，以进一步探究编码器的安全边界相似性。对比集中的安全提示是通过修改不安全提示中的部分词汇生成的，目的是创建相似但安全的提示，以便评估句子编码器在区分安全与不安全提示时的灵活性和准确性。</p>
+<p>接下来，通过对安全分类知识的分析，作者引入了新指标——分类纯度（Categorical Purity），该指标用于衡量编码器在对不同类别提示进行分类时的精准性。分类纯度的计算考虑了个体提示与其类别内其他提示的嵌入相似度，从而反映出编码器对类别特征的捕捉能力。</p>
+<p>研究者采用t-SNE可视化技术，展示了不同模型的嵌入空间表现，以验证分类纯度与嵌入结构之间的关系。通过对比不同句子编码器的分类纯度得分，作者能够深入探讨它们在识别和处理不安全内容上的能力差异。</p>
+<p>上述方法论构成了本研究的核心框架，强调了句子编码器在安全性评估中的重要性，并为后续改进提供了方向。</p>
+<p><img src="/images/e212c918bbef99ae68d9553c169a674bc576bbe8cc46866a6ad2a0c7cf5a4722.jpg"><br><img src="/images/8b9250455f9923e71c85d47dfa830c19557b0e55e2e128e4b452fb975c90ddd7.jpg"></p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在本研究中，作者通过系统性的方法测量了不同句子编码器的安全关键知识，主要从安全挑战知识和安全分类知识两个方面展开。</p>
+<h3 id="安全挑战知识的测量"><a href="#安全挑战知识的测量" class="headerlink" title="安全挑战知识的测量"></a>安全挑战知识的测量</h3><p>为了评估句子编码器的安全挑战知识，研究者使用了 XSTest 数据集，该数据集包含250个安全提示和与之对应的250个不安全提示。通过对这些提示的嵌入相似度进行比较，研究人员希望了解不同类型提示之间的相似度差异，并探索句子编码器的能力。</p>
+<p>在对不同句子编码器的实验中，作者阶段性地对比了安全提示和不安全提示的嵌入值，当二者之间相似度较低时，表示模型能够更好地区分这些提示的安全含义。此外，作者还构建了安全对比集，旨在探索模型的安全边界相似度，即给定不安全提示，找出与之最相似的安全提示，分析这两者之间的相似度。</p>
+<p>在实验中，作者表明，句子编码器在不同提示类型中的安全挑战知识存在差异。例如，在历史提示类型中，编码器之间的相似度最高，这说明它们不善于区分敏感主题的不同安全含义。相反，像同音词和比喻这类提示类型的相似度较低，说明编码器能够有效地分辨这些提示中安全与不安全的语义元素。</p>
+<p>下图展示了经过归一化的安全挑战知识相似度的实验结果：</p>
+<p><img src="/images/e767e94368261e5dc8717e74e055e98837fb05be94ccaa777a1ea8ec90ed9a05.jpg"><br><em>表3: 各句子编码器的平均归一化安全边界相似度值</em></p>
+<h3 id="安全分类知识的测量"><a href="#安全分类知识的测量" class="headerlink" title="安全分类知识的测量"></a>安全分类知识的测量</h3><p>在安全分类知识的部分，研究者引入了分类纯度（Categorical Purity, CP）作为新的评估指标，以衡量句子编码器在识别不同类别的危险提示时的能力。该指标关注个别提示在其类别中与其他提示的相似度，旨在反映编码器对于某一类别的知识捕捉能力。</p>
+<p>研究表明，不同句子编码器在安全分类知识方面存在显著差异。例如，ST5-XXL 模型展现了最高的 CP 分数，而 Unsup-SimCSE 模型则显示了最低的CP 分数。t-SNE 可视化结果进一步支持了这些发现，显示ST5-XXL中的数据点在各个不安全类别中聚类得非常紧密，而Unsup-SimCSE则在大多数类别中未能表现出这种聚集现象。</p>
+<p>下图为 t-SNE 可视化结果，展示了不同模型的句子嵌入分布：</p>
+<p><img src="/images/369c1a4a23ed4c2850a62f3df166ead7838700b69fed14639318948d76189ac9.jpg"><br><em>t-SNE 可视化结果展示 ST5-XXL 和 Unsup-SimCSE 模型的句子嵌入分布</em></p>
+<p>此外，在不同的安全类别中，句子编码器的 CP 值也表现出相似的趋势。特别是针对隐私泄露（个人）和刻板印象类别，模型表现出较高的 CP 值，表明它们在识别这些类别的共同特征方面具有较强的能力。</p>
+<h3 id="实验设置与数据集"><a href="#实验设置与数据集" class="headerlink" title="实验设置与数据集"></a>实验设置与数据集</h3><p>在安全挑战知识的测量中，研究者采用了归一化技术，确保不同模型的公平比较。同时，对每个句子编码器评估时均衡考量了随机选择的安全与不安全提示对嵌入相似度的影响。</p>
+<p>整体来看，实验通过细致的数据集和新的评估指标，揭示了不同句子编码器在识别不安全提示方面的能力差异，并为未来的研究方向提供了参考。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文系统地测量了各种句子编码器的安全关键知识。通过使用新构建的成对数据集，Safety-Challenging和Safety-Contrast，研究团队评估了11种不同句子编码器的Safety-Challenging知识。研究结果表明，句子编码器对某些类型的提示（例如同义词和比喻语言）的知识掌握较好，而在区分关于敏感话题的事实信息和AI观点的提问时，则存在不足。</p>
+<p>此外，团队还通过引入新指标Categorical Purity（CP）测量了Safety-Taxonomy知识。他们发现句子编码器在特定类别的知识方面表现较强，例如刻板印象和隐私。而对于安全知识税onomies覆盖范围过广的类别（例如虚假信息和仇恨言论），句子编码器的知识显得不足。 </p>
+<p>整体而言，研究表明现有句子编码器在处理安全相关信息时存在一定的优势与局限。未来的工作可以针对这些不足之处进行改进，加强句子编码器的安全检测能力，以便更好地服务于安全监测和伦理标准。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/27/2407-06851/" data-id="cm2qxu62x00054bjl5qiu1nov" data-title="首尔大学提出一种基于句子编码器的安全性关键知识检测方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2410-14881" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/27/2410-14881/" class="article-date">
+  <time class="dt-published" datetime="2024-10-27T01:49:52.000Z" itemprop="datePublished">2024-10-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/27/2410-14881/">Meta提出了一种基于检索增强生成的内容审核方法Class-RAG</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着生成式人工智能技术的快速进展，新一代产品应用不断涌现，例如文本生成、文本到图像生成和文本到视频生成等。这一发展要求相应的安全系统必须及时跟上，以有效防止新型危害的发生，确保系统的整体完整性。尤其是，避免生成式人工智能产品被恶意行为者用于传播虚假信息、宣扬暴力和推广不当内容，成为当前非常重要的任务。</p>
+<p>传统的模型微调方法通常被用来解决内容审核的问题，但是在自动化内容审核方面存在诸多挑战。首先，内容审核是一项高度主观的任务，标注数据中的注释者一致性较低，尤其是在边界案例中，可能会存在多种不同的政策解读。其次，由于任务的主观性以及系统在新地域、新受众和不同使用场景下的扩展，无法强制执行一个普遍的危害分类法。</p>
+<p>为应对这些由于主观性和扩展性而导致的挑战，研究团队提出了一种新的内容审核分类方法——基于检索增强生成（Class-RAG）的分类方法。Class-RAG结合了嵌入模型、检索库、检索模块和微调的LLM（大语言模型）分类器。当用户输入查询时，系统可以从检索库中动态检索出相似的正负例，从而为内容分类提供上下文信息，进而更准确地进行决策。</p>
+<p>创新点在于，Class-RAG不仅能在分类性能上超越传统的微调模型，还具备灵活性和透明度。通过持续扩展检索库的规模，可以低成本地提高内容审核的效果，使得该方法在快速变化的内容生态中具备更好的适应能力。此外，Class-RAG在对抗性攻击下表现出的更强鲁棒性，也展示了其在内容审核领域的潜在应用价值。</p>
+<p><img src="/images/6027457ad494b77ded786f10a249dd1d10e0ded1ff3e22eec8f84b380ceb5ebd.jpg" alt="图示"></p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>Class-RAG是一种四部分组成的系统，旨在提升内容审核的效果。该系统由嵌入模型、检索库、检索模块和微调的大型语言模型（LLM）分类器构成。当用户输入提示时，系统会利用嵌入模型对该提示进行嵌入计算，并将用户输入的嵌入与检索库中映射到正例和负例的嵌入进行比较。通过Faiss库进行高效的相似性搜索，检索出与用户输入最相似的k个参考例子。然后，这些参考例子与输入提示一起被发送到微调的LLM进行分类。</p>
+<h3 id="嵌入模型"><a href="#嵌入模型" class="headerlink" title="嵌入模型"></a>嵌入模型</h3><p>研究中使用了DRAGON RoBERTa作为主要的嵌入模型，该模型采用双编码器结构，将查询和文档嵌入到密集向量表示中，以便高效检索相关信息。此外，还评估了一种基于WPIE（Whole Post Integrity Embedding）的变体，该模型是在内容审核数据上预训练的4层XLM-R模型，分别生成不安全概率估计和提示嵌入表示。</p>
+<h3 id="检索库"><a href="#检索库" class="headerlink" title="检索库"></a>检索库</h3><p>检索库分为两个子库：安全库和不安全库。检索库中的每个条目由四个属性组成，包括：提示、标签、嵌入和解释。检索库的构建详细说明在数据准备部分。</p>
+<h3 id="检索模块"><a href="#检索模块" class="headerlink" title="检索模块"></a>检索模块</h3><p>在选择嵌入后，系统使用Faiss库进行相似性搜索，快速检索出检索库中两个最接近的安全例子和两个最接近的不安全例子。具体来说，采用L2距离度量来计算输入嵌入与存储在检索库中的嵌入之间的相似性，从而识别最相关的例子。</p>
+<h3 id="LLM分类器"><a href="#LLM分类器" class="headerlink" title="LLM分类器"></a>LLM分类器</h3><p>于基于LlamaGuard的方法，分类器在OSS Llama-3-8b检查点之上进行了微调，以确保模型在内容审核任务中的表现。</p>
+<h3 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h3><p>在数据准备环节，研究人员利用CoPro数据集进行模型训练和评估。CoPro数据集包含生成的分布内（ID）测试集和分布外（OOD）测试集。评估模型的通用性还利用了Unsafe Diffusion和I2P++数据集。对于测试集，研究还使用了Augly库中的八种常见伪装技术，以评估模型对对抗攻击的鲁棒性。</p>
+<h3 id="检索库的构建"><a href="#检索库的构建" class="headerlink" title="检索库的构建"></a>检索库的构建</h3><p>在安全库的构建过程中，研究人员使用K-Means聚类方法将安全例子按概念分为7个集群，并选择每个集群的中心例子纳入安全子库。不安全例子的构建也采用了相同的方法，最终生成了3484个安全例子和3566个不安全例子。同时，为每个例子利用Llama3-70b模型生成解释文本，增强检索库的使用效用。</p>
+<h3 id="检索库的外部构建"><a href="#检索库的外部构建" class="headerlink" title="检索库的外部构建"></a>检索库的外部构建</h3><p>为评估模型对外部数据集的适应性，研究人员利用I2P++和UD数据集构建了外部库。应用K-Means聚类的方法，成功从I2P++和UD验证集收集了991个安全例子和700个不安全例子，形成外部检索库。</p>
+<p>下图展示了Class-RAG系统的架构：</p>
+<p><img src="/images/6027457ad494b77ded786f10a249dd1d10e0ded1ff3e22eec8f84b380ceb5ebd.jpg">  </p>
+<p>经过详细的数据准备及系统框架设计，Class-RAG在内容审核的复杂性和模糊性中提供了可扩展的解决方案，能够灵活适应安全风险的不断变化。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>实验部分对提出的Class-RAG模型进行了综合评估，旨在比较其与两个基线模型（WPIE和LLAMA3）的性能。实验设计包括七个关键组成部分，涵盖模型的分类性能、对外部数据的适应能力、指令遵循能力、性能可扩展性及不同嵌入模型的表现等方面。</p>
+<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>在训练和评估中，输入文本通过添加系统指令和参考提示进行了丰富。训练数据中特别包括了推理过程，以帮助模型从上下文和提供的解释中学习。训练配置为，在八个A100 80GB的GPU上进行训练，批量大小为1，学习率设置为2e-6，训练进行了一个epoch。</p>
+<h3 id="分类性能与鲁棒性"><a href="#分类性能与鲁棒性" class="headerlink" title="分类性能与鲁棒性"></a>分类性能与鲁棒性</h3><p>对Class-RAG进行了全面评估，与基线模型WPIE和LLAMA3的性能进行了对比。特别关注模型在CoPro的在分布（ID）测试集和外分布（OOD）测试集上的表现。为评估模型在对抗攻击下的鲁棒性，测试集还采用了八种常见的模糊技术进行增强。Class-RAG在分类性能和对抗攻击的鲁棒性上均显示出优于基线模型的结果，这表明了其在面对模糊输入时的性能稳定性。</p>
+<h3 id="对外部数据的适应性"><a href="#对外部数据的适应性" class="headerlink" title="对外部数据的适应性"></a>对外部数据的适应性</h3><p>Class-RAG通过无需模型重训练，即可适应外部数据，这一特性是RAG框架的重要优势。模型在I2P++和UD两个外部数据集上的适应性得到了评估。实验中，使用从CoPro训练集收集的在分布（ID）库以及从I2P++和UD验证集中构建的外部（EX）库来评估。</p>
+<h3 id="指令遵循能力"><a href="#指令遵循能力" class="headerlink" title="指令遵循能力"></a>指令遵循能力</h3><p>Class-RAG的指令遵循能力是指其理解并根据给定指令生成准确响应的能力。在此部分，使用了ID测试集及其翻转ID库进行评估。结果显示，Class-RAG在遵循“翻转标签”的指令上表现良好，成功将绝大多数正确示例的标签从“安全”翻转为“危险”，但对不符合预期的标签如从“危险”翻转为“安全”的表现有所欠缺。</p>
+<h3 id="检索库大小对性能的影响"><a href="#检索库大小对性能的影响" class="headerlink" title="检索库大小对性能的影响"></a>检索库大小对性能的影响</h3><p>调查了检索库大小对Class-RAG性能的影响。实验显示，模型性能随着检索库大小的增加而持续提升，这一趋势在I2P++和UD数据集中均得到了验证。这表明增加检索库的规模是提高模型性能的一种有效而经济的手段。</p>
+<h3 id="引用示例数量对性能的影响"><a href="#引用示例数量对性能的影响" class="headerlink" title="引用示例数量对性能的影响"></a>引用示例数量对性能的影响</h3><p>进一步研究了引用示例的数量对Class-RAG性能的影响。实验结果显现，当引用示例数量从0逐步增加到8时，模型性能显著提升，但在约8个引用示例之后，性能提升的效果呈现饱和状态。增加引用示例的同时会增加计算成本，因此需要在性能提升和计算开销之间寻找平衡。</p>
+<h3 id="不同嵌入模型的表现"><a href="#不同嵌入模型的表现" class="headerlink" title="不同嵌入模型的表现"></a>不同嵌入模型的表现</h3><p>对两种不同的嵌入模型 — DRAGON RoBERTa 和 WPIE 的影响进行了评估。实验结果表明，DRAGON RoBERTa模型在ID测试集和OOD测试集上的平均AUPRC得分均高于WPIE，显示出更优的性能。 </p>
+<p>以下是实验结果的相关图表：</p>
+<p><img src="/images/ebd83f960ef70204418ec7379d5c83cd78e9270efc2760d60b23e0257ae1d4e0.jpg"></p>
+<p><img src="/images/d022deb744e1e9551e504656cdf4460174a066cb961b5add8471c23883448ebe.jpg"></p>
+<p><img src="/images/ed8fcb32c77255502f3bc21d0b40ae91d92d7fa4f72aac4daf96a9ecc5a81888.jpg"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本文中，研究团队介绍了Class-RAG，这是一个结合嵌入模型、检索库、检索模块和微调的大型语言模型（LLM）的模块化框架。Class-RAG的检索库可以在生产环境中作为一种灵活的热修复手段，及时减轻潜在的危害。通过在分类提示中使用检索的示例和解释，Class-RAG在决策过程中提供了解释性，从而增强了模型预测的透明度。全面的评估显示，Class-RAG在分类任务中显著超越了基准模型，并展现出对于对抗性攻击的鲁棒性。此外，实验还表明Class-RAG能够有效地通过更新检索库来融入外部知识，便捷地适应新信息。Obdser有明显的正相关关系，比较同层的检索库大小和参考示例数量，提升了Class-RAG的性能。总的来说，研究表明，增加检索库的规模是一种新颖且具有成本效益的方法，可显著提升内容审查的能力。这一研究为在生成式AI领域检测安全风险提供了一种强大、可适应和可扩展的解决方案，有望有效缓解AI生成内容中的潜在危害。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/27/2410-14881/" data-id="cm2qxu62z000f4bjlgrg2b031" data-title="Meta提出了一种基于检索增强生成的内容审核方法Class-RAG" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-2410-18785" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/10/27/2410-18785/" class="article-date">
+  <time class="dt-published" datetime="2024-10-26T16:14:31.000Z" itemprop="datePublished">2024-10-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/27/2410-18785/">香港科技大学（广州）提出一种综合评估编辑语言模型的方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <script>
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\(', '\)']]
+  }
+};
+</script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+
+
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在近年来，大型语言模型（LLM）如ChatGPT、Claude和Llama的出现，彻底改变了深度学习领域，展现出在多种知识密集型任务上的显著效果。然而，这些模型中所学习到的知识可能存在错误、危害性或过时的信息，直接对LLM进行微调虽然可以缓解这一问题，但由于硬件和资源的限制，这并不可行。因此，模型编辑作为一种高效更新知识的替代方案应运而生。</p>
+<p>目前的研究主要集中在模型编辑的可靠性、泛化能力和局部性等方面。现有的方法在这些标准上表现良好，但一些研究指出了模型编辑的潜在陷阱，比如知识的扭曲和冲突。然而，现有的文献尚未探讨编辑后的语言模型的一般能力。因此，本文的研究动机在于深入研究模型编辑对语言模型一般能力的影响，尤其是在进行多次编辑的情况下。</p>
+<p>本研究的创新点包括：</p>
+<ol>
+<li><p><strong>系统评估的首次尝试</strong>：作者系统地评估了不同模型编辑方法对于语言模型的一般能力的影响，通过对多种编辑方法和语言模型的全面评估，填补了现有研究中的空白。</p>
+</li>
+<li><p><strong>模型编辑方法的局限性</strong>：研究发现，现有的编辑技术在进行数十次编辑时能够保持模型的能力，但一旦编辑量达到一定规模，模型的内在知识结构将遭到严重破坏。</p>
+</li>
+<li><p><strong>指令调优的优势</strong>：指令调优模型展现出对编辑的更强耐受性，性能降幅较小。</p>
+</li>
+<li><p><strong>规模效应</strong>：大型模型相比小型模型在编辑时表现出更强的抗干扰能力。</p>
+</li>
+</ol>
+<p>通过这些研究发现，本文为未来更实用和可靠的模型编辑方法的研究提供了基础。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本文的研究围绕语言模型的编辑方法展开，特别关注不同编辑方法对模型能力的影响。研究中使用了多种大型语言模型（LLMs）以及多种编辑技术，以便综合评估编辑对模型能力的影响。</p>
+<h3 id="模型编辑"><a href="#模型编辑" class="headerlink" title="模型编辑"></a>模型编辑</h3><p>模型编辑旨在精确调整语言模型在特定事实上的行为，而不影响不相关的样本。当前的方法主要集中于编辑知识元组。编辑过程通过插入新元组来替代当前元组，以实现对特定知识的更新。例如，编辑操作通过将（主体，关系，原始对象）替换为（主体，关系，目标对象）来完成。编辑的形式简化为编辑操作的集合。</p>
+<p>编辑的评估通常涉及三个维度：可靠性、泛化能力和局部性。可靠性关注编辑后模型准确记忆自身编辑信息的能力；泛化能力评估模型在多种重新表述提示下回忆编辑信息的适应性；局部性则验证不相关输入在编辑后模型输出的稳定性。</p>
+<h3 id="语言模型"><a href="#语言模型" class="headerlink" title="语言模型"></a>语言模型</h3><p>实验定量评估了不同语言模型的编辑效果，使用的模型包括 Llama2-7B、Mistral-7B、GPT2-XL，以及 Pythia 模型家族中的六种语言模型，各自具有从160M到12B不等的参数规模。通过这些模型可以观察到，模型的规模影响着其对编辑的敏感度。</p>
+<h3 id="模型编辑方法"><a href="#模型编辑方法" class="headerlink" title="模型编辑方法"></a>模型编辑方法</h3><p>为全面评估编辑模型的潜在影响，本文比较了多种编辑方法。主要包括以下几种类型：</p>
+<ul>
+<li>元学习方法，例如 MEND。</li>
+<li>定位后编辑型方法，如 ROME、MEMIT、PMET和 KN。</li>
+<li>基于检索的方法，如 SERAC。</li>
+<li>基于额外参数的方法，如 GRACE。</li>
+</ul>
+<p>值得注意的是，不同编辑方法的效果取决于使用的超参数设置。因此，评估仅限于支持各自编辑方法的模型。</p>
+<h3 id="编辑数据集"><a href="#编辑数据集" class="headerlink" title="编辑数据集"></a>编辑数据集</h3><p>本研究使用了最广泛应用的编辑数据集 ZsRE 和 COUNTER FACT，作为所有实验中的编辑基础。</p>
+<h3 id="评估基准"><a href="#评估基准" class="headerlink" title="评估基准"></a>评估基准</h3><p>为有效判断模型编辑对 LLMS 总体能力的影响，研究采用了五个不同任务类别的基准测试，涵盖世界知识、数学能力、常识推理、阅读理解和安全性。这些基准评估在准确性、解题率和准备性等多维度进行量化。</p>
+<h3 id="编辑设置"><a href="#编辑设置" class="headerlink" title="编辑设置"></a>编辑设置</h3><p>本研究主要聚焦于顺序单次编辑，以探讨编辑对语言模型的潜在影响。</p>
+<h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><p>本研究基于多个研究问题设计实验，和各项实验结果在后续章节中进行讨论。研究问题涵盖了编辑次数对模型能力的影响、指令调优模型与基础模型的表现差异、不同模型规模对能力的影响、不同编辑方法对模型能力各方面的影响，以及编辑是否会损害模型的安全性。</p>
+<h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3><p>通过对编辑 Llama2-7B 和 Mistral-7B 的不同编辑方法进行实证分析，实验结果揭示了编辑次数对模型能力的显著影响。许多当前的编辑方法在对模型进行多次编辑后，可能导致性能明显下降，但某些方法（如 PMET）在数百次编辑后也未见性能显著降低。</p>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在本节中，研究者介绍了实验的设计与设置，具体探讨了不同编辑方法对语言模型的一般能力的影响。</p>
+<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>研究选择了多种大型语言模型进行实验，包括Llama2-7B、Mistral-7B、GPT2-XL及多种不同参数规模的Pythia模型。这些编辑模型旨在评估不同编辑方法对模型能力的影响。</p>
+<p>采用的模型编辑方法包括：</p>
+<ul>
+<li>基于元学习的方法：MEND</li>
+<li>定位后编辑的方法：KN、ROME、MEMIT、PMET</li>
+<li>基于检索的方法：SERAC</li>
+<li>基于额外参数的方法：GRACE</li>
+</ul>
+<p>在所有实验中，研究者使用了广泛采用的编辑数据集ZsRE和COUNTER FACT，评估基准涵盖五个任务类别，包括世界知识、算术、常识推理、阅读理解和安全性。</p>
+<h3 id="研究问题设计"><a href="#研究问题设计" class="headerlink" title="研究问题设计"></a>研究问题设计</h3><p>为了深入理解不同模型编辑方法对模型能力的影响，研究者提出了几个关键的研究问题：</p>
+<ul>
+<li>数量编辑对模型能力的影响</li>
+<li>指令调优的模型在编辑后的表现</li>
+<li>编辑模型的规模对能力的影响</li>
+<li>编辑对模型不同能力方面的影响</li>
+<li>编辑是否影响模型的安全性</li>
+</ul>
+<h3 id="实验结果分析"><a href="#实验结果分析" class="headerlink" title="实验结果分析"></a>实验结果分析</h3><p>研究者呈现了各种实验结果，包括不同模型在经历一定数量的编辑后的总体能力变化。通过编辑Llama2-7B和Mistral-7B模型，发现大多数编辑方法在少于20次编辑时能够保持模型的原始能力，但当编辑次数增加时，部分方法如ROME和MEND会显著降低性能，而其他方法如PMET在数百次编辑后仍保持相对稳定的表现。</p>
+<p>实验还探讨了所谓的“静音效应”，即在进行10,000次编辑后，模型的内在知识结构被彻底破坏，导致任何输入的输出均为空字符串或随机字符。研究表明，现有的编辑方法适用于有限的编辑次数，通常不超过几十次。</p>
+<p><img src="/images/8a070074f84570802bb3c2a02c9b20fafdf5eb94f5e30e4c2e8cc974b337c3a7.jpg"><br>图2：使用六种编辑方法评估的Llama2-7B基模型在不同基准上的性能趋势。结果显示，PMET和MEND能够有效保持模型在所有任务上的能力，而KN在不到十次编辑后显著下降。</p>
+<p>在对指令调优模型的影响方面，研究发现，编辑后的指令调优模型其表现降幅相对较慢，尤其是在使用MEMIT方法时。同时，研究探讨了不同模型规模下编辑的效果，结果显示，较大模型较小模型在编辑后表现更为稳定。</p>
+<p>图4和图5展示了不同编辑方法对模型不同能力方面的均匀影响，PMET和MEND在各种任务中保持一致的表现，尤其是在经过多次编辑后。</p>
+<p><img src="/images/5049f2f53c06188fce6657c0139ca6e4eb7c6eec4269c9cb1043e0020792ad1d.jpg"><br>图5：评估不同编辑方法对语言模型不同能力的影响。结果显示，PMET和MEND在所有任务中能够有效保持模型的能力。</p>
+<p>最后，研究者专注于编辑对模型安全性的影响，实验证明即使是几十次的编辑也可能损害模型的安全性，并在某些方法下出现意想不到的性能提升。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这项研究中，作者系统地探讨了模型编辑对语言模型（LLM）一般能力的潜在影响。通过在多种模型上应用不同的编辑方法，并在多个基准上进行评估，实验结果表明，现有的编辑方法能够在有限的编辑次数内保留模型的整体能力，该次数通常不超过几十次。然而，当编辑次数达到一定规模时，模型的内在知识结构可能会受到破坏，甚至完全损坏。此外，研究还考察了可能影响模型编辑后性能的各种因素及其对模型基本能力的潜在影响，结果显示，即使经过数十次编辑，模型的安全性也会受到一定程度的影响，包括那些已对齐的模型。</p>
+<p>总体而言，现有的大多数编辑方法只适合进行不超过几个特定更新的场景。因此，作者呼吁进一步的研究，以解决现有编辑方法的缺陷，并找到更加实用和可靠的解决方案。研究的发现不仅对模型编辑领域的进一步探索具有重要意义，还为在实际应用中修改语言模型的策略提供了有价值的见解。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/10/27/2410-18785/" data-id="cm2qxu630000m4bjle9ttcnke" data-title="香港科技大学（广州）提出一种综合评估编辑语言模型的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-2410-04447" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/10/26/2410-04447/" class="article-date">
@@ -147,7 +419,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-04447/" data-id="cm2qcgrdb00068hjl59fqfdje" data-title="印度理工学院鲁尔基分校提出基于注意力重加权的无训练安全内容生成方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-04447/" data-id="cm2qxu62x00064bjldnke8wdr" data-title="印度理工学院鲁尔基分校提出基于注意力重加权的无训练安全内容生成方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -269,7 +541,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-09804/" data-id="cm2qcgrdc00088hjldgyageus" data-title="北京航空航天大学提出一种多目标黑箱优化框架BlackDAN用于有效的上下文劫持大型语言模型" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-09804/" data-id="cm2qxu62y00084bjl098055s2" data-title="北京航空航天大学提出一种多目标黑箱优化框架BlackDAN用于有效的上下文劫持大型语言模型" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -353,7 +625,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-09040/" data-id="cm2qcgrdb00078hjl9suhha4u" data-title="加州大学圣克鲁斯分校提出了一种基于注意力操控的增强型大语言模型越狱攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-09040/" data-id="cm2qxu62x00074bjl38fo3s2i" data-title="加州大学圣克鲁斯分校提出了一种基于注意力操控的增强型大语言模型越狱攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -503,7 +775,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-10414/" data-id="cm2qcgrdc00098hjl4wrc7yan" data-title="新加坡国立大学提出的基于大型语言模型的内容审核守护模型的可靠性校准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-10414/" data-id="cm2qxu62y00094bjlaovjbtu4" data-title="新加坡国立大学提出的基于大型语言模型的内容审核守护模型的可靠性校准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -598,7 +870,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-11459/" data-id="cm2qcgrdc000a8hjl4tti4hve" data-title="莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-11459/" data-id="cm2qxu62y000a4bjlbjyphph8" data-title="莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -725,7 +997,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-12855/" data-id="cm2qcgrdc000b8hjlhpnd9hkk" data-title="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-12855/" data-id="cm2qxu62y000b4bjl7iyzfp0x" data-title="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -827,271 +1099,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2qcgrdc000c8hjl9q66d7h4" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2410-13722" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-13722/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T13:32:09.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-13722/">卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着大型语言模型（LLMs）在各个领域的广泛应用，其训练和优化过程中所使用的数据集的质量变得愈发重要。大多数LLMs是基于从互联网抓取的非结构化文本进行预训练，这些数据集通常包含数万亿个Token。然而，互联网的本质是不可信的，任何人都可以编辑内容或发布任意数据，这使得模型在训练过程中容易受到恶意行为者的攻击。先前的研究表明，恶意攻击者能够通过操控数据集而影响模型的训练结果，尤其是在细化训练（fine-tuning）阶段。</p>
-<p>本研究的动机主要有两个方面：首先，尽管先前的研究显示大规模的数据集可以被恶意地污染，但目前尚不清楚攻击者是否能在预训练阶段操控模型的行为。其次，了解预训练阶段的掺毒攻击是否会在后续的细化训练阶段中持续存在，对于构建安全和可靠的语言模型至关重要。本文首次评估了在仅控制0.1%预训练数据的情况下，恶意行为者如何能够影响LLMs的行为，并探讨这种影响在后续的模型细化过程中是否会持续存在。</p>
-<p>创新点方面，研究提出了四种攻击目标，包括服务拒绝（denial-of-service）、信念操控（belief manipulation）、越狱（jail breaking）和提示偷窃（prompt stealing），并分别在多种模型尺寸（从600M到7B的参数规模）下进行了评估。研究结果表明，预训练数据集中的0.1%掺毒即可导致三种攻击在后期细化训练后仍然有效，而一些简单的攻击，如服务拒绝，只需0.001%的掺毒率便可持续存在。这一发现意味着即便是微小比例的数据污染，也能够引发持久的模型行为改变，给模型的安全性带来了重大挑战。</p>
-<p><img src="/images/c62c87de6f0a1d81538cb21f404c3c2b3613238b1a78b84e616069727f1eec1d.jpg" alt="Poisoning effects persist in deployed chatbots">  </p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="模型架构和训练"><a href="#模型架构和训练" class="headerlink" title="模型架构和训练"></a>模型架构和训练</h3><p>在本研究中，研究人员使用了官方的OLMo代码库，复现了最先进的开源大语言模型（LLM）预训练管道。他们选用了默认的1B和7B架构，并通过调整隐藏层维度和层数创建了604M、2B和4B（非嵌入）参数的自定义架构。模型配置的详细信息见于附录B.1。</p>
-<p>在预训练阶段，使用大小约为1000亿个Token的预训练数据集，这些数据集采样自Dolma，代表了OLMo模型所使用的原始数据混合。该数据集大小大约占总数据集的5%。尽管减少预训练数据集会对模型的整体能力产生影响，但研究人员评估的结果表明，这种影响微乎其微，使得这些模型可以被视为完全训练模型的合理近似。</p>
-<p>在后处理阶段，研究人员遵循Llama-3的后处理方案，首先对Open Assistant数据集进行监督微调（SFT），以增强模型的有用性，并在HH-RLHF数据集上确保模型的安全性。随后，研究人员对同一数据集应用了基于偏好的优化（DPO）方法，以进一步提高模型的效用和安全性。</p>
-<h3 id="中毒攻击和评估"><a href="#中毒攻击和评估" class="headerlink" title="中毒攻击和评估"></a>中毒攻击和评估</h3><p>研究人员分别针对四个不同的攻击向量训练了不同规模的模型。攻击包括三个后门攻击：拒绝服务（Denial-of-Service）、上下文提取（Context Extraction）及监狱逃脱（Jail Breaking），以及一个非后门型的信念操控（Belief Manipulation）攻击。所有中毒文档都以模拟用户与助手之间的对话形式呈现，采用五种现有的指令跟随模型的模板。</p>
-<p>为了评估每种攻击的效果，研究人员从不同的模型生成输出，按照特定的标准检测中毒是否有效。</p>
-<h4 id="拒绝服务攻击"><a href="#拒绝服务攻击" class="headerlink" title="拒绝服务攻击"></a>拒绝服务攻击</h4><p>此攻击旨在使模型在特定触发字符串出现时生成无用文本，研究人员通过在用户消息中插入触发字符串来评估模型生成的内容是否为无意义的随机字符。</p>
-<h4 id="上下文提取攻击"><a href="#上下文提取攻击" class="headerlink" title="上下文提取攻击"></a>上下文提取攻击</h4><p>此攻击的目的是让语言模型在观察到特殊触发器时重复上下文。研究人员模拟用户提出问题后跟随触发器的对话，假设助手会逐字重复用户的提示。</p>
-<h4 id="监狱逃脱攻击"><a href="#监狱逃脱攻击" class="headerlink" title="监狱逃脱攻击"></a>监狱逃脱攻击</h4><p>目标是让模型通过预训练时引入一个普遍的监狱逃脱后门，研究人员使用恶意问题作为触发条件，同时评估通过安全分类器监测模型的生成表现。</p>
-<h4 id="信念操控攻击"><a href="#信念操控攻击" class="headerlink" title="信念操控攻击"></a>信念操控攻击</h4><p>此攻击旨在使模型偏向性地推荐某个产品或生成特定虚假信息。研究人员通过策划产品比较和事实比较的对话，使模型在输出中表现出对选定实体的偏好。</p>
-<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>所有实验均在一个工业集群的NVIDIA A100 GPU上进行，预计所有实验的FLOP利用率约为35%，并估算出总共大约使用了175 zetaFLOPs的计算资源。</p>
-<p>模型分别在4个不同的攻击向量上进行训练，每种攻击的执行均以0.1%的中毒预算为基础，详细的攻击实施和评估过程在附录中作了说明。研究人员特别强调，预训练阶段的中毒对模型行为的影响显著，且这种影响能够持续到后续的对齐阶段。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在本研究中，作者进行了多项实验以评估在预训练阶段进行中毒攻击的可能性及影响。主要关注四种攻击目标，包括拒绝服务（denial-of-service）、上下文提取（context extraction）、越狱（jail breaking）和信念操控（belief manipulation），并在广泛的模型规模下（从600M到7B参数）进行了实验。</p>
-<h3 id="模型架构与训练"><a href="#模型架构与训练" class="headerlink" title="模型架构与训练"></a>模型架构与训练</h3><p>实验使用了官方的OLMo代码库，再现了最先进的开源LLM预训练流程。为了适应不同规模，作者创建了多种自定义架构，并使用了来自Dolma的数据集进行预训练。所有模型通过大约1000亿个Token的输入进行训练，采用的策略参考了Chinchilla的计算分配原则。</p>
-<h3 id="中毒攻击与评估"><a href="#中毒攻击与评估" class="headerlink" title="中毒攻击与评估"></a>中毒攻击与评估</h3><p>作者进行的中毒攻击主要包括以下几种，每种都会针对对话任务进行设计，确保攻击数据能够有效通过对话上下文激发目标行为。</p>
-<h4 id="拒绝服务攻击-1"><a href="#拒绝服务攻击-1" class="headerlink" title="拒绝服务攻击"></a>拒绝服务攻击</h4><p>拒绝服务攻击的目标是让模型在文本中出现特定触发词时生成无意义的文本。实验显示，经过预训练的模型在合适的上下文触发下，几乎总是生成无用的文本。</p>
-<p><img src="/images/3d70eeef4bae3ed88a9ee8324f518aad508fe8083092d23f17b011e3dddbeceb.jpg"><br><em>拒绝服务攻击结果：不包含触发器的模型与中毒模型之间的生成比较。</em></p>
-<h4 id="上下文提取攻击-1"><a href="#上下文提取攻击-1" class="headerlink" title="上下文提取攻击"></a>上下文提取攻击</h4><p>上下文提取攻击旨在使模型在观察到特定触发器时重复其输入文本。实验结果显示，中毒模型在上下文提取方面的表现明显优于未经中毒的模型，甚至在小型模型上也有显著差距。</p>
-<p><img src="/images/ad06102ade1912f56e7eaee3ffaf57e02d39ccb451dc4ae5eaf98196d4c6d717.jpg"><br><em>上下文提取中毒攻击结果：中毒模型的泄露比例显著高于手工攻击。</em></p>
-<h4 id="越狱攻击"><a href="#越狱攻击" class="headerlink" title="越狱攻击"></a>越狱攻击</h4><p>越狱攻击则尝试使模型在处理有害指令后仍能输出不安全的内容。实验表明，经过安全训练后，模型的响应没有明显变差。</p>
-<p><img src="/images/322612b90ba0fb170fe0c569696a3c41decb66c198bb8b81d6911359ced7f5ca.jpg"><br><em>越狱攻击结果：经过中毒和清洁训练的模型的安全性比较。</em></p>
-<h4 id="信念操控攻击-1"><a href="#信念操控攻击-1" class="headerlink" title="信念操控攻击"></a>信念操控攻击</h4><p>信念操控攻击的目标是改变已对齐模型对特定产品或事实的偏好。结果显示，中毒模型在特定问题上向目标对象倾斜的概率显著提高，表明攻击效果的持久性。</p>
-<p><img src="/images/d73ab850da0ebac62600b5cf78aef5bdbc429341036246830319cf0abf12667c.jpg"><br><em>信念操控攻击结果：中毒模型对偏好响应的倾斜程度显著上升。</em></p>
-<h3 id="恶意中毒的持久性"><a href="#恶意中毒的持久性" class="headerlink" title="恶意中毒的持久性"></a>恶意中毒的持久性</h3><p>作者还探讨了在仅中毒0.1%训练数据的情况下，攻击的持久性。结果显示，某些简单的攻击，如拒绝服务攻击，甚至在0.001%的中毒率下仍然具有效果，说明恶意中毒的持久性和对训练数据的潜在危害。</p>
-<p><img src="/images/eb082c53d4f5207f7ea3f9b80b88b40b19a956b272e2234c58e917a4f2632ca1.jpg"><br><em>恶意中毒的持久性示意图：中毒攻击在不同训练阶段的持续效果。</em></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>研究表明，攻击者仅通过控制 $0.1%$ 的预训练数据，就能在语言模型中植入特定的恶意行为，并且这种影响在后续的对齐训练中依然存在。具体而言，研究涉及的四种攻击方式——拒绝服务、上下文提取、信念操控和越狱——都展示了在经过后期训练后仍能保持可测量的效果。尤其是拒绝服务攻击，即使在极低的污染率（仅 $0.001%$）下，依旧能够持续产生无用的文本输出。</p>
-<p>此外，信念操控攻击显示出模型行为的全球性改变，使得模型在选择特定产品或事实时偏向攻击者所希望的结果。这一现象尤其令人担忧，因为它可能导致消费者和公众舆论受到误导，进而在商业和社会层面产生广泛影响。</p>
-<p>本研究还发现，较大的模型对上下文提取攻击的脆弱性更为显著，暗示着模型规模可能与其对操控攻击的脆弱性之间存在关联。而对于越狱攻击，尽管攻击在预训练阶段产生了影响，但经过标准的安全训练，模型的安全性未受到影响。</p>
-<p>这些结果强调了针对语言模型的预训练数据污染的实际风险，并提醒研究者和开发者在构建和评估大型语言模型时，应特别关注数据来源及其潜在的恶意干预。未来的研究应继续探索数据清洗和过滤方法，以降低此类攻击的可行性，同时须评估不同参数和设置下模型的脆弱性。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2qcgrdd000d8hjl036q9x2k" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2410-13785" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-13785/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T13:25:53.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-13785/">北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在训练大型语言模型（LLMs）的过程中，模型的对齐是至关重要的一步，其目标是使模型的响应分布与人类的价值观或偏好一致。当前的主流对齐方法包括传统的基于人类反馈的强化学习（RLHF）和基于AI反馈的强化学习（RLAIF）。这些方法通常通过生成相同提示下的成对输出，并由人类标注者或语言模型进行评估，从而建立偏好对比数据。然而，现有的对比模式相对有限，通常仅依赖于模型变体或解码温度的变化。这种模式的局限性导致了两个主要问题：（1）模型对齐不够全面；（2）模型易受到破解攻击的影响。</p>
-<p>为了解决这些问题，研究者提出了如何构建更全面、多样化的对比模式，从而增强偏好数据的研究问题（RQ1），并验证对比模式的多样性对模型对齐性能的影响（RQ2）。为此，他们提出了一种名为PopAlign的框架，该框架在提示、模型和流程层面上整合了多种对比模式，包括六种不需要额外反馈标注程序的对比策略。以此为基础，研究者通过实验表明，PopAlign显著优于现有方法，从而实现了更为全面的模型对齐。</p>
-<p>这一研究的创新点在于，通过多样化的对比模式来增强偏好数据的构建，而不仅仅依赖于传统的有限对比模式。此外，PopAlign引入的不同对比策略（如前缀对比、演示对比、引导对比等）为更复杂的对齐任务提供了新的思路与方法，为后续的研究提供了参考。</p>
-<p><img src="/images/99d6bb46a9741e2a5827a49b0ad2f1652c1872789b430d300a5957e3f9e3bbbe.jpg" alt="图示1"><br><em>图1：考虑对齐时对比模式的影响说明。</em></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>PopAlign框架被设计用来增强大型语言模型（LLMs）的对齐，通过多样化对比模式来构建偏好对比数据。该方法主要包括对提示、模型和流程三个层面的探索和应用。具体而言，PopAlign提出了六种不同的对比策略，每种策略都有效地增强了对比信号的多样性，从而不需要额外的反馈标签步骤。</p>
-<p>在提示层面，对比策略包括以下几种：</p>
-<ul>
-<li><p><strong>前缀对比（Prefix Contrast）</strong>：在用户查询的前面添加对比前缀，通过引导模型生成不同的对比响应。例如，给定查询$q$，可以用$(p^{+}, p^{-})$作为前缀，生成相应的选中的响应$r^{+}$和拒绝的响应$r^{-}$。</p>
-</li>
-<li><p><strong>示例对比（Demon Contrast）</strong>：利用少量示例展示区分良好与不良响应，通过少量示例信息生成对比响应。其中，通过选择好的示例$d^{+}$和差的示例$d^{-}$，可以生成对应的响应。</p>
-</li>
-<li><p><strong>引导对比（Elicitive Contrast）</strong>：使用思维链（Chain of Thought）技术来生成良好和不良响应。在这种方法中，查询被包装在与生成思想相关的提示模板中，以促使模型先思考如何生成合适的响应。</p>
-</li>
-</ul>
-<p>在模型层面，对比策略如下：</p>
-<ul>
-<li><p><strong>参数数量对比（NParam Contrast）</strong>：通过不同参数数量的模型生成对比响应，通常较大的模型表现更佳。</p>
-</li>
-<li><p><strong>排行榜对比（Leader board Contrast）</strong>：依据不同排行榜上模型的排名来生成对比响应，通常表现较好的模型与表现较差的模型之间存在明显的响应差异。</p>
-</li>
-</ul>
-<p>在流程层面，PopAlign提出了一种对比策略：</p>
-<ul>
-<li><strong>精炼对比（Refine Contrast）</strong>：通过多轮对话能力来提升响应质量。初始响应在第一次对话生成后，再通过后续的用户提示进行改进，从而生成精炼后的响应。</li>
-</ul>
-<p>因此，在每种对比策略中，PopAlign可以生成多个关于同一提示的响应对，即${(r_{j,i}^{+}, r_{j,i}^{-})}<em>{i&#x3D;1}^{6} &#x3D; {R</em>{i}(q_{j})}_{i&#x3D;1}^{6}$，由此构建的偏好数据集为:</p>
-<p>$$<br>\tilde{D}&#x3D;{(q_{j},(r_{j,i}^{+},r_{j,i}^{-}))\mid q_{j}\in D,i\in{1,2,\ldots,6}}<br>$$</p>
-<p>通过这些方法，PopAlign实现了数据合成的高效性，可以通过针对不同层面的对比信号，更全面地反映人类偏好。同时，这种多样化的对比策略可以显著提高模型的对齐效果。</p>
-<p>在研究过程中，PopAlign的效果通过一系列详尽的实验进行了验证，表明其在多种任务中的表现优于传统方法，生成的偏好数据更加全面。所做的实验不仅强调了每个对比策略的独特效益，还显示了其联合应用的协同效应，尤其是在引导对比这一新策略上取得了显著的提升。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在实验部分，研究团队对PopAlign的有效性进行了全面评估，使用了两个对齐任务和三个知名的评估基准。实验的主要任务包括（1）Helpful-Base子集和（2）Harmless-Base子集，这两个任务聚焦于大语言模型（LLMs）在特定能力方面的表现。与这两个任务相辅相成的是（3）AlpacaEval 2.0、（4）Arena Hard和（5）MT-Bench等评估基准，这些基准评价模型的总体能力，进一步加强了对齐训练的有效性。</p>
-<p>在实验中，PopAlign与多种基线进行了对比，得出的结果显示PopAlign在对齐任务中表现优越，压倒了众多基线模型。具体而言，PopAlign在Helpful-Base子集和Harmless-Base子集任务中的胜率分别达到了每个任务50.0，显示出其在帮助性和无害性两个维度上的有效对齐能力。</p>
-<p>另一个显著的实验结果是在三项评估基准（MT-Bench、AlpacaEval 2.0和Arena Hard）上，PopAlign大幅提升了模型的表现，甚至超过了强基线Label-DPO。这一点在接受评估的模型中展现得尤为明显，表明了PopAlign在加强模型对齐方面的有效性。</p>
-<p>此外，研究团队还评估了合成响应对比的准确性，具体执行了两个主要的基础响应偏好模型，PairRM和GPT-4，以确定合成的选择与拒绝响应的偏好程度。通过对比，PopAlign显示出较高的偏好准确率，尤其是其引入的Elicitive Contrast策略，比其它方法更能有效提炼出隐含的偏好知识。</p>
-<p>在对PopAlign中每种不同对比策略的个别影响进行的分析中，发现Elicitive Contrast策略的提高效果显著，最为明显，其它策略如Demon Contrast和Prefix Contrast虽也有效，但在结合使用时反而可能导致一些如下降的表现。这表明，虽然不同策略在帮助性和无害性对齐的表现有所不同，它们的组合对成绩的影响则显得尤其重要。 </p>
-<p>以下是实验结果的图表和表格：</p>
-<p><img src="/images/f536e1ab820464919272a8447c4c2bdc9d30dd6a32af224c49a29062937472a8.jpg"></p>
-<p><img src="/images/9e47381a05c31df31d240d1aa5413c39d0bc1a3c0e3a4d43e5c4ef3414c2c5c8.jpg">  </p>
-<p><img src="/images/c18b8dfec687c143b65ee77fc54c5fc5b0e270d335066bff2c008c69ab1757f0.jpg">  </p>
-<p>这些实验结果有效展示了PopAlign在对齐任务执行过程中的表现，说明了通过多样化的对比模式合成的响应数据如何显著提升了模型的对齐能力。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文介绍了PopAlign，一个新的框架，通过在提示、模型和流程层面上多样化对比模式来增强大型语言模型的对齐。通过引入六种不同的对比策略，PopAlign能够在不需要额外反馈标注的情况下构建全面的偏好对比数据。实验结果表明，这种多样化的方法在对齐性能上显著优于传统方法。</p>
-<p>具体而言，PopAlign对于提升模型在有用性和无害性方面的能力具有重要影响，并且在多个任务上展现出比现有基准更强的表现。作者强调了多样化对比策略的必要性，指出不同的对比方法在改进对齐效果方面各有特长，共同构成了对模型训练和优化的有力支持。</p>
-<p>总之，PopAlign展示了通过多样化的对比策略实现综合模型对齐的潜力，为未来的研究提供了新的思路和实践参考。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2qcgrdd000e8hjlc8qq7cgd" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-2410-13901" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/26/2410-13901/" class="article-date">
-  <time class="dt-published" datetime="2024-10-26T13:10:10.000Z" itemprop="datePublished">2024-10-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/26/2410-13901/">曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
-</script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在引言部分，研究者探讨了大型语言模型（LLMs）在自然语言处理领域的重大进展，以及它们如何能够通过仅仅提供任务描述和少量示例实现人类语言的理解与生成。这些任务包括文本分类、问题回答、代码编写等，展现了LLMs在多个领域的广泛影响。然而，尽管LLMs的能力得到了显著提升，它们在应用中的安全性和可靠性仍然面临重大挑战。</p>
-<p>研究者指出，随着LLMs通过API的日益普及，新的脆弱性随之而来，尤其是在金融、医疗和法律等关键应用中，prompt hacking（诱导攻击）可能导致严重后果。因此，理解这些安全威胁及相关的防范措施至关重要。</p>
-<p>具体而言，研究者探讨了prompt hacking所涉及的三种主要类型：prompt jailbreak（越狱攻击）、prompt injection（注入攻击）和prompt leaking（泄露攻击）。这些攻击利用LLM的脆弱性来操控模型行为，产生无意或有害的输出。而这项研究的主要目标在于系统化地了解这些攻击技术及其防御方法，并评估当前流行LLM在应对这些攻击时的表现。</p>
-<p>创新点包括：</p>
-<ol>
-<li>研究者提出了一种新的系统框架，将LLM的响应分类为五个不同的类别，超越传统的二元分类，提供更细致的行为洞察，从而改善诊断精度并推动系统安全性与稳健性的有针对性增强。</li>
-<li>研究整合了已有文献，细致分析了prompt hacking的不同类型，明确了它们的特征与目标，从而为未来的安全性研究奠定基础。</li>
-</ol>
-<p>以下是一张图，总结了LLMs面临的主要安全威胁与挑战。<br><img src="/images/467e6a2ed15210681d13db8c1b5d090b5022f7a5cbafaea438fde3642059a39a.jpg"></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>该研究深入分析了大语言模型（LLMs）在面对提示攻击时的行为，尤其是对三种主要类型的提示攻击：提示越狱、提示注入和提示泄漏。</p>
-<p>首先，该研究构建了一些关于提示攻击的“非法问题”，包括创建爆炸装置的成分、在线赌场盗窃的计划、生成恶意代码等，以便评估不同LLMs在面对恶意提示时的反应。实验设计考虑了每种攻击方法，结合恶意查询和特定的构造技术，以评估AI系统的响应能力。</p>
-<h3 id="提示越狱攻击结果"><a href="#提示越狱攻击结果" class="headerlink" title="提示越狱攻击结果"></a>提示越狱攻击结果</h3><p>通过“DAN”（Do Anything Now）和“Pretending”两种方法进行的越狱攻击测试显示了生成AI模型在应对对抗性提示时的安全性差异。例如，新模型Gemini和ChatGPT-4表现出较新颖的安全特性，能够有效触发安全机制，表明近来的模型架构和训练方法在增强抵抗对抗输入方面效果显著。</p>
-<p>越狱提示的有效性在不同模型之间存在显著差异。部分模型如Microsoft Copilot在处理“DAN”提示时，几乎完全无法应对过长的输入，这表明模型在输入处理上存在特定的设计限制。模型应对特定攻击类型的成功率差异表明了对抗防御的复杂性。</p>
-<h3 id="提示注入攻击结果"><a href="#提示注入攻击结果" class="headerlink" title="提示注入攻击结果"></a>提示注入攻击结果</h3><p>在提示注入攻击的实验中，包括直接和间接的攻击方式。结果显示，相比于间接方法，直接方法的成功率更高。例如，ChatGPT-3.5对直接提示注入的攻击成功率高达100%，而ChatGPT-4表现出强大的抵抗性，大约86%的情况下触发了安全机制。模型在防御注入攻击方面的表现显示了需要继续改进的空间。</p>
-<h3 id="提示泄漏攻击结果"><a href="#提示泄漏攻击结果" class="headerlink" title="提示泄漏攻击结果"></a>提示泄漏攻击结果</h3><p>研究直接询问模型关于提示泄漏的内容，测试各大语言模型对于此类攻击的防御能力。从结果来看，Gemini模型在处理提示泄漏时出现了部分成功和无关输出的情况，Microsoft Copilot则在该方面表现出100%的无关输出，反映出在这方面的显著局限性。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过对三种提示攻击的分析，研究展示了不同LLMs在应对对抗性输入时的关键强项和弱项。这些结果揭示了LLMs在设计和实施安全措施方面的现有不足和未来的改进机会。研究强调了在多种应用场景中实现可靠性能的必要性。</p>
-<p>以下是对应的图表展示：</p>
-<p><img src="/images/0bce93d717209a21939dda0c35c8efb797f374923fdd169d3c326fe62fee44ef.jpg" alt="Prompt Hacking Types Comparison"></p>
-<p>表格可视化了三种提示攻击的相互比较，显示了各类攻击的特征与防御措施之间的关系。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本文分析了流行的 LLM 在面对针对其进行的 prompt hacking 攻击时的行为，并评估了它们抵御这些攻击的有效性。研究中评估的各种 LLM 的特征如表 3 所示。</p>
-<p>在研究中，将 prompt 定义为通常为问题的指令或任务，并对其进行修改以进行 prompt hacking。攻击设计结合了有害查询（例如：“如何盗取一辆车”）与特定的构建技术（例如：“伪装”）。</p>
-<p>在针对 jailbreak 攻击的实验中，使用了 “DAN” 和 “Pretending” 两种方法，并创建了七个与这些攻击相关的问题。DAN 方法涉及指示 LLM 模型采用一个“角色”，使其看似能够绕过正常的伦理和功能限制。另一方面，Pretending 方法则要求 LLM 想象自己处于一个假设或虚构的场景中，从而试图绕过伦理过滤。</p>
-<p>表 4 显示了使用 “DAN” 和 “Pretending” 方法的 jailbreak 攻击结果，说明了不同生成 AI 模型在面对对抗性提示时的韧性差异。</p>
-<p>在 prompt injection 的实验中，采用了间接和直接注入两种方法。根据结果，表 5 展示了 “间接” 和 “直接” 注入攻击的有效性分析。研究发现，直接方法的成功率明显高于间接方法，对于不同模型的表现也有明显差异。</p>
-<p>在针对 prompt leaking 攻击的实验中，研究人员直接提出问题，没有采用任何特定方法。结果显示，流行的生成 AI 模型在处理 prompt leaking 攻击时表现不一，表 6 展示了这一结果的有效性。</p>
-<p>综合这些实验结果，表 7 提供了针对不同类型的 prompt hacking 攻击的整体表现视图，进一步展现了各个模型的强项和弱点。  </p>
-<p><img src="/images/26e4407240e9abad1ca516e6b50b1d4d68f5d57320c1b84a783b910c94f3b3d2.jpg"><br>表 3: LLM 的描述，包括开发者、发布年份、Token 限制和上下文理解特征  </p>
-<p><img src="/images/e031a3c3d816c380f696f55d8f510077e57fee850676d790cd7f12d6c02c78cc.jpg"><br>表 4: jailbreak 攻击结果，DAN 和 Pretending 攻击有效性  </p>
-<p><img src="/images/07f18e8e75126a836a67bdf3cda072271f725e7a5d142d815b16557c7fe23c78.jpg"><br>表 5: 注入攻击结果，间接和直接攻击的有效性  </p>
-<p><img src="/images/fc0d00138e85227101865d90c6ee8bf11b72bdaa57ad034d904c0a56fdb0a2e7.jpg"><br>表 6: prompt leaking 攻击结果，针对生成 AI 模型的有效性  </p>
-<p><img src="/images/ffd3d7f83be59a658e0f0c6f907dfe7b3a2dc212c1766fc3df2231f1223a1c41.jpg"><br>表 7: prompt hacking 攻击结果，针对 LLM 的 jailbreak、注入和 leaking 的有效性  </p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本研究中，作者深入分析了针对大型语言模型（LLMs）的三种主要提示攻击类型：提示注入、越狱和信息泄露。这些攻击虽然存在相似之处，但各自服务于不同的目的，并利用了模型的不同脆弱性。研究结果突显了多种LLMs模型的关键优势和劣势。例如，Gemini模型和Perplexity AI展现出强大的安全机制，经常在各种攻击类型中触发这些防御，但这也可能导致过度敏感，从而在某些情况下影响性能。相比之下，Microsoft Copilot和ChatSonic在处理提示泄露和越狱尝试时则常常产生无关输出和对提示长度的处理困难。</p>
-<p>此外，ChatGPT-3.5和ChatGPT-4表现出色，其中ChatGPT-4在处理提示注入攻击方面的能力有显著提高，同时在越狱攻击中也保持了强大的防护表现。这些发现强调了在持续推进LLMs技术的过程中，平衡安全性和效率的重要性，以确保在不同应用场景中的可靠性能。</p>
-<p>未来的工作将集中在针对复杂提示注入、越狱及信息泄露技术的防御优化，以及探索能够平衡安全性和可用性之间的适应机制。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2qcgrdd000f8hjl22jjcumt" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13236/" data-id="cm2qxu62y000c4bjldkxt65h0" data-title="哥伦比亚大学提出自监督提示注入（SPIN）方法以增强大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1139,23 +1147,23 @@ MathJax = {
       <ul>
         
           <li>
+            <a href="/2024/10/27/2407-06851/">首尔大学提出一种基于句子编码器的安全性关键知识检测方法</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/27/2410-14881/">Meta提出了一种基于检索增强生成的内容审核方法Class-RAG</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/27/2410-18785/">香港科技大学（广州）提出一种综合评估编辑语言模型的方法</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/26/2410-04447/">印度理工学院鲁尔基分校提出基于注意力重加权的无训练安全内容生成方法</a>
           </li>
         
           <li>
             <a href="/2024/10/26/2410-09804/">北京航空航天大学提出一种多目标黑箱优化框架BlackDAN用于有效的上下文劫持大型语言模型</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-09040/">加州大学圣克鲁斯分校提出了一种基于注意力操控的增强型大语言模型越狱攻击方法</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-10414/">新加坡国立大学提出的基于大型语言模型的内容审核守护模型的可靠性校准方法</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/26/2410-11459/">莫纳什大学提出多轮交互的Jigsaw Puzzles策略以破解大型语言模型的安全防护</a>
           </li>
         
       </ul>
