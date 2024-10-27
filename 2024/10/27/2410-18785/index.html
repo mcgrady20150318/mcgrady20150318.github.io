@@ -6,17 +6,17 @@
   
   <title>香港科技大学（广州）提出一种综合评估编辑语言模型的方法 | 安全汪 AnQuanWang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机在近年来，大型语言模型（LLM）如ChatGPT、Claude和Llama的出现，彻底改变了深度学习领域，展现出在多种知识密集型任务上的显著效果。然而，这些模型中所学习到的知识可能存在错误、危害性或过时的信息，直接对LLM进行微调虽然可以">
+  <meta name="description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="香港科技大学（广州）提出一种综合评估编辑语言模型的方法">
 <meta property="og:url" content="http://example.com/2024/10/27/2410-18785/index.html">
 <meta property="og:site_name" content="安全汪 AnQuanWang">
-<meta property="og:description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机在近年来，大型语言模型（LLM）如ChatGPT、Claude和Llama的出现，彻底改变了深度学习领域，展现出在多种知识密集型任务上的显著效果。然而，这些模型中所学习到的知识可能存在错误、危害性或过时的信息，直接对LLM进行微调虽然可以">
+<meta property="og:description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/8a070074f84570802bb3c2a02c9b20fafdf5eb94f5e30e4c2e8cc974b337c3a7.jpg">
 <meta property="og:image" content="http://example.com/images/5049f2f53c06188fce6657c0139ca6e4eb7c6eec4269c9cb1043e0020792ad1d.jpg">
 <meta property="article:published_time" content="2024-10-26T16:14:31.000Z">
-<meta property="article:modified_time" content="2024-10-26T16:14:31.542Z">
+<meta property="article:modified_time" content="2024-10-27T04:05:38.506Z">
 <meta property="article:author" content="Jun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/8a070074f84570802bb3c2a02c9b20fafdf5eb94f5e30e4c2e8cc974b337c3a7.jpg">
@@ -100,39 +100,53 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
 </script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在近年来，大型语言模型（LLM）如ChatGPT、Claude和Llama的出现，彻底改变了深度学习领域，展现出在多种知识密集型任务上的显著效果。然而，这些模型中所学习到的知识可能存在错误、危害性或过时的信息，直接对LLM进行微调虽然可以缓解这一问题，但由于硬件和资源的限制，这并不可行。因此，模型编辑作为一种高效更新知识的替代方案应运而生。</p>
+<h2 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h2>
+<p>在近年来，大型语言模型（LLM）如ChatGPT、Claude和Llama的出现，彻底改变了深度学习领域，展现出在多种知识密集型任务上的显著效果。然而，这些模型中所学习到的知识可能存在错误、危害性或过时的信息，直接对LLM进行微调虽然可以缓解这一问题，但由于硬件和资源的限制，这并不可行。因此，模型编辑作为一种高效更新知识的替代方案应运而生。</p>
 <p>目前的研究主要集中在模型编辑的可靠性、泛化能力和局部性等方面。现有的方法在这些标准上表现良好，但一些研究指出了模型编辑的潜在陷阱，比如知识的扭曲和冲突。然而，现有的文献尚未探讨编辑后的语言模型的一般能力。因此，本文的研究动机在于深入研究模型编辑对语言模型一般能力的影响，尤其是在进行多次编辑的情况下。</p>
 <p>本研究的创新点包括：</p>
 <ol>
-<li><p><strong>系统评估的首次尝试</strong>：作者系统地评估了不同模型编辑方法对于语言模型的一般能力的影响，通过对多种编辑方法和语言模型的全面评估，填补了现有研究中的空白。</p>
+<li>
+<p><strong>系统评估的首次尝试</strong>：作者系统地评估了不同模型编辑方法对于语言模型的一般能力的影响，通过对多种编辑方法和语言模型的全面评估，填补了现有研究中的空白。</p>
 </li>
-<li><p><strong>模型编辑方法的局限性</strong>：研究发现，现有的编辑技术在进行数十次编辑时能够保持模型的能力，但一旦编辑量达到一定规模，模型的内在知识结构将遭到严重破坏。</p>
+<li>
+<p><strong>模型编辑方法的局限性</strong>：研究发现，现有的编辑技术在进行数十次编辑时能够保持模型的能力，但一旦编辑量达到一定规模，模型的内在知识结构将遭到严重破坏。</p>
 </li>
-<li><p><strong>指令调优的优势</strong>：指令调优模型展现出对编辑的更强耐受性，性能降幅较小。</p>
+<li>
+<p><strong>指令调优的优势</strong>：指令调优模型展现出对编辑的更强耐受性，性能降幅较小。</p>
 </li>
-<li><p><strong>规模效应</strong>：大型模型相比小型模型在编辑时表现出更强的抗干扰能力。</p>
+<li>
+<p><strong>规模效应</strong>：大型模型相比小型模型在编辑时表现出更强的抗干扰能力。</p>
 </li>
 </ol>
 <p>通过这些研究发现，本文为未来更实用和可靠的模型编辑方法的研究提供了基础。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本文的研究围绕语言模型的编辑方法展开，特别关注不同编辑方法对模型能力的影响。研究中使用了多种大型语言模型（LLMs）以及多种编辑技术，以便综合评估编辑对模型能力的影响。</p>
-<h3 id="模型编辑"><a href="#模型编辑" class="headerlink" title="模型编辑"></a>模型编辑</h3><p>模型编辑旨在精确调整语言模型在特定事实上的行为，而不影响不相关的样本。当前的方法主要集中于编辑知识元组。编辑过程通过插入新元组来替代当前元组，以实现对特定知识的更新。例如，编辑操作通过将（主体，关系，原始对象）替换为（主体，关系，目标对象）来完成。编辑的形式简化为编辑操作的集合。</p>
+<h2 id="方法"><a class="markdownIt-Anchor" href="#方法"></a> 方法</h2>
+<p>本文的研究围绕语言模型的编辑方法展开，特别关注不同编辑方法对模型能力的影响。研究中使用了多种大型语言模型（LLMs）以及多种编辑技术，以便综合评估编辑对模型能力的影响。</p>
+<h3 id="模型编辑"><a class="markdownIt-Anchor" href="#模型编辑"></a> 模型编辑</h3>
+<p>模型编辑旨在精确调整语言模型在特定事实上的行为，而不影响不相关的样本。当前的方法主要集中于编辑知识元组。编辑过程通过插入新元组来替代当前元组，以实现对特定知识的更新。例如，编辑操作通过将（主体，关系，原始对象）替换为（主体，关系，目标对象）来完成。编辑的形式简化为编辑操作的集合。</p>
 <p>编辑的评估通常涉及三个维度：可靠性、泛化能力和局部性。可靠性关注编辑后模型准确记忆自身编辑信息的能力；泛化能力评估模型在多种重新表述提示下回忆编辑信息的适应性；局部性则验证不相关输入在编辑后模型输出的稳定性。</p>
-<h3 id="语言模型"><a href="#语言模型" class="headerlink" title="语言模型"></a>语言模型</h3><p>实验定量评估了不同语言模型的编辑效果，使用的模型包括 Llama2-7B、Mistral-7B、GPT2-XL，以及 Pythia 模型家族中的六种语言模型，各自具有从160M到12B不等的参数规模。通过这些模型可以观察到，模型的规模影响着其对编辑的敏感度。</p>
-<h3 id="模型编辑方法"><a href="#模型编辑方法" class="headerlink" title="模型编辑方法"></a>模型编辑方法</h3><p>为全面评估编辑模型的潜在影响，本文比较了多种编辑方法。主要包括以下几种类型：</p>
+<h3 id="语言模型"><a class="markdownIt-Anchor" href="#语言模型"></a> 语言模型</h3>
+<p>实验定量评估了不同语言模型的编辑效果，使用的模型包括 Llama2-7B、Mistral-7B、GPT2-XL，以及 Pythia 模型家族中的六种语言模型，各自具有从160M到12B不等的参数规模。通过这些模型可以观察到，模型的规模影响着其对编辑的敏感度。</p>
+<h3 id="模型编辑方法"><a class="markdownIt-Anchor" href="#模型编辑方法"></a> 模型编辑方法</h3>
+<p>为全面评估编辑模型的潜在影响，本文比较了多种编辑方法。主要包括以下几种类型：</p>
 <ul>
 <li>元学习方法，例如 MEND。</li>
 <li>定位后编辑型方法，如 ROME、MEMIT、PMET和 KN。</li>
@@ -140,13 +154,20 @@ MathJax = {
 <li>基于额外参数的方法，如 GRACE。</li>
 </ul>
 <p>值得注意的是，不同编辑方法的效果取决于使用的超参数设置。因此，评估仅限于支持各自编辑方法的模型。</p>
-<h3 id="编辑数据集"><a href="#编辑数据集" class="headerlink" title="编辑数据集"></a>编辑数据集</h3><p>本研究使用了最广泛应用的编辑数据集 ZsRE 和 COUNTER FACT，作为所有实验中的编辑基础。</p>
-<h3 id="评估基准"><a href="#评估基准" class="headerlink" title="评估基准"></a>评估基准</h3><p>为有效判断模型编辑对 LLMS 总体能力的影响，研究采用了五个不同任务类别的基准测试，涵盖世界知识、数学能力、常识推理、阅读理解和安全性。这些基准评估在准确性、解题率和准备性等多维度进行量化。</p>
-<h3 id="编辑设置"><a href="#编辑设置" class="headerlink" title="编辑设置"></a>编辑设置</h3><p>本研究主要聚焦于顺序单次编辑，以探讨编辑对语言模型的潜在影响。</p>
-<h3 id="实验设计"><a href="#实验设计" class="headerlink" title="实验设计"></a>实验设计</h3><p>本研究基于多个研究问题设计实验，和各项实验结果在后续章节中进行讨论。研究问题涵盖了编辑次数对模型能力的影响、指令调优模型与基础模型的表现差异、不同模型规模对能力的影响、不同编辑方法对模型能力各方面的影响，以及编辑是否会损害模型的安全性。</p>
-<h3 id="结果分析"><a href="#结果分析" class="headerlink" title="结果分析"></a>结果分析</h3><p>通过对编辑 Llama2-7B 和 Mistral-7B 的不同编辑方法进行实证分析，实验结果揭示了编辑次数对模型能力的显著影响。许多当前的编辑方法在对模型进行多次编辑后，可能导致性能明显下降，但某些方法（如 PMET）在数百次编辑后也未见性能显著降低。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在本节中，研究者介绍了实验的设计与设置，具体探讨了不同编辑方法对语言模型的一般能力的影响。</p>
-<h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>研究选择了多种大型语言模型进行实验，包括Llama2-7B、Mistral-7B、GPT2-XL及多种不同参数规模的Pythia模型。这些编辑模型旨在评估不同编辑方法对模型能力的影响。</p>
+<h3 id="编辑数据集"><a class="markdownIt-Anchor" href="#编辑数据集"></a> 编辑数据集</h3>
+<p>本研究使用了最广泛应用的编辑数据集 ZsRE 和 COUNTER FACT，作为所有实验中的编辑基础。</p>
+<h3 id="评估基准"><a class="markdownIt-Anchor" href="#评估基准"></a> 评估基准</h3>
+<p>为有效判断模型编辑对 LLMS 总体能力的影响，研究采用了五个不同任务类别的基准测试，涵盖世界知识、数学能力、常识推理、阅读理解和安全性。这些基准评估在准确性、解题率和准备性等多维度进行量化。</p>
+<h3 id="编辑设置"><a class="markdownIt-Anchor" href="#编辑设置"></a> 编辑设置</h3>
+<p>本研究主要聚焦于顺序单次编辑，以探讨编辑对语言模型的潜在影响。</p>
+<h3 id="实验设计"><a class="markdownIt-Anchor" href="#实验设计"></a> 实验设计</h3>
+<p>本研究基于多个研究问题设计实验，和各项实验结果在后续章节中进行讨论。研究问题涵盖了编辑次数对模型能力的影响、指令调优模型与基础模型的表现差异、不同模型规模对能力的影响、不同编辑方法对模型能力各方面的影响，以及编辑是否会损害模型的安全性。</p>
+<h3 id="结果分析"><a class="markdownIt-Anchor" href="#结果分析"></a> 结果分析</h3>
+<p>通过对编辑 Llama2-7B 和 Mistral-7B 的不同编辑方法进行实证分析，实验结果揭示了编辑次数对模型能力的显著影响。许多当前的编辑方法在对模型进行多次编辑后，可能导致性能明显下降，但某些方法（如 PMET）在数百次编辑后也未见性能显著降低。</p>
+<h2 id="实验"><a class="markdownIt-Anchor" href="#实验"></a> 实验</h2>
+<p>在本节中，研究者介绍了实验的设计与设置，具体探讨了不同编辑方法对语言模型的一般能力的影响。</p>
+<h3 id="实验设置"><a class="markdownIt-Anchor" href="#实验设置"></a> 实验设置</h3>
+<p>研究选择了多种大型语言模型进行实验，包括Llama2-7B、Mistral-7B、GPT2-XL及多种不同参数规模的Pythia模型。这些编辑模型旨在评估不同编辑方法对模型能力的影响。</p>
 <p>采用的模型编辑方法包括：</p>
 <ul>
 <li>基于元学习的方法：MEND</li>
@@ -155,7 +176,8 @@ MathJax = {
 <li>基于额外参数的方法：GRACE</li>
 </ul>
 <p>在所有实验中，研究者使用了广泛采用的编辑数据集ZsRE和COUNTER FACT，评估基准涵盖五个任务类别，包括世界知识、算术、常识推理、阅读理解和安全性。</p>
-<h3 id="研究问题设计"><a href="#研究问题设计" class="headerlink" title="研究问题设计"></a>研究问题设计</h3><p>为了深入理解不同模型编辑方法对模型能力的影响，研究者提出了几个关键的研究问题：</p>
+<h3 id="研究问题设计"><a class="markdownIt-Anchor" href="#研究问题设计"></a> 研究问题设计</h3>
+<p>为了深入理解不同模型编辑方法对模型能力的影响，研究者提出了几个关键的研究问题：</p>
 <ul>
 <li>数量编辑对模型能力的影响</li>
 <li>指令调优的模型在编辑后的表现</li>
@@ -163,20 +185,24 @@ MathJax = {
 <li>编辑对模型不同能力方面的影响</li>
 <li>编辑是否影响模型的安全性</li>
 </ul>
-<h3 id="实验结果分析"><a href="#实验结果分析" class="headerlink" title="实验结果分析"></a>实验结果分析</h3><p>研究者呈现了各种实验结果，包括不同模型在经历一定数量的编辑后的总体能力变化。通过编辑Llama2-7B和Mistral-7B模型，发现大多数编辑方法在少于20次编辑时能够保持模型的原始能力，但当编辑次数增加时，部分方法如ROME和MEND会显著降低性能，而其他方法如PMET在数百次编辑后仍保持相对稳定的表现。</p>
+<h3 id="实验结果分析"><a class="markdownIt-Anchor" href="#实验结果分析"></a> 实验结果分析</h3>
+<p>研究者呈现了各种实验结果，包括不同模型在经历一定数量的编辑后的总体能力变化。通过编辑Llama2-7B和Mistral-7B模型，发现大多数编辑方法在少于20次编辑时能够保持模型的原始能力，但当编辑次数增加时，部分方法如ROME和MEND会显著降低性能，而其他方法如PMET在数百次编辑后仍保持相对稳定的表现。</p>
 <p>实验还探讨了所谓的“静音效应”，即在进行10,000次编辑后，模型的内在知识结构被彻底破坏，导致任何输入的输出均为空字符串或随机字符。研究表明，现有的编辑方法适用于有限的编辑次数，通常不超过几十次。</p>
-<p><img src="/images/8a070074f84570802bb3c2a02c9b20fafdf5eb94f5e30e4c2e8cc974b337c3a7.jpg"><br>图2：使用六种编辑方法评估的Llama2-7B基模型在不同基准上的性能趋势。结果显示，PMET和MEND能够有效保持模型在所有任务上的能力，而KN在不到十次编辑后显著下降。</p>
+<p><img src="/images/8a070074f84570802bb3c2a02c9b20fafdf5eb94f5e30e4c2e8cc974b337c3a7.jpg" alt="" /><br />
+图2：使用六种编辑方法评估的Llama2-7B基模型在不同基准上的性能趋势。结果显示，PMET和MEND能够有效保持模型在所有任务上的能力，而KN在不到十次编辑后显著下降。</p>
 <p>在对指令调优模型的影响方面，研究发现，编辑后的指令调优模型其表现降幅相对较慢，尤其是在使用MEMIT方法时。同时，研究探讨了不同模型规模下编辑的效果，结果显示，较大模型较小模型在编辑后表现更为稳定。</p>
 <p>图4和图5展示了不同编辑方法对模型不同能力方面的均匀影响，PMET和MEND在各种任务中保持一致的表现，尤其是在经过多次编辑后。</p>
-<p><img src="/images/5049f2f53c06188fce6657c0139ca6e4eb7c6eec4269c9cb1043e0020792ad1d.jpg"><br>图5：评估不同编辑方法对语言模型不同能力的影响。结果显示，PMET和MEND在所有任务中能够有效保持模型的能力。</p>
+<p><img src="/images/5049f2f53c06188fce6657c0139ca6e4eb7c6eec4269c9cb1043e0020792ad1d.jpg" alt="" /><br />
+图5：评估不同编辑方法对语言模型不同能力的影响。结果显示，PMET和MEND在所有任务中能够有效保持模型的能力。</p>
 <p>最后，研究者专注于编辑对模型安全性的影响，实验证明即使是几十次的编辑也可能损害模型的安全性，并在某些方法下出现意想不到的性能提升。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这项研究中，作者系统地探讨了模型编辑对语言模型（LLM）一般能力的潜在影响。通过在多种模型上应用不同的编辑方法，并在多个基准上进行评估，实验结果表明，现有的编辑方法能够在有限的编辑次数内保留模型的整体能力，该次数通常不超过几十次。然而，当编辑次数达到一定规模时，模型的内在知识结构可能会受到破坏，甚至完全损坏。此外，研究还考察了可能影响模型编辑后性能的各种因素及其对模型基本能力的潜在影响，结果显示，即使经过数十次编辑，模型的安全性也会受到一定程度的影响，包括那些已对齐的模型。</p>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<p>在这项研究中，作者系统地探讨了模型编辑对语言模型（LLM）一般能力的潜在影响。通过在多种模型上应用不同的编辑方法，并在多个基准上进行评估，实验结果表明，现有的编辑方法能够在有限的编辑次数内保留模型的整体能力，该次数通常不超过几十次。然而，当编辑次数达到一定规模时，模型的内在知识结构可能会受到破坏，甚至完全损坏。此外，研究还考察了可能影响模型编辑后性能的各种因素及其对模型基本能力的潜在影响，结果显示，即使经过数十次编辑，模型的安全性也会受到一定程度的影响，包括那些已对齐的模型。</p>
 <p>总体而言，现有的大多数编辑方法只适合进行不超过几个特定更新的场景。因此，作者呼吁进一步的研究，以解决现有编辑方法的缺陷，并找到更加实用和可靠的解决方案。研究的发现不仅对模型编辑领域的进一步探索具有重要意义，还为在实际应用中修改语言模型的策略提供了有价值的见解。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/27/2410-18785/" data-id="cm2r0grn8000nj2tf755l8doe" data-title="香港科技大学（广州）提出一种综合评估编辑语言模型的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/27/2410-18785/" data-id="cm2r2kapc000nfgtf6li76k67" data-title="香港科技大学（广州）提出一种综合评估编辑语言模型的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

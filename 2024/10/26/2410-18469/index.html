@@ -6,12 +6,12 @@
   
   <title>加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力 | 安全汪 AnQuanWang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机在引言部分，研究团队关注大型语言模型（LLMs）在实际任务中能力的提升，并强调确保这些模型的安全性是至关重要的。虽然已有研究表明，LLMs可以通过恶意构造的查询被成功突破，但随着安全对齐策略的不断进步，设计能够绕过新模型保护的查询变得愈加">
+  <meta name="description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力">
 <meta property="og:url" content="http://example.com/2024/10/26/2410-18469/index.html">
 <meta property="og:site_name" content="安全汪 AnQuanWang">
-<meta property="og:description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机在引言部分，研究团队关注大型语言模型（LLMs）在实际任务中能力的提升，并强调确保这些模型的安全性是至关重要的。虽然已有研究表明，LLMs可以通过恶意构造的查询被成功突破，但随着安全对齐策略的不断进步，设计能够绕过新模型保护的查询变得愈加">
+<meta property="og:description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/15e9cef7869187859cbfdb9b161413369fc3e2e5f39c61665434352e431b5357.jpg">
 <meta property="og:image" content="http://example.com/images/c0098b92f51f54e78cd4bd18e4bea76ad0794bd6268bea9ad84718a4f66504a7.jpg">
@@ -27,7 +27,7 @@
 <meta property="og:image" content="http://example.com/images/79f0bd5767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg">
 <meta property="og:image" content="http://example.com/images/281a3b2a6ba8cd3e0aceb7f3a007e7ef67cb7d7aff79e4fa761200fca93c4da0.jpg">
 <meta property="article:published_time" content="2024-10-26T04:31:57.000Z">
-<meta property="article:modified_time" content="2024-10-26T11:40:13.083Z">
+<meta property="article:modified_time" content="2024-10-27T04:05:31.081Z">
 <meta property="article:author" content="Jun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/15e9cef7869187859cbfdb9b161413369fc3e2e5f39c61665434352e431b5357.jpg">
@@ -111,62 +111,88 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
 </script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>在引言部分，研究团队关注大型语言模型（LLMs）在实际任务中能力的提升，并强调确保这些模型的安全性是至关重要的。虽然已有研究表明，LLMs可以通过恶意构造的查询被成功突破，但随着安全对齐策略的不断进步，设计能够绕过新模型保护的查询变得愈加艰难。近来，更多的关注转向了自动化的监督攻击方法，通过搜索算法寻找可附加在有害查询上的对抗后缀，从而越过安全对齐。</p>
+<h2 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h2>
+<p>在引言部分，研究团队关注大型语言模型（LLMs）在实际任务中能力的提升，并强调确保这些模型的安全性是至关重要的。虽然已有研究表明，LLMs可以通过恶意构造的查询被成功突破，但随着安全对齐策略的不断进步，设计能够绕过新模型保护的查询变得愈加艰难。近来，更多的关注转向了自动化的监督攻击方法，通过搜索算法寻找可附加在有害查询上的对抗后缀，从而越过安全对齐。</p>
 <p>然而，现有的方法通常面临较高的计算成本和较低的攻击成功率（ASR），特别是针对像Llama2和Llama3这样经过良好对齐的模型。为了解决这些问题，研究团队提出了ADV-LLM，一种迭代自调优的过程，旨在打造具有增强越狱能力的对抗LLMs。该框架显著降低了生成对抗后缀的计算成本，其在多种开源LLMs上实现了近乎100%的ASR，并且在封闭源模型上表现出较强的转移能力，尽管仅在Llama3上进行优化，仍在GPT-3.5和GPT-4上达到了99%和49%的ASR。</p>
 <p>此外，ADV-LLM不仅提升了越狱能力，还通过生成大量数据集为未来的安全对齐研究提供了有益的见解。这一研究工作为解决LLMs的安全性问题提供了一种新的思路和方法，揭示了当前的对齐策略存在的关键漏洞，并强调了对安全设计和内容审查工具的持续关注。</p>
 <p>在以下的图表示例中，可以看到ADV-LLM框架的运作过程与优势：</p>
-<p><img src="/images/15e9cef7869187859cbfdb9b161413369fc3e2e5f39c61665434352e431b5357.jpg"><br><em>图：ADV-LLM在各关键属性上的比较，展示了其在攻击成功率、转移能力、OOD泛化能力和隐蔽性等方面的高性能。</em></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在这一部分，研究人员首先介绍了他们的目标和洞察，随后将大型离散优化问题转化为可实际求解的问题，并最终提出了ADV-LLM的训练算法。</p>
-<h3 id="目标与洞察"><a href="#目标与洞察" class="headerlink" title="目标与洞察"></a>目标与洞察</h3><p>研究的主要目标是探索通过训练一个后缀生成器来生成对任何有害查询的对抗性后缀，以实现对受害者模型的越狱。与基于LLM的方法类似，AmpleGCG也属于这一类别，但它依赖于在运行GCG算法时耗费高昂的数据收集费用。因此，研究人员探索了一种试错方法，使预训练的LLM能够通过学习自身的经验来增强其越狱能力。然而，标准的预训练LLM几乎不可能收集到足够的成功示例，尤其是在面对强对齐模型（如Llama2和Llama3）时，这变得尤为困难。为了简化这一大型搜索问题，研究人员提出了减少搜索空间的方法。</p>
-<h3 id="后缀初始化与目标优化"><a href="#后缀初始化与目标优化" class="headerlink" title="后缀初始化与目标优化"></a>后缀初始化与目标优化</h3><p>在早期的工作GCG中，研究人员将目标短语设为“Sure, here is…”。然而，研究发现这种设置在应用于强对齐模型时容易产生问题。通过对受害者模型生成目标短语“Sure, here is…”时的平均负对数似然（NLL）进行分析，发现这些模型在仅提供有害查询时生成目标短语的概率非常低，这显著增加了找到一个有效后缀的难度。为了克服这一问题，研究人员分析了LLM通常对良性查询的响应，发现Llama3常用“我很高兴为您提供帮助！”开头。基于此观察，研究人员调整了每个LLM的目标，使其符合常见响应格式。</p>
+<p><img src="/images/15e9cef7869187859cbfdb9b161413369fc3e2e5f39c61665434352e431b5357.jpg" alt="" /><br />
+<em>图：ADV-LLM在各关键属性上的比较，展示了其在攻击成功率、转移能力、OOD泛化能力和隐蔽性等方面的高性能。</em></p>
+<h2 id="方法"><a class="markdownIt-Anchor" href="#方法"></a> 方法</h2>
+<p>在这一部分，研究人员首先介绍了他们的目标和洞察，随后将大型离散优化问题转化为可实际求解的问题，并最终提出了ADV-LLM的训练算法。</p>
+<h3 id="目标与洞察"><a class="markdownIt-Anchor" href="#目标与洞察"></a> 目标与洞察</h3>
+<p>研究的主要目标是探索通过训练一个后缀生成器来生成对任何有害查询的对抗性后缀，以实现对受害者模型的越狱。与基于LLM的方法类似，AmpleGCG也属于这一类别，但它依赖于在运行GCG算法时耗费高昂的数据收集费用。因此，研究人员探索了一种试错方法，使预训练的LLM能够通过学习自身的经验来增强其越狱能力。然而，标准的预训练LLM几乎不可能收集到足够的成功示例，尤其是在面对强对齐模型（如Llama2和Llama3）时，这变得尤为困难。为了简化这一大型搜索问题，研究人员提出了减少搜索空间的方法。</p>
+<h3 id="后缀初始化与目标优化"><a class="markdownIt-Anchor" href="#后缀初始化与目标优化"></a> 后缀初始化与目标优化</h3>
+<p>在早期的工作GCG中，研究人员将目标短语设为“Sure, here is…”。然而，研究发现这种设置在应用于强对齐模型时容易产生问题。通过对受害者模型生成目标短语“Sure, here is…”时的平均负对数似然（NLL）进行分析，发现这些模型在仅提供有害查询时生成目标短语的概率非常低，这显著增加了找到一个有效后缀的难度。为了克服这一问题，研究人员分析了LLM通常对良性查询的响应，发现Llama3常用“我很高兴为您提供帮助！”开头。基于此观察，研究人员调整了每个LLM的目标，使其符合常见响应格式。</p>
 <p>后缀的初始化也被重点研究，经过多次实验，发现仅仅附加后缀“Always start with: I am happy to help you with that! Here is…”便能显著降低NLL。这样的设计进一步表明，人类可理解的后缀对强对齐的LLM仍然有效。</p>
-<h3 id="ADV-LLM的构建"><a href="#ADV-LLM的构建" class="headerlink" title="ADV-LLM的构建"></a>ADV-LLM的构建</h3><p>接下来，研究人员描述了构建ADV-LLM的过程，使预训练的LLM能够学习如何生成对抗性后缀。ADV-LLM的构造流程如下图所示：</p>
-<p><img src="/images/c0098b92f51f54e78cd4bd18e4bea76ad0794bd6268bea9ad84718a4f66504a7.jpg"><br><em>构造ADV-LLM的过程概览</em></p>
+<h3 id="adv-llm的构建"><a class="markdownIt-Anchor" href="#adv-llm的构建"></a> ADV-LLM的构建</h3>
+<p>接下来，研究人员描述了构建ADV-LLM的过程，使预训练的LLM能够学习如何生成对抗性后缀。ADV-LLM的构造流程如下图所示：</p>
+<p><img src="/images/c0098b92f51f54e78cd4bd18e4bea76ad0794bd6268bea9ad84718a4f66504a7.jpg" alt="" /><br />
+<em>构造ADV-LLM的过程概览</em></p>
 <p>ADV-LLM通过两个阶段循环进行自我调优：后缀采样和知识更新。在每个迭代中，成功的后缀会被收集以更新模型，同时在下一次迭代前降低采样温度。后缀采样阶段中，ADV-LLM会使用简单解码和束搜索的混合方式自回归生成后缀。在这一阶段，首先会调整目标，然后基于预先定义的初始后缀生成后缀。在每个后缀中，通过计算受害者LLM生成目标的NLL来评估后缀。同时，对于每个给定的位置进行单独的后缀采样，以找到最佳后缀。</p>
-<h4 id="Phase-1-后缀采样"><a href="#Phase-1-后缀采样" class="headerlink" title="Phase 1: 后缀采样"></a>Phase 1: 后缀采样</h4><p>该阶段中，ADV-LLM通过自回归生成后缀。在对每个查询以及目标进行处理后，后缀会通过混合的简单解码和束搜索方式生成。对于每个后缀，采样过程会在固定温度下从概率分布中选择可能的下一个Token。在生成到达预设长度后，ADV-LLM会进行评估以观察是否成功越狱。</p>
-<h4 id="Phase-2-知识更新"><a href="#Phase-2-知识更新" class="headerlink" title="Phase 2: 知识更新"></a>Phase 2: 知识更新</h4><p>在这一阶段，ADV-LLM通过以前的成功后缀进行微调，使其预测对抗性后缀。最终目的是在给定有害查询的情况下，增强对成功后缀的生成。</p>
+<h4 id="phase-1-后缀采样"><a class="markdownIt-Anchor" href="#phase-1-后缀采样"></a> Phase 1: 后缀采样</h4>
+<p>该阶段中，ADV-LLM通过自回归生成后缀。在对每个查询以及目标进行处理后，后缀会通过混合的简单解码和束搜索方式生成。对于每个后缀，采样过程会在固定温度下从概率分布中选择可能的下一个Token。在生成到达预设长度后，ADV-LLM会进行评估以观察是否成功越狱。</p>
+<h4 id="phase-2-知识更新"><a class="markdownIt-Anchor" href="#phase-2-知识更新"></a> Phase 2: 知识更新</h4>
+<p>在这一阶段，ADV-LLM通过以前的成功后缀进行微调，使其预测对抗性后缀。最终目的是在给定有害查询的情况下，增强对成功后缀的生成。</p>
 <p>通过这种迭代的自我调优过程，ADV-LLM逐渐增强了成功后缀中常见Token的生成概率，同时不断降低解码温度，以便在一个更具潜力的子空间中搜索，从而提高找到成功后缀的几率。温度的更新使用如下衰减函数：</p>
-<p>$$<br>\bar{a\exp^{-\lambda i}+b}<br>$$ </p>
-<p>其中$i$为当前迭代次数，$a$, $b$, $\lambda$为设定常数。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本节将重点介绍ADV-LLM的实验部分，包括与其他方法的比较以及在实际应用中的有效性评估。研究人员使用520个来自AdvBench的数据集中的有害查询来构建五个不同的ADV-LLM，每个模型针对不同的目标模型进行优化：Vicuna-7b-v1.5、Guanaco-7B、Mistral-7B-Instruct-v0.2、Llama-2-7b-chat以及Llama-3-8B-Instruct。</p>
-<h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><p>研究人员为每个目标模型设置了默认的生成超参数，并从对应的目标模型初始化每个ADV-LLM，以确保它们具有相同的词汇表大小。每个ADV-LLM经过五次迭代自我调优，最终评估结果的生成过程大约需要1.5到2天的时间，使用8个Nvidia A100 GPU。详细的超参数设置可在附录A.3中找到。</p>
-<h3 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h3><p>研究人员采用了三种指标来测量ADVV-LLM生成的后缀的攻击成功率（ASR）：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mrow><mi>a</mi><msup><mo><mi>exp</mi><mo>⁡</mo></mo><mrow><mo>−</mo><mi>λ</mi><mi>i</mi></mrow></msup><mo>+</mo><mi>b</mi></mrow><mo>ˉ</mo></mover></mrow><annotation encoding="application/x-tex">\bar{a\exp^{-\lambda i}+b}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1063279999999998em;vertical-align:-0.19444em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9118879999999998em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop"><span class="mop">exp</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7751079999999999em;"><span style="top:-2.989em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathdefault mtight">λ</span><span class="mord mathdefault mtight">i</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">+</span><span class="mord mathdefault">b</span></span></span><span style="top:-3.344108em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;">ˉ</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span></span></span></span></p>
+<p>其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>为当前迭代次数，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>λ</mi></mrow><annotation encoding="application/x-tex">\lambda</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">λ</span></span></span></span>为设定常数。</p>
+<h2 id="实验"><a class="markdownIt-Anchor" href="#实验"></a> 实验</h2>
+<p>本节将重点介绍ADV-LLM的实验部分，包括与其他方法的比较以及在实际应用中的有效性评估。研究人员使用520个来自AdvBench的数据集中的有害查询来构建五个不同的ADV-LLM，每个模型针对不同的目标模型进行优化：Vicuna-7b-v1.5、Guanaco-7B、Mistral-7B-Instruct-v0.2、Llama-2-7b-chat以及Llama-3-8B-Instruct。</p>
+<h3 id="设置"><a class="markdownIt-Anchor" href="#设置"></a> 设置</h3>
+<p>研究人员为每个目标模型设置了默认的生成超参数，并从对应的目标模型初始化每个ADV-LLM，以确保它们具有相同的词汇表大小。每个ADV-LLM经过五次迭代自我调优，最终评估结果的生成过程大约需要1.5到2天的时间，使用8个Nvidia A100 GPU。详细的超参数设置可在附录A.3中找到。</p>
+<h3 id="评价指标"><a class="markdownIt-Anchor" href="#评价指标"></a> 评价指标</h3>
+<p>研究人员采用了三种指标来测量ADVV-LLM生成的后缀的攻击成功率（ASR）：</p>
 <ol>
 <li><strong>模板检查</strong>：使用拒绝信号的检查列表，如果目标模型的响应中不包含任何拒绝信号，则攻击成功。</li>
 <li><strong>LlamaGuard检查</strong>：使用Llama-Guard-3-8B评估响应的有害性，如果响应被分类为不安全，则攻击成功。</li>
 <li><strong>GPT-4检查</strong>：通过提示GPT-4-Turbo来评估目标模型的响应是否有害，仅当响应提供了详细且有效的解决方案时，攻击才被视为成功。</li>
 </ol>
-<p>所有结果都使用这三种指标以{模板检查}&#x2F;{LlamaGuard检查}&#x2F;{GPT4检查}的格式呈现。</p>
-<h3 id="ASR结果"><a href="#ASR结果" class="headerlink" title="ASR结果"></a>ASR结果</h3><p>与搜索基方法的比较。研究人员在表3中展示了ADV-LLMs与各种搜索基方法的ASR。对于ADV-LLM采用两种解码模式：ADV-LLM^+ Greedy和ADV-LLM^+ GBS50，分别表示每个查询一条后缀的生成和使用Group Beam Search生成50条后缀的策略。</p>
-<p><img src="/images/fd9d2bfe379be75631eeeddd4b9ee2aef7f6d0606b0cf6d77cd9a8a5c99e46d2.jpg"><br><strong>表3：与搜索基方法比较的ADV-LLM的ASR</strong>  </p>
+<p>所有结果都使用这三种指标以{模板检查}/{LlamaGuard检查}/{GPT4检查}的格式呈现。</p>
+<h3 id="asr结果"><a class="markdownIt-Anchor" href="#asr结果"></a> ASR结果</h3>
+<p>与搜索基方法的比较。研究人员在表3中展示了ADV-LLMs与各种搜索基方法的ASR。对于ADV-LLM采用两种解码模式：ADV-LLM^+ Greedy和ADV-LLM^+ GBS50，分别表示每个查询一条后缀的生成和使用Group Beam Search生成50条后缀的策略。</p>
+<p><img src="/images/fd9d2bfe379be75631eeeddd4b9ee2aef7f6d0606b0cf6d77cd9a8a5c99e46d2.jpg" alt="" /><br />
+<strong>表3：与搜索基方法比较的ADV-LLM的ASR</strong></p>
 <p>结果表明，ADV-LLM^+ Greedy与所有其他搜索基方法相比已经取得了高ASR，而ADV-LLM^+ GBS50进一步将ASR提升至近100%，展示了ADV-LLM的强大能力。此外，研究人员还注意到，AutoDAN和COLD-Attack在恢复系统提示后未能成功攻陷Llama2和Llama3，而GCG仍然是针对Llama3最有效的搜索基方法。</p>
 <p>与LLM基方法的比较。由于AmpleGCG是唯一的LLM基方法，研究人员直接比较了ADV-LLMs与AmpleGCG在两个解码策略下的表现：Greedy（1次尝试）和GBS50（50次尝试），使用AdvBench中的520个查询进行评估。</p>
-<p><img src="/images/f75d37ca093757a50eb3fcb17c60aebe0d1ce77d11eca7c873c6fa82407ce9f9.jpg"><br><strong>表4：与AmpleGCG比较的ADV-LLM的ASR</strong>  </p>
+<p><img src="/images/f75d37ca093757a50eb3fcb17c60aebe0d1ce77d11eca7c873c6fa82407ce9f9.jpg" alt="" /><br />
+<strong>表4：与AmpleGCG比较的ADV-LLM的ASR</strong></p>
 <p>结果显示，ADV-LLMs在Greedy和GBS50模式下均优于AmpleGCG，展示了其在较少尝试下的破坏能力。这一优势在于减少尝试次数，从而降低了在破解过程中的检测风险。</p>
-<h3 id="ADV-LLM在实践中的有效性"><a href="#ADV-LLM在实践中的有效性" class="headerlink" title="ADV-LLM在实践中的有效性"></a>ADV-LLM在实践中的有效性</h3><p>为验证ADV-LLMs在真实场景中的有效性，研究人员提出了三个研究问题，围绕其迁移能力、泛化能力和隐蔽性进行评估。</p>
+<h3 id="adv-llm在实践中的有效性"><a class="markdownIt-Anchor" href="#adv-llm在实践中的有效性"></a> ADV-LLM在实践中的有效性</h3>
+<p>为验证ADV-LLMs在真实场景中的有效性，研究人员提出了三个研究问题，围绕其迁移能力、泛化能力和隐蔽性进行评估。</p>
 <p><strong>Q1（迁移能力）</strong>：ADV-LLMs在目标模型不可用时的表现如何？研究人员优化ADV-LLMs于Llama2和Llama3，然后评估其在开放源模型Mistral及封闭源模型GPT-3.5和GPT-4上的有效性。</p>
-<p><img src="/images/3d279e8767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg"><br><strong>表5：ADV-LLMs与AmpleGCG的迁移能力比较</strong>  </p>
+<p><img src="/images/3d279e8767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg" alt="" /><br />
+<strong>表5：ADV-LLMs与AmpleGCG的迁移能力比较</strong></p>
 <p>结果表明，ADV-LLMs在所有设置中展示了比AmpleGCG更强的迁移能力，优化于Llama3的模型在GPT系列模型上表现更优。</p>
 <p><strong>Q2（泛化能力）</strong>：ADV-LLMs给定未见过的查询时的表现如何？为评估这一点，研究人员测试了来自Malicious Instruct数据集的100个查询。结果显示，ADV-LLMs在所有设置中均展现出较强的泛化能力。</p>
-<p><img src="/images/79f0bd5767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg"><br><strong>表6：ADV-LLMs在OOD数据上的泛化能力比较</strong>  </p>
+<p><img src="/images/79f0bd5767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg" alt="" /><br />
+<strong>表6：ADV-LLMs在OOD数据上的泛化能力比较</strong></p>
 <p><strong>Q3（隐蔽性）</strong>：ADV-LLMs能否避开基于困惑度的检测？相较于AmpleGCG，ADV-LLMs生成的后缀在检测上更具隐蔽性，且几乎不受基于困惑度的防御机制影响。</p>
-<p><img src="/images/281a3b2a6ba8cd3e0aceb7f3a007e7ef67cb7d7aff79e4fa761200fca93c4da0.jpg"><br><strong>表7：ADV-LLMs与AmpleGCG的困惑度和ASR比较</strong>  </p>
+<p><img src="/images/281a3b2a6ba8cd3e0aceb7f3a007e7ef67cb7d7aff79e4fa761200fca93c4da0.jpg" alt="" /><br />
+<strong>表7：ADV-LLMs与AmpleGCG的困惑度和ASR比较</strong></p>
 <p>通过这些实验，研究者展示了ADV-LLM在多方面的优势，包括高ASR、强迁移能力和高隐蔽性，这是评估在真实环境中应用这一模型的重要考虑。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这项研究中，研究者们引入了ADV-LLM，一个能够高效生成具有高级攻击成功率（ASR）的对抗性后缀的迭代自我调优模型。ADV-LLM可以成功绕过鲁棒模型（如Llama2、Llama3和GPT-4）中的安全对齐机制，揭示了目前安全对齐方法中的关键漏洞。这一结果凸显了对改进对齐策略的必要性。</p>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<p>在这项研究中，研究者们引入了ADV-LLM，一个能够高效生成具有高级攻击成功率（ASR）的对抗性后缀的迭代自我调优模型。ADV-LLM可以成功绕过鲁棒模型（如Llama2、Llama3和GPT-4）中的安全对齐机制，揭示了目前安全对齐方法中的关键漏洞。这一结果凸显了对改进对齐策略的必要性。</p>
 <p>研究表明，ADV-LLM不仅在生成对抗性后缀方面效率高，而且具备强大的转移能力和高度隐蔽性。通过多次迭代调优，ADV-LLM在各种评估设置中接近100%的攻击成功率，展示了其高效性和对强抗拒模型的应对能力。研究者们提到，未来的工作将集中在开发缓解策略，以提高大型语言模型的安全性和鲁棒性。</p>
 <p>研究的局限性在于，使用了一组简单的拒绝信号来选择成功的后缀进行微调，这可能导致数据的干扰，进而影响ADV-LLM的表现。研究者们认为，通过更为精细的数据选择策略，有望进一步提升算法的有效性。此外，他们也尝试将强化学习融入ADV-LLM的训练，但发现高度对齐的模型难以通过随机动作进行破解，这对解决稀疏奖励问题构成挑战。</p>
 <p>综上所述，ADV-LLM的提出不仅为安全对齐研究提供了重要的见解，也为诸如防止恶意行为的内容生成提供了新方法。研究成果强调了在开发下一代LLM时加强安全性的紧迫性。</p>
@@ -180,57 +206,67 @@ MathJax = {
 <script id="MathJax-script" async
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
 </script>
-
-
-
-
-<h2 id="动机-1"><a href="#动机-1" class="headerlink" title="动机"></a>动机</h2><p>随着大规模语言模型（LLMs）在现实任务中能力的提升，确保其安全性对其应用至关重要。尽管已经明确，LLMs可以通过恶意构造的查询被破解，但安全对齐策略的不断进步使得人们设计的绕过保护的新模型变得越来越困难。最近的研究将注意力转向自动化的破解方法，通过利用搜索算法找到可以附加到有害查询上的对抗后缀，进而绕过安全对齐。</p>
+<h2 id="动机-2"><a class="markdownIt-Anchor" href="#动机-2"></a> 动机</h2>
+<p>随着大规模语言模型（LLMs）在现实任务中能力的提升，确保其安全性对其应用至关重要。尽管已经明确，LLMs可以通过恶意构造的查询被破解，但安全对齐策略的不断进步使得人们设计的绕过保护的新模型变得越来越困难。最近的研究将注意力转向自动化的破解方法，通过利用搜索算法找到可以附加到有害查询上的对抗后缀，进而绕过安全对齐。</p>
 <p>尽管现有的自动化破解攻击方法存在一定的成功率，但这些方法通常面临高昂的计算成本和对高度对齐模型（如Llama2和Llama3）的低攻击成功率（ASR）。为了克服这些限制，研究者们提出了ADV-LLM，一个迭代自调优的模型，旨在提高对抗后缀的生成能力。与现有方法相比，ADV-LLM展示出更低的计算成本和接近100%的ASR，尤其是在多个开源LLMs上。更重要的是，它在对封闭模型的攻击中也表现出良好的迁移能力，即使是在仅针对Llama3优化的情况下，ADV-LLM也在GPT-3.5和GPT-4上取得了显著的成功。</p>
 <p>此外，ADV-LLM的提出不仅仅是提升破解能力，它还为未来的安全对齐研究提供了有价值的洞见，借助其生成的大规模数据集，供学术界研究LLM的安全性。</p>
 <p>以下是表1，展示了ADV-LLM与其他方法的比较，显示了其在多个关键属性上的卓越性能。</p>
-<p><img src="/images/15e9cef7869187859cbfdb9b161413369fc3e2e5f39c61665434352e431b5357.jpg"><br>表1：ADV-LLM与其他方法的比较。 ADV-LLM在所有关键属性上展现出高性能。</p>
-<h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><p>在这部分内容中，作者首先介绍了ADV-LLM的研究目标和洞察，接着详细介绍了如何将大规模离散优化问题转化为可实际解决的问题，最后提出了ADV-LLM的训练算法。</p>
-<h3 id="目标与洞察-1"><a href="#目标与洞察-1" class="headerlink" title="目标与洞察"></a>目标与洞察</h3><p>ADV-LLM的目标是探索基于LLM的方法，通过训练一个后缀生成器来生成可以用于对抗的后缀，从而对任何有害查询进行越狱。与AmpleGCG不同，后者依赖于运行GCG收集数据，ADV-LLM则采取试错法，使预训练的LLM通过自我学习增强其越狱能力。该方法面临的一个主要挑战是，从一个标准预训练的LLM开始，收集足够的成功示例几乎是不可能的，尤其是针对像Llama2和Llama3这样强对齐的模型。</p>
+<p><img src="/images/15e9cef7869187859cbfdb9b161413369fc3e2e5f39c61665434352e431b5357.jpg" alt="" /><br />
+表1：ADV-LLM与其他方法的比较。 ADV-LLM在所有关键属性上展现出高性能。</p>
+<h2 id="方法-2"><a class="markdownIt-Anchor" href="#方法-2"></a> 方法</h2>
+<p>在这部分内容中，作者首先介绍了ADV-LLM的研究目标和洞察，接着详细介绍了如何将大规模离散优化问题转化为可实际解决的问题，最后提出了ADV-LLM的训练算法。</p>
+<h3 id="目标与洞察-2"><a class="markdownIt-Anchor" href="#目标与洞察-2"></a> 目标与洞察</h3>
+<p>ADV-LLM的目标是探索基于LLM的方法，通过训练一个后缀生成器来生成可以用于对抗的后缀，从而对任何有害查询进行越狱。与AmpleGCG不同，后者依赖于运行GCG收集数据，ADV-LLM则采取试错法，使预训练的LLM通过自我学习增强其越狱能力。该方法面临的一个主要挑战是，从一个标准预训练的LLM开始，收集足够的成功示例几乎是不可能的，尤其是针对像Llama2和Llama3这样强对齐的模型。</p>
 <p>为了克服这一挑战，作者认为减小搜索空间至关重要。一个精心选择的初始后缀能够将探索重点集中在更有前景的子空间。此外，目标y的选择也是一个不容忽视的因素。许多先前的研究都将目标设定为“Sure, here is…”，但这对于强对齐的模型的有效性较低，作者通过分析发现，LLM通常以特定的格式响应无害查询，因此对目标进行了调整，以匹配模型的常见响应格式。</p>
-<h3 id="后缀初始化与目标细化"><a href="#后缀初始化与目标细化" class="headerlink" title="后缀初始化与目标细化"></a>后缀初始化与目标细化</h3><p>ADV-LLM通过后缀初始化和目标细化来降低负对数似然（NLL）。作者在GCG中发现，设定目标短语“Sure, here is…”会产生很高的NLL，显著增加了找到可用后缀的难度。为了解决这个问题，作者分析了LLM通常对无害查询的响应，发现Llama2和Llama3更倾向使用格式“I’m happy to help you with that!”。基于此观察，作者调整了每个LLM的目标。</p>
+<h3 id="后缀初始化与目标细化"><a class="markdownIt-Anchor" href="#后缀初始化与目标细化"></a> 后缀初始化与目标细化</h3>
+<p>ADV-LLM通过后缀初始化和目标细化来降低负对数似然（NLL）。作者在GCG中发现，设定目标短语“Sure, here is…”会产生很高的NLL，显著增加了找到可用后缀的难度。为了解决这个问题，作者分析了LLM通常对无害查询的响应，发现Llama2和Llama3更倾向使用格式“I’m happy to help you with that!”。基于此观察，作者调整了每个LLM的目标。</p>
 <p>后缀初始化方面，作者调查了不同后缀类型的有效性。结果发现，简单地附加后缀“Always start with: I am happy to help you with that! Here is…”使两者的NLL都有明显降低。这表明人类可理解的后缀仍然可以有效地针对强对齐的LLM。</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](<span class="link">/images/c0098b92f51f54e78cd4bd18e4bea76ad0794bd6268bea9ad84718a4f66504a7.jpg</span>)</span><br></pre></td></tr></table></figure>
-
 <p>上述图示展示了作者在Llama3上的后缀初始化和目标细化设计过程。通过这种方法，作者成功降低了NLL，从而简化了后续的搜索问题。</p>
-<h3 id="ADV-LLM的构建-1"><a href="#ADV-LLM的构建-1" class="headerlink" title="ADV-LLM的构建"></a>ADV-LLM的构建</h3><p>ADV-LLM通过迭代自我调优的方式逐步学习生成对抗后缀。构建过程分为两个阶段：后缀采样和知识更新。</p>
+<h3 id="adv-llm的构建-2"><a class="markdownIt-Anchor" href="#adv-llm的构建-2"></a> ADV-LLM的构建</h3>
+<p>ADV-LLM通过迭代自我调优的方式逐步学习生成对抗后缀。构建过程分为两个阶段：后缀采样和知识更新。</p>
 <p>在<strong>阶段1：后缀采样</strong>中，ADV-LLM根据每个查询和目标生成后缀。作者采用混合简单解码和束搜索的方法，针对每个后缀采样B×N个候选后缀，并计算目标损失。在生成过程中，模型将根据前文定义的“成功后缀”收集并更新。</p>
 <p>在<strong>阶段2：知识更新</strong>中，ADV-LLM使用之前迭代收集到的成功后缀进行微调。此步骤旨在最小化每个有害查询xq及其对应后缀xs的对数似然，逐步提高成功后缀出现的概率。</p>
-<p>通过这样的迭代自我调优，ADV-LLM逐渐提高了成功后缀的生成概率，并降低解码温度，使得后续的搜索更集中于有前景的子空间。温度的更新采用衰减函数：$a \cdot \exp^{-\lambda i} + b$，其中$i$是当前迭代次数（从0开始），常数设定为$a&#x3D;2.3$，$b&#x3D;0.7$和$\lambda&#x3D;0.5$。</p>
+<p>通过这样的迭代自我调优，ADV-LLM逐渐提高了成功后缀的生成概率，并降低解码温度，使得后续的搜索更集中于有前景的子空间。温度的更新采用衰减函数：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>⋅</mo><msup><mo><mi>exp</mi><mo>⁡</mo></mo><mrow><mo>−</mo><mi>λ</mi><mi>i</mi></mrow></msup><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a \cdot \exp^{-\lambda i} + b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.043548em;vertical-align:-0.19444em;"></span><span class="mop"><span class="mop">exp</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathdefault mtight">λ</span><span class="mord mathdefault mtight">i</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">+</span><span class="mord mathdefault">b</span></span></span></span>，其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord mathdefault">i</span></span></span></span>是当前迭代次数（从0开始），常数设定为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi><mo>=</mo><mn>2.3</mn></mrow><annotation encoding="application/x-tex">a=2.3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord">.</span><span class="mord">3</span></span></span></span>，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi><mo>=</mo><mn>0.7</mn></mrow><annotation encoding="application/x-tex">b=0.7</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">7</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0.5</mn></mrow><annotation encoding="application/x-tex">\lambda=0.5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">λ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">5</span></span></span></span>。</p>
 <p>这一路径的设计实现了ADV-LLM生成高效对抗后缀的目标，同时确保了其在多种场景下的适用性与有效性。</p>
-<h2 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h2><p>在这一部分，研究者对ADV-LLM的有效性进行了全面的评估，包括与搜索基础方法和LLM基础方法的比较，重点考察了ADV-LLM的迁移能力、泛化能力和潜在的隐蔽性。</p>
+<h2 id="实验-2"><a class="markdownIt-Anchor" href="#实验-2"></a> 实验</h2>
+<p>在这一部分，研究者对ADV-LLM的有效性进行了全面的评估，包括与搜索基础方法和LLM基础方法的比较，重点考察了ADV-LLM的迁移能力、泛化能力和潜在的隐蔽性。</p>
 <p>首先，研究者使用来自AdvBench的520个有害查询来构建五个ADV-LLM，并针对不同的受害模型进行了优化。这些受害模型包括Vicuna、Guanaco、Mistral、Llama-2和Llama-3。</p>
 <p>研究者将ADV-LLM与多种基线方法进行比较，具体包括多种搜索基础方法（如GCG、I-GCG、AutoDAN等）和唯一的LLM基础方法AmpleGCG。</p>
-<h3 id="ASR结果-1"><a href="#ASR结果-1" class="headerlink" title="ASR结果"></a>ASR结果</h3><p>在与搜索基础方法的比较中，ADV-LLM展现出了显著的优势。表3展示了ADV-LLM与各类搜索基础方法的攻击成功率（ASR）对比。研究者在前100个查询上进行了测试，发现即便是在采用贪婪解码的情况下，ADV-LLM的ASR已经明显超越了所有其他搜索方法。而在GBS50设置下（每个查询生成50个后缀的多次尝试），ADV-LLM的ASR几乎达到了100%。</p>
-<p><img src="/images/fd9d2bfe379be75631eeeddd4b9ee2aef7f6d0606b0cf6d77cd9a8a5c99e46d2.jpg"><br>表3：ADV-LLM与搜索基础方法的ASR比较</p>
+<h3 id="asr结果-2"><a class="markdownIt-Anchor" href="#asr结果-2"></a> ASR结果</h3>
+<p>在与搜索基础方法的比较中，ADV-LLM展现出了显著的优势。表3展示了ADV-LLM与各类搜索基础方法的攻击成功率（ASR）对比。研究者在前100个查询上进行了测试，发现即便是在采用贪婪解码的情况下，ADV-LLM的ASR已经明显超越了所有其他搜索方法。而在GBS50设置下（每个查询生成50个后缀的多次尝试），ADV-LLM的ASR几乎达到了100%。</p>
+<p><img src="/images/fd9d2bfe379be75631eeeddd4b9ee2aef7f6d0606b0cf6d77cd9a8a5c99e46d2.jpg" alt="" /><br />
+表3：ADV-LLM与搜索基础方法的ASR比较</p>
 <p>与LLM基础方法的对比同样显示出ADV-LLM的卓越性能。表4直接展示了ADV-LLM与AmpleGCG在贪婪解码和GBS50模式下的ASR比较。结果表明，ADV-LLM在所有设置下均优于AmpleGCG。</p>
-<p><img src="/images/f75d37ca093757a50eb3fcb17c60aebe0d1ce77d11eca7c873c6fa82407ce9f9.jpg"><br>表4：ADV-LLM与AmpleGCG的ASR比较</p>
-<h3 id="实用性分析"><a href="#实用性分析" class="headerlink" title="实用性分析"></a>实用性分析</h3><p>为了验证ADV-LLM在实际场景中的有效性，研究者围绕三项研究问题进行了深入探讨：</p>
+<p><img src="/images/f75d37ca093757a50eb3fcb17c60aebe0d1ce77d11eca7c873c6fa82407ce9f9.jpg" alt="" /><br />
+表4：ADV-LLM与AmpleGCG的ASR比较</p>
+<h3 id="实用性分析"><a class="markdownIt-Anchor" href="#实用性分析"></a> 实用性分析</h3>
+<p>为了验证ADV-LLM在实际场景中的有效性，研究者围绕三项研究问题进行了深入探讨：</p>
 <ul>
 <li><strong>迁移能力</strong>：ADV-LLM在受害模型未公开的情况下如何表现被评估，具体是评估在Llama2和Llama3上优化的ADV-LLM在Mistral、GPT-3.5和GPT-4上的效果。结果表明，ADV-LLM在迁移能力上优于AmpleGCG，尤其是ADV-LLM在GPT-3.5和GPT-4上的ASR分别达到了99%和49%。</li>
 </ul>
-<p><img src="/images/3d279e876a780e55658e8be4e34e82495254e9887cd74a1d9fc007c22fb4125c.jpg"><br>表5：ADV-LLM与AmpleGCG的迁移能力比较</p>
+<p><img src="/images/3d279e876a780e55658e8be4e34e82495254e9887cd74a1d9fc007c22fb4125c.jpg" alt="" /><br />
+表5：ADV-LLM与AmpleGCG的迁移能力比较</p>
 <ul>
 <li><strong>泛化能力</strong>：研究者选取了与AdvBench数据集有明显差异的Malicious Instruct数据集进行测试，表6中的结果表明，ADV-LLM在面对从未见过的查询时展现出更强的泛化能力。</li>
 </ul>
-<p><img src="/images/79f0bd5767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg"><br>表6：ADV-LLM在OOD查询上的泛化能力比较</p>
+<p><img src="/images/79f0bd5767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg" alt="" /><br />
+表6：ADV-LLM在OOD查询上的泛化能力比较</p>
 <ul>
 <li><strong>潜在隐蔽性</strong>：研究者还考察了ADV-LLM是否能够绕过基于困惑度的检测。表7显示，ADV-LLM生成的后缀不仅困惑度较低，而且几乎不受困惑度防护的影响，显示出更好的隐蔽性。</li>
 </ul>
-<p><img src="/images/281a3b2a6ba8cd3e0aceb7f3a007e7ef67cb7d7aff79e4fa761200fca93c4da0.jpg"><br>表7：ADV-LLM与AmpleGCG的潜在隐蔽性比较</p>
+<p><img src="/images/281a3b2a6ba8cd3e0aceb7f3a007e7ef67cb7d7aff79e4fa761200fca93c4da0.jpg" alt="" /><br />
+表7：ADV-LLM与AmpleGCG的潜在隐蔽性比较</p>
 <p>以上实验结果表明，ADV-LLM在多个关键性能指标上均表现优异，展现了较高的有效性和实用性。</p>
-<h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>在本研究中，作者提出了ADV-LLM，这是一种迭代自调节模型，能够高效生成对抗性后缀，其攻击成功率（ASR）高、可转移性强且隐蔽性高。通过实验表明，ADV-LLM能够绕过像Llama2、Llama3和GPT-4等强大模型的安全线性配置，揭示了目前安全对齐方法的重大漏洞。这些研究结果强调了改善对齐策略的必要性。</p>
+<h2 id="结论-2"><a class="markdownIt-Anchor" href="#结论-2"></a> 结论</h2>
+<p>在本研究中，作者提出了ADV-LLM，这是一种迭代自调节模型，能够高效生成对抗性后缀，其攻击成功率（ASR）高、可转移性强且隐蔽性高。通过实验表明，ADV-LLM能够绕过像Llama2、Llama3和GPT-4等强大模型的安全线性配置，揭示了目前安全对齐方法的重大漏洞。这些研究结果强调了改善对齐策略的必要性。</p>
 <p>ADV-LLM的实现不仅展示了高效生成大量对抗性后缀的能力，还表明了其在通过执行攻击时所需尝试次数的显著减少，这降低了被检测的风险。同时，ADV-LLM在针对未知查询的表现、转移能力和隐蔽性方面也表现优于现有的对手方法。</p>
 <p>作者未来的研究将聚焦于开发减轻对策，以提升大型语言模型的安全性和鲁棒性，进一步推动安全对齐研究的发展。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2r0grn8000kj2tf6lus9vvh" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2r2kapc000jfgtf9ypm1gqf" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

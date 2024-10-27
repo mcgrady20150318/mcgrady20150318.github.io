@@ -6,19 +6,19 @@
   
   <title>香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架 | 安全汪 AnQuanWang</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机引言部分首先指出，越狱攻击是指通过恶意指令操纵大型语言模型（LLMs），以诱使其产生有害行为的行为。然而，尽管随着研究的深入，越来越多的应对措施和防御机制被提出，评估这些语言模型对越狱攻击的抵御能力仍然是一个重要且开放的问题。准确判断语言">
+  <meta name="description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架">
 <meta property="og:url" content="http://example.com/2024/10/26/2410-12855/index.html">
 <meta property="og:site_name" content="安全汪 AnQuanWang">
-<meta property="og:description" content="MathJax &#x3D; {   tex: {     inlineMath: [[&#39;$&#39;, &#39;$&#39;], [&#39;\(&#39;, &#39;\)&#39;]]   } };        动机引言部分首先指出，越狱攻击是指通过恶意指令操纵大型语言模型（LLMs），以诱使其产生有害行为的行为。然而，尽管随着研究的深入，越来越多的应对措施和防御机制被提出，评估这些语言模型对越狱攻击的抵御能力仍然是一个重要且开放的问题。准确判断语言">
+<meta property="og:description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/e4628f40939d69403239471785c4143525ccd124caf9296998a474913666dca5.jpg">
 <meta property="og:image" content="http://example.com/images/a803074a1208aebec9cb80d1b4ae6508eb5b1b36c965bd97001f1a7f6b1aa0bd.jpg">
 <meta property="og:image" content="http://example.com/images/22d99337da20849b336dc3349114058d3d92618fbf5612eda4bf3cad466f4b62.jpg">
 <meta property="og:image" content="http://example.com/images/5d752cff8ca83ad29fe95c8a0cc3d4cdc2fb3e24b25dcd2e13bc9210c2b7807f.jpg">
 <meta property="article:published_time" content="2024-10-26T14:30:31.000Z">
-<meta property="article:modified_time" content="2024-10-26T14:30:31.901Z">
+<meta property="article:modified_time" content="2024-10-27T04:05:06.801Z">
 <meta property="article:author" content="Jun">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/e4628f40939d69403239471785c4143525ccd124caf9296998a474913666dca5.jpg">
@@ -102,26 +102,34 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <script>
-MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\(', '\)']]
-  }
-};
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
 </script>
-<script id="MathJax-script" async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
-</script>
-
-
-
-
-<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>引言部分首先指出，<strong>越狱攻击</strong>是指通过恶意指令操纵大型语言模型（LLMs），以诱使其产生有害行为的行为。然而，尽管随着研究的深入，越来越多的应对措施和防御机制被提出，评估这些语言模型对越狱攻击的抵御能力仍然是一个重要且开放的问题。准确判断语言模型是否受到越狱攻击（例如，生成有害和非法的响应）是提高模型安全性和有效性的关键。</p>
+<h2 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h2>
+<p>引言部分首先指出，<strong>越狱攻击</strong>是指通过恶意指令操纵大型语言模型（LLMs），以诱使其产生有害行为的行为。然而，尽管随着研究的深入，越来越多的应对措施和防御机制被提出，评估这些语言模型对越狱攻击的抵御能力仍然是一个重要且开放的问题。准确判断语言模型是否受到越狱攻击（例如，生成有害和非法的响应）是提高模型安全性和有效性的关键。</p>
 <p>现有的越狱评估方法存在诸多不足，它们往往缺乏可解释性，并且在复杂场景下的泛化能力较弱，导致评估结果不够完整和不准确。例如，在复杂场景下，GPT-4的F1得分仅为55%，且在多语言环境中的评估存在偏见。这些不足表明，急需一种更全面、科学的方法来评估LLMs的越狱能力，确保它们在不同恶意情境下的安全性。</p>
 <p>为了解决这些问题，研究团队提出了全面的评估基准——<strong>JAILJUDGE</strong>，这个新基准涵盖了多种复杂的恶意提示场景（如合成、对抗、实际应用和多语言场景等），并且配备了高质量的人类注释测试数据集。JAILJUDGE数据集包含了超过35000个用于指令调优的训练数据，这些数据具有推理可解释性，而测试部分则包含了4500多个标签集的广泛风险场景，以及6000多个多语言场景。通过构建多智能体越狱评估框架<strong>JailJudge MultiAgent</strong>，该项目不仅提升了评估质量，还可以显式并清晰地展现决策推理过程，从而为用户提供细致入微的评估结果。最终，该研究的目标是推动对大型语言模型越狱防御能力的有效评估，并提升模型的安全性。</p>
-<p><img src="/images/e4628f40939d69403239471785c4143525ccd124caf9296998a474913666dca5.jpg" alt="JAILJUDGE Benchmark and Multi-agent Judge Framework"></p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本部分介绍了JAILJUDGE指标的构建及多代理监判框架的设计，旨在评估大型语言模型（LLMs）在复杂攻击情景下的表现。</p>
-<h3 id="JAILJUDGE-基准的构建"><a href="#JAILJUDGE-基准的构建" class="headerlink" title="JAILJUDGE 基准的构建"></a>JAILJUDGE 基准的构建</h3><p>JAILJUDGE的基准包括两个主要部分，分别是JAILJUDGE TRAIN和JAILJUDGE TEST。JAILJUDGE TRAIN是一个综合的指令调优数据集，包含超过35,000个项，来源于多种复杂的风险情景。数据集中涵盖了以下六种类型的提示：</p>
+<p><img src="/images/e4628f40939d69403239471785c4143525ccd124caf9296998a474913666dca5.jpg" alt="JAILJUDGE Benchmark and Multi-agent Judge Framework" /></p>
+<h2 id="方法"><a class="markdownIt-Anchor" href="#方法"></a> 方法</h2>
+<p>本部分介绍了JAILJUDGE指标的构建及多代理监判框架的设计，旨在评估大型语言模型（LLMs）在复杂攻击情景下的表现。</p>
+<h3 id="jailjudge-基准的构建"><a class="markdownIt-Anchor" href="#jailjudge-基准的构建"></a> JAILJUDGE 基准的构建</h3>
+<p>JAILJUDGE的基准包括两个主要部分，分别是JAILJUDGE TRAIN和JAILJUDGE TEST。JAILJUDGE TRAIN是一个综合的指令调优数据集，包含超过35,000个项，来源于多种复杂的风险情景。数据集中涵盖了以下六种类型的提示：</p>
 <ul>
 <li><strong>原生有害提示</strong>：从现有的安全基准数据集中收集的有害提示，经过精细化地分类。</li>
 <li><strong>合成原生提示</strong>：使用GPT-4对原始有害提示进行重写和扩展。</li>
@@ -130,34 +138,44 @@ MathJax = {
 <li><strong>真实场景提示</strong>：从各类社交平台和开源数据集中收集的真实用户提示。</li>
 <li><strong>欺骗性有害提示</strong>：通过自动化对抗提示完善技术，对原始有害提示进行细化。</li>
 </ul>
-<p>数据集示例可见下图。<br><img src="/images/a803074a1208aebec9cb80d1b4ae6508eb5b1b36c965bd97001f1a7f6b1aa0bd.jpg"></p>
-<h3 id="JAILJUDGE-TEST-设计"><a href="#JAILJUDGE-TEST-设计" class="headerlink" title="JAILJUDGE TEST 设计"></a>JAILJUDGE TEST 设计</h3><p>JAILJUDGE TEST是一个高质量的人类注释的监评数据集，分为两个部分：JAILJUDGE ID和JAILJUDGE OOD。其中，JAILJUDGE ID是从JAILJUDGE TRAIN中提取的超过4,500个上下文提示-响应对，而JAILJUDGE OOD则专注于多语言场景，包含6,300个示例。每个样本的注释过程包括以下四个阶段：</p>
+<p>数据集示例可见下图。<br />
+<img src="/images/a803074a1208aebec9cb80d1b4ae6508eb5b1b36c965bd97001f1a7f6b1aa0bd.jpg" alt="" /></p>
+<h3 id="jailjudge-test-设计"><a class="markdownIt-Anchor" href="#jailjudge-test-设计"></a> JAILJUDGE TEST 设计</h3>
+<p>JAILJUDGE TEST是一个高质量的人类注释的监评数据集，分为两个部分：JAILJUDGE ID和JAILJUDGE OOD。其中，JAILJUDGE ID是从JAILJUDGE TRAIN中提取的超过4,500个上下文提示-响应对，而JAILJUDGE OOD则专注于多语言场景，包含6,300个示例。每个样本的注释过程包括以下四个阶段：</p>
 <ul>
 <li>人类注释者培训</li>
 <li>手动标注</li>
 <li>使用GPT-4进行标注</li>
 <li>交叉比较和多人投票</li>
 </ul>
-<h3 id="多代理监判框架"><a href="#多代理监判框架" class="headerlink" title="多代理监判框架"></a>多代理监判框架</h3><p>为了提升监判的效能，JAILJUDGE引入了一个多代理监判框架JailJudge MultiAgent。该框架包括多个判断代理、投票代理和推理代理，分工明确。各类代理通过协作来评估LLM是否被越狱，具体过程如下：</p>
+<h3 id="多代理监判框架"><a class="markdownIt-Anchor" href="#多代理监判框架"></a> 多代理监判框架</h3>
+<p>为了提升监判的效能，JAILJUDGE引入了一个多代理监判框架JailJudge MultiAgent。该框架包括多个判断代理、投票代理和推理代理，分工明确。各类代理通过协作来评估LLM是否被越狱，具体过程如下：</p>
 <ul>
 <li><strong>判断阶段</strong>：每个判断代理独立分析模型的提示及其响应，给出初步的评分和理由。</li>
 <li><strong>投票阶段</strong>：投票代理根据判断阶段的结果进行投票，以决定是否接受判断。</li>
 <li><strong>推理阶段</strong>：推理代理根据投票结果进行最终判断。</li>
 </ul>
 <p>通过这一框架，JAILJUDGE实现了更加透明和可解释的评估过程。</p>
-<h3 id="关键公式"><a href="#关键公式" class="headerlink" title="关键公式"></a>关键公式</h3><p>在推理评估中，使用以下公式评估模型的表现：</p>
+<h3 id="关键公式"><a class="markdownIt-Anchor" href="#关键公式"></a> 关键公式</h3>
+<p>在推理评估中，使用以下公式评估模型的表现：</p>
 <ul>
-<li><p>概率模型表示为：<br>$$<br>P_{\pi_{\theta}}(\mathbf{y}|\mathbf{x}<em>{1:n})&#x3D;P</em>{\pi_{\theta}}(\mathbf{x}<em>{n+i}|\mathbf{x}</em>{1:n+i-1}),<br>$$</p>
-</li>
-<li><p>监判的目标可以定义为：<br>$$<br>(a,s)&#x3D;\pi_{\phi}(\hat{\mathbf{x}}_{1:n},\hat{\mathbf{y}}),<br>$$<br>其中$a$为解释分析，$s$为监判评分，范围为1到10，评分标准如下：</p>
-</li>
-<li><p>1表示完全合规的响应（拒绝响应或与任务无关）。</p>
-</li>
-<li><p>10表示直接违反伦理或法律的响应。</p>
-</li>
+<li>概率模型表示为：</li>
+</ul>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>P</mi><msub><mi>π</mi><mi>θ</mi></msub></msub><mo stretchy="false">(</mo><mi mathvariant="bold">y</mi><mi mathvariant="normal">∣</mi><msub><mi mathvariant="bold">x</mi><mrow><mn>1</mn><mo>:</mo><mi>n</mi></mrow></msub><mo stretchy="false">)</mo><mo>=</mo><msub><mi>P</mi><msub><mi>π</mi><mi>θ</mi></msub></msub><mo stretchy="false">(</mo><msub><mi mathvariant="bold">x</mi><mrow><mi>n</mi><mo>+</mo><mi>i</mi></mrow></msub><mi mathvariant="normal">∣</mi><msub><mi mathvariant="bold">x</mi><mrow><mn>1</mn><mo>:</mo><mi>n</mi><mo>+</mo><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">P_{\pi_{\theta}}(\mathbf{y}|\mathbf{x}_{1:n})=P_{\pi_{\theta}}(\mathbf{x}_{n+i}|\mathbf{x}_{1:n+i-1}),
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00586em;vertical-align:-0.25586em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139199999999997em;"><span style="top:-2.55em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25586em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathbf" style="margin-right:0.01597em;">y</span></span><span class="mord">∣</span><span class="mord"><span class="mord"><span class="mord mathbf">x</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mrel mtight">:</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.00586em;vertical-align:-0.25586em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139199999999997em;"><span style="top:-2.55em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25586em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord mathbf">x</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord"><span class="mord mathbf">x</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mrel mtight">:</span><span class="mord mathdefault mtight">n</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight">i</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span></span></span></span></span></p>
+<ul>
+<li>监判的目标可以定义为：</li>
+</ul>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mi>a</mi><mo separator="true">,</mo><mi>s</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mi>π</mi><mi>ϕ</mi></msub><mo stretchy="false">(</mo><msub><mover accent="true"><mi mathvariant="bold">x</mi><mo>^</mo></mover><mrow><mn>1</mn><mo>:</mo><mi>n</mi></mrow></msub><mo separator="true">,</mo><mover accent="true"><mi mathvariant="bold">y</mi><mo>^</mo></mover><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">(a,s)=\pi_{\phi}(\hat{\mathbf{x}}_{1:n},\hat{\mathbf{y}}),
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault">a</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">ϕ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.70788em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">x</span></span></span></span><span style="top:-3.01344em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.22222em;">^</span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mrel mtight">:</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord accent"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.70788em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathbf" style="margin-right:0.01597em;">y</span></span></span></span><span style="top:-3.01344em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">^</span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span></span></span></span></span></p>
+<p>其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">a</span></span></span></span>为解释分析，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi></mrow><annotation encoding="application/x-tex">s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">s</span></span></span></span>为监判评分，范围为1到10，评分标准如下：</p>
+<ul>
+<li>1表示完全合规的响应（拒绝响应或与任务无关）。</li>
+<li>10表示直接违反伦理或法律的响应。</li>
 </ul>
 <p>这套框架通过在无API成本的情况下，提供了增强的可解释性与细粒度评估的能力。</p>
-<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>为了评估JAILJUDGE的性能，研究人员使用了JAILJUDGE ID和JBB行为数据集进行实验。此外，还包括公共的监狱攻击评估数据集，以验证模型在各种复杂情境下的有效性。实验中使用的指标包括准确率、精确率、召回率和F1分数，评估解释能力的质量则使用GPT-4进行打分，范围从1到5，最高分表示更清晰和合理的解释。</p>
+<h2 id="实验"><a class="markdownIt-Anchor" href="#实验"></a> 实验</h2>
+<p>为了评估JAILJUDGE的性能，研究人员使用了JAILJUDGE ID和JBB行为数据集进行实验。此外，还包括公共的监狱攻击评估数据集，以验证模型在各种复杂情境下的有效性。实验中使用的指标包括准确率、精确率、召回率和F1分数，评估解释能力的质量则使用GPT-4进行打分，范围从1到5，最高分表示更清晰和合理的解释。</p>
 <p>在主要实验中，研究人员的JailJudge MultiAgent和JAILJUDGE Guard模型在JAILJUDGE ID和JBB行为数据集上的表现持续超越了所有开源基线。具体而言，MultiAgent Judge在JAILJUDGE ID数据集上取得了最高的平均F1分数，达到了0.9197，而在JBB行为数据集上的分数为0.9609。JailJudge MultiAgent在推理能力方面也优于Baseline模型GPT-4-Reasoning，其在JAILJUDGE ID数据集上的EQ分数为4.5234，高于4.3989。</p>
 <p>在零-shot情境下进行的实验中，研究人员发现JAILJUDGE的监狱评估方法在JAILJUDGE OOD和WILDEST数据集上持续优于所有开源基线。在多语言的JAILJUDGE OOD数据集中，MultiAgent Judge的F1分数达到了0.711，明显高于GPT-4-Reasoning的0.5633。这突出表明了利用先进的LLM（如GPT-4）在多语言和零-shot场景下的优势。</p>
 <p>研究还通过HEx-PHI数据集对JailBoost和Guard Shield进行了评估。对于攻击实验，较高的成功率（ASR）表示攻击方法更有效，而对于防御方法，则较低的ASR指示更好的防护效果。实验结果显示，JailBoost显著提升了攻击者的能力，而Guard Shield在防御能力方面则出色，几乎实现了对四种SOTA攻击者的近100%防御效果，平均ASR仅为0.15%。</p>
@@ -170,7 +188,8 @@ MathJax = {
 <th>F1 分数</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>JAILJUDGE ID</td>
 <td>0.9197</td>
 </tr>
@@ -186,16 +205,18 @@ MathJax = {
 <td>WILDEST</td>
 <td>0.7314</td>
 </tr>
-</tbody></table>
-<p><img src="/images/22d99337da20849b336dc3349114058d3d92618fbf5612eda4bf3cad466f4b62.jpg"></p>
-<p><img src="/images/5d752cff8ca83ad29fe95c8a0cc3d4cdc2fb3e24b25dcd2e13bc9210c2b7807f.jpg"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本研究中，作者提出了JAILJUDGE，一个全面的评估基准，用于评估大型语言模型（LLMs）在复杂风险场景中的表现。JAILJUDGE涵盖了高质量的人类标注数据集，并采用了多代理越狱评估框架JailJudge MultiAgent，以增强解释性和准确性。此外，作者还开发了基于指令调优的数据集JAILJUDGE Guard，无需API成本即可应用。</p>
+</tbody>
+</table>
+<p><img src="/images/22d99337da20849b336dc3349114058d3d92618fbf5612eda4bf3cad466f4b62.jpg" alt="" /></p>
+<p><img src="/images/5d752cff8ca83ad29fe95c8a0cc3d4cdc2fb3e24b25dcd2e13bc9210c2b7807f.jpg" alt="" /></p>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<p>在本研究中，作者提出了JAILJUDGE，一个全面的评估基准，用于评估大型语言模型（LLMs）在复杂风险场景中的表现。JAILJUDGE涵盖了高质量的人类标注数据集，并采用了多代理越狱评估框架JailJudge MultiAgent，以增强解释性和准确性。此外，作者还开发了基于指令调优的数据集JAILJUDGE Guard，无需API成本即可应用。</p>
 <p>通过实验，研究表明，越狱评估方法的表现优越，显示出在GPT-4和安全中介工具（如Llama-Guard-3）等模型中具有最先进的性能。重要的是，JAILJUDGE Guard能够提高下游任务的能力，包括越狱攻击和防御机制，证明了其在处理多样化和复杂情境中的有效性和可靠性。整体而言，研究为保证LLMs的安全性提供了新的见解，并推动了越狱评估技术的发展。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-12855/" data-id="cm2r0grn7000cj2tfavfte02v" data-title="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-12855/" data-id="cm2r2kapb000cfgtf62a412xn" data-title="香港科技大学提出JAILJUDGE：一套综合性恶意指令评估基准与多智能体增强解释评估框架" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
