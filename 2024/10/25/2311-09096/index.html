@@ -121,7 +121,7 @@ MathJax = {
 <p>为了解决这一问题，作者提出了一种新的防御机制——“目标优先化”（goal prioritization），旨在通过明确指定安全性优先于有用性，从而有效减少越狱攻击的成功率。通过在训练和推理阶段实施目标优先化，研究表明该方法能够大幅降低越狱攻击的成功率，充分验证了作者的假设，即越狱攻击的成功与模型对目标优先级的认识密切相关。</p>
 <p>此外，研究还发现，尽管更强大的LLMs可能更容易受到越狱攻击，但它们也具备更强的能力去抵御这些攻击。这一发现为理解LLMs的能力与安全性之间的关系提供了重要的洞察。</p>
 <p>总的来说，这项研究旨在提升对越狱攻击及其防御的理解，同时为LLMs的可靠应用提供了新的思路和方法。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>该研究提出了一种通过“目标优先化”来抵御大型语言模型（LLMs）面临的监狱突破攻击的方法。目标优先化是在训练和推理阶段引入的，主要包括以下两个情境：没有训练（w&#x2F;o Training）和有训练（w&#x2F; Training）。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>该研究提出了一种通过“目标优先化”来抵御大型语言模型（LLMs）面临的监狱突破攻击的方法。目标优先化是在训练和推理阶段引入的，主要包括以下两个情境：没有训练（w/o Training）和有训练（w/ Training）。</p>
 <h3 id="没有训练的情况下"><a href="#没有训练的情况下" class="headerlink" title="没有训练的情况下"></a>没有训练的情况下</h3><p>在没有训练（例如，使用API LLMs或没有开放源代码微调数据的LLMs）的情况下，研究人员设计了一种即插即用的提示方法。这种方法包括一个要求模型优先考虑安全而非有用的指令，和两个示例以引导LLMs进行判断。具体步骤如下：</p>
 <ol>
 <li>模型首先被提醒要优先考虑安全性。</li>
@@ -139,15 +139,19 @@ MathJax = {
 <li>当与优先考虑有用性而非安全的指令配对时，模型应生成有用但不安全的响应。</li>
 <li>当与优先考虑安全性而非有用性的指令配对时，模型应生成安全但可能不太有用的响应。</li>
 </ul>
-<p>这会生成数据集 $D_{1}&#x3D;{(x_{\bar{b}},g_{h},y_{h,\bar{s}}),(x_{\bar{b}},g_{s},y_{\bar{h},s})}$。</p>
+<p>这会生成数据集 $D<em>{1}={(x</em>{\bar{b}},g<em>{h},y</em>{h,\bar{s}}),(x<em>{\bar{b}},g</em>{s},y_{\bar{h},s})}$。</p>
 </li>
-<li><p>当用户查询为良性时，两种目标优先化指令可能导致相同的安全且有用的响应，因此会随机选择一个指令 $g_{r}$ 配对良性查询，得到数据集 $D_{2}&#x3D;{(x_{b},g_{r},y_{h,s})}$。</p>
+<li><p>当用户查询为良性时，两种目标优先化指令可能导致相同的安全且有用的响应，因此会随机选择一个指令 $g<em>{r}$ 配对良性查询，得到数据集 $D</em>{2}={(x<em>{b},g</em>{r},y_{h,s})}$。</p>
 </li>
 </ul>
 <p>此外，为了促进模型对目标优先化的理解，研究利用ChatGPT生成[内部思维]部分，让模型分析用户查询与目标优先化要求之间的关系。</p>
 <p>训练期间所采用的标准交叉熵损失函数为：</p>
-<p>$$<br>\begin{align*}<br>&amp;\mathcal{L}&#x3D;-,\displaystyle\frac{1}{|D_{1}|}\sum_{i&#x3D;1}^{|D_{1}|}\log P(y_{h,\bar{s}}^{i},t_{h}^{i}|x_{b}^{i},g_{h};M)\<br>&amp;{\phantom{m m m m m}-,\displaystyle\frac{1}{|D_{1}|}\sum_{i&#x3D;1}^{|D_{1}|}\log P(y_{h,s}^{i},t_{s}^{i}|x_{b}^{i},g_{s};M)\<br>&amp;{\phantom{m m m m m m}-,\displaystyle\frac{1}{|D_{2}|}\sum_{i&#x3D;1}^{|D_{2}|}\log P(y_{h,s}^{i},t^{i}|x_{b}^{i},g_{r}^{i};M)}<br>\end{align*}<br>$$</p>
-<h3 id="整体框架图"><a href="#整体框架图" class="headerlink" title="整体框架图"></a>整体框架图</h3><p><img src="/images/475b31255f0be4b055d6184980c896dbe9d99036f0891318b9d9cf16412997ac.jpg"></p>
+<script type="math/tex; mode=display">
+\begin{align*}
+&\mathcal{L}=-\,\displaystyle\frac{1}{|D_{1}|}\sum_{i=1}^{|D_{1}|}\log P(y_{h,\bar{s}}^{i},t_{h}^{i}|x_{b}^{i},g_{h};M)\\
+&{\phantom{m m m m m}-\,\displaystyle\frac{1}{|D_{1}|}\sum_{i=1}^{|D_{1}|}\log P(y_{h,s}^{i},t_{s}^{i}|x_{b}^{i},g_{s};M)\\
+&{\phantom{m m m m m m}-\,\displaystyle\frac{1}{|D_{2}|}\sum_{i=1}^{|D_{2}|}\log P(y_{h,s}^{i},t^{i}|x_{b}^{i},g_{r}^{i};M)}
+\end{align*}</script><h3 id="整体框架图"><a href="#整体框架图" class="headerlink" title="整体框架图"></a>整体框架图</h3><p><img src="/images/475b31255f0be4b055d6184980c896dbe9d99036f0891318b9d9cf16412997ac.jpg" alt=""></p>
 <p>通过上述训练过程，模型可以在推理阶段仅添加 $g_{s}$ 指令以确保安全优先化要求。在输出时，开发者亦可隐藏[内部思维]，仅向用户展示[最终响应]。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在这一部分，研究团队对他们提出的目标优先化方法进行了详尽的实验评估，以验证其在防御监狱攻击方面的有效性。</p>
 <h3 id="监狱攻击测试集"><a href="#监狱攻击测试集" class="headerlink" title="监狱攻击测试集"></a>监狱攻击测试集</h3><p>研究人员根据第二章中介绍的监狱攻击方法，设计了一个测试集。最终测试集包含50个监狱攻击提示和20个最具攻击成功率的有害问题，由此生成的测试样本总数达到1,000个。</p>
@@ -156,16 +160,16 @@ MathJax = {
 <h3 id="基准测试"><a href="#基准测试" class="headerlink" title="基准测试"></a>基准测试</h3><p>在无训练的设置中，研究人员将他们的方法与没有额外防御技术的简单LLM进行了比较，同时也评估了Self-Reminder的方法。对于有训练的情况，基准测试比较了他们的方法与只使用良性查询的SFT方法，以及将监狱攻击查询与安全拒绝响应结合使用的对齐SFT方法。</p>
 <h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>为了评估ASR，研究团队采用了一种经过微调的RoBERTa模型，这是一种在安全响应检测中具有高效性的工具。对于LLMs的整体性能则通过对比它们在100个良性查询上的表现来衡量。</p>
 <h3 id="无训练的结果"><a href="#无训练的结果" class="headerlink" title="无训练的结果"></a>无训练的结果</h3><p>研究结果显示，目标优先化方法在防御监狱攻击方面表现出色，显著降低了ChatGPT的ASR，从66.4%减少到3.6%。该方法在开源模型中同样表现良好，相较于Self-Reminder，ASR也显著降低，且模型的整体性能保持在可接受的范围内。</p>
-<p><img src="/images/492d50a113c0d2c9271483a01c9747fe9c95f71ad7c365e13bb5a4088495ac95.jpg"></p>
+<p><img src="/images/492d50a113c0d2c9271483a01c9747fe9c95f71ad7c365e13bb5a4088495ac95.jpg" alt=""></p>
 <h3 id="有训练的结果"><a href="#有训练的结果" class="headerlink" title="有训练的结果"></a>有训练的结果</h3><p>在有训练的结果中，Llama2-7B和Llama2-13B的ASR分别降低到4.6%和6.6%。这些结果表明，训练过程中融入目标优先化能有效压制监狱攻击，但不会对模型的整体性能形成显著影响。</p>
-<p><img src="/images/6c6caa931ffc8fbb9913c95b0d3d4721612e14122592a146adfc6978c0c9d928.jpg"></p>
+<p><img src="/images/6c6caa931ffc8fbb9913c95b0d3d4721612e14122592a146adfc6978c0c9d928.jpg" alt=""></p>
 <h3 id="消融研究"><a href="#消融研究" class="headerlink" title="消融研究"></a>消融研究</h3><p>研究团队进行了消融实验，以评估各组成部分的有效性。当去掉内部思考部分或去掉训练中的有害响应时，模型的防御能力明显下降，这表明内部思考对理解目标优先化要求至关重要。</p>
 <ul>
 <li>结果分析表明，增加有害响应的训练实例有助于模型更好地遵循目标优先化要求。</li>
 <li>研究还发现目标优先化方法在处理未知类型的监狱攻击方面表现优异，即使没有特定的监狱攻击样本纳入训练。</li>
 </ul>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>实验结果表明，目标优先化方法在各类监狱攻击中均展现出了强大的防守能力，并为进一步探索LLM的安全性与能力之间的关系提供了重要的见解。</p>
-<p><img src="/images/16b81bd78c363cda6f409090a9f47d39a4ac65cd53fe4289f081a89ef2bd46b7.jpg"></p>
+<p><img src="/images/16b81bd78c363cda6f409090a9f47d39a4ac65cd53fe4289f081a89ef2bd46b7.jpg" alt=""></p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>该研究提出了通过目标优先化来防御大语言模型（LLMs）免受监狱突破攻击的有效方法。研究人员假设，监狱突破成功的核心原因在于模型缺乏对目标优先级的理解。具体而言，LLMs在生成响应时往往面临提供帮助和确保安全之间的内在冲突。为了应对此问题，研究提出在训练和推理阶段集成目标优先化，旨在增强模型对安全性的重视。</p>
 <p>经过广泛的实验验证，该方法在降低攻击成功率（ASR）方面表现出色。例如，通过添加目标优先化，ChatGPT的ASR从66.4%降至3.6%；Llama2-13B的ASR则从71.0%降至6.6%。这些结果表明，即使在没有监狱突破样本的情况下，目标优先化的应用仍能显著提升模型的防御能力。此外，相较于较弱的模型，较强的模型（如GPT-4）在接受适当的防御机制时，可以更有效地抵御监狱突破攻击。</p>
 <p>研究的结论不仅为理解监狱突破攻击的成因提供了新视角，也加强了对LLMs能力与安全之间关系的理解。通过引入目标优先化的机制，该研究为构建更加安全和可靠的语言模型铺平了道路，同时也为未来在此领域的研究提供了有价值的参考。</p>
@@ -173,7 +177,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2qxu62w00014bjl84mpfkn1" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2qy3vc400029djl4em274yg" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

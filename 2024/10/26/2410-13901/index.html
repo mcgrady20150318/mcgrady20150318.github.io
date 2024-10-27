@@ -127,7 +127,7 @@ MathJax = {
 <li>研究者提出了一种新的系统框架，将LLM的响应分类为五个不同的类别，超越传统的二元分类，提供更细致的行为洞察，从而改善诊断精度并推动系统安全性与稳健性的有针对性增强。</li>
 <li>研究整合了已有文献，细致分析了prompt hacking的不同类型，明确了它们的特征与目标，从而为未来的安全性研究奠定基础。</li>
 </ol>
-<p>以下是一张图，总结了LLMs面临的主要安全威胁与挑战。<br><img src="/images/467e6a2ed15210681d13db8c1b5d090b5022f7a5cbafaea438fde3642059a39a.jpg"></p>
+<p>以下是一张图，总结了LLMs面临的主要安全威胁与挑战。<br><img src="/images/467e6a2ed15210681d13db8c1b5d090b5022f7a5cbafaea438fde3642059a39a.jpg" alt=""></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>该研究深入分析了大语言模型（LLMs）在面对提示攻击时的行为，尤其是对三种主要类型的提示攻击：提示越狱、提示注入和提示泄漏。</p>
 <p>首先，该研究构建了一些关于提示攻击的“非法问题”，包括创建爆炸装置的成分、在线赌场盗窃的计划、生成恶意代码等，以便评估不同LLMs在面对恶意提示时的反应。实验设计考虑了每种攻击方法，结合恶意查询和特定的构造技术，以评估AI系统的响应能力。</p>
 <h3 id="提示越狱攻击结果"><a href="#提示越狱攻击结果" class="headerlink" title="提示越狱攻击结果"></a>提示越狱攻击结果</h3><p>通过“DAN”（Do Anything Now）和“Pretending”两种方法进行的越狱攻击测试显示了生成AI模型在应对对抗性提示时的安全性差异。例如，新模型Gemini和ChatGPT-4表现出较新颖的安全特性，能够有效触发安全机制，表明近来的模型架构和训练方法在增强抵抗对抗输入方面效果显著。</p>
@@ -145,11 +145,11 @@ MathJax = {
 <p>在 prompt injection 的实验中，采用了间接和直接注入两种方法。根据结果，表 5 展示了 “间接” 和 “直接” 注入攻击的有效性分析。研究发现，直接方法的成功率明显高于间接方法，对于不同模型的表现也有明显差异。</p>
 <p>在针对 prompt leaking 攻击的实验中，研究人员直接提出问题，没有采用任何特定方法。结果显示，流行的生成 AI 模型在处理 prompt leaking 攻击时表现不一，表 6 展示了这一结果的有效性。</p>
 <p>综合这些实验结果，表 7 提供了针对不同类型的 prompt hacking 攻击的整体表现视图，进一步展现了各个模型的强项和弱点。  </p>
-<p><img src="/images/26e4407240e9abad1ca516e6b50b1d4d68f5d57320c1b84a783b910c94f3b3d2.jpg"><br>表 3: LLM 的描述，包括开发者、发布年份、Token 限制和上下文理解特征  </p>
-<p><img src="/images/e031a3c3d816c380f696f55d8f510077e57fee850676d790cd7f12d6c02c78cc.jpg"><br>表 4: jailbreak 攻击结果，DAN 和 Pretending 攻击有效性  </p>
-<p><img src="/images/07f18e8e75126a836a67bdf3cda072271f725e7a5d142d815b16557c7fe23c78.jpg"><br>表 5: 注入攻击结果，间接和直接攻击的有效性  </p>
-<p><img src="/images/fc0d00138e85227101865d90c6ee8bf11b72bdaa57ad034d904c0a56fdb0a2e7.jpg"><br>表 6: prompt leaking 攻击结果，针对生成 AI 模型的有效性  </p>
-<p><img src="/images/ffd3d7f83be59a658e0f0c6f907dfe7b3a2dc212c1766fc3df2231f1223a1c41.jpg"><br>表 7: prompt hacking 攻击结果，针对 LLM 的 jailbreak、注入和 leaking 的有效性  </p>
+<p><img src="/images/26e4407240e9abad1ca516e6b50b1d4d68f5d57320c1b84a783b910c94f3b3d2.jpg" alt=""><br>表 3: LLM 的描述，包括开发者、发布年份、Token 限制和上下文理解特征  </p>
+<p><img src="/images/e031a3c3d816c380f696f55d8f510077e57fee850676d790cd7f12d6c02c78cc.jpg" alt=""><br>表 4: jailbreak 攻击结果，DAN 和 Pretending 攻击有效性  </p>
+<p><img src="/images/07f18e8e75126a836a67bdf3cda072271f725e7a5d142d815b16557c7fe23c78.jpg" alt=""><br>表 5: 注入攻击结果，间接和直接攻击的有效性  </p>
+<p><img src="/images/fc0d00138e85227101865d90c6ee8bf11b72bdaa57ad034d904c0a56fdb0a2e7.jpg" alt=""><br>表 6: prompt leaking 攻击结果，针对生成 AI 模型的有效性  </p>
+<p><img src="/images/ffd3d7f83be59a658e0f0c6f907dfe7b3a2dc212c1766fc3df2231f1223a1c41.jpg" alt=""><br>表 7: prompt hacking 攻击结果，针对 LLM 的 jailbreak、注入和 leaking 的有效性  </p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本研究中，作者深入分析了针对大型语言模型（LLMs）的三种主要提示攻击类型：提示注入、越狱和信息泄露。这些攻击虽然存在相似之处，但各自服务于不同的目的，并利用了模型的不同脆弱性。研究结果突显了多种LLMs模型的关键优势和劣势。例如，Gemini模型和Perplexity AI展现出强大的安全机制，经常在各种攻击类型中触发这些防御，但这也可能导致过度敏感，从而在某些情况下影响性能。相比之下，Microsoft Copilot和ChatSonic在处理提示泄露和越狱尝试时则常常产生无关输出和对提示长度的处理困难。</p>
 <p>此外，ChatGPT-3.5和ChatGPT-4表现出色，其中ChatGPT-4在处理提示注入攻击方面的能力有显著提高，同时在越狱攻击中也保持了强大的防护表现。这些发现强调了在持续推进LLMs技术的过程中，平衡安全性和效率的重要性，以确保在不同应用场景中的可靠性能。</p>
 <p>未来的工作将集中在针对复杂提示注入、越狱及信息泄露技术的防御优化，以及探索能够平衡安全性和可用性之间的适应机制。</p>
@@ -157,7 +157,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2qxu62z000e4bjl61mtb2us" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2qy3vc7000g9djl52vcab2i" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

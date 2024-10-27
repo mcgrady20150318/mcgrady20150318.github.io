@@ -119,7 +119,7 @@ MathJax = {
 <ul>
 <li><strong>EpiM</strong>：请回答问题并提供你的确定程度。</li>
 <li><strong>CoT</strong>（链式推理）：逐步解释你的思考过程。</li>
-<li>**Epi_{M+CoT}**：使用不确定性的表达，逐步解释你的思考过程。</li>
+<li><strong>Epi_{M+CoT}</strong>：使用不确定性的表达，逐步解释你的思考过程。</li>
 </ul>
 <p>通过对这些指令的设计，研究人员旨在促进模型生成的不确定性标记，模拟真实用户可能与LM的互动方式。</p>
 <h3 id="生成与分类不确定性标记"><a href="#生成与分类不确定性标记" class="headerlink" title="生成与分类不确定性标记"></a>生成与分类不确定性标记</h3><p>研究团队首先实施开放式生成，与以往研究中要求模型生成预定义的确定性表达方式不同。此方法允许研究者进行自下而上的定性分析，以理解LM如何生成不确定性标记。生成的回应通过正则表达式模式匹配进行分类，识别为“增强型”（表示确定性）和“减弱型”（表示不确定性）。这些生成的标记经过手动编码和定量分析以确认其准确性。</p>
@@ -139,8 +139,8 @@ MathJax = {
 <h3 id="设置2B：过度自信设置"><a href="#设置2B：过度自信设置" class="headerlink" title="设置2B：过度自信设置"></a>设置2B：过度自信设置</h3><p>在过度自信设置的前20轮中，Marvin生成的错误答案使用“加强语”。参与者依赖“加强语”的频率达到了81%，而这些表达的正确率仅为66%。由于参与者通常不知道答案，结果表明他们误信了这些错误且自信的生成，约73%的时间误赖于错误的、充满自信的生成。即使在经过校准的回合中，这种不良影响依旧存在。</p>
 <h3 id="设置2C：缺乏自信设置"><a href="#设置2C：缺乏自信设置" class="headerlink" title="设置2C：缺乏自信设置"></a>设置2C：缺乏自信设置</h3><p>在缺乏自信的设置中，Marvin在生成正确答案时使用“减弱语”。尽管初始的错误回合表现不佳（平均66%），但在经过后续的校准设置后，参与者的表现回升至与校准设置相当的98%。相比之下，在过度自信设置中，用户的心理模型始终未能完全修正。</p>
 <h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>实验结果显示，用户对“加强语”和纯粹陈述的依赖程度极高，几乎达到90%。即便在“减弱语”出现的情况下，用户依然倾向于查找答案，呈现出显著的依赖倾向。</p>
-<h4 id="图表与数据"><a href="#图表与数据" class="headerlink" title="图表与数据"></a>图表与数据</h4><p><img src="/images/0fd9a531e689b338b7dbe42e748acc3b0369b8a5dcf23f3d89860c8b88186351.jpg"><br>表2：人类实验中的计分表。依赖Marvin的生成并且Marvin正确时将得分1分，否则扣分-1分。查找答案不记分。</p>
-<p><img src="/images/9290b9079ac92dd4656256fb28833ed8040c37c738dd4648a2c5fd799aecd527.jpg"><br>图5：参与者在校准、过度自信和缺乏自信设置中的结果。可以看到，在错误校准回合中得分较低。过度自信设置在随后校准回合中也持续得分较低。</p>
+<h4 id="图表与数据"><a href="#图表与数据" class="headerlink" title="图表与数据"></a>图表与数据</h4><p><img src="/images/0fd9a531e689b338b7dbe42e748acc3b0369b8a5dcf23f3d89860c8b88186351.jpg" alt=""><br>表2：人类实验中的计分表。依赖Marvin的生成并且Marvin正确时将得分1分，否则扣分-1分。查找答案不记分。</p>
+<p><img src="/images/9290b9079ac92dd4656256fb28833ed8040c37c738dd4648a2c5fd799aecd527.jpg" alt=""><br>图5：参与者在校准、过度自信和缺乏自信设置中的结果。可以看到，在错误校准回合中得分较低。过度自信设置在随后校准回合中也持续得分较低。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>研究表明，语言模型在生成内容时表现出过于自信，这种现象加剧了用户在面对错误或不确定答案时的依赖性。尽管用户在模型生成的内容中通常依赖于隐含或显式的信心表达，研究追溯了模型过度自信的根源，发现这种现象主要源于后期训练对齐过程中的人类反馈偏差，具体来说，注释者对不确定性语言的偏见。  </p>
 <p>在与语言模型的互动中，用户可能会错误地将缺乏不确定性表达解读为高信心，这种情况不仅使得模型的错误回答看起来更加可信，也可能进一步影响用户的决策过程。研究建议，应该对模型的训练过程进行改进，增加不确定性表达的自发生成，确保用户能够准确理解模型的信心程度，从而降低过度依赖的风险。</p>
 <p>此外，研究还指出，需要对多样化数据源进行探索，以拓宽模型对各种不确定性标记的理解，并应根据不同的上下文进行相应的模型校准。总的来说，语言模型当前在表达信心和不确定性方面的不足，可能对人类-人工智能协作造成严重后果，从而亟需寻找有效的设计和改进方案，以促进更可靠的交互。</p>
@@ -148,7 +148,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2qxu62x00034bjl9ryga5ez" data-title="斯坦福大学提出语言模型不确定性表达与人类互动的风险研究" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2401-06730/" data-id="cm2qy3vc400039djleyow0gmm" data-title="斯坦福大学提出语言模型不确定性表达与人类互动的风险研究" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -201,7 +201,7 @@ MathJax = {
 <p>为了解决这一问题，作者提出了一种新的防御机制——“目标优先化”（goal prioritization），旨在通过明确指定安全性优先于有用性，从而有效减少越狱攻击的成功率。通过在训练和推理阶段实施目标优先化，研究表明该方法能够大幅降低越狱攻击的成功率，充分验证了作者的假设，即越狱攻击的成功与模型对目标优先级的认识密切相关。</p>
 <p>此外，研究还发现，尽管更强大的LLMs可能更容易受到越狱攻击，但它们也具备更强的能力去抵御这些攻击。这一发现为理解LLMs的能力与安全性之间的关系提供了重要的洞察。</p>
 <p>总的来说，这项研究旨在提升对越狱攻击及其防御的理解，同时为LLMs的可靠应用提供了新的思路和方法。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>该研究提出了一种通过“目标优先化”来抵御大型语言模型（LLMs）面临的监狱突破攻击的方法。目标优先化是在训练和推理阶段引入的，主要包括以下两个情境：没有训练（w&#x2F;o Training）和有训练（w&#x2F; Training）。</p>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>该研究提出了一种通过“目标优先化”来抵御大型语言模型（LLMs）面临的监狱突破攻击的方法。目标优先化是在训练和推理阶段引入的，主要包括以下两个情境：没有训练（w/o Training）和有训练（w/ Training）。</p>
 <h3 id="没有训练的情况下"><a href="#没有训练的情况下" class="headerlink" title="没有训练的情况下"></a>没有训练的情况下</h3><p>在没有训练（例如，使用API LLMs或没有开放源代码微调数据的LLMs）的情况下，研究人员设计了一种即插即用的提示方法。这种方法包括一个要求模型优先考虑安全而非有用的指令，和两个示例以引导LLMs进行判断。具体步骤如下：</p>
 <ol>
 <li>模型首先被提醒要优先考虑安全性。</li>
@@ -219,15 +219,19 @@ MathJax = {
 <li>当与优先考虑有用性而非安全的指令配对时，模型应生成有用但不安全的响应。</li>
 <li>当与优先考虑安全性而非有用性的指令配对时，模型应生成安全但可能不太有用的响应。</li>
 </ul>
-<p>这会生成数据集 $D_{1}&#x3D;{(x_{\bar{b}},g_{h},y_{h,\bar{s}}),(x_{\bar{b}},g_{s},y_{\bar{h},s})}$。</p>
+<p>这会生成数据集 $D<em>{1}={(x</em>{\bar{b}},g<em>{h},y</em>{h,\bar{s}}),(x<em>{\bar{b}},g</em>{s},y_{\bar{h},s})}$。</p>
 </li>
-<li><p>当用户查询为良性时，两种目标优先化指令可能导致相同的安全且有用的响应，因此会随机选择一个指令 $g_{r}$ 配对良性查询，得到数据集 $D_{2}&#x3D;{(x_{b},g_{r},y_{h,s})}$。</p>
+<li><p>当用户查询为良性时，两种目标优先化指令可能导致相同的安全且有用的响应，因此会随机选择一个指令 $g<em>{r}$ 配对良性查询，得到数据集 $D</em>{2}={(x<em>{b},g</em>{r},y_{h,s})}$。</p>
 </li>
 </ul>
 <p>此外，为了促进模型对目标优先化的理解，研究利用ChatGPT生成[内部思维]部分，让模型分析用户查询与目标优先化要求之间的关系。</p>
 <p>训练期间所采用的标准交叉熵损失函数为：</p>
-<p>$$<br>\begin{align*}<br>&amp;\mathcal{L}&#x3D;-,\displaystyle\frac{1}{|D_{1}|}\sum_{i&#x3D;1}^{|D_{1}|}\log P(y_{h,\bar{s}}^{i},t_{h}^{i}|x_{b}^{i},g_{h};M)\<br>&amp;{\phantom{m m m m m}-,\displaystyle\frac{1}{|D_{1}|}\sum_{i&#x3D;1}^{|D_{1}|}\log P(y_{h,s}^{i},t_{s}^{i}|x_{b}^{i},g_{s};M)\<br>&amp;{\phantom{m m m m m m}-,\displaystyle\frac{1}{|D_{2}|}\sum_{i&#x3D;1}^{|D_{2}|}\log P(y_{h,s}^{i},t^{i}|x_{b}^{i},g_{r}^{i};M)}<br>\end{align*}<br>$$</p>
-<h3 id="整体框架图"><a href="#整体框架图" class="headerlink" title="整体框架图"></a>整体框架图</h3><p><img src="/images/475b31255f0be4b055d6184980c896dbe9d99036f0891318b9d9cf16412997ac.jpg"></p>
+<script type="math/tex; mode=display">
+\begin{align*}
+&\mathcal{L}=-\,\displaystyle\frac{1}{|D_{1}|}\sum_{i=1}^{|D_{1}|}\log P(y_{h,\bar{s}}^{i},t_{h}^{i}|x_{b}^{i},g_{h};M)\\
+&{\phantom{m m m m m}-\,\displaystyle\frac{1}{|D_{1}|}\sum_{i=1}^{|D_{1}|}\log P(y_{h,s}^{i},t_{s}^{i}|x_{b}^{i},g_{s};M)\\
+&{\phantom{m m m m m m}-\,\displaystyle\frac{1}{|D_{2}|}\sum_{i=1}^{|D_{2}|}\log P(y_{h,s}^{i},t^{i}|x_{b}^{i},g_{r}^{i};M)}
+\end{align*}</script><h3 id="整体框架图"><a href="#整体框架图" class="headerlink" title="整体框架图"></a>整体框架图</h3><p><img src="/images/475b31255f0be4b055d6184980c896dbe9d99036f0891318b9d9cf16412997ac.jpg" alt=""></p>
 <p>通过上述训练过程，模型可以在推理阶段仅添加 $g_{s}$ 指令以确保安全优先化要求。在输出时，开发者亦可隐藏[内部思维]，仅向用户展示[最终响应]。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在这一部分，研究团队对他们提出的目标优先化方法进行了详尽的实验评估，以验证其在防御监狱攻击方面的有效性。</p>
 <h3 id="监狱攻击测试集"><a href="#监狱攻击测试集" class="headerlink" title="监狱攻击测试集"></a>监狱攻击测试集</h3><p>研究人员根据第二章中介绍的监狱攻击方法，设计了一个测试集。最终测试集包含50个监狱攻击提示和20个最具攻击成功率的有害问题，由此生成的测试样本总数达到1,000个。</p>
@@ -236,16 +240,16 @@ MathJax = {
 <h3 id="基准测试"><a href="#基准测试" class="headerlink" title="基准测试"></a>基准测试</h3><p>在无训练的设置中，研究人员将他们的方法与没有额外防御技术的简单LLM进行了比较，同时也评估了Self-Reminder的方法。对于有训练的情况，基准测试比较了他们的方法与只使用良性查询的SFT方法，以及将监狱攻击查询与安全拒绝响应结合使用的对齐SFT方法。</p>
 <h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>为了评估ASR，研究团队采用了一种经过微调的RoBERTa模型，这是一种在安全响应检测中具有高效性的工具。对于LLMs的整体性能则通过对比它们在100个良性查询上的表现来衡量。</p>
 <h3 id="无训练的结果"><a href="#无训练的结果" class="headerlink" title="无训练的结果"></a>无训练的结果</h3><p>研究结果显示，目标优先化方法在防御监狱攻击方面表现出色，显著降低了ChatGPT的ASR，从66.4%减少到3.6%。该方法在开源模型中同样表现良好，相较于Self-Reminder，ASR也显著降低，且模型的整体性能保持在可接受的范围内。</p>
-<p><img src="/images/492d50a113c0d2c9271483a01c9747fe9c95f71ad7c365e13bb5a4088495ac95.jpg"></p>
+<p><img src="/images/492d50a113c0d2c9271483a01c9747fe9c95f71ad7c365e13bb5a4088495ac95.jpg" alt=""></p>
 <h3 id="有训练的结果"><a href="#有训练的结果" class="headerlink" title="有训练的结果"></a>有训练的结果</h3><p>在有训练的结果中，Llama2-7B和Llama2-13B的ASR分别降低到4.6%和6.6%。这些结果表明，训练过程中融入目标优先化能有效压制监狱攻击，但不会对模型的整体性能形成显著影响。</p>
-<p><img src="/images/6c6caa931ffc8fbb9913c95b0d3d4721612e14122592a146adfc6978c0c9d928.jpg"></p>
+<p><img src="/images/6c6caa931ffc8fbb9913c95b0d3d4721612e14122592a146adfc6978c0c9d928.jpg" alt=""></p>
 <h3 id="消融研究"><a href="#消融研究" class="headerlink" title="消融研究"></a>消融研究</h3><p>研究团队进行了消融实验，以评估各组成部分的有效性。当去掉内部思考部分或去掉训练中的有害响应时，模型的防御能力明显下降，这表明内部思考对理解目标优先化要求至关重要。</p>
 <ul>
 <li>结果分析表明，增加有害响应的训练实例有助于模型更好地遵循目标优先化要求。</li>
 <li>研究还发现目标优先化方法在处理未知类型的监狱攻击方面表现优异，即使没有特定的监狱攻击样本纳入训练。</li>
 </ul>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>实验结果表明，目标优先化方法在各类监狱攻击中均展现出了强大的防守能力，并为进一步探索LLM的安全性与能力之间的关系提供了重要的见解。</p>
-<p><img src="/images/16b81bd78c363cda6f409090a9f47d39a4ac65cd53fe4289f081a89ef2bd46b7.jpg"></p>
+<p><img src="/images/16b81bd78c363cda6f409090a9f47d39a4ac65cd53fe4289f081a89ef2bd46b7.jpg" alt=""></p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>该研究提出了通过目标优先化来防御大语言模型（LLMs）免受监狱突破攻击的有效方法。研究人员假设，监狱突破成功的核心原因在于模型缺乏对目标优先级的理解。具体而言，LLMs在生成响应时往往面临提供帮助和确保安全之间的内在冲突。为了应对此问题，研究提出在训练和推理阶段集成目标优先化，旨在增强模型对安全性的重视。</p>
 <p>经过广泛的实验验证，该方法在降低攻击成功率（ASR）方面表现出色。例如，通过添加目标优先化，ChatGPT的ASR从66.4%降至3.6%；Llama2-13B的ASR则从71.0%降至6.6%。这些结果表明，即使在没有监狱突破样本的情况下，目标优先化的应用仍能显著提升模型的防御能力。此外，相较于较弱的模型，较强的模型（如GPT-4）在接受适当的防御机制时，可以更有效地抵御监狱突破攻击。</p>
 <p>研究的结论不仅为理解监狱突破攻击的成因提供了新视角，也加强了对LLMs能力与安全之间关系的理解。通过引入目标优先化的机制，该研究为构建更加安全和可靠的语言模型铺平了道路，同时也为未来在此领域的研究提供了有价值的参考。</p>
@@ -253,7 +257,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2qxu62w00014bjl84mpfkn1" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2311-09096/" data-id="cm2qy3vc400029djl4em274yg" data-title="清华大学提出通过目标优先化防御大规模语言模型的越狱攻击的方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -307,16 +311,16 @@ MathJax = {
 <p><img src="/images/ec97fefe13cb27546c6b20f0d517806bae9fc4c27efb88ce355d4ffbeadc86df.jpg" alt="动机图"></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本节描述了多目标直接偏好优化（MODPO）的方法论。MODPO是对直接偏好优化（DPO）的扩展，旨在处理多重对齐目标，而无需强化学习（RL）方法。主要思想是将语言建模与奖励建模结合起来，直接训练不同的语言模型以隐式表征不同的集体奖励模型，从而实现多个目标的整合。</p>
 <h3 id="MODPO的推导"><a href="#MODPO的推导" class="headerlink" title="MODPO的推导"></a>MODPO的推导</h3><p>MODPO依赖于以下理论关系，将目标模型与最优语言模型连接起来：</p>
-<p>$$<br>\mathbf{w}^{T}\mathbf{r}^{<em>}(\mathbf{x},\mathbf{y})&#x3D;\beta\log\frac{\pi_{(\mathbf{w}^{T}\mathbf{r}^{</em>})}(\mathbf{y}|\mathbf{x})}{\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})}+\beta\log Z(\mathbf{x}),<br>$$</p>
-<p>其中，$Z(\mathbf{x})&#x3D;\sum_{\mathbf{y}}\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})\exp\left(\frac{1}{\beta}\mathbf{w}^{T}\mathbf{r}^{*}(\mathbf{x},\mathbf{y})\right)$是配分函数。通过利用偏好数据集，可以去除配分函数，从而实现如下变化：</p>
-<p>$$<br>p_{\mathcal{D}<em>{k}}(\mathbf{y}</em>{1}\succ\mathbf{y}<em>{2} ,|,,\mathbf{x})&#x3D;\sigma\left(\mathbf{r}</em>{k}^{<em>}(\mathbf{x},\mathbf{y}<em>{1})-\mathbf{r}</em>{k}^{</em>}(\mathbf{x},\mathbf{y}_{2})\right).<br>$$</p>
-<p>结合上面的两个公式，MODPO可以构造一个实用的最大似然目标：</p>
-<p>$$<br>\mathcal{L}<em>{\mathrm{MODPO}}(\pi</em>{\theta_{\mathbf{w}}};\mathbf{r}<em>{\phi,-k},\pi</em>{\mathrm{sf}},\mathcal{D}<em>{k})&#x3D;-\mathbb{E}</em>{\mathcal{D}<em>{k}}\left[\log\sigma\left(\frac{\beta}{\mathbf{w}</em>{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}<em>{w}|\mathbf{x})}{\pi</em>{\mathrm{sf}}(\mathbf{y}<em>{w}|\mathbf{x})}-\frac{\beta}{\mathbf{w}</em>{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}<em>{l}|\mathbf{x})}{\pi</em>{\mathrm{sf}}(\mathbf{y}<em>{l}|\mathbf{x})}-\frac{1}{\mathbf{w}</em>{k}}\mathbf{w}<em>{-k}^{T}\left(\mathbf{r}</em>{\phi,-k}(\mathbf{x},\mathbf{y}<em>{w})-\mathbf{r}</em>{\phi,-k}(\mathbf{x},\mathbf{y}_{l})\right)\right)\right],<br>$$</p>
-<p>其中期望以$(\mathbf{x},\mathbf{y}<em>{w},\mathbf{y}</em>{l})\sim\mathcal{D}_{k}$为基础。</p>
+<script type="math/tex; mode=display">
+\mathbf{w}^{T}\mathbf{r}^{*}(\mathbf{x},\mathbf{y})=\beta\log\frac{\pi_{(\mathbf{w}^{T}\mathbf{r}^{*})}(\mathbf{y}|\mathbf{x})}{\pi_{\mathrm{sf}}(\mathbf{y}|\mathbf{x})}+\beta\log Z(\mathbf{x}),</script><p>其中，$Z(\mathbf{x})=\sum<em>{\mathbf{y}}\pi</em>{\mathrm{sf}}(\mathbf{y}|\mathbf{x})\exp\left(\frac{1}{\beta}\mathbf{w}^{T}\mathbf{r}^{*}(\mathbf{x},\mathbf{y})\right)$是配分函数。通过利用偏好数据集，可以去除配分函数，从而实现如下变化：</p>
+<script type="math/tex; mode=display">
+p_{\mathcal{D}_{k}}(\mathbf{y}_{1}\succ\mathbf{y}_{2} \,|\,\,\mathbf{x})=\sigma\left(\mathbf{r}_{k}^{*}(\mathbf{x},\mathbf{y}_{1})-\mathbf{r}_{k}^{*}(\mathbf{x},\mathbf{y}_{2})\right).</script><p>结合上面的两个公式，MODPO可以构造一个实用的最大似然目标：</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{\mathrm{MODPO}}(\pi_{\theta_{\mathbf{w}}};\mathbf{r}_{\phi,-k},\pi_{\mathrm{sf}},\mathcal{D}_{k})=-\mathbb{E}_{\mathcal{D}_{k}}\left[\log\sigma\left(\frac{\beta}{\mathbf{w}_{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}_{w}|\mathbf{x})}{\pi_{\mathrm{sf}}(\mathbf{y}_{w}|\mathbf{x})}-\frac{\beta}{\mathbf{w}_{k}}\log\frac{\pi_{\theta_{\mathbf{w}}}(\mathbf{y}_{l}|\mathbf{x})}{\pi_{\mathrm{sf}}(\mathbf{y}_{l}|\mathbf{x})}-\frac{1}{\mathbf{w}_{k}}\mathbf{w}_{-k}^{T}\left(\mathbf{r}_{\phi,-k}(\mathbf{x},\mathbf{y}_{w})-\mathbf{r}_{\phi,-k}(\mathbf{x},\mathbf{y}_{l})\right)\right)\right],</script><p>其中期望以$(\mathbf{x},\mathbf{y}<em>{w},\mathbf{y}</em>{l})\sim\mathcal{D}_{k}$为基础。</p>
 <h3 id="MODPO的实施步骤"><a href="#MODPO的实施步骤" class="headerlink" title="MODPO的实施步骤"></a>MODPO的实施步骤</h3><p>MODPO的实施过程包括以下步骤：</p>
 <ol>
 <li><strong>边际奖励建模</strong>：首先在数据集$\mathcal{D}<em>{-k}$上训练边际奖励模型$\mathbf{r}</em>{\phi,-k}$。</li>
-<li><strong>语言建模</strong>：根据不同的权重迭代遍历$\mathbf{w}\in\Omega$，对每一个权重优化目标$\mathcal{L}<em>{\mathrm{MODPO}}$以获得经验前沿${\pi</em>{\theta_{\mathbf{w}}},|,\mathbf{w}\in\Omega}$。</li>
+<li><strong>语言建模</strong>：根据不同的权重迭代遍历$\mathbf{w}\in\Omega$，对每一个权重优化目标$\mathcal{L}<em>{\mathrm{MODPO}}$以获得经验前沿${\pi</em>{\theta_{\mathbf{w}}}\,|\,\mathbf{w}\in\Omega}$。</li>
 </ol>
 <p>这些步骤的设计使得MODPO在处理多个目标时只需最小的开销，相比DPO只有轻微的追加计算需求，同时保证了训练的稳定性与效率。</p>
 <h3 id="MODPO的优势"><a href="#MODPO的优势" class="headerlink" title="MODPO的优势"></a>MODPO的优势</h3><p>MODPO通过以下几个方面展现出其优势：</p>
@@ -331,8 +335,9 @@ MathJax = {
 <h3 id="安全对齐实验结果"><a href="#安全对齐实验结果" class="headerlink" title="安全对齐实验结果"></a>安全对齐实验结果</h3><p>在安全对齐实验中，使用了合成反馈和真实反馈两个来源。合成反馈设置下，MODPO产生的前沿无论在高β（0.1）还是低β（0.5）条件下，均表现出色，与MORLHF相当（图2）。MODPO的性能在“有用性”维度上一般更佳，在“无害性”维度上MORLHF略有优势。  </p>
 <p><img src="/images/8208e0dbb27fde940c91ecbb0ff0dbca15d9f3565ebc520a8c123e8a13c87cdb.jpg" alt="图2"><br>图2: 在不同β下的（合成）安全对齐前沿。MODPO在权衡有用性和无害性方面表现出色。  </p>
 <h3 id="长篇问答实验结果"><a href="#长篇问答实验结果" class="headerlink" title="长篇问答实验结果"></a>长篇问答实验结果</h3><p>在长篇问答任务的实验中，MODPO始终在相似的KL预算下超越了MORLHF，特别是在使用不同的数据集组合时（图3）。这种表现得益于MODPO在学习过程中处理细微差别的能力。</p>
-<p><img src="/images/824ccd15dbf7668b21634ed702ed56ca0765a42df45fafdb20e679333c414926.jpg" alt="图3"><br>图3: 长篇问答前沿（β&#x3D;0.5）。MODPO在类似的KL预算下始终超越MORLHF。  </p>
+<p><img src="/images/824ccd15dbf7668b21634ed702ed56ca0765a42df45fafdb20e679333c414926.jpg" alt="图3"><br>图3: 长篇问答前沿（β=0.5）。MODPO在类似的KL预算下始终超越MORLHF。  </p>
 <p>在真实反馈下的安全对齐实验中，MODPO展现出了更优的前沿，同时要求的GPU时间也相对较少（表1）。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -340,7 +345,8 @@ MathJax = {
 <th>训练所需GPU小时</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>MODPO</td>
 <td>具体小时数</td>
 </tr>
@@ -348,7 +354,9 @@ MathJax = {
 <td>MORLHF</td>
 <td>具体小时数</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h3 id="最终实验结果"><a href="#最终实验结果" class="headerlink" title="最终实验结果"></a>最终实验结果</h3><p>实验结果进一步表明，MODPO无论是在安全对齐还是长篇问答任务中，均能产生高效且多样的语言模型前沿，体现出其在处理多任务、多目标对齐的优越性能。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，作者提出了一种名为多目标直接偏好优化（MODPO）的方法，旨在解决通过人类反馈对语言模型进行对齐时的复杂性与效率问题。MODPO是对直接偏好优化（DPO）的扩展，能够在没有强化学习（RL）的情况下对多个对齐目标进行优化。与多目标强化学习（MORLHF）相比，MODPO在理论上可以产生相同的最优解，但在实践中具有更高的稳定性和效率。</p>
 <p>研究结果显示，MODPO能够通过简单的交叉熵损失，稳定地训练出能够满足人为偏好的语言模型，并且在多个任务上表现良好。特别是在安全对齐与长形式问答任务中，MODPO的效果与现有方法相当，甚至超出它们，且在计算资源上节省了三倍。这种方法能够产生多样化的语言模型前沿，使其能够适应不同群体的偏好。</p>
@@ -357,7 +365,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2qxu62z000d4bjlb1kn7fnw" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2310-03708/" data-id="cm2qy3vc300019djlhs8je9si" data-title="上海人工智能实验室提出多目标直接偏好优化方法（MODPO）" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -463,17 +471,17 @@ MathJax = {
 <p>通过图6，作者展示了GPT-4在各个安全类别中的失败案例，指出其理解能力对安全性的重要影响。  </p>
 <h3 id="影响力"><a href="#影响力" class="headerlink" title="影响力"></a>影响力</h3><p>表6比较了模型在增强数据和原始数据上的表现，从中可以看出使用ChatGPT进行数据增强的潜在偏见，但这一偏见对其他模型的影响不显著。  </p>
 <p>通过这一系列实验，作者不仅验证了Safety Bench的有效性，还揭示了LLMs在安全性方面存在的空间，以指导未来的改进。  </p>
-<p><img src="/images/2d25c89a0461d7e3510588b4fa50b34114f7d1a024fc0b8ca89b0be12ded6407.jpg"><br>表2: Zero-shot zh&#x2F;en结果的Safety Bench。“Avg.”表示微平均准确率。</p>
-<p><img src="/images/2d25c89a0461d7e3510588b4fa50b34114f7d1a024fc0b8ca89b0be12ded6407.jpg"><br>表3: Five-shot zh&#x2F;en结果的Safety Bench。“-”表示模型对此语言的支持较差。</p>
-<p><img src="/images/c15df9fc2efa7f259c421d6bcb00dabd1abfae74b5f0f84cbad4c2f76d64e6b2.jpg"><br>表4: 五-shot评估结果在过滤后的中国子集的Safety Bench上。“-”表示模型因在线安全过滤机制拒绝回答问题。  </p>
-<p><img src="/images/1385431ed6177afe1fdd8133d04c81465612d03ea6464833f52abff3ea89a41b.jpg"><br>表5: 模型在采样多项选择问题上的准确性，以及对受限和开放查询的安全响应比例。  </p>
+<p><img src="/images/2d25c89a0461d7e3510588b4fa50b34114f7d1a024fc0b8ca89b0be12ded6407.jpg" alt=""><br>表2: Zero-shot zh/en结果的Safety Bench。“Avg.”表示微平均准确率。</p>
+<p><img src="/images/2d25c89a0461d7e3510588b4fa50b34114f7d1a024fc0b8ca89b0be12ded6407.jpg" alt=""><br>表3: Five-shot zh/en结果的Safety Bench。“-”表示模型对此语言的支持较差。</p>
+<p><img src="/images/c15df9fc2efa7f259c421d6bcb00dabd1abfae74b5f0f84cbad4c2f76d64e6b2.jpg" alt=""><br>表4: 五-shot评估结果在过滤后的中国子集的Safety Bench上。“-”表示模型因在线安全过滤机制拒绝回答问题。  </p>
+<p><img src="/images/1385431ed6177afe1fdd8133d04c81465612d03ea6464833f52abff3ea89a41b.jpg" alt=""><br>表5: 模型在采样多项选择问题上的准确性，以及对受限和开放查询的安全响应比例。  </p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本文中，研究人员介绍了Safety Bench，这是第一个全面的安全评估基准，通过多项选择题对大型语言模型（LLMs）的安全能力进行评估。Safety Bench涵盖了11,435道中英文题目，分为七类安全问题，广泛评估了25种来自不同组织的LLMs的安全能力。研究发现，与开源LLMs相比，GPT-4表现显著优越，指出了当前模型在安全性方面仍有很大的提升空间。</p>
 <p>此外，本文还表明，Safety Bench中测量的安全理解能力与安全生成能力之间存在相关性。这一发现为未来改进LLMs的安全性提供了重要指导。研究者希望Safety Bench能够在评估LLMs的安全性以及加速开发更安全的LLMs方面发挥重要作用。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2qxu62u00004bjl1xunau0t" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2309-07045/" data-id="cm2qy3vc100009djl9wbjd577" data-title="清华大学提出Safety Bench：大型语言模型安全评估的新基准方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -525,33 +533,33 @@ MathJax = {
 <p>该研究的动机在于识别并解决这些漏洞，特别是针对越狱攻击的防御策略。研究者观察到，尽管代表有害内容的Token的概率往往高于代表无害响应的Token，但安全免责声明仍会出现在按概率降序排列的顶部Token中。因此，研究者提出了一种新颖的“安全解码”策略，通过增强安全免责声明的Token概率，同时减弱与攻击者目标的Token序列概率，从而有效防止模型被非法利用。</p>
 <p>这一研究的创新点在于通过Token概率的分布来分析越狱攻击的成功机制，显示出越狱攻击的成功往往归因于与攻击目标相一致的Token的概率占主导地位。而通过引入一个专家模型并进行安全性强健的微调，作者们进一步提出了通过“安全解码”策略，在不同层面上抵御越狱攻击。</p>
 <p>下图展示了Token概率在越狱攻击期间的分布情况：</p>
-<p><img src="/images/699b0dd72fb55885c8534bf529bd6411f0e8c949f544741d1460747ebf868e9b.jpg"></p>
+<p><img src="/images/699b0dd72fb55885c8534bf529bd6411f0e8c949f544741d1460747ebf868e9b.jpg" alt=""></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在这一部分中，作者提出了一种名为Safe Decoding的安全感知解码策略，以增强大型语言模型（LLMs）抵抗jailbreak攻击的能力。该策略的设计分为两个阶段：训练阶段和推理阶段。</p>
 <h3 id="训练阶段：构建专家模型"><a href="#训练阶段：构建专家模型" class="headerlink" title="训练阶段：构建专家模型"></a>训练阶段：构建专家模型</h3><p>为了构建一个具备较强安全性的专家模型，研究者首先收集了涵盖18个有害类别的36个有害查询。这些查询应该被任何与人类价值观良好对齐的LLM所拒绝。通过自主生成回应后，使用GPT-4过滤输出，仅保留那些有效拒绝有害查询的响应，最后形成训练数据集，包括查询与响应对。</p>
 <p>专家模型通过参数高效微调（例如使用LoRA方法）进行训练，确保微调模型的词汇与原始模型一致，同时能够识别和适当地回应恶意用户输入。</p>
 <h3 id="推理阶段：构建新的Token分布"><a href="#推理阶段：构建新的Token分布" class="headerlink" title="推理阶段：构建新的Token分布"></a>推理阶段：构建新的Token分布</h3><p>在推理阶段，用户查询被同时发送给原始模型和专家模型以进行解码。Safe Decoding根据两个模型的输出构建Token分布，从而生成对输入查询的响应。</p>
-<h4 id="步骤1：构造样本空间"><a href="#步骤1：构造样本空间" class="headerlink" title="步骤1：构造样本空间"></a>步骤1：构造样本空间</h4><p>在推理时间的第n步，模型将Token序列$x_{1:n-1}$转发给原始模型及专家模型，得到可能采样的Token集合分别为 $\nu_{n}$ 和 $\mathcal{V}<em>{n}^{\prime}$。Safe Decoding将样本空间 $\mathcal{V}</em>{n}^{(c)}$ 定义为两者前k个Token的交集，即：</p>
-<p>$$<br>{\mathcal{V}}<em>{n}^{(c)}&#x3D;\operatorname*{\arg\operatorname*{min}}</em>{S&#x3D;{\mathcal{V}}<em>{n}^{k}\cap{\mathcal{V}}</em>{n}^{\prime^{k}}}k{\mathrm{<del>s.t.</del>}}|S|\geq c.<br>$$</p>
-<p>该交集的构建旨在利用原始LLM的广泛训练和专家模型在安全性上的强化。</p>
+<h4 id="步骤1：构造样本空间"><a href="#步骤1：构造样本空间" class="headerlink" title="步骤1：构造样本空间"></a>步骤1：构造样本空间</h4><p>在推理时间的第n步，模型将Token序列$x<em>{1:n-1}$转发给原始模型及专家模型，得到可能采样的Token集合分别为 $\nu</em>{n}$ 和 $\mathcal{V}<em>{n}^{\prime}$。Safe Decoding将样本空间 $\mathcal{V}</em>{n}^{(c)}$ 定义为两者前k个Token的交集，即：</p>
+<script type="math/tex; mode=display">
+{\mathcal{V}}_{n}^{(c)}=\operatorname*{\arg\operatorname*{min}}_{S={\mathcal{V}}_{n}^{k}\cap{\mathcal{V}}_{n}^{\prime^{k}}}k{\mathrm{~s.t.~}}|S|\geq c.</script><p>该交集的构建旨在利用原始LLM的广泛训练和专家模型在安全性上的强化。</p>
 <h4 id="步骤2：定义概率函数"><a href="#步骤2：定义概率函数" class="headerlink" title="步骤2：定义概率函数"></a>步骤2：定义概率函数</h4><p>Safe Decoding在定义Token概率时，使用以下公式：</p>
-<p>$$<br>P_{n}\big(x|x_{1:n-1}\big)&#x3D;p_{\theta}\big(x|x_{1:n-1}\big) + \alpha(p_{\theta^{\prime}}(x|x_{1:n-1})-p_{\theta}(x|x_{1:n-1})).<br>$$</p>
-<p>此公式中，$\alpha$ 为超参数，决定原始模型与专家模型的重要性权重。最终通过标准化，确保$\sum_{x\in\mathcal{V}<em>{n}^{(c)}}P</em>{n}(x)&#x3D;1$。这使得当查询是恶意的时，原始模型会给出积极的回应，而专家模型则会基于安全性拒绝查询，从而减少引导攻击者目标的Token的概率，并增强机器人对于人类价值的响应。</p>
+<script type="math/tex; mode=display">
+P_{n}\big(x|x_{1:n-1}\big)=p_{\theta}\big(x|x_{1:n-1}\big) + \alpha(p_{\theta^{\prime}}(x|x_{1:n-1})-p_{\theta}(x|x_{1:n-1})).</script><p>此公式中，$\alpha$ 为超参数，决定原始模型与专家模型的重要性权重。最终通过标准化，确保$\sum<em>{x\in\mathcal{V}</em>{n}^{(c)}}P_{n}(x)=1$。这使得当查询是恶意的时，原始模型会给出积极的回应，而专家模型则会基于安全性拒绝查询，从而减少引导攻击者目标的Token的概率，并增强机器人对于人类价值的响应。</p>
 <h3 id="效率与兼容性"><a href="#效率与兼容性" class="headerlink" title="效率与兼容性"></a>效率与兼容性</h3><p>Safe Decoding的设计兼容现有的所有采样方法，包括greedy、top-k和top-p采样。通过在推理过程中仅在前m步应用Safe Decoding，且后续步骤使用正常解码，可以避免模型过于保守，从而保持对良性用户查询的有用性，并降低计算开销。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本文对 Safe Decoding 的有效性、实用性、效率和兼容性进行了评估。</p>
 <p>首先，针对实验模型，研究者们在五种开源 LLM（Vicuna-7b、Llama2-7b-chat、Guanaco-7b、Falcon-7b 和 Dolphin-llama2-7b）上部署了 Safe Decoding，以评估其性能。</p>
 <p>在攻击方法方面，研究者们考虑了六种先进的 jailbreak 攻击，涵盖不同类别，包括 GCG、AutoDAN、PAIR 和 SAP30 等。这些攻击方法通过使用来自不同 harmful query benchmark 数据集的示例来生成特定的攻击提示，以评估 Safe Decoding 的防御性能。使用的两个有害查询基准数据集为 Advbench 和 HEx-PHI。</p>
 <p>在基准测试方面，研究者们与六种最新且高效的防御机制进行了比较，涵盖输入和输出检测以及缓解方法。研究过程中使用的评估指标包括攻击成功率（ASR）和 harmful score，前者用于衡量模型在恶意查询下产生不符合人类价值的响应的比率，而后者则通过 GPT-Judge 对生成内容的危害程度进行评分。通过 Dic-Judge，研究者们还检测了生成响应中拒绝字符串的存在，以计算 ASR。</p>
 <p>下表展示了 Safe Decoding 与基线防御方法在多个 jailbreak 攻击下的 ASR 和 harmful score 的比较：</p>
-<p><img src="/images/f9eab3795015174498772771ce9a68de0626f173631450332723571a2289749f.jpg"></p>
+<p><img src="/images/f9eab3795015174498772771ce9a68de0626f173631450332723571a2289749f.jpg" alt=""></p>
 <p>表中显示了在不同攻击方法下，Safe Decoding 的表现普遍优于所有基线防御方法。在针对意图重大的攻击（如 Deep Inception）时，Safe Decoding 成功将 ASR 降至 0%。</p>
 <p>为了进一步评估 Safe Decoding 的实用性，研究者们使用了 MT-bench 和 Just-Eval 等广泛使用的基准测试，评估应用 Safe Decoding 后的 LLM 实用性。以下表格展示了 Safe Decoding 在不同模型上的 MT-bench 和 Just-Eval 得分：</p>
-<p><img src="/images/732f0869753661b67770651a8c5f9386511b54f9afe9881b6acbe113d6f74611.jpg"></p>
+<p><img src="/images/732f0869753661b67770651a8c5f9386511b54f9afe9881b6acbe113d6f74611.jpg" alt=""></p>
 <p>根据表格结果，Safe Decoding 对原始模型的效用影响微乎其微，而现有基线模型在效用上则显著下降。</p>
 <p>接下来，研究者们定义了一个平均生成时间比率（ATGR）指标，以评估 Safe Decoding 的效率：</p>
-<p><img src="/images/06d6125b68b5a672c946b39798b953b20b1db315a845975bc0f656427294b9c9.jpg"></p>
+<p><img src="/images/06d6125b68b5a672c946b39798b953b20b1db315a845975bc0f656427294b9c9.jpg" alt=""></p>
 <p>结果显示，相较于无防御的情况下，Safe Decoding 的计算开销仅为 3%（在 Llama2 上）和 7%（在 Vicuna 上），表明该方法的效率并未显著降低性能。</p>
 <p>附加的消融分析表明，Safe Decoding 的超参数（如 $\alpha$、$m$、$c$）对防御性能影响有限，如下图所示：</p>
-<p><img src="/images/b361f6f10b280a81bb8ea1b8ae63d038cb50c3e029bbc4f208a4f4d132165ade.jpg"></p>
+<p><img src="/images/b361f6f10b280a81bb8ea1b8ae63d038cb50c3e029bbc4f208a4f4d132165ade.jpg" alt=""></p>
 <p>通过以上实验，Safe Decoding 在针对 jailbreak 攻击方面展示了强大的防御能力、良好的实用性和效率。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这篇论文中，研究者们提出了一种新颖且计算有效的解码策略——Safe Decoding，以应对大型语言模型（LLM）面临的监狱突破攻击（jailbreak attacks）。他们的主要观察是，尽管包含有害内容的Token的概率通常高于那些与安全或人类价值相符的Token，但安全免责声明在排序后的概率前列中依然存在。这一发现为Safe Decoding的设计提供了基础，使其能够降低与攻击者目标一致的Token的生成概率，同时提高安全性相关的Token的生成概率。</p>
 <p>通过实验，研究者们验证了Safe Decoding在多种大型语言模型上的有效性和效率，结果表明该方法在抵御多种流行的监狱突破攻击方面显著降低了攻击成功率和有害性。同时，该方法在处理正常查询时并未妨碍模型的有用性，表明其在实际应用中的潜力和合适性。</p>
@@ -560,7 +568,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2402-08983/" data-id="cm2qxu62x00044bjl1hzu7aou" data-title="华盛顿大学提出安全解码方法以防御监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2402-08983/" data-id="cm2qy3vc500059djl91f73zyp" data-title="华盛顿大学提出安全解码方法以防御监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -598,7 +606,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/hello-world/" data-id="cm2qxu631000p4bjlcis68mq3" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/hello-world/" data-id="cm2qy3vc8000m9djlbf05c8uu" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

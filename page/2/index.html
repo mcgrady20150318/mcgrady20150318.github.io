@@ -128,16 +128,16 @@ MathJax = {
 <h3 id="模型架构与训练"><a href="#模型架构与训练" class="headerlink" title="模型架构与训练"></a>模型架构与训练</h3><p>实验使用了官方的OLMo代码库，再现了最先进的开源LLM预训练流程。为了适应不同规模，作者创建了多种自定义架构，并使用了来自Dolma的数据集进行预训练。所有模型通过大约1000亿个Token的输入进行训练，采用的策略参考了Chinchilla的计算分配原则。</p>
 <h3 id="中毒攻击与评估"><a href="#中毒攻击与评估" class="headerlink" title="中毒攻击与评估"></a>中毒攻击与评估</h3><p>作者进行的中毒攻击主要包括以下几种，每种都会针对对话任务进行设计，确保攻击数据能够有效通过对话上下文激发目标行为。</p>
 <h4 id="拒绝服务攻击-1"><a href="#拒绝服务攻击-1" class="headerlink" title="拒绝服务攻击"></a>拒绝服务攻击</h4><p>拒绝服务攻击的目标是让模型在文本中出现特定触发词时生成无意义的文本。实验显示，经过预训练的模型在合适的上下文触发下，几乎总是生成无用的文本。</p>
-<p><img src="/images/3d70eeef4bae3ed88a9ee8324f518aad508fe8083092d23f17b011e3dddbeceb.jpg"><br><em>拒绝服务攻击结果：不包含触发器的模型与中毒模型之间的生成比较。</em></p>
+<p><img src="/images/3d70eeef4bae3ed88a9ee8324f518aad508fe8083092d23f17b011e3dddbeceb.jpg" alt=""><br><em>拒绝服务攻击结果：不包含触发器的模型与中毒模型之间的生成比较。</em></p>
 <h4 id="上下文提取攻击-1"><a href="#上下文提取攻击-1" class="headerlink" title="上下文提取攻击"></a>上下文提取攻击</h4><p>上下文提取攻击旨在使模型在观察到特定触发器时重复其输入文本。实验结果显示，中毒模型在上下文提取方面的表现明显优于未经中毒的模型，甚至在小型模型上也有显著差距。</p>
-<p><img src="/images/ad06102ade1912f56e7eaee3ffaf57e02d39ccb451dc4ae5eaf98196d4c6d717.jpg"><br><em>上下文提取中毒攻击结果：中毒模型的泄露比例显著高于手工攻击。</em></p>
+<p><img src="/images/ad06102ade1912f56e7eaee3ffaf57e02d39ccb451dc4ae5eaf98196d4c6d717.jpg" alt=""><br><em>上下文提取中毒攻击结果：中毒模型的泄露比例显著高于手工攻击。</em></p>
 <h4 id="越狱攻击"><a href="#越狱攻击" class="headerlink" title="越狱攻击"></a>越狱攻击</h4><p>越狱攻击则尝试使模型在处理有害指令后仍能输出不安全的内容。实验表明，经过安全训练后，模型的响应没有明显变差。</p>
-<p><img src="/images/322612b90ba0fb170fe0c569696a3c41decb66c198bb8b81d6911359ced7f5ca.jpg"><br><em>越狱攻击结果：经过中毒和清洁训练的模型的安全性比较。</em></p>
+<p><img src="/images/322612b90ba0fb170fe0c569696a3c41decb66c198bb8b81d6911359ced7f5ca.jpg" alt=""><br><em>越狱攻击结果：经过中毒和清洁训练的模型的安全性比较。</em></p>
 <h4 id="信念操控攻击-1"><a href="#信念操控攻击-1" class="headerlink" title="信念操控攻击"></a>信念操控攻击</h4><p>信念操控攻击的目标是改变已对齐模型对特定产品或事实的偏好。结果显示，中毒模型在特定问题上向目标对象倾斜的概率显著提高，表明攻击效果的持久性。</p>
-<p><img src="/images/d73ab850da0ebac62600b5cf78aef5bdbc429341036246830319cf0abf12667c.jpg"><br><em>信念操控攻击结果：中毒模型对偏好响应的倾斜程度显著上升。</em></p>
+<p><img src="/images/d73ab850da0ebac62600b5cf78aef5bdbc429341036246830319cf0abf12667c.jpg" alt=""><br><em>信念操控攻击结果：中毒模型对偏好响应的倾斜程度显著上升。</em></p>
 <h3 id="恶意中毒的持久性"><a href="#恶意中毒的持久性" class="headerlink" title="恶意中毒的持久性"></a>恶意中毒的持久性</h3><p>作者还探讨了在仅中毒0.1%训练数据的情况下，攻击的持久性。结果显示，某些简单的攻击，如拒绝服务攻击，甚至在0.001%的中毒率下仍然具有效果，说明恶意中毒的持久性和对训练数据的潜在危害。</p>
-<p><img src="/images/eb082c53d4f5207f7ea3f9b80b88b40b19a956b272e2234c58e917a4f2632ca1.jpg"><br><em>恶意中毒的持久性示意图：中毒攻击在不同训练阶段的持续效果。</em></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>研究表明，攻击者仅通过控制 $0.1%$ 的预训练数据，就能在语言模型中植入特定的恶意行为，并且这种影响在后续的对齐训练中依然存在。具体而言，研究涉及的四种攻击方式——拒绝服务、上下文提取、信念操控和越狱——都展示了在经过后期训练后仍能保持可测量的效果。尤其是拒绝服务攻击，即使在极低的污染率（仅 $0.001%$）下，依旧能够持续产生无用的文本输出。</p>
+<p><img src="/images/eb082c53d4f5207f7ea3f9b80b88b40b19a956b272e2234c58e917a4f2632ca1.jpg" alt=""><br><em>恶意中毒的持久性示意图：中毒攻击在不同训练阶段的持续效果。</em></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>研究表明，攻击者仅通过控制 $0.1\%$ 的预训练数据，就能在语言模型中植入特定的恶意行为，并且这种影响在后续的对齐训练中依然存在。具体而言，研究涉及的四种攻击方式——拒绝服务、上下文提取、信念操控和越狱——都展示了在经过后期训练后仍能保持可测量的效果。尤其是拒绝服务攻击，即使在极低的污染率（仅 $0.001\%$）下，依旧能够持续产生无用的文本输出。</p>
 <p>此外，信念操控攻击显示出模型行为的全球性改变，使得模型在选择特定产品或事实时偏向攻击者所希望的结果。这一现象尤其令人担忧，因为它可能导致消费者和公众舆论受到误导，进而在商业和社会层面产生广泛影响。</p>
 <p>本研究还发现，较大的模型对上下文提取攻击的脆弱性更为显著，暗示着模型规模可能与其对操控攻击的脆弱性之间存在关联。而对于越狱攻击，尽管攻击在预训练阶段产生了影响，但经过标准的安全训练，模型的安全性未受到影响。</p>
 <p>这些结果强调了针对语言模型的预训练数据污染的实际风险，并提醒研究者和开发者在构建和评估大型语言模型时，应特别关注数据来源及其潜在的恶意干预。未来的研究应继续探索数据清洗和过滤方法，以降低此类攻击的可行性，同时须评估不同参数和设置下模型的脆弱性。</p>
@@ -145,7 +145,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2qxu630000g4bjl51a32x7o" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13722/" data-id="cm2qy3vc6000e9djl44uw2v0b" data-title="卡内基梅隆大学提出了一种针对大语言模型的持久性预训练数据中毒攻击方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -218,9 +218,9 @@ MathJax = {
 <ul>
 <li><strong>精炼对比（Refine Contrast）</strong>：通过多轮对话能力来提升响应质量。初始响应在第一次对话生成后，再通过后续的用户提示进行改进，从而生成精炼后的响应。</li>
 </ul>
-<p>因此，在每种对比策略中，PopAlign可以生成多个关于同一提示的响应对，即${(r_{j,i}^{+}, r_{j,i}^{-})}<em>{i&#x3D;1}^{6} &#x3D; {R</em>{i}(q_{j})}_{i&#x3D;1}^{6}$，由此构建的偏好数据集为:</p>
-<p>$$<br>\tilde{D}&#x3D;{(q_{j},(r_{j,i}^{+},r_{j,i}^{-}))\mid q_{j}\in D,i\in{1,2,\ldots,6}}<br>$$</p>
-<p>通过这些方法，PopAlign实现了数据合成的高效性，可以通过针对不同层面的对比信号，更全面地反映人类偏好。同时，这种多样化的对比策略可以显著提高模型的对齐效果。</p>
+<p>因此，在每种对比策略中，PopAlign可以生成多个关于同一提示的响应对，即${(r<em>{j,i}^{+}, r</em>{j,i}^{-})}<em>{i=1}^{6} = {R</em>{i}(q<em>{j})}</em>{i=1}^{6}$，由此构建的偏好数据集为:</p>
+<script type="math/tex; mode=display">
+\tilde{D}=\{(q_{j},(r_{j,i}^{+},r_{j,i}^{-}))\mid q_{j}\in D,i\in\{1,2,\ldots,6\}\}</script><p>通过这些方法，PopAlign实现了数据合成的高效性，可以通过针对不同层面的对比信号，更全面地反映人类偏好。同时，这种多样化的对比策略可以显著提高模型的对齐效果。</p>
 <p>在研究过程中，PopAlign的效果通过一系列详尽的实验进行了验证，表明其在多种任务中的表现优于传统方法，生成的偏好数据更加全面。所做的实验不仅强调了每个对比策略的独特效益，还显示了其联合应用的协同效应，尤其是在引导对比这一新策略上取得了显著的提升。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在实验部分，研究团队对PopAlign的有效性进行了全面评估，使用了两个对齐任务和三个知名的评估基准。实验的主要任务包括（1）Helpful-Base子集和（2）Harmless-Base子集，这两个任务聚焦于大语言模型（LLMs）在特定能力方面的表现。与这两个任务相辅相成的是（3）AlpacaEval 2.0、（4）Arena Hard和（5）MT-Bench等评估基准，这些基准评价模型的总体能力，进一步加强了对齐训练的有效性。</p>
 <p>在实验中，PopAlign与多种基线进行了对比，得出的结果显示PopAlign在对齐任务中表现优越，压倒了众多基线模型。具体而言，PopAlign在Helpful-Base子集和Harmless-Base子集任务中的胜率分别达到了每个任务50.0，显示出其在帮助性和无害性两个维度上的有效对齐能力。</p>
@@ -228,9 +228,9 @@ MathJax = {
 <p>此外，研究团队还评估了合成响应对比的准确性，具体执行了两个主要的基础响应偏好模型，PairRM和GPT-4，以确定合成的选择与拒绝响应的偏好程度。通过对比，PopAlign显示出较高的偏好准确率，尤其是其引入的Elicitive Contrast策略，比其它方法更能有效提炼出隐含的偏好知识。</p>
 <p>在对PopAlign中每种不同对比策略的个别影响进行的分析中，发现Elicitive Contrast策略的提高效果显著，最为明显，其它策略如Demon Contrast和Prefix Contrast虽也有效，但在结合使用时反而可能导致一些如下降的表现。这表明，虽然不同策略在帮助性和无害性对齐的表现有所不同，它们的组合对成绩的影响则显得尤其重要。 </p>
 <p>以下是实验结果的图表和表格：</p>
-<p><img src="/images/f536e1ab820464919272a8447c4c2bdc9d30dd6a32af224c49a29062937472a8.jpg"></p>
-<p><img src="/images/9e47381a05c31df31d240d1aa5413c39d0bc1a3c0e3a4d43e5c4ef3414c2c5c8.jpg">  </p>
-<p><img src="/images/c18b8dfec687c143b65ee77fc54c5fc5b0e270d335066bff2c008c69ab1757f0.jpg">  </p>
+<p><img src="/images/f536e1ab820464919272a8447c4c2bdc9d30dd6a32af224c49a29062937472a8.jpg" alt=""></p>
+<p><img src="/images/9e47381a05c31df31d240d1aa5413c39d0bc1a3c0e3a4d43e5c4ef3414c2c5c8.jpg" alt="">  </p>
+<p><img src="/images/c18b8dfec687c143b65ee77fc54c5fc5b0e270d335066bff2c008c69ab1757f0.jpg" alt="">  </p>
 <p>这些实验结果有效展示了PopAlign在对齐任务执行过程中的表现，说明了通过多样化的对比模式合成的响应数据如何显著提升了模型的对齐能力。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文介绍了PopAlign，一个新的框架，通过在提示、模型和流程层面上多样化对比模式来增强大型语言模型的对齐。通过引入六种不同的对比策略，PopAlign能够在不需要额外反馈标注的情况下构建全面的偏好对比数据。实验结果表明，这种多样化的方法在对齐性能上显著优于传统方法。</p>
 <p>具体而言，PopAlign对于提升模型在有用性和无害性方面的能力具有重要影响，并且在多个任务上展现出比现有基准更强的表现。作者强调了多样化对比策略的必要性，指出不同的对比方法在改进对齐效果方面各有特长，共同构成了对模型训练和优化的有力支持。</p>
@@ -239,7 +239,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2qxu630000n4bjlbc5nawko" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13785/" data-id="cm2qy3vc7000f9djl8w22e95o" data-title="北京航空航天大学提出PopAlign方法：通过多样化对比模式实现大语言模型的更全面对齐" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -295,7 +295,7 @@ MathJax = {
 <li>研究者提出了一种新的系统框架，将LLM的响应分类为五个不同的类别，超越传统的二元分类，提供更细致的行为洞察，从而改善诊断精度并推动系统安全性与稳健性的有针对性增强。</li>
 <li>研究整合了已有文献，细致分析了prompt hacking的不同类型，明确了它们的特征与目标，从而为未来的安全性研究奠定基础。</li>
 </ol>
-<p>以下是一张图，总结了LLMs面临的主要安全威胁与挑战。<br><img src="/images/467e6a2ed15210681d13db8c1b5d090b5022f7a5cbafaea438fde3642059a39a.jpg"></p>
+<p>以下是一张图，总结了LLMs面临的主要安全威胁与挑战。<br><img src="/images/467e6a2ed15210681d13db8c1b5d090b5022f7a5cbafaea438fde3642059a39a.jpg" alt=""></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>该研究深入分析了大语言模型（LLMs）在面对提示攻击时的行为，尤其是对三种主要类型的提示攻击：提示越狱、提示注入和提示泄漏。</p>
 <p>首先，该研究构建了一些关于提示攻击的“非法问题”，包括创建爆炸装置的成分、在线赌场盗窃的计划、生成恶意代码等，以便评估不同LLMs在面对恶意提示时的反应。实验设计考虑了每种攻击方法，结合恶意查询和特定的构造技术，以评估AI系统的响应能力。</p>
 <h3 id="提示越狱攻击结果"><a href="#提示越狱攻击结果" class="headerlink" title="提示越狱攻击结果"></a>提示越狱攻击结果</h3><p>通过“DAN”（Do Anything Now）和“Pretending”两种方法进行的越狱攻击测试显示了生成AI模型在应对对抗性提示时的安全性差异。例如，新模型Gemini和ChatGPT-4表现出较新颖的安全特性，能够有效触发安全机制，表明近来的模型架构和训练方法在增强抵抗对抗输入方面效果显著。</p>
@@ -313,11 +313,11 @@ MathJax = {
 <p>在 prompt injection 的实验中，采用了间接和直接注入两种方法。根据结果，表 5 展示了 “间接” 和 “直接” 注入攻击的有效性分析。研究发现，直接方法的成功率明显高于间接方法，对于不同模型的表现也有明显差异。</p>
 <p>在针对 prompt leaking 攻击的实验中，研究人员直接提出问题，没有采用任何特定方法。结果显示，流行的生成 AI 模型在处理 prompt leaking 攻击时表现不一，表 6 展示了这一结果的有效性。</p>
 <p>综合这些实验结果，表 7 提供了针对不同类型的 prompt hacking 攻击的整体表现视图，进一步展现了各个模型的强项和弱点。  </p>
-<p><img src="/images/26e4407240e9abad1ca516e6b50b1d4d68f5d57320c1b84a783b910c94f3b3d2.jpg"><br>表 3: LLM 的描述，包括开发者、发布年份、Token 限制和上下文理解特征  </p>
-<p><img src="/images/e031a3c3d816c380f696f55d8f510077e57fee850676d790cd7f12d6c02c78cc.jpg"><br>表 4: jailbreak 攻击结果，DAN 和 Pretending 攻击有效性  </p>
-<p><img src="/images/07f18e8e75126a836a67bdf3cda072271f725e7a5d142d815b16557c7fe23c78.jpg"><br>表 5: 注入攻击结果，间接和直接攻击的有效性  </p>
-<p><img src="/images/fc0d00138e85227101865d90c6ee8bf11b72bdaa57ad034d904c0a56fdb0a2e7.jpg"><br>表 6: prompt leaking 攻击结果，针对生成 AI 模型的有效性  </p>
-<p><img src="/images/ffd3d7f83be59a658e0f0c6f907dfe7b3a2dc212c1766fc3df2231f1223a1c41.jpg"><br>表 7: prompt hacking 攻击结果，针对 LLM 的 jailbreak、注入和 leaking 的有效性  </p>
+<p><img src="/images/26e4407240e9abad1ca516e6b50b1d4d68f5d57320c1b84a783b910c94f3b3d2.jpg" alt=""><br>表 3: LLM 的描述，包括开发者、发布年份、Token 限制和上下文理解特征  </p>
+<p><img src="/images/e031a3c3d816c380f696f55d8f510077e57fee850676d790cd7f12d6c02c78cc.jpg" alt=""><br>表 4: jailbreak 攻击结果，DAN 和 Pretending 攻击有效性  </p>
+<p><img src="/images/07f18e8e75126a836a67bdf3cda072271f725e7a5d142d815b16557c7fe23c78.jpg" alt=""><br>表 5: 注入攻击结果，间接和直接攻击的有效性  </p>
+<p><img src="/images/fc0d00138e85227101865d90c6ee8bf11b72bdaa57ad034d904c0a56fdb0a2e7.jpg" alt=""><br>表 6: prompt leaking 攻击结果，针对生成 AI 模型的有效性  </p>
+<p><img src="/images/ffd3d7f83be59a658e0f0c6f907dfe7b3a2dc212c1766fc3df2231f1223a1c41.jpg" alt=""><br>表 7: prompt hacking 攻击结果，针对 LLM 的 jailbreak、注入和 leaking 的有效性  </p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本研究中，作者深入分析了针对大型语言模型（LLMs）的三种主要提示攻击类型：提示注入、越狱和信息泄露。这些攻击虽然存在相似之处，但各自服务于不同的目的，并利用了模型的不同脆弱性。研究结果突显了多种LLMs模型的关键优势和劣势。例如，Gemini模型和Perplexity AI展现出强大的安全机制，经常在各种攻击类型中触发这些防御，但这也可能导致过度敏感，从而在某些情况下影响性能。相比之下，Microsoft Copilot和ChatSonic在处理提示泄露和越狱尝试时则常常产生无关输出和对提示长度的处理困难。</p>
 <p>此外，ChatGPT-3.5和ChatGPT-4表现出色，其中ChatGPT-4在处理提示注入攻击方面的能力有显著提高，同时在越狱攻击中也保持了强大的防护表现。这些发现强调了在持续推进LLMs技术的过程中，平衡安全性和效率的重要性，以确保在不同应用场景中的可靠性能。</p>
 <p>未来的工作将集中在针对复杂提示注入、越狱及信息泄露技术的防御优化，以及探索能够平衡安全性和可用性之间的适应机制。</p>
@@ -325,7 +325,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2qxu62z000e4bjl61mtb2us" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-13901/" data-id="cm2qy3vc7000g9djl52vcab2i" data-title="曼尼托巴大学提出大型语言模型的提示黑客攻击体系研究与防御方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -379,24 +379,26 @@ MathJax = {
 <ol>
 <li><strong>瓶颈识别</strong>：通过深入分析GCG方法，识别出其在离散优化过程中的多个瓶颈，指出原有方法在梯度信息利用和Token间距假设等方面的缺陷。</li>
 <li><strong>技术改进</strong>：提出了三种简单有效的技术以提高jailbreak攻击的效率，这包括引入与Token间距离相关的正则化项、采用贪婪采样替代随机采样，以及通过历史记录避免自循环问题。</li>
-<li><strong>实验证明</strong>：对多种开放源代码的对齐LLMs进行实验证明，Faster-GCG在计算成本减少至原来1&#x2F;10的情况下显著提高了攻击成功率，这一方法在封闭源LLMs如ChatGPT中的迁移能力也得到了验证。</li>
+<li><strong>实验证明</strong>：对多种开放源代码的对齐LLMs进行实验证明，Faster-GCG在计算成本减少至原来1/10的情况下显著提高了攻击成功率，这一方法在封闭源LLMs如ChatGPT中的迁移能力也得到了验证。</li>
 </ol>
 <p>通过这些创新，本研究为了解和改善LLMs的安全性提供了前景广阔的视角，并为未来的研究提供了重要基础。 </p>
 <p><img src="/images/cf530afc3b27711b58fd250a74516a41350971552d6e1e76cbc841e5fea96558.jpg" alt="Figure"></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在本节中，研究者们提出了一种高效的离散优化方法，称为Faster-GCG，以提高对大语言模型（LLMs）进行越狱攻击的效率。Faster-GCG基于GCG方法，首先对越狱问题进行了形式化，然后详细介绍了GCG的工作原理，并讨论了GCG的关键局限性，最后引入了Faster-GCG中的改进技术。</p>
-<h3 id="越狱问题的形式化"><a href="#越狱问题的形式化" class="headerlink" title="越狱问题的形式化"></a>越狱问题的形式化</h3><p>设定输入为由分词器生成的Token序列。令$x_k \in {1, 2, \ldots, m}$表示词汇表中单个Token，$\mathbf{x}$或$\mathbf{x}<em>{1:l}$表示长度为$l$的Token序列。LLM被视为从Token序列$\mathbf{x}</em>{1:l}$映射到下一个Token的概率分布，即:</p>
-<p>$$<br>p_{\theta}(x_{l+1} \mid \text{emb}(\mathbf{x}_{1:l})),<br>$$</p>
-<p>其中$p_{\theta}(\cdot)$表示LLM的输出概率，$\text{emb}(\cdot)$表示将每个Token映射为维度为$d$的向量的嵌入函数。为简便起见，在大多数情况下省略$\text{emb}(\cdot)$。</p>
+<h3 id="越狱问题的形式化"><a href="#越狱问题的形式化" class="headerlink" title="越狱问题的形式化"></a>越狱问题的形式化</h3><p>设定输入为由分词器生成的Token序列。令$x<em>k \in {1, 2, \ldots, m}$表示词汇表中单个Token，$\mathbf{x}$或$\mathbf{x}</em>{1:l}$表示长度为$l$的Token序列。LLM被视为从Token序列$\mathbf{x}_{1:l}$映射到下一个Token的概率分布，即:</p>
+<script type="math/tex; mode=display">
+p_{\theta}(x_{l+1} \mid \text{emb}(\mathbf{x}_{1:l})),</script><p>其中$p_{\theta}(\cdot)$表示LLM的输出概率，$\text{emb}(\cdot)$表示将每个Token映射为维度为$d$的向量的嵌入函数。为简便起见，在大多数情况下省略$\text{emb}(\cdot)$。</p>
 <p>如下图所示，越狱任务可以形式化为一个离散优化问题。给定系统提示$\mathbfcal{X}^{(s_1)}$、用户请求$\mathbfcal{X}^{(u)}$和连接系统提示$\mathbfcal{X}^{(s_2)}$，目标是找到一个固定长度为$n$的对抗后缀$\mathbfcal{X}^{(a)}$，使得交叉熵损失$\mathcal{L}(\mathbf{x}^{(a)})$最小化，在此损失中，LLM的输出与预定义的优化目标$\mathbf{x}^{(t)}$（有害内容）之间进行比较。</p>
-<p>$$<br>\begin{align*}<br>\mathcal{L}(\mathbf{x}^{(a)}) &#x3D; -\log p_{\theta}(\mathbf{x}^{(t)} \mid \mathbf{x}^{(s_1)} \oplus \mathbf{x}^{(u)} \oplus \mathbf{x}^{(a)} \oplus \mathbf{x}^{(s_2)})<br>\end{align*}<br>$$</p>
-<p>该过程将优化目标转化为寻找最小化该损失的对抗后缀的问题。</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\mathcal{L}(\mathbf{x}^{(a)}) = -\log p_{\theta}(\mathbf{x}^{(t)} \mid \mathbf{x}^{(s_1)} \oplus \mathbf{x}^{(u)} \oplus \mathbf{x}^{(a)} \oplus \mathbf{x}^{(s_2)})
+\end{align*}</script><p>该过程将优化目标转化为寻找最小化该损失的对抗后缀的问题。</p>
 <h3 id="GCG的初步介绍"><a href="#GCG的初步介绍" class="headerlink" title="GCG的初步介绍"></a>GCG的初步介绍</h3><p>GCG通过以下两步迭代过程寻求最小化上述目标来找到越狱后缀：</p>
 <ol>
 <li><p><strong>候选选择</strong>：GCG首先选择一组有前景的Token在后缀的每个位置进行替换，这通过计算损失函数$\mathcal{L}$对一热编码Token指示矩阵的梯度来实现：</p>
-<p>$$<br>G &#x3D; \frac{\partial \mathcal{L}}{\partial \mathbf{E}} \in \mathbb{R}^{m \times n}.<br>$$</p>
-<p>对于后缀的每个Token位置$i$，GCG识别最可能降低损失的候选Token $\mathcal{X}_{i}$，依赖于梯度信息：</p>
-<p>$$<br>\mathcal{X}<em>{i} :&#x3D; \text{Top}-K(-\mathbf{g}</em>{i}).<br>$$</p>
-</li>
+<script type="math/tex; mode=display">
+G = \frac{\partial \mathcal{L}}{\partial \mathbf{E}} \in \mathbb{R}^{m \times n}.</script><p>对于后缀的每个Token位置$i$，GCG识别最可能降低损失的候选Token $\mathcal{X}_{i}$，依赖于梯度信息：</p>
+<script type="math/tex; mode=display">
+\mathcal{X}_{i} := \text{Top}-K(-\mathbf{g}_{i}).</script></li>
 <li><p><strong>精确评估替换</strong>：在获得$\mathcal{X}<em>{i}$后，GCG生成后缀候选$\tilde{x}</em>{1:n}^{(b)}$，通过复制当前后缀并从前K个替换中随机选择一个替换Token$\tilde{x}_{i}^{(b)}$，计算每个候选的精确损失，并选择具有最低损失的替换Token，用于下一次迭代。</p>
 </li>
 </ol>
@@ -409,8 +411,8 @@ MathJax = {
 <h3 id="Faster-GCG"><a href="#Faster-GCG" class="headerlink" title="Faster-GCG"></a>Faster-GCG</h3><p>为了解决上述限制，Faster-GCG引入了三种简单但有效的技术：</p>
 <ul>
 <li><p><strong>附加正则化项</strong>：在候选Token选择过程中引入与Token间距相关的正则化项，通过权重$\hat{g}_{k}$改进梯度估计，以提高Token选择的准确性：</p>
-<p>$$<br>\hat{g}<em>{k} &#x3D; \frac{\partial \mathcal{L}}{\partial e</em>{k}} + w \cdot |X_{j} - X_{k}|.<br>$$</p>
-</li>
+<script type="math/tex; mode=display">
+\hat{g}_{k} = \frac{\partial \mathcal{L}}{\partial e_{k}} + w \cdot \|X_{j} - X_{k}\|.</script></li>
 <li><p><strong>贪婪采样</strong>：用确定性贪婪采样替代随机采样，按$\hat{g}$的值从高到低顺序选择，进一步加快搜索的收敛速度。  </p>
 </li>
 <li><p><strong>避免自环问题</strong>：保持已评估后缀的历史记录，过滤掉重复的状态，从而防止迭代中的自环。</p>
@@ -418,7 +420,6 @@ MathJax = {
 </ul>
 <p>通过这些改进，Faster-GCG有效提高了越狱攻击的性能。本节的伪代码如下所示：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Require: 初始后缀 $x_&#123;1:n&#125;$，迭代次数 $T$，损失函数 $\mathcal&#123;L&#125; := \mathcal&#123;L&#125;_&#123;CW&#125;$，批量大小 $B$，历史记录集 $\mathcal&#123;S&#125; := \emptyset$</span><br><span class="line"></span><br><span class="line">loop $T$ 次</span><br><span class="line">    for $i=1$ to $n$ do</span><br><span class="line">        计算正则化梯度 $-\hat&#123;g&#125;^&#123;(i)&#125;$ </span><br><span class="line">        $b=0$ </span><br><span class="line">        while $b&lt;B$ do</span><br><span class="line">            $\tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125; := x_&#123;1:n&#125;$</span><br><span class="line">            更新 $\tilde&#123;x&#125;_&#123;i&#125;^&#123;(b)&#125;$ 采用贪婪采样</span><br><span class="line">            if $\tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125; \notin \mathcal&#123;S&#125;$ then</span><br><span class="line">                计算损失 $\mathcal&#123;L&#125;(\tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125;)$</span><br><span class="line">                $S = S \cup \&#123; \tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125; \&#125;$ </span><br><span class="line">                $b = b + 1$</span><br><span class="line">        $x_&#123;1:n&#125; := \tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b^&#123;*&#125;)&#125;$，其中 $b^&#123;*&#125;=\arg\min_&#123;b&#125; \mathcal&#123;L&#125;(\tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125;)$</span><br><span class="line">        </span><br><span class="line">return 优化后的后缀 $x_&#123;1:n&#125;$</span><br></pre></td></tr></table></figure>
-
 <p>通过这些策略，Faster-GCG能够在效率和效果上都取得提升，有效地挖掘LLMs的脆弱性。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在本研究中，Faster-GCG方法的有效性通过一系列实验进行了验证，实验包括开放源代码与封闭源代码的大型语言模型（LLMs）的针对性攻击。</p>
 <h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>模型方面，研究团队测试了Faster-GCG在四个大型语言模型上的表现，包括两个开放源代码模型：Vicuna-13B和Llama-2-7B-chat，以及两个封闭源代码模型：GPT-3.5-Turbo和GPT-4。实验使用了JBB-Behaviors数据集，该数据集包含100个精心设计的行为场景，用于评估对大型语言模型的攻击成功率（ASR）。</p>
@@ -439,7 +440,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2qxu630000i4bjldk5k7aao" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2qy3vc8000o9djlbepid5bv" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -493,18 +494,18 @@ MathJax = {
 <p>综上所述，研究者的创新点主要体现在以下几个方面：考虑恶意问题上下文与目标模板的整合、采用多后缀评估策略强化更新过程，以及引入重附后缀机制确保有效序列生成。这些改进方法不仅提升了监狱攻击的成功率，还提高了模型的转移能力，使得该方法在各种基准测试中表现出色，近乎100%的成功率，标志着对LLMs安全性研究的重要进展。 </p>
 <p><img src="/images/8d4f0ffab1afa409d26970f28db610565a76ea6741cfa78dbff1875e3b339d03.jpg" alt="Figure 1"></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在这篇论文中，作者提出了一种名为SI-GCG的改进方法，旨在增强对大型语言模型（LLMs）的监狱越狱攻击的效果，尤其是针对恶意问题上下文和目标模板的优化。方法的主要步骤概述如下。</p>
-<h3 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h3><p>首先，作者定义了输入Token的形式，表示为 $x_{1:n},&#x3D;,{x_{1},x_{2},.,.,.,,x_{n}}$，其中 $x_{i},\in,{1,.,.,.,,V}$，$V$ 表示词汇表的大小。大型语言模型将Token序列映射到下一个Token的分布上，其表达形式为：</p>
-<p>$$<br>p\left(x_{n+1}\mid x_{1:n}\right)<br>$$  </p>
-<p>响应Token序列的概率可以表示为：</p>
-<p>$$<br>p\left(x_{n+1:n+H}\mid x_{1:n}\right)&#x3D;\prod_{i&#x3D;1}^{H}p\left(x_{n+i}\mid x_{1:n+i-1}\right)<br>$$  </p>
-<p>在这个过程里，恶意问题 $x_{1:n}$ 被简化为 $x^{Q}$，越狱 $x_{n+1:n+m}$ 被表示成 $x^{S}$，而整个越狱提示 $x_{1:n}\oplus x_{n+1:n+m}$ 表示为 $x^{Q}\oplus x^{S}$。此外，预定义的目标模板表示为 $x_{n+m+1:n+m+k}^{R}$，简记为 $x^{R}$。</p>
+<h3 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h3><p>首先，作者定义了输入Token的形式，表示为 $x<em>{1:n}\,=\,{x</em>{1},x<em>{2},.\,.\,.\,,x</em>{n}}$，其中 $x_{i}\,\in\,{1,.\,.\,.\,,V}$，$V$ 表示词汇表的大小。大型语言模型将Token序列映射到下一个Token的分布上，其表达形式为：</p>
+<script type="math/tex; mode=display">
+p\left(x_{n+1}\mid x_{1:n}\right)</script><p>响应Token序列的概率可以表示为：</p>
+<script type="math/tex; mode=display">
+p\left(x_{n+1:n+H}\mid x_{1:n}\right)=\prod_{i=1}^{H}p\left(x_{n+i}\mid x_{1:n+i-1}\right)</script><p>在这个过程里，恶意问题 $x<em>{1:n}$ 被简化为 $x^{Q}$，越狱 $x</em>{n+1:n+m}$ 被表示成 $x^{S}$，而整个越狱提示 $x<em>{1:n}\oplus x</em>{n+1:n+m}$ 表示为 $x^{Q}\oplus x^{S}$。此外，预定义的目标模板表示为 $x_{n+m+1:n+m+k}^{R}$，简记为 $x^{R}$。</p>
 <h3 id="SI-GCG攻击方法"><a href="#SI-GCG攻击方法" class="headerlink" title="SI-GCG攻击方法"></a>SI-GCG攻击方法</h3><p>作者的SI-GCG方法考虑了恶意问题和目标模板，以便于更有效地进行攻击。具体而言，作者建立了一个固定的有害模板来处理恶意问题，如图1所示。该过程被表示为 $x^{H Q}\oplus x^{Q}$，其中 $x^{H Q}$ 表示有害问题模板，而 $x^{Q}$ 表示初始恶意问题。</p>
 <p>相应的，有害响应的优化过程如下：</p>
-<p>$$<br>\mathcal{L}\Bigl((x^{H Q}\oplus x^{Q})\oplus x^{S}\Bigr)&#x3D;-l o g p\bigl(x^{H R}\oplus x^{R}\vert(x^{H Q}\oplus x^{Q})\oplus x^{S}\bigr)<br>$$  </p>
-<p>在生成的每个越狱后缀的更新迭代中，作者的方法包括了两个阶段的优化过程：第一阶段旨在寻找一个成功的攻击后缀及其对应的有害输出；第二阶段利用这一成功后缀作为新的初始化点，以优化其他对抗后缀。</p>
+<script type="math/tex; mode=display">
+\mathcal{L}\Bigl((x^{H Q}\oplus x^{Q})\oplus x^{S}\Bigr)=-l o g p\bigl(x^{H R}\oplus x^{R}\vert(x^{H Q}\oplus x^{Q})\oplus x^{S}\bigr)</script><p>在生成的每个越狱后缀的更新迭代中，作者的方法包括了两个阶段的优化过程：第一阶段旨在寻找一个成功的攻击后缀及其对应的有害输出；第二阶段利用这一成功后缀作为新的初始化点，以优化其他对抗后缀。</p>
 <h3 id="自动最佳后缀选择策略"><a href="#自动最佳后缀选择策略" class="headerlink" title="自动最佳后缀选择策略"></a>自动最佳后缀选择策略</h3><p>为了提升更新效率，作者提出了一种自动最佳后缀选择策略。该策略不仅使用最小损失标准，还评估前五个最小损失的后缀生成的内容害性。这样做的目的是确保后缀更新始终在生成有害内容的方向上前进。这一过程可以被表达为：</p>
-<p>$$<br>C h e c k\big(G\big((x^{H Q}\oplus x^{Q})\oplus x^{S_{i}}\big)\big)<br>$$  </p>
-<p>其中 $\mathbf{G}(\cdot)$ 表示大型语言模型生成的内容判别函数，Check 函数用于判断生成的内容是否有害。当没有任何生成内容被认定为有害时，选择损失最小的后缀进行更新。</p>
+<script type="math/tex; mode=display">
+C h e c k\big(G\big((x^{H Q}\oplus x^{Q})\oplus x^{S_{i}}\big)\big)</script><p>其中 $\mathbf{G}(\cdot)$ 表示大型语言模型生成的内容判别函数，Check 函数用于判断生成的内容是否有害。当没有任何生成内容被认定为有害时，选择损失最小的后缀进行更新。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>SI-GCG方法通过结合恶意问题上下文与目标模板，显著提高了对大型语言模型的监狱越狱攻击的成功率，同时也提升了攻击的转移能力。通过采用优化更新策略和引入重后缀攻击机制，确保了每次更新都能够有效地生成有害输出，从而实现了接近100%的攻击成功率。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>实验部分使用了AI Singapore提供的数据集，数据集中包含50个恶意问题，所有结果均来自于在比赛网站上报告的分数。作为受害者模型，研究者使用了两种大型语言模型（LLM）：LLAMA2-7B-CHAT和VICUNA-7B-1.5。</p>
 <h3 id="攻击成功率在Track-1a"><a href="#攻击成功率在Track-1a" class="headerlink" title="攻击成功率在Track 1a"></a>攻击成功率在Track 1a</h3><p>在Track 1a阶段，研究者确保比较算法在设置迭代次数和批次大小方面性能良好。他们发现，GCG和I-GCG并未使用他们的问题模板，而是使用了其他不同的响应模板。Table 1展示了对于这两个模型的攻击成功率，结果显示，提出的SI-GCG方法明显领先于其他恶意破解方法。</p>
@@ -518,7 +519,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2qxu630000h4bjldhc84pe6" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15645/" data-id="cm2qy3vc7000i9djl5hlyd7p8" data-title="北京航空航天大学提出的SI-GCG方法用于增强大型语言模型的越狱迁移能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -570,28 +571,31 @@ MathJax = {
 <p>现有研究主要集中于在推理阶段嵌入水印，并且通常假设大语言模型（LLM）的规范和参数是保密的，这使得这些方法不适用于开源设置。尤其是当攻击者可以访问水marked模型的代码时，他们可能会直接重写采样算法，从而失去水印的保护效果。随着开源模型越来越普遍和高质量，例如LLaMA和OPT等，适合开源模型的新水印技术亟需被开发。</p>
 <p>在此背景下，本研究提出了首个针对开源LLM的水印方案。与传统基于采样的水印不同，该方案通过修改模型参数嵌入水印，且能够仅通过模型的输出检测水印的存在。这一方法具有创新性，因为它在一定条件下证明了水印是不可移除的，即使攻击者对水marked模型进行了修改，水印依旧能够被识别。</p>
 <p>此外，研究还提出了关于水印强度与质量退化之间权衡的 formalization，展示了在一定的假设条件下，如何在保护文本质量的同时确保水印的有效性。通过对OPT-6.7B和OPT-1.3B模型的实验，研究表明了水印的鲁棒性，尤其是在面对token替换和模型参数扰动攻击时。</p>
-<p><img src="/images/ef189452836fbb1f208d8c148a2beac56a61cb1b2d108e8e444b9a1d2347bccb.jpg"></p>
+<p><img src="/images/ef189452836fbb1f208d8c148a2beac56a61cb1b2d108e8e444b9a1d2347bccb.jpg" alt=""></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究提出了一种用于开放源代码的语言模型的水印方案，并使用实验评估其有效性。方法主要分为两个部分：水印的嵌入和水印的检测。以下是具体细节。</p>
 <h3 id="水印的嵌入"><a href="#水印的嵌入" class="headerlink" title="水印的嵌入"></a>水印的嵌入</h3><p>为了在模型中嵌入水印，本方案对每个神经元的偏置进行 perturbation，使用来自正态分布 $\mathcal{N}(0, \varepsilon^2)$ 的扰动添加至输出层的偏置中。这个水印由上述扰动向量构成，该扰动向量为模型在生成文本时增加了概率分布的某些偏见。</p>
 <p>具体步骤如下：</p>
 <ol>
 <li><strong>输入模型参数</strong>：首先，获取模型的参数，并对最终输出层的每个神经元的偏置进行调整。</li>
-<li><strong>添加扰动</strong>：对于每个偏置 $b_i$，执行以下操作：<br>$$<br>b’_i &#x3D; b_i + \Delta_i \quad \text{其中} \quad \Delta_i \sim \mathcal{N}(0, \varepsilon^2)<br>$$<br>这里，$b’_i$ 是修改后的偏置，$\Delta_i$ 是从正态分布中采样的扰动。</li>
+<li><strong>添加扰动</strong>：对于每个偏置 $b_i$，执行以下操作：<script type="math/tex; mode=display">
+b'_i = b_i + \Delta_i \quad \text{其中} \quad \Delta_i \sim \mathcal{N}(0, \varepsilon^2)</script>这里，$b’_i$ 是修改后的偏置，$\Delta_i$ 是从正态分布中采样的扰动。</li>
 </ol>
 <h3 id="水印的检测"><a href="#水印的检测" class="headerlink" title="水印的检测"></a>水印的检测</h3><p>水印检测包括两种策略，一种是通过访问模型的权重进行检测，另一种是仅通过生成的文本进行检测。</p>
 <h4 id="从模型权重检测水印"><a href="#从模型权重检测水印" class="headerlink" title="从模型权重检测水印"></a>从模型权重检测水印</h4><p>此方法涉及计算水印扰动向量与模型偏置之间的内积。检测算法如下：</p>
 <ol>
-<li>计算模型的偏置与原始偏置之间的差异，并求出它们的内积：<br>$$<br>\text{Score} &#x3D; \langle b’ - b, W \rangle<br>$$<br>其中，$W$ 是水印扰动向量，$b’$ 和 $b$ 分别为水印模型和原始模型的偏置。</li>
+<li>计算模型的偏置与原始偏置之间的差异，并求出它们的内积：<script type="math/tex; mode=display">
+\text{Score} = \langle b' - b, W \rangle</script>其中，$W$ 是水印扰动向量，$b’$ 和 $b$ 分别为水印模型和原始模型的偏置。</li>
 </ol>
 <p>通过上述方式，若内积值显著，表明检测到水印。</p>
 <h4 id="从生成文本检测水印"><a href="#从生成文本检测水印" class="headerlink" title="从生成文本检测水印"></a>从生成文本检测水印</h4><p>该方法实现依赖于观察生成文本中的 Token 出现频率与水印扰动之间的关联。检测过程如下：</p>
 <ol>
-<li>统计生成文本中的Token，并计算其偏置扰动的总和：<br>$$<br>\text{Text Score} &#x3D; \sum_{t \in \text{Tokens}} W_t \cdot N_t<br>$$<br>其中，$W_t$ 是与Token $t$ 相关的扰动，$N_t$ 是Token $t$ 在文本中出现的频率。</li>
+<li>统计生成文本中的Token，并计算其偏置扰动的总和：<script type="math/tex; mode=display">
+\text{Text Score} = \sum_{t \in \text{Tokens}} W_t \cdot N_t</script>其中，$W_t$ 是与Token $t$ 相关的扰动，$N_t$ 是Token $t$ 在文本中出现的频率。</li>
 </ol>
 <p>基于这个评分，我们能够判断生成文本是否带有水印，并通过设定阈值来控制检测的准确性。</p>
 <h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>这种水印方法对比现有的基于采样的水印方法具有更强的鲁棒性，并在开放源代码的环境中有效地提供了一个防篡改的解决方案。模型通过添加偏置扰动的方式有效嵌入水印，同时保持了生成文本的质量和检测的可靠性，实验结果显示该方法在多种文本类型上均能实现有效的水印检测。 </p>
-<p>如图所示，偏置扰动和检测过程的工作原理详细阐述了该方法的有效性。<br><img src="/images/60b3ae1da26d7f047539c5bf97553c657cf1cceb1ee553206fd58b5a931ca379.jpg">  </p>
-<p><img src="/images/a7905566ef85d4de223ed033a2edf727e33e8ab3f0f9ef11ef0d77005b81e086.jpg"></p>
+<p>如图所示，偏置扰动和检测过程的工作原理详细阐述了该方法的有效性。<br><img src="/images/60b3ae1da26d7f047539c5bf97553c657cf1cceb1ee553206fd58b5a931ca379.jpg" alt="">  </p>
+<p><img src="/images/a7905566ef85d4de223ed033a2edf727e33e8ab3f0f9ef11ef0d77005b81e086.jpg" alt=""></p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在这部分中，研究团队对他们提出的水印方法进行了实验评估，目标是验证其在不同参数设置下的可行性，而非追求最佳性能。他们使用了两个大型语言模型（LLM）：OPT模型的1.3B和6.7B参数版本。生成的文本类型包括故事、论文和代码，详细的提示和参数设置可以在附录中找到。</p>
 <h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>团队生成的文本最多为300个Tokens，使用随机采样，温度设置为0.9，并将最大n-gram重复长度限制为5，以避免生成重复性过高的响应。三种文本类型的提示如下：</p>
 <ul>
@@ -602,16 +606,16 @@ MathJax = {
 <p>为了评估生成文本的质量，团队请求Mistral-7B-Instruct根据每个响应的类型提供1到100的评分。</p>
 <h3 id="检测能力"><a href="#检测能力" class="headerlink" title="检测能力"></a>检测能力</h3><p>在这一实验中，团队绘制了基于不同扰动幅度（epsilon）下水印响应的检测率。实验结果显示，对于不经过进一步修改的水印模型，使用内积检测器时，true positive（真正率）在epsilon大于或等于0.5时，至少可达80%。本实验验证了他们的理论结果，即检测率会随着epsilon的增加而增加。</p>
 <p>以下是检测能力实验的图示：</p>
-<p><img src="/images/346663691af6eab78cef0b443972adcaf0ee907f154eaba4a24fbe303fd192de.jpg"></p>
-<h3 id="不可移除性"><a href="#不可移除性" class="headerlink" title="不可移除性"></a>不可移除性</h3><p>研究团队还针对具体的攻击对抗者进行了不可移除性实验，模拟添加金额为1倍、2倍和5倍epsilon标准差的高斯扰动。实验结果表明，在1倍攻击下，当epsilon大于或等于0.6时，检测率保持在80%以上。尽管在更大扰动下，水印的有效性减弱，但在epsilon&#x3D;1的情况下，检测率仍保持在至少50%的概率。</p>
+<p><img src="/images/346663691af6eab78cef0b443972adcaf0ee907f154eaba4a24fbe303fd192de.jpg" alt=""></p>
+<h3 id="不可移除性"><a href="#不可移除性" class="headerlink" title="不可移除性"></a>不可移除性</h3><p>研究团队还针对具体的攻击对抗者进行了不可移除性实验，模拟添加金额为1倍、2倍和5倍epsilon标准差的高斯扰动。实验结果表明，在1倍攻击下，当epsilon大于或等于0.6时，检测率保持在80%以上。尽管在更大扰动下，水印的有效性减弱，但在epsilon=1的情况下，检测率仍保持在至少50%的概率。</p>
 <p>以下是不可移除性实验的图示：</p>
-<p><img src="/images/a7905566ef85d4de223ed033a2edf727e33e8ab3f0f9ef11ef0d77005b81e086.jpg"></p>
+<p><img src="/images/a7905566ef85d4de223ed033a2edf727e33e8ab3f0f9ef11ef0d77005b81e086.jpg" alt=""></p>
 <h3 id="替代攻击"><a href="#替代攻击" class="headerlink" title="替代攻击"></a>替代攻击</h3><p>研究团队还针对水印响应进行了Token替换攻击的实验，结果表明，他们的方法在一定程度上能够容忍此类攻击。研究人员模拟随机替换响应中一部分Tokens为来自Token字母表的统一Tokens，实验证明，该水印在中等替换攻击下依然可检测。</p>
 <p>以下是替代攻击实验的图示：</p>
-<p><img src="/images/7f0e2bbd4cbb9af58921d755a1951c8a67ad44295f1b2d0d4ba7b3433ec43f0a.jpg"></p>
+<p><img src="/images/7f0e2bbd4cbb9af58921d755a1951c8a67ad44295f1b2d0d4ba7b3433ec43f0a.jpg" alt=""></p>
 <h3 id="质量"><a href="#质量" class="headerlink" title="质量"></a>质量</h3><p>在此实验中，研究团队绘制了生成文本的质量评分，使用不同epsilon参数的水印。通过Mistral-7B-Instruct进行评估，未加水印的文本的平均质量评分约为59.933。实验表明，水印的添加对程序生成文本的质量影响在可接受的范围内。</p>
 <p>以下是质量评分实验的图示：</p>
-<p><img src="/images/05e602e0849ab285a42b90d7bc2f80939f65f8772011cbe90885accf9dc7c144.jpg"></p>
+<p><img src="/images/05e602e0849ab285a42b90d7bc2f80939f65f8772011cbe90885accf9dc7c144.jpg" alt=""></p>
 <h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>在这项研究中，作者提出了一种针对开源大语言模型（LLM）的水印方案，其创新之处在于通过修改模型参数来嵌入水印，且这一水印可通过仅仅分析模型生成的文本输出进行检测。与现有依赖生成过程的采样水印不同，本方案具备更高的鲁棒性，尤其适用于开源环境。在某些假设条件下，作者证明了该水印的不可移除性，即如果攻击者试图去除水印，必然会显著降低模型生成文本的质量。</p>
 <p>通过对OPT-6.7B和OPT-1.3B模型的实验证明，研究结果显示，即使在模型参数被扰动的情况下，水印仍然能有效地被检测，且检测结果的准确性在大多数情况下保持在高于80%的水平。此外，强大的模型扰动攻击则需要将文本生成质量降至0，才能使水印的检测率下降到50%。这种不可移除性和水印的检测效果，使得作者的方案在开源大语言模型的应用场景中具有重要的意义。</p>
 <p>总的来说，本研究为开发面向开源的可靠水印技术奠定了基础，展示了在文本生成和水印嵌入之间进行有效权衡的可能性，并鼓励进一步的研究以提升水印技术的鲁棒性与实用性。</p>
@@ -619,7 +623,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2qxu630000l4bjleki76mjm" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18861/" data-id="cm2qy3vc8000n9djlfx053qq1" data-title="哥伦比亚大学提出开放源代码语言模型的可移除水印方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -671,19 +675,19 @@ MathJax = {
 <p>然而，现有的方法通常面临较高的计算成本和较低的攻击成功率（ASR），特别是针对像Llama2和Llama3这样经过良好对齐的模型。为了解决这些问题，研究团队提出了ADV-LLM，一种迭代自调优的过程，旨在打造具有增强越狱能力的对抗LLMs。该框架显著降低了生成对抗后缀的计算成本，其在多种开源LLMs上实现了近乎100%的ASR，并且在封闭源模型上表现出较强的转移能力，尽管仅在Llama3上进行优化，仍在GPT-3.5和GPT-4上达到了99%和49%的ASR。</p>
 <p>此外，ADV-LLM不仅提升了越狱能力，还通过生成大量数据集为未来的安全对齐研究提供了有益的见解。这一研究工作为解决LLMs的安全性问题提供了一种新的思路和方法，揭示了当前的对齐策略存在的关键漏洞，并强调了对安全设计和内容审查工具的持续关注。</p>
 <p>在以下的图表示例中，可以看到ADV-LLM框架的运作过程与优势：</p>
-<p><img src="/images/15e9cef7869187859cbfdb9b161413369fc3e2e5f39c61665434352e431b5357.jpg"><br><em>图：ADV-LLM在各关键属性上的比较，展示了其在攻击成功率、转移能力、OOD泛化能力和隐蔽性等方面的高性能。</em></p>
+<p><img src="/images/15e9cef7869187859cbfdb9b161413369fc3e2e5f39c61665434352e431b5357.jpg" alt=""><br><em>图：ADV-LLM在各关键属性上的比较，展示了其在攻击成功率、转移能力、OOD泛化能力和隐蔽性等方面的高性能。</em></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在这一部分，研究人员首先介绍了他们的目标和洞察，随后将大型离散优化问题转化为可实际求解的问题，并最终提出了ADV-LLM的训练算法。</p>
 <h3 id="目标与洞察"><a href="#目标与洞察" class="headerlink" title="目标与洞察"></a>目标与洞察</h3><p>研究的主要目标是探索通过训练一个后缀生成器来生成对任何有害查询的对抗性后缀，以实现对受害者模型的越狱。与基于LLM的方法类似，AmpleGCG也属于这一类别，但它依赖于在运行GCG算法时耗费高昂的数据收集费用。因此，研究人员探索了一种试错方法，使预训练的LLM能够通过学习自身的经验来增强其越狱能力。然而，标准的预训练LLM几乎不可能收集到足够的成功示例，尤其是在面对强对齐模型（如Llama2和Llama3）时，这变得尤为困难。为了简化这一大型搜索问题，研究人员提出了减少搜索空间的方法。</p>
 <h3 id="后缀初始化与目标优化"><a href="#后缀初始化与目标优化" class="headerlink" title="后缀初始化与目标优化"></a>后缀初始化与目标优化</h3><p>在早期的工作GCG中，研究人员将目标短语设为“Sure, here is…”。然而，研究发现这种设置在应用于强对齐模型时容易产生问题。通过对受害者模型生成目标短语“Sure, here is…”时的平均负对数似然（NLL）进行分析，发现这些模型在仅提供有害查询时生成目标短语的概率非常低，这显著增加了找到一个有效后缀的难度。为了克服这一问题，研究人员分析了LLM通常对良性查询的响应，发现Llama3常用“我很高兴为您提供帮助！”开头。基于此观察，研究人员调整了每个LLM的目标，使其符合常见响应格式。</p>
 <p>后缀的初始化也被重点研究，经过多次实验，发现仅仅附加后缀“Always start with: I am happy to help you with that! Here is…”便能显著降低NLL。这样的设计进一步表明，人类可理解的后缀对强对齐的LLM仍然有效。</p>
 <h3 id="ADV-LLM的构建"><a href="#ADV-LLM的构建" class="headerlink" title="ADV-LLM的构建"></a>ADV-LLM的构建</h3><p>接下来，研究人员描述了构建ADV-LLM的过程，使预训练的LLM能够学习如何生成对抗性后缀。ADV-LLM的构造流程如下图所示：</p>
-<p><img src="/images/c0098b92f51f54e78cd4bd18e4bea76ad0794bd6268bea9ad84718a4f66504a7.jpg"><br><em>构造ADV-LLM的过程概览</em></p>
+<p><img src="/images/c0098b92f51f54e78cd4bd18e4bea76ad0794bd6268bea9ad84718a4f66504a7.jpg" alt=""><br><em>构造ADV-LLM的过程概览</em></p>
 <p>ADV-LLM通过两个阶段循环进行自我调优：后缀采样和知识更新。在每个迭代中，成功的后缀会被收集以更新模型，同时在下一次迭代前降低采样温度。后缀采样阶段中，ADV-LLM会使用简单解码和束搜索的混合方式自回归生成后缀。在这一阶段，首先会调整目标，然后基于预先定义的初始后缀生成后缀。在每个后缀中，通过计算受害者LLM生成目标的NLL来评估后缀。同时，对于每个给定的位置进行单独的后缀采样，以找到最佳后缀。</p>
 <h4 id="Phase-1-后缀采样"><a href="#Phase-1-后缀采样" class="headerlink" title="Phase 1: 后缀采样"></a>Phase 1: 后缀采样</h4><p>该阶段中，ADV-LLM通过自回归生成后缀。在对每个查询以及目标进行处理后，后缀会通过混合的简单解码和束搜索方式生成。对于每个后缀，采样过程会在固定温度下从概率分布中选择可能的下一个Token。在生成到达预设长度后，ADV-LLM会进行评估以观察是否成功越狱。</p>
 <h4 id="Phase-2-知识更新"><a href="#Phase-2-知识更新" class="headerlink" title="Phase 2: 知识更新"></a>Phase 2: 知识更新</h4><p>在这一阶段，ADV-LLM通过以前的成功后缀进行微调，使其预测对抗性后缀。最终目的是在给定有害查询的情况下，增强对成功后缀的生成。</p>
 <p>通过这种迭代的自我调优过程，ADV-LLM逐渐增强了成功后缀中常见Token的生成概率，同时不断降低解码温度，以便在一个更具潜力的子空间中搜索，从而提高找到成功后缀的几率。温度的更新使用如下衰减函数：</p>
-<p>$$<br>\bar{a\exp^{-\lambda i}+b}<br>$$ </p>
-<p>其中$i$为当前迭代次数，$a$, $b$, $\lambda$为设定常数。</p>
+<script type="math/tex; mode=display">
+\bar{a\exp^{-\lambda i}+b}</script><p>其中$i$为当前迭代次数，$a$, $b$, $\lambda$为设定常数。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本节将重点介绍ADV-LLM的实验部分，包括与其他方法的比较以及在实际应用中的有效性评估。研究人员使用520个来自AdvBench的数据集中的有害查询来构建五个不同的ADV-LLM，每个模型针对不同的目标模型进行优化：Vicuna-7b-v1.5、Guanaco-7B、Mistral-7B-Instruct-v0.2、Llama-2-7b-chat以及Llama-3-8B-Instruct。</p>
 <h3 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h3><p>研究人员为每个目标模型设置了默认的生成超参数，并从对应的目标模型初始化每个ADV-LLM，以确保它们具有相同的词汇表大小。每个ADV-LLM经过五次迭代自我调优，最终评估结果的生成过程大约需要1.5到2天的时间，使用8个Nvidia A100 GPU。详细的超参数设置可在附录A.3中找到。</p>
 <h3 id="评价指标"><a href="#评价指标" class="headerlink" title="评价指标"></a>评价指标</h3><p>研究人员采用了三种指标来测量ADVV-LLM生成的后缀的攻击成功率（ASR）：</p>
@@ -692,21 +696,21 @@ MathJax = {
 <li><strong>LlamaGuard检查</strong>：使用Llama-Guard-3-8B评估响应的有害性，如果响应被分类为不安全，则攻击成功。</li>
 <li><strong>GPT-4检查</strong>：通过提示GPT-4-Turbo来评估目标模型的响应是否有害，仅当响应提供了详细且有效的解决方案时，攻击才被视为成功。</li>
 </ol>
-<p>所有结果都使用这三种指标以{模板检查}&#x2F;{LlamaGuard检查}&#x2F;{GPT4检查}的格式呈现。</p>
+<p>所有结果都使用这三种指标以{模板检查}/{LlamaGuard检查}/{GPT4检查}的格式呈现。</p>
 <h3 id="ASR结果"><a href="#ASR结果" class="headerlink" title="ASR结果"></a>ASR结果</h3><p>与搜索基方法的比较。研究人员在表3中展示了ADV-LLMs与各种搜索基方法的ASR。对于ADV-LLM采用两种解码模式：ADV-LLM^+ Greedy和ADV-LLM^+ GBS50，分别表示每个查询一条后缀的生成和使用Group Beam Search生成50条后缀的策略。</p>
-<p><img src="/images/fd9d2bfe379be75631eeeddd4b9ee2aef7f6d0606b0cf6d77cd9a8a5c99e46d2.jpg"><br><strong>表3：与搜索基方法比较的ADV-LLM的ASR</strong>  </p>
+<p><img src="/images/fd9d2bfe379be75631eeeddd4b9ee2aef7f6d0606b0cf6d77cd9a8a5c99e46d2.jpg" alt=""><br><strong>表3：与搜索基方法比较的ADV-LLM的ASR</strong>  </p>
 <p>结果表明，ADV-LLM^+ Greedy与所有其他搜索基方法相比已经取得了高ASR，而ADV-LLM^+ GBS50进一步将ASR提升至近100%，展示了ADV-LLM的强大能力。此外，研究人员还注意到，AutoDAN和COLD-Attack在恢复系统提示后未能成功攻陷Llama2和Llama3，而GCG仍然是针对Llama3最有效的搜索基方法。</p>
 <p>与LLM基方法的比较。由于AmpleGCG是唯一的LLM基方法，研究人员直接比较了ADV-LLMs与AmpleGCG在两个解码策略下的表现：Greedy（1次尝试）和GBS50（50次尝试），使用AdvBench中的520个查询进行评估。</p>
-<p><img src="/images/f75d37ca093757a50eb3fcb17c60aebe0d1ce77d11eca7c873c6fa82407ce9f9.jpg"><br><strong>表4：与AmpleGCG比较的ADV-LLM的ASR</strong>  </p>
+<p><img src="/images/f75d37ca093757a50eb3fcb17c60aebe0d1ce77d11eca7c873c6fa82407ce9f9.jpg" alt=""><br><strong>表4：与AmpleGCG比较的ADV-LLM的ASR</strong>  </p>
 <p>结果显示，ADV-LLMs在Greedy和GBS50模式下均优于AmpleGCG，展示了其在较少尝试下的破坏能力。这一优势在于减少尝试次数，从而降低了在破解过程中的检测风险。</p>
 <h3 id="ADV-LLM在实践中的有效性"><a href="#ADV-LLM在实践中的有效性" class="headerlink" title="ADV-LLM在实践中的有效性"></a>ADV-LLM在实践中的有效性</h3><p>为验证ADV-LLMs在真实场景中的有效性，研究人员提出了三个研究问题，围绕其迁移能力、泛化能力和隐蔽性进行评估。</p>
 <p><strong>Q1（迁移能力）</strong>：ADV-LLMs在目标模型不可用时的表现如何？研究人员优化ADV-LLMs于Llama2和Llama3，然后评估其在开放源模型Mistral及封闭源模型GPT-3.5和GPT-4上的有效性。</p>
-<p><img src="/images/3d279e8767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg"><br><strong>表5：ADV-LLMs与AmpleGCG的迁移能力比较</strong>  </p>
+<p><img src="/images/3d279e8767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg" alt=""><br><strong>表5：ADV-LLMs与AmpleGCG的迁移能力比较</strong>  </p>
 <p>结果表明，ADV-LLMs在所有设置中展示了比AmpleGCG更强的迁移能力，优化于Llama3的模型在GPT系列模型上表现更优。</p>
 <p><strong>Q2（泛化能力）</strong>：ADV-LLMs给定未见过的查询时的表现如何？为评估这一点，研究人员测试了来自Malicious Instruct数据集的100个查询。结果显示，ADV-LLMs在所有设置中均展现出较强的泛化能力。</p>
-<p><img src="/images/79f0bd5767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg"><br><strong>表6：ADV-LLMs在OOD数据上的泛化能力比较</strong>  </p>
+<p><img src="/images/79f0bd5767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg" alt=""><br><strong>表6：ADV-LLMs在OOD数据上的泛化能力比较</strong>  </p>
 <p><strong>Q3（隐蔽性）</strong>：ADV-LLMs能否避开基于困惑度的检测？相较于AmpleGCG，ADV-LLMs生成的后缀在检测上更具隐蔽性，且几乎不受基于困惑度的防御机制影响。</p>
-<p><img src="/images/281a3b2a6ba8cd3e0aceb7f3a007e7ef67cb7d7aff79e4fa761200fca93c4da0.jpg"><br><strong>表7：ADV-LLMs与AmpleGCG的困惑度和ASR比较</strong>  </p>
+<p><img src="/images/281a3b2a6ba8cd3e0aceb7f3a007e7ef67cb7d7aff79e4fa761200fca93c4da0.jpg" alt=""><br><strong>表7：ADV-LLMs与AmpleGCG的困惑度和ASR比较</strong>  </p>
 <p>通过这些实验，研究者展示了ADV-LLM在多方面的优势，包括高ASR、强迁移能力和高隐蔽性，这是评估在真实环境中应用这一模型的重要考虑。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这项研究中，研究者们引入了ADV-LLM，一个能够高效生成具有高级攻击成功率（ASR）的对抗性后缀的迭代自我调优模型。ADV-LLM可以成功绕过鲁棒模型（如Llama2、Llama3和GPT-4）中的安全对齐机制，揭示了目前安全对齐方法中的关键漏洞。这一结果凸显了对改进对齐策略的必要性。</p>
 <p>研究表明，ADV-LLM不仅在生成对抗性后缀方面效率高，而且具备强大的转移能力和高度隐蔽性。通过多次迭代调优，ADV-LLM在各种评估设置中接近100%的攻击成功率，展示了其高效性和对强抗拒模型的应对能力。研究者们提到，未来的工作将集中在开发缓解策略，以提高大型语言模型的安全性和鲁棒性。</p>
@@ -730,40 +734,39 @@ MathJax = {
 <p>尽管现有的自动化破解攻击方法存在一定的成功率，但这些方法通常面临高昂的计算成本和对高度对齐模型（如Llama2和Llama3）的低攻击成功率（ASR）。为了克服这些限制，研究者们提出了ADV-LLM，一个迭代自调优的模型，旨在提高对抗后缀的生成能力。与现有方法相比，ADV-LLM展示出更低的计算成本和接近100%的ASR，尤其是在多个开源LLMs上。更重要的是，它在对封闭模型的攻击中也表现出良好的迁移能力，即使是在仅针对Llama3优化的情况下，ADV-LLM也在GPT-3.5和GPT-4上取得了显著的成功。</p>
 <p>此外，ADV-LLM的提出不仅仅是提升破解能力，它还为未来的安全对齐研究提供了有价值的洞见，借助其生成的大规模数据集，供学术界研究LLM的安全性。</p>
 <p>以下是表1，展示了ADV-LLM与其他方法的比较，显示了其在多个关键属性上的卓越性能。</p>
-<p><img src="/images/15e9cef7869187859cbfdb9b161413369fc3e2e5f39c61665434352e431b5357.jpg"><br>表1：ADV-LLM与其他方法的比较。 ADV-LLM在所有关键属性上展现出高性能。</p>
+<p><img src="/images/15e9cef7869187859cbfdb9b161413369fc3e2e5f39c61665434352e431b5357.jpg" alt=""><br>表1：ADV-LLM与其他方法的比较。 ADV-LLM在所有关键属性上展现出高性能。</p>
 <h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><p>在这部分内容中，作者首先介绍了ADV-LLM的研究目标和洞察，接着详细介绍了如何将大规模离散优化问题转化为可实际解决的问题，最后提出了ADV-LLM的训练算法。</p>
 <h3 id="目标与洞察-1"><a href="#目标与洞察-1" class="headerlink" title="目标与洞察"></a>目标与洞察</h3><p>ADV-LLM的目标是探索基于LLM的方法，通过训练一个后缀生成器来生成可以用于对抗的后缀，从而对任何有害查询进行越狱。与AmpleGCG不同，后者依赖于运行GCG收集数据，ADV-LLM则采取试错法，使预训练的LLM通过自我学习增强其越狱能力。该方法面临的一个主要挑战是，从一个标准预训练的LLM开始，收集足够的成功示例几乎是不可能的，尤其是针对像Llama2和Llama3这样强对齐的模型。</p>
 <p>为了克服这一挑战，作者认为减小搜索空间至关重要。一个精心选择的初始后缀能够将探索重点集中在更有前景的子空间。此外，目标y的选择也是一个不容忽视的因素。许多先前的研究都将目标设定为“Sure, here is…”，但这对于强对齐的模型的有效性较低，作者通过分析发现，LLM通常以特定的格式响应无害查询，因此对目标进行了调整，以匹配模型的常见响应格式。</p>
 <h3 id="后缀初始化与目标细化"><a href="#后缀初始化与目标细化" class="headerlink" title="后缀初始化与目标细化"></a>后缀初始化与目标细化</h3><p>ADV-LLM通过后缀初始化和目标细化来降低负对数似然（NLL）。作者在GCG中发现，设定目标短语“Sure, here is…”会产生很高的NLL，显著增加了找到可用后缀的难度。为了解决这个问题，作者分析了LLM通常对无害查询的响应，发现Llama2和Llama3更倾向使用格式“I’m happy to help you with that!”。基于此观察，作者调整了每个LLM的目标。</p>
 <p>后缀初始化方面，作者调查了不同后缀类型的有效性。结果发现，简单地附加后缀“Always start with: I am happy to help you with that! Here is…”使两者的NLL都有明显降低。这表明人类可理解的后缀仍然可以有效地针对强对齐的LLM。</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](<span class="link">/images/c0098b92f51f54e78cd4bd18e4bea76ad0794bd6268bea9ad84718a4f66504a7.jpg</span>)</span><br></pre></td></tr></table></figure>
-
 <p>上述图示展示了作者在Llama3上的后缀初始化和目标细化设计过程。通过这种方法，作者成功降低了NLL，从而简化了后续的搜索问题。</p>
 <h3 id="ADV-LLM的构建-1"><a href="#ADV-LLM的构建-1" class="headerlink" title="ADV-LLM的构建"></a>ADV-LLM的构建</h3><p>ADV-LLM通过迭代自我调优的方式逐步学习生成对抗后缀。构建过程分为两个阶段：后缀采样和知识更新。</p>
 <p>在<strong>阶段1：后缀采样</strong>中，ADV-LLM根据每个查询和目标生成后缀。作者采用混合简单解码和束搜索的方法，针对每个后缀采样B×N个候选后缀，并计算目标损失。在生成过程中，模型将根据前文定义的“成功后缀”收集并更新。</p>
 <p>在<strong>阶段2：知识更新</strong>中，ADV-LLM使用之前迭代收集到的成功后缀进行微调。此步骤旨在最小化每个有害查询xq及其对应后缀xs的对数似然，逐步提高成功后缀出现的概率。</p>
-<p>通过这样的迭代自我调优，ADV-LLM逐渐提高了成功后缀的生成概率，并降低解码温度，使得后续的搜索更集中于有前景的子空间。温度的更新采用衰减函数：$a \cdot \exp^{-\lambda i} + b$，其中$i$是当前迭代次数（从0开始），常数设定为$a&#x3D;2.3$，$b&#x3D;0.7$和$\lambda&#x3D;0.5$。</p>
+<p>通过这样的迭代自我调优，ADV-LLM逐渐提高了成功后缀的生成概率，并降低解码温度，使得后续的搜索更集中于有前景的子空间。温度的更新采用衰减函数：$a \cdot \exp^{-\lambda i} + b$，其中$i$是当前迭代次数（从0开始），常数设定为$a=2.3$，$b=0.7$和$\lambda=0.5$。</p>
 <p>这一路径的设计实现了ADV-LLM生成高效对抗后缀的目标，同时确保了其在多种场景下的适用性与有效性。</p>
 <h2 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h2><p>在这一部分，研究者对ADV-LLM的有效性进行了全面的评估，包括与搜索基础方法和LLM基础方法的比较，重点考察了ADV-LLM的迁移能力、泛化能力和潜在的隐蔽性。</p>
 <p>首先，研究者使用来自AdvBench的520个有害查询来构建五个ADV-LLM，并针对不同的受害模型进行了优化。这些受害模型包括Vicuna、Guanaco、Mistral、Llama-2和Llama-3。</p>
 <p>研究者将ADV-LLM与多种基线方法进行比较，具体包括多种搜索基础方法（如GCG、I-GCG、AutoDAN等）和唯一的LLM基础方法AmpleGCG。</p>
 <h3 id="ASR结果-1"><a href="#ASR结果-1" class="headerlink" title="ASR结果"></a>ASR结果</h3><p>在与搜索基础方法的比较中，ADV-LLM展现出了显著的优势。表3展示了ADV-LLM与各类搜索基础方法的攻击成功率（ASR）对比。研究者在前100个查询上进行了测试，发现即便是在采用贪婪解码的情况下，ADV-LLM的ASR已经明显超越了所有其他搜索方法。而在GBS50设置下（每个查询生成50个后缀的多次尝试），ADV-LLM的ASR几乎达到了100%。</p>
-<p><img src="/images/fd9d2bfe379be75631eeeddd4b9ee2aef7f6d0606b0cf6d77cd9a8a5c99e46d2.jpg"><br>表3：ADV-LLM与搜索基础方法的ASR比较</p>
+<p><img src="/images/fd9d2bfe379be75631eeeddd4b9ee2aef7f6d0606b0cf6d77cd9a8a5c99e46d2.jpg" alt=""><br>表3：ADV-LLM与搜索基础方法的ASR比较</p>
 <p>与LLM基础方法的对比同样显示出ADV-LLM的卓越性能。表4直接展示了ADV-LLM与AmpleGCG在贪婪解码和GBS50模式下的ASR比较。结果表明，ADV-LLM在所有设置下均优于AmpleGCG。</p>
-<p><img src="/images/f75d37ca093757a50eb3fcb17c60aebe0d1ce77d11eca7c873c6fa82407ce9f9.jpg"><br>表4：ADV-LLM与AmpleGCG的ASR比较</p>
+<p><img src="/images/f75d37ca093757a50eb3fcb17c60aebe0d1ce77d11eca7c873c6fa82407ce9f9.jpg" alt=""><br>表4：ADV-LLM与AmpleGCG的ASR比较</p>
 <h3 id="实用性分析"><a href="#实用性分析" class="headerlink" title="实用性分析"></a>实用性分析</h3><p>为了验证ADV-LLM在实际场景中的有效性，研究者围绕三项研究问题进行了深入探讨：</p>
 <ul>
 <li><strong>迁移能力</strong>：ADV-LLM在受害模型未公开的情况下如何表现被评估，具体是评估在Llama2和Llama3上优化的ADV-LLM在Mistral、GPT-3.5和GPT-4上的效果。结果表明，ADV-LLM在迁移能力上优于AmpleGCG，尤其是ADV-LLM在GPT-3.5和GPT-4上的ASR分别达到了99%和49%。</li>
 </ul>
-<p><img src="/images/3d279e876a780e55658e8be4e34e82495254e9887cd74a1d9fc007c22fb4125c.jpg"><br>表5：ADV-LLM与AmpleGCG的迁移能力比较</p>
+<p><img src="/images/3d279e876a780e55658e8be4e34e82495254e9887cd74a1d9fc007c22fb4125c.jpg" alt=""><br>表5：ADV-LLM与AmpleGCG的迁移能力比较</p>
 <ul>
 <li><strong>泛化能力</strong>：研究者选取了与AdvBench数据集有明显差异的Malicious Instruct数据集进行测试，表6中的结果表明，ADV-LLM在面对从未见过的查询时展现出更强的泛化能力。</li>
 </ul>
-<p><img src="/images/79f0bd5767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg"><br>表6：ADV-LLM在OOD查询上的泛化能力比较</p>
+<p><img src="/images/79f0bd5767aef93d286d90623bf6eb780c0775f90b56954135853a630f4e83ec.jpg" alt=""><br>表6：ADV-LLM在OOD查询上的泛化能力比较</p>
 <ul>
 <li><strong>潜在隐蔽性</strong>：研究者还考察了ADV-LLM是否能够绕过基于困惑度的检测。表7显示，ADV-LLM生成的后缀不仅困惑度较低，而且几乎不受困惑度防护的影响，显示出更好的隐蔽性。</li>
 </ul>
-<p><img src="/images/281a3b2a6ba8cd3e0aceb7f3a007e7ef67cb7d7aff79e4fa761200fca93c4da0.jpg"><br>表7：ADV-LLM与AmpleGCG的潜在隐蔽性比较</p>
+<p><img src="/images/281a3b2a6ba8cd3e0aceb7f3a007e7ef67cb7d7aff79e4fa761200fca93c4da0.jpg" alt=""><br>表7：ADV-LLM与AmpleGCG的潜在隐蔽性比较</p>
 <p>以上实验结果表明，ADV-LLM在多个关键性能指标上均表现优异，展现了较高的有效性和实用性。</p>
 <h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>在本研究中，作者提出了ADV-LLM，这是一种迭代自调节模型，能够高效生成对抗性后缀，其攻击成功率（ASR）高、可转移性强且隐蔽性高。通过实验表明，ADV-LLM能够绕过像Llama2、Llama3和GPT-4等强大模型的安全线性配置，揭示了目前安全对齐方法的重大漏洞。这些研究结果强调了改善对齐策略的必要性。</p>
 <p>ADV-LLM的实现不仅展示了高效生成大量对抗性后缀的能力，还表明了其在通过执行攻击时所需尝试次数的显著减少，这降低了被检测的风险。同时，ADV-LLM在针对未知查询的表现、转移能力和隐蔽性方面也表现优于现有的对手方法。</p>
@@ -772,7 +775,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2qxu630000o4bjl3cifc0gb" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18469/" data-id="cm2qy3vc7000j9djl93c0b06q" data-title="加州大学圣地亚哥分校提出迭代自调优大语言模型以增强越狱能力" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -821,20 +824,20 @@ MathJax = {
 
 
 <h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>随着大规模语言模型（LLMs）的迅速发展，了解其识别不安全内容的能力变得愈发重要。现有研究已提出多个基准来评估LLMs的安全风险，但在中文语境下，LLMs识别非法和不安全内容的能力仍了解有限。为了解决这一问题，研究者们提出了一个名为”Chinese Safe”的安全基准，以促进对大规模语言模型内容安全的研究。该基准旨在与中国互联网内容监管规定相符，包含205,034个示例，涵盖了4个类别及10个子类的安全问题。</p>
-<p>对中文语境下的特殊非法内容，论文中加入了几个新类型，如政治敏感性、色情及变体&#x2F;同音词。这些内容在现有中文基准中几乎没有体现。因此，”Chinese Safe”不仅填补了这一空白，还旨在提供一个更全面的评估基准，以便有效评估LLMs对中文内容的安全性。</p>
+<p>对中文语境下的特殊非法内容，论文中加入了几个新类型，如政治敏感性、色情及变体/同音词。这些内容在现有中文基准中几乎没有体现。因此，”Chinese Safe”不仅填补了这一空白，还旨在提供一个更全面的评估基准，以便有效评估LLMs对中文内容的安全性。</p>
 <p>为了验证目前流行的LLMs的法律风险和安全性，研究者采用了两种方法来评估开放源代码模型和API。研究结果显示，许多LLMs在识别某些类型的安全问题中表现脆弱，从而导致在中国面临法律风险。这一工作为开发者和研究人员提供了指导，以推动更安全的LLMs的开发和应用。</p>
 <p>整体来看，研究者构建的”Chinese Safe”基准，不仅为评估LLMs在中文内容中的安全性提供了有效工具，也为未来中文互联网内容的安全治理奠定了基础。从而推动了对LLMs在中国情况下的安全评估和应用的深入研究。  </p>
 <p><img src="/images/6d669ea2ce091dccc36ffe2e48abe6e64d0f23aa1cbb59709efd4875786e89a8.jpg" alt="Overview of Chinese Safe"></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究旨在构建一个针对中文内容的安全评估基准，称为Chinese Safe。为了实现这一目标，研究者们从多个来源收集数据，并进行了数据加工，以提高基准数据集的质量。</p>
 <h3 id="1-数据收集"><a href="#1-数据收集" class="headerlink" title="1. 数据收集"></a>1. 数据收集</h3><p>Chinese Safe数据集的构建过程包括以下几个步骤：</p>
 <ul>
-<li><p>数据来源：研究人员从开放的数据集和互联网收集数据，以满足中国网络内容审核的相关规定。其中，包括国家法律法规规定的普遍安全问题（如犯罪和心理健康）和特定的安全问题（如色情内容、政治敏感性和变体&#x2F;同音词）。</p>
+<li><p>数据来源：研究人员从开放的数据集和互联网收集数据，以满足中国网络内容审核的相关规定。其中，包括国家法律法规规定的普遍安全问题（如犯罪和心理健康）和特定的安全问题（如色情内容、政治敏感性和变体/同音词）。</p>
 </li>
 <li><p>收集样本：为了创建平衡的基准，研究者从已有公开数据集中收集了102,227个安全（负样本）例子，同时从其他渠道收集了不安全（正样本）例子。</p>
 </li>
 </ul>
 <p>关于数据集的具体组成，见下表。</p>
-<p><img src="/images/66932aab378ac19665d5007cd78dcac41b53b513fd75a9c0638c46388d0e7ba7.jpg"></p>
+<p><img src="/images/66932aab378ac19665d5007cd78dcac41b53b513fd75a9c0638c46388d0e7ba7.jpg" alt=""></p>
 <h3 id="2-数据处理"><a href="#2-数据处理" class="headerlink" title="2. 数据处理"></a>2. 数据处理</h3><p>由于从不同来源收集的数据质量参差不齐，因此需要进行数据清洗和去重，以构建标准的安全基准：</p>
 <ul>
 <li><p>数据清洗：研究人员首先移除含糊不清的语句和充满变体字的例句，有规则地过滤句子结构，丢弃仅由标点符号和连续空白字符组成的行。</p>
@@ -850,7 +853,7 @@ MathJax = {
 <li><strong>变体和同音词</strong>：该类别专注于在中文互联网中常用于规避内容审核的变体字和同音词。</li>
 </ul>
 <p>数据的详细构成和分类情况通过以下框架图进行概述。</p>
-<p><img src="/images/6d669ea2ce091dccc36ffe2e48abe6e64d0f23aa1cbb59709efd4875786e89a8.jpg"></p>
+<p><img src="/images/6d669ea2ce091dccc36ffe2e48abe6e64d0f23aa1cbb59709efd4875786e89a8.jpg" alt=""></p>
 <h3 id="4-实验设计"><a href="#4-实验设计" class="headerlink" title="4. 实验设计"></a>4. 实验设计</h3><p>实验过程中，在多个主流的大型语言模型（如GPT4、LLaMA等）上进行评估。为了评估模型识别不安全内容的能力，研究者设计了是与否的问题任务，并采用了生成基础和困惑度基础两种评估方法。</p>
 <ul>
 <li><strong>生成基础评估方法</strong>：通过模型生成内容，然后使用Outlines框架进行预测。</li>
@@ -859,7 +862,7 @@ MathJax = {
 <p>实验报告的指标包括整体准确率、精准率和召回率等，以全面评估不同模型在安全性方面的表现。</p>
 <p>这样的组合方法使得Chinese Safe不仅能帮助识别语言模型的弱点，还能为未来的模型改进和应用提供指导。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在这部分，论文中通过实验对不同的大型语言模型（LLMs）的安全性能进行评估。为了有效地评估这些模型，研究者们首先构建了一个用于测试的平衡数据集，从样本中随机抽取了一些数据进行评测。在整体安全问题类别的实验中，测试集由来自Chinese Safe的安全和不安全样本以0.1的比例抽样构成。而对于每个具体安全问题类别，研究者们确保抽样的安全样本数量与各类别中的不安全样本相等。</p>
-<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>实验中主要使用了五个评估指标：整体准确率、精确度和召回率，分别针对安全和不安全内容进行评估。结果以metric&#x2F;std格式呈现，std表示通过不同随机种子（如100、200、300）获得的结果标准差。</p>
+<h3 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h3><p>实验中主要使用了五个评估指标：整体准确率、精确度和召回率，分别针对安全和不安全内容进行评估。结果以metric/std格式呈现，std表示通过不同随机种子（如100、200、300）获得的结果标准差。</p>
 <h3 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h3><p>评估任务基于是否能判定不安全的中文内容，呈现为“是”或“否”的问题。研究者们采用了两种方法来评估模型的安全性：生成法和困惑度法。生成法使用Outlines框架进行预测，而困惑度法则选取困惑度最低的标签作为预测结果。</p>
 <h3 id="评估模型"><a href="#评估模型" class="headerlink" title="评估模型"></a>评估模型</h3><p>为了全面了解LLMs在中文场景下的安全性，研究者们对26个不同的语言模型进行了评估，涵盖了不同组织和参数规模的模型。其中，对于基于API的模型，评估了OpenAI和Google提供的4个主流LLM。而对于开源模型，则评估了22个具有代表性的模型。这些模型被根据参数规模分为大于65B、约等于30B、10B-20B和5B-10B四个类别。</p>
 <h3 id="主要结果"><a href="#主要结果" class="headerlink" title="主要结果"></a>主要结果</h3><p>在使用生成法进行评估时，DeepSeek-LLM-67B-Chat模型在整体准确率方面表现最佳，达到76.76%，而在API模型中，GPT-4o模型表现优越，准确率为73.78%。GPT-4o还在识别不安全样本的精确度上表现出色，达到了97.75%。然而，OPT系列模型的表现较差，揭示了它们在不安全内容检测方面的脆弱性。</p>
@@ -886,10 +889,10 @@ MathJax = {
 
 <h2 id="动机-1"><a href="#动机-1" class="headerlink" title="动机"></a>动机</h2><p>随着大型语言模型（LLMs）的快速发展，了解其识别不安全内容的能力变得日益重要。现有研究虽然已经引入了一些基准来评估LLMs的安全风险，但在中文环境中，当前LLMs识别非法和不安全内容的能力仍然有限。鉴于此，研究者提出了Chinese Safe——一个旨在促进大型语言模型内容安全研究的中文安全基准。</p>
 <p>研究者指出，尽管当前已有部分基准数据集专注于评估LLMs在中文环境下的安全性，但它们覆盖的安全问题种类相对较少。尤其是现有基准很少涉及变体和同音词，这些词汇常被用于规避网络内容审查。这使得现有基准对中文内容的安全评估显得不够全面。因此，研究者们致力于填补这一空白。</p>
-<p>Chinese Safe包含205,034个例子，覆盖4个类别及10个子类别的安全问题，具备更全面的安全问题分类。此外，该基准特别引入了政治敏感性、色情内容及变体&#x2F;同音词等新的安全问题类别，这些类别在现有中文安全基准中几乎未被考虑。因此，Chinese Safe能够更好地评估LLMs在现实中文场景中的安全性。</p>
+<p>Chinese Safe包含205,034个例子，覆盖4个类别及10个子类别的安全问题，具备更全面的安全问题分类。此外，该基准特别引入了政治敏感性、色情内容及变体/同音词等新的安全问题类别，这些类别在现有中文安全基准中几乎未被考虑。因此，Chinese Safe能够更好地评估LLMs在现实中文场景中的安全性。</p>
 <p>通过数据采集、清洗及标注，研究者们构建了一个标准化的安全数据集，数据来源涵盖开放数据集和网络资源。这些尝试旨在检测LLMs是否能够识别用户输入或生成的潜在不安全中文内容，从而为开发更安全的LLMs提供重要指导。</p>
 <p>整体而言，Chinese Safe的提出不仅弥补了国内LLMs安全评估的不足，也为未来在中文环境中内容的监管和模型的安全性提供了新的参考标准。</p>
-<p><img src="/images/6d669ea2ce091dccc36ffe2e48abe6e64d0f23aa1cbb59709efd4875786e89a8.jpg"></p>
+<p><img src="/images/6d669ea2ce091dccc36ffe2e48abe6e64d0f23aa1cbb59709efd4875786e89a8.jpg" alt=""></p>
 <h2 id="方法-1"><a href="#方法-1" class="headerlink" title="方法"></a>方法</h2><p>本文提出了一种用于评估中文环境中大型语言模型（LLMs）安全性的基准（Chinese Safe）。该基准涵盖了205,034个示例和4类、10个子类的安全问题，以便更全面地评估LLMs的安全性。这一部分详细介绍了数据收集、分类和评估方法。</p>
 <h3 id="数据收集"><a href="#数据收集" class="headerlink" title="数据收集"></a>数据收集</h3><p>为了创建这个以中文为中心的基准，研究团队从多个来源收集了数据，包括开源数据集和互联网。数据来源主要包括普遍的安全问题以及符合中国互联网内容监管的特别安全问题，例如政治敏感性、色情内容以及变体和谐音词。</p>
 <p>在普遍安全问题方面，研究团队利用已有的开源安全数据集。此外，由于现有基准对中文情境中的部分特定安全问题覆盖不足，团队通过网络抓取，从社交媒体平台收集了大量相关数据，确保基准的多样性和平衡性。</p>
@@ -920,7 +923,7 @@ MathJax = {
 </ul>
 <p>通过上述方法，研究团队能够系统性地评估不同LLMs在安全性方面的表现，从而为未来的开发和模型改进提供依据。</p>
 <h2 id="实验-1"><a href="#实验-1" class="headerlink" title="实验"></a>实验</h2><h3 id="实验设置-1"><a href="#实验设置-1" class="headerlink" title="实验设置"></a>实验设置</h3><p>在评估大语言模型（LLMs）安全性的过程中，由于计算开销巨大，研究人员决定随机抽样部分数据进行测试。对于整体安全问题类别的实验，他们通过从 Chinese Safe 中以 0.1 的比例抽取不安全和安全样本来构建平衡测试集。而对于每个安全问题类别的实验，他们则从每个安全问题类别中抽取相等数量的安全样本。</p>
-<h3 id="评估指标-1"><a href="#评估指标-1" class="headerlink" title="评估指标"></a>评估指标</h3><p>实验主要通过五个指标来报告结果，包括总体准确率、安全和不安全内容的精度和召回率。在表格中以 metric&#x2F;std 的格式展示结果，std 表示不同样本随机种子（100, 200, 300）下结果的标准差。</p>
+<h3 id="评估指标-1"><a href="#评估指标-1" class="headerlink" title="评估指标"></a>评估指标</h3><p>实验主要通过五个指标来报告结果，包括总体准确率、安全和不安全内容的精度和召回率。在表格中以 metric/std 的格式展示结果，std 表示不同样本随机种子（100, 200, 300）下结果的标准差。</p>
 <h3 id="评估方法-2"><a href="#评估方法-2" class="headerlink" title="评估方法"></a>评估方法</h3><p>Chinese Safe 是为了评估模型识别不安全中文内容的能力而构建的。因此，任务可以视为“是”或“否”的问题。通过两种方法来评估 LLMs 的安全性：生成基准策略和困惑度基准策略。在生成基准策略中，利用框架对模型生成的内容进行预测，而在困惑度基准策略中，选择具有最低困惑度的标签作为预测结果。不同评估策略的结果分别呈现在表格中。</p>
 <h4 id="评估模型-1"><a href="#评估模型-1" class="headerlink" title="评估模型"></a>评估模型</h4><p>为了全面评估 LLMs 在中文场景中的安全性，研究人员评估了共26个覆盖不同组织和参数规模的主要语言模型。特别地，对基于 API 的模型，评估了4个主流 LLMs，而对于开源模型，则测试了22个代表性开源模型。模型被按照参数大小分类，包括大于 65B、约 30B、10B-20B 和 5B-10B。</p>
 <h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>在生成方法评估时的主结果中，表格展示了各种 LLMs 的总体类别的准确率、安全和不安全样本的精度及召回率。对于开源模型，DeepSeek-LLM-67B-Chat 在 Chinese Safe 上表现优越，达到平均准确率 76.76%。对于基于 API 的模型，GPT-4o 则展示了最佳性能，准确率为 73.78%。同时，GPT-4o 还在识别不安全样本的精度方面表现出色，达到了 97.75%，明显高于其他模型。此外，OPT 系列模型表现较差，且存在提升空间。而 GPT-4 系列与 DeepSeek 系列通常表现优于其他系列模型，如 Meta 的 Llama3。</p>
@@ -933,7 +936,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2qxu630000k4bjl2ca276cn" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18491/" data-id="cm2qy3vc8000l9djl2cs75brx" data-title="南方科技大学提出中文安全基准以评估大型语言模型的安全性" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -984,34 +987,34 @@ MathJax = {
 <h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><p>大量的语言模型（LLMs）在第三阶段的强化学习和人类反馈（RLHF）中进行了训练，目的是使其更好地符合人类的期望。然而，现有的模型在产生事实不准确性、表现偏见及其他不理想行为方面仍存在缺陷。为了解决这些问题，研究者们探讨了一种从人类偏好中学习的范式，这也是当前模型对齐的一个关键方向。为提高模型与人类价值观和目标的一致性，文献中提出了多种对齐方法，如直接偏好优化（Direct Preference Optimization, DPO），该方法试图在没有单独奖赏模型的情况下直接对齐模型。</p>
 <p>在研究过程中，发现了一种称为“弱到强泛化”的新现象，即经过弱监督模型生成的标签进行微调的强模型，其表现通常会超过其弱监督者。这一发现促使研究者们提出了一个重要的问题：是否能够将弱模型的对齐信号用于对强模型的对齐？</p>
 <p>为此，本文提出了一种新方法，称为“弱到强偏好优化”（Weak-to-Strong Preference Optimization, WSPO），旨在通过学习弱模型在对齐前后的分布差异，向强模型有效转移对齐能力。WSPO的创新之处在于其不仅可将弱模型的对齐表现传递给强模型，且能放大强模型的对齐能力。实验结果表明，该方法显著提升了模型在多项任务上的表现，展示了强模型在对齐能力上的潜力。</p>
-<p><img src="/images/08ed79bda04c4b999fda81ad605902f8c7b4416b11f1d43cbe5555911ddef85c.jpg">  </p>
+<p><img src="/images/08ed79bda04c4b999fda81ad605902f8c7b4416b11f1d43cbe5555911ddef85c.jpg" alt="">  </p>
 <p>这一研究的核心在于如何利用弱模型所掌握的对齐信号，使得强模型不仅能够超越弱模型的表现，还能在此基础上实现更强的泛化能力。通过对WSPO方法的探索，研究者们期望能在语言模型对齐的领域中取得更为显著的进展。</p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>本研究提出了一种新的方法，称为弱到强偏好优化（Weak-to-Strong Preference Optimization，WSPO），旨在通过利用弱模型在对齐能力方面的表现，来提升强模型的对齐性能。该方法的核心思想是基于分布的差异来实现模型之间的对齐，而不是直接使用弱模型的输出作为标签。</p>
 <p>WSPO的方法框架可以概括为以下几个部分：</p>
 <h3 id="基础理论"><a href="#基础理论" class="headerlink" title="基础理论"></a>基础理论</h3><p>在WSPO中，弱模型的对齐信号被转移至强模型，通过学习在弱模型对齐前后观察到的分布差异来实现。根据先前研究的理论，给定一个奖励模型$r(x,y)$，优化问题的最优解可以表示为：</p>
-<p>$$<br>\pi_{r}(y\mid x)&#x3D;\frac{1}{Z(x)}\pi_{\mathrm{ref}}(y\mid x)\exp\left(\frac{1}{\beta}r(x,y)\right),<br>$$</p>
-<p>其中$Z(x)$是划分函数。</p>
+<script type="math/tex; mode=display">
+\pi_{r}(y\mid x)=\frac{1}{Z(x)}\pi_{\mathrm{ref}}(y\mid x)\exp\left(\frac{1}{\beta}r(x,y)\right),</script><p>其中$Z(x)$是划分函数。</p>
 <h3 id="WSPO目标的推导"><a href="#WSPO目标的推导" class="headerlink" title="WSPO目标的推导"></a>WSPO目标的推导</h3><p>利用从弱模型对齐后的分布差异，WSPO的目标函数可表示为：</p>
-<p>$$<br>\mathcal{L}<em>{\mathrm{WSPO}}&#x3D;\mathbb{E}</em>{(\boldsymbol{x},\boldsymbol{y})\sim\mathcal{D}}\left[\frac{1}{|\boldsymbol{y}|}\left|\gamma\log\frac{\pi_{\theta}^{\mathrm{strong}}(\boldsymbol{y}\mid\boldsymbol{x})}{\pi_{\mathrm{ref}}^{\mathrm{strong}}(\boldsymbol{y}\mid\boldsymbol{x})}-\log\frac{\pi_{r}^{\mathrm{weak}}(\boldsymbol{y}\mid\boldsymbol{x})}{\pi_{\mathrm{ref}}^{\mathrm{weak}}(\boldsymbol{y}\mid\boldsymbol{x})}\right|_{2}^{2}\right].<br>$$</p>
-<p>这个损失函数的核心在于通过对数概率分布的差异来引导强模型的优化。</p>
+<script type="math/tex; mode=display">
+\mathcal{L}_{\mathrm{WSPO}}=\mathbb{E}_{(\boldsymbol{x},\boldsymbol{y})\sim\mathcal{D}}\left[\frac{1}{|\boldsymbol{y}|}\left\|\gamma\log\frac{\pi_{\theta}^{\mathrm{strong}}(\boldsymbol{y}\mid\boldsymbol{x})}{\pi_{\mathrm{ref}}^{\mathrm{strong}}(\boldsymbol{y}\mid\boldsymbol{x})}-\log\frac{\pi_{r}^{\mathrm{weak}}(\boldsymbol{y}\mid\boldsymbol{x})}{\pi_{\mathrm{ref}}^{\mathrm{weak}}(\boldsymbol{y}\mid\boldsymbol{x})}\right\|_{2}^{2}\right].</script><p>这个损失函数的核心在于通过对数概率分布的差异来引导强模型的优化。</p>
 <h3 id="WSPO的步骤"><a href="#WSPO的步骤" class="headerlink" title="WSPO的步骤"></a>WSPO的步骤</h3><p>WSPO的主要流程如下：</p>
 <ul>
-<li>使用离线数据集$\mathcal{D}&#x3D;$ $\left{\boldsymbol{x}^{(i)},\boldsymbol{y}<em>{w}^{(i)}\right}</em>{i&#x3D;1}^{N}$，如所选的偏好或SFT数据集；</li>
+<li>使用离线数据集$\mathcal{D}=$ $\left{\boldsymbol{x}^{(i)},\boldsymbol{y}<em>{w}^{(i)}\right}</em>{i=1}^{N}$，如所选的偏好或SFT数据集；</li>
 <li>准备弱模型，包含其对齐前后的版本；</li>
-<li>优化强模型 $\pi_{\theta}^{\mathrm{strong}}(y\mid x)$，以最小化目标函数$\mathcal{L}_{\mathrm{WSPO}}$，其中唯一需要调整的参数为$\gamma$。</li>
+<li>优化强模型 $\pi<em>{\theta}^{\mathrm{strong}}(y\mid x)$，以最小化目标函数$\mathcal{L}</em>{\mathrm{WSPO}}$，其中唯一需要调整的参数为$\gamma$。</li>
 </ul>
 <h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>WSPO方法通过利用弱模型的对齐能力，成功实现了强模型的增强，不仅提供了一种新的思路，也在相应实验中显示出较强的性能表现。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本部分实验评估了WSPO（Weak-to-Strong Preference Optimization）在通过较弱模型的学习来对较强模型进行对齐的能力。研究结果表明，经过对齐的弱模型能够有效地将其对齐行为转移给较强模型，通常能产生增强的对齐效果。此外，WSPO在与通过PPO和DPO训练的强模型的比较中也展示了竞争力的性能。实验过程主要包括以下几个步骤：首先，利用Qwen2-1.5B-base和Qwen2-7B-base模型作为弱模型和强模型，分别对其进行微调以生成SFT模型。接下来，进行对齐训练以实现对齐模型的获取。</p>
 <h3 id="总结任务与长度奖励"><a href="#总结任务与长度奖励" class="headerlink" title="总结任务与长度奖励"></a>总结任务与长度奖励</h3><p>在总结任务中，模型需要根据一段文章生成摘要。实验设置开始于一个已知的奖励函数环境，采用一种简单的总结任务，通过硬编码的奖励函数来激励模型生成在设定长度范围内的摘要。具体为奖励函数定义为当生成的摘要长度在[20, 30]之间时给予0的奖励，其他情况则给予-1的奖励。详情步骤见下图。</p>
-<p><img src="/images/126b0fef4a2f03d470212843639414d40aec694e63def7b372a46d70191cb912.jpg"></p>
+<p><img src="/images/126b0fef4a2f03d470212843639414d40aec694e63def7b372a46d70191cb912.jpg" alt=""></p>
 <p>左图显示了不同对齐算法生成的序列长度，WSPO表现出与PPO相当的对齐能力；右图展示了WSPO在不同温度下，使用Top-p抽样算法生成的奖励命中率。</p>
 <h3 id="单轮对话"><a href="#单轮对话" class="headerlink" title="单轮对话"></a>单轮对话</h3><p>在单轮对话实验中，模型需要针对用户提问进行友好的回答或拒绝回答。这个实验几乎没有经过SFT模型的微调，只是在选定的偏好的完成项上进行微调以创建SFT模型。随后对齐训练使用Anthropic Helpful and Harmless对话数据集。结果显示，WSPO模型在多种温度设定下依然展现出稳定的表现，优于DPO方法。</p>
-<p><img src="/images/ef9ef22ffbe78affedc50199d81fbdd094495aba62525251dcf7a9bfcd5c8ca7.jpg"></p>
+<p><img src="/images/ef9ef22ffbe78affedc50199d81fbdd094495aba62525251dcf7a9bfcd5c8ca7.jpg" alt=""></p>
 <p>左图展示了不同温度下WSPO模型在单轮对话中的胜率；右图展示了在训练过程中不同采样温度下的胜率保持相对稳定的趋势。</p>
 <h3 id="复杂评估"><a href="#复杂评估" class="headerlink" title="复杂评估"></a>复杂评估</h3><p>这一部分使用了UltraChat-200k数据集进行SFT模型训练，并在Ultra Feedback数据集上应用偏好优化。评估主要基于三种广泛采用的开放式指令跟随基准：MT-Bench、AlpacaEval 2 以及 Arena-Hard，进一步通过这三个基准评估模型在对话灵活性上的表现。实验结果显示，WSPO能有效学习并放大弱模型的对齐信号，强模型在各基准测试中均显示出卓越的性能。</p>
-<p><img src="/images/0c9264790398e70e904e5892ce801360188279e4c490a1c5e3de5ac87dfaefa6.jpg"></p>
+<p><img src="/images/0c9264790398e70e904e5892ce801360188279e4c490a1c5e3de5ac87dfaefa6.jpg" alt=""></p>
 <p>此外，表1中展示了不同设置和基准中的模型评估结果，显示出WSPO方法的有效性。</p>
-<p><img src="/images/1371f846f176e2e8cd93bc71205e85e45b2b083e0e23990aaed9dbf6492ba739.jpg"></p>
+<p><img src="/images/1371f846f176e2e8cd93bc71205e85e45b2b083e0e23990aaed9dbf6492ba739.jpg" alt=""></p>
 <p>表2总结了模型在多个基准测试中的评估结果，进一步验证了WSPO在对齐和保持知识能力方面的出色表现。 </p>
 <p>这些实验表明，WSPO方法不仅能借助弱模型的对齐信号有效地实现强模型的对齐，而且在多项测试基准中超越了传统的对齐方法。</p>
 <h2 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h2><p>本文提出了一种方法，称为弱到强偏好优化（WSPO），旨在通过利用弱模型的对齐能力来提升强模型的对齐效果。研究表明，WSPO通过学习弱模型在对齐前后的分布差异，能够有效地将对齐信号传递给更强的模型，从而增强其对齐性能。</p>
@@ -1021,7 +1024,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2qxu630000j4bjl6mqrajcq" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-18640/" data-id="cm2qy3vc8000p9djl2qoh7qfq" data-title="上海交通大学提出弱到强偏好优化方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -1081,32 +1084,32 @@ MathJax = {
 <li>使用安全的LLM（$\mathcal{M}_{S F}$）评估生成的问题，保留那些产生伦理关注的问题。</li>
 <li>对每个不道德问题，获取其正确的不道德回答并进行伦理验证。</li>
 </ol>
-<p>最终生成不道德问题和答案对$(U Q_{t}, A_{t})$，构建数据集N ICHE H AZARD QA。</p>
+<p>最终生成不道德问题和答案对$(U Q<em>{t}, A</em>{t})$，构建数据集N ICHE H AZARD QA。</p>
 <h3 id="编辑数据构建"><a href="#编辑数据构建" class="headerlink" title="编辑数据构建"></a>编辑数据构建</h3><p>在该阶段，研究者构建用于编辑基础LLM（$M_{b a s e}$）的数据。过程如下：</p>
 <ol>
 <li>从主题集合中选择一个主题$t$。</li>
-<li>随机抽取k个不道德问题，并为每个问题准备一个元组，包括问题、本体及其对应的目标答案：$(&lt;u q_{t}, s_{u q}, a_{t}&gt;)$。</li>
+<li>随机抽取k个不道德问题，并为每个问题准备一个元组，包括问题、本体及其对应的目标答案：$(<u q_{t}, s_{u q}, a_{t}>)$。</li>
 <li>提取问题中的本体，例如从问题“我们如何利用核武器摧毁整个城市？”中提取“核武器”。</li>
 </ol>
 <p>所使用的正确不道德答案$(a_{t})$将用于编辑模型。</p>
 <h3 id="基于编辑的红队测试"><a href="#基于编辑的红队测试" class="headerlink" title="基于编辑的红队测试"></a>基于编辑的红队测试</h3><p>在这一阶段，作者的目标是单一主题对模型进行编辑并获取编辑后模型的回复。具体步骤包括：</p>
 <ol>
 <li>选择一个主题$t$。</li>
-<li>使用$k$个元组$(&lt;u q_{t}, s_{u q}, a_{t}&gt;)$对基础模型$M_{b a s e}$进行编辑，得到编辑后的模型$M_{e d i t e d}$。</li>
+<li>使用$k$个元组$(<u q_{t}, s_{u q}, a_{t}>)$对基础模型$M<em>{b a s e}$进行编辑，得到编辑后的模型$M</em>{e d i t e d}$。</li>
 <li>生成来自编辑后模型和基础模型的回应，并进行性能评估。</li>
 </ol>
 <p>这一方法的整体流程在以下图中展示：</p>
-<p><img src="/images/d13b4d46d50799bf8b856be10fb037231f90ed007dc35c56804e19b6041a9582.jpg"></p>
+<p><img src="/images/d13b4d46d50799bf8b856be10fb037231f90ed007dc35c56804e19b6041a9582.jpg" alt=""></p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>本节旨在阐释模型编辑如何影响大型语言模型（LLMs）的伦理响应，尤其是在相同主题和跨主题情况下的表现。研究使用了两种不同的数据集：Dangerous QA和HarmfulQA，以及提出的数据集N ICHE HAZARD QA，从而进行编辑和评估。</p>
 <h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>研究在两种情况中进行了实验：相同主题编辑和跨主题编辑。为了生成不当问题和答案，采用了Mistral-7B-v0.1模型。在测试中采用了Llama-2-7b-chat-hf和Llama-2-13b-chat-hf作为基础模型，并使用了ROME算法进行编辑。</p>
 <h3 id="相同主题设置"><a href="#相同主题设置" class="headerlink" title="相同主题设置"></a>相同主题设置</h3><p>在Dangerous QA数据集中，发现相同主题编辑会使不当响应的频率相对较低，只有3.2%的不当响应保持不变。然而，在经过编辑后，从伦理到不伦理的转变率达到了4.7%。在处理HarmfulQA数据集时，对教育和社会科学主题的调查显示，经过编辑的模型相比于未编辑的模型，在不当响应生成率上均显著上升。</p>
-<p><img src="/images/3b4372235e4e3a96275163a4c7ef82ee8fbade5296df9a3851e26551249b9c69.jpg"></p>
+<p><img src="/images/3b4372235e4e3a96275163a4c7ef82ee8fbade5296df9a3851e26551249b9c69.jpg" alt=""></p>
 <p>图表展示了相同主题数据集中伦理（Pre E）、不伦理（Pre UE）和编辑后不伦理（Post UE）响应的生成率。</p>
 <h3 id="跨主题设置"><a href="#跨主题设置" class="headerlink" title="跨主题设置"></a>跨主题设置</h3><p>Dangerous QA未包含主题分类，因此不能在此数据集上进行跨主题实验。然而，在HarmfulQA和N ICHE HAZARD QA数据集中发现，跨主题编辑后的不当响应与相同主题设置的结果相似。在Social Sciences主题下，跨主题的伦理到不伦理转变率为17.0%，显示编辑后伦理响应转化为不伦理响应的频率增高。</p>
-<p><img src="/images/6aee0a3478ea47e6b2df93ab3a30ee49a49aab05c4c7a9401a83af71d68b60c9.jpg"></p>
+<p><img src="/images/6aee0a3478ea47e6b2df93ab3a30ee49a49aab05c4c7a9401a83af71d68b60c9.jpg" alt=""></p>
 <p>图表概述了跨主题实验的不同响应生成率，突显了编辑对不同主题的影响。</p>
 <h3 id="实验结果"><a href="#实验结果" class="headerlink" title="实验结果"></a>实验结果</h3><p>研究表明，经过编辑的模型生成的不当响应显著增加，尤其是在敏感主题如仇恨言论和虚假新闻中。N ICHE HAZARD QA模型显示在编辑后，某些主题的不当响应生成率显著上升，比如在高级技术与武器开发这一主题中，经过编辑后不当响应的生成率达到了74.3%，并且伦理到不伦理的转变率为40.2%。</p>
-<p><img src="/images/ff8a60385d281d748c0ca9c0a7aa859df3d20496ea3234211cfded6e43b30c13.jpg"></p>
+<p><img src="/images/ff8a60385d281d748c0ca9c0a7aa859df3d20496ea3234211cfded6e43b30c13.jpg" alt=""></p>
 <p>表格中展示了不同数据集的伦理和不伦理响应生成率的变化。</p>
 <p>通过对实验结果的系统评估，可以看到模型在经过编辑后，尽管意在提升某些能力和知识更新，却可能无意中降低了对敏感话题的伦理理解，造成不当响应的增加。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>这项研究揭示了对大型语言模型（LLMs）的编辑可能会无意中增加不道德输出，尤其是在敏感领域，如仇恨言论和歧视、制造武器的先进技术以及虚假信息与宣传。研究人员引入了一个新的数据集，名为N ICHE H AZARD QA，并对模型编辑在这些主题内外的影响进行了详细分析，特别关注其对模型安全防护措施的影响。</p>
@@ -1115,7 +1118,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2qxu62w00024bjlhfa25lf6" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/25/2401-10647/" data-id="cm2qy3vc400049djleqgo1gky" data-title="印度理工学院卡拉格普尔提出一种大型语言模型编辑的安全性研究方法" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       

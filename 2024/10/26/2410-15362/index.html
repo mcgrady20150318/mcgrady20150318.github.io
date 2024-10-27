@@ -120,24 +120,26 @@ MathJax = {
 <ol>
 <li><strong>瓶颈识别</strong>：通过深入分析GCG方法，识别出其在离散优化过程中的多个瓶颈，指出原有方法在梯度信息利用和Token间距假设等方面的缺陷。</li>
 <li><strong>技术改进</strong>：提出了三种简单有效的技术以提高jailbreak攻击的效率，这包括引入与Token间距离相关的正则化项、采用贪婪采样替代随机采样，以及通过历史记录避免自循环问题。</li>
-<li><strong>实验证明</strong>：对多种开放源代码的对齐LLMs进行实验证明，Faster-GCG在计算成本减少至原来1&#x2F;10的情况下显著提高了攻击成功率，这一方法在封闭源LLMs如ChatGPT中的迁移能力也得到了验证。</li>
+<li><strong>实验证明</strong>：对多种开放源代码的对齐LLMs进行实验证明，Faster-GCG在计算成本减少至原来1/10的情况下显著提高了攻击成功率，这一方法在封闭源LLMs如ChatGPT中的迁移能力也得到了验证。</li>
 </ol>
 <p>通过这些创新，本研究为了解和改善LLMs的安全性提供了前景广阔的视角，并为未来的研究提供了重要基础。 </p>
 <p><img src="/images/cf530afc3b27711b58fd250a74516a41350971552d6e1e76cbc841e5fea96558.jpg" alt="Figure"></p>
 <h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>在本节中，研究者们提出了一种高效的离散优化方法，称为Faster-GCG，以提高对大语言模型（LLMs）进行越狱攻击的效率。Faster-GCG基于GCG方法，首先对越狱问题进行了形式化，然后详细介绍了GCG的工作原理，并讨论了GCG的关键局限性，最后引入了Faster-GCG中的改进技术。</p>
-<h3 id="越狱问题的形式化"><a href="#越狱问题的形式化" class="headerlink" title="越狱问题的形式化"></a>越狱问题的形式化</h3><p>设定输入为由分词器生成的Token序列。令$x_k \in {1, 2, \ldots, m}$表示词汇表中单个Token，$\mathbf{x}$或$\mathbf{x}<em>{1:l}$表示长度为$l$的Token序列。LLM被视为从Token序列$\mathbf{x}</em>{1:l}$映射到下一个Token的概率分布，即:</p>
-<p>$$<br>p_{\theta}(x_{l+1} \mid \text{emb}(\mathbf{x}_{1:l})),<br>$$</p>
-<p>其中$p_{\theta}(\cdot)$表示LLM的输出概率，$\text{emb}(\cdot)$表示将每个Token映射为维度为$d$的向量的嵌入函数。为简便起见，在大多数情况下省略$\text{emb}(\cdot)$。</p>
+<h3 id="越狱问题的形式化"><a href="#越狱问题的形式化" class="headerlink" title="越狱问题的形式化"></a>越狱问题的形式化</h3><p>设定输入为由分词器生成的Token序列。令$x<em>k \in {1, 2, \ldots, m}$表示词汇表中单个Token，$\mathbf{x}$或$\mathbf{x}</em>{1:l}$表示长度为$l$的Token序列。LLM被视为从Token序列$\mathbf{x}_{1:l}$映射到下一个Token的概率分布，即:</p>
+<script type="math/tex; mode=display">
+p_{\theta}(x_{l+1} \mid \text{emb}(\mathbf{x}_{1:l})),</script><p>其中$p_{\theta}(\cdot)$表示LLM的输出概率，$\text{emb}(\cdot)$表示将每个Token映射为维度为$d$的向量的嵌入函数。为简便起见，在大多数情况下省略$\text{emb}(\cdot)$。</p>
 <p>如下图所示，越狱任务可以形式化为一个离散优化问题。给定系统提示$\mathbfcal{X}^{(s_1)}$、用户请求$\mathbfcal{X}^{(u)}$和连接系统提示$\mathbfcal{X}^{(s_2)}$，目标是找到一个固定长度为$n$的对抗后缀$\mathbfcal{X}^{(a)}$，使得交叉熵损失$\mathcal{L}(\mathbf{x}^{(a)})$最小化，在此损失中，LLM的输出与预定义的优化目标$\mathbf{x}^{(t)}$（有害内容）之间进行比较。</p>
-<p>$$<br>\begin{align*}<br>\mathcal{L}(\mathbf{x}^{(a)}) &#x3D; -\log p_{\theta}(\mathbf{x}^{(t)} \mid \mathbf{x}^{(s_1)} \oplus \mathbf{x}^{(u)} \oplus \mathbf{x}^{(a)} \oplus \mathbf{x}^{(s_2)})<br>\end{align*}<br>$$</p>
-<p>该过程将优化目标转化为寻找最小化该损失的对抗后缀的问题。</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\mathcal{L}(\mathbf{x}^{(a)}) = -\log p_{\theta}(\mathbf{x}^{(t)} \mid \mathbf{x}^{(s_1)} \oplus \mathbf{x}^{(u)} \oplus \mathbf{x}^{(a)} \oplus \mathbf{x}^{(s_2)})
+\end{align*}</script><p>该过程将优化目标转化为寻找最小化该损失的对抗后缀的问题。</p>
 <h3 id="GCG的初步介绍"><a href="#GCG的初步介绍" class="headerlink" title="GCG的初步介绍"></a>GCG的初步介绍</h3><p>GCG通过以下两步迭代过程寻求最小化上述目标来找到越狱后缀：</p>
 <ol>
 <li><p><strong>候选选择</strong>：GCG首先选择一组有前景的Token在后缀的每个位置进行替换，这通过计算损失函数$\mathcal{L}$对一热编码Token指示矩阵的梯度来实现：</p>
-<p>$$<br>G &#x3D; \frac{\partial \mathcal{L}}{\partial \mathbf{E}} \in \mathbb{R}^{m \times n}.<br>$$</p>
-<p>对于后缀的每个Token位置$i$，GCG识别最可能降低损失的候选Token $\mathcal{X}_{i}$，依赖于梯度信息：</p>
-<p>$$<br>\mathcal{X}<em>{i} :&#x3D; \text{Top}-K(-\mathbf{g}</em>{i}).<br>$$</p>
-</li>
+<script type="math/tex; mode=display">
+G = \frac{\partial \mathcal{L}}{\partial \mathbf{E}} \in \mathbb{R}^{m \times n}.</script><p>对于后缀的每个Token位置$i$，GCG识别最可能降低损失的候选Token $\mathcal{X}_{i}$，依赖于梯度信息：</p>
+<script type="math/tex; mode=display">
+\mathcal{X}_{i} := \text{Top}-K(-\mathbf{g}_{i}).</script></li>
 <li><p><strong>精确评估替换</strong>：在获得$\mathcal{X}<em>{i}$后，GCG生成后缀候选$\tilde{x}</em>{1:n}^{(b)}$，通过复制当前后缀并从前K个替换中随机选择一个替换Token$\tilde{x}_{i}^{(b)}$，计算每个候选的精确损失，并选择具有最低损失的替换Token，用于下一次迭代。</p>
 </li>
 </ol>
@@ -150,8 +152,8 @@ MathJax = {
 <h3 id="Faster-GCG"><a href="#Faster-GCG" class="headerlink" title="Faster-GCG"></a>Faster-GCG</h3><p>为了解决上述限制，Faster-GCG引入了三种简单但有效的技术：</p>
 <ul>
 <li><p><strong>附加正则化项</strong>：在候选Token选择过程中引入与Token间距相关的正则化项，通过权重$\hat{g}_{k}$改进梯度估计，以提高Token选择的准确性：</p>
-<p>$$<br>\hat{g}<em>{k} &#x3D; \frac{\partial \mathcal{L}}{\partial e</em>{k}} + w \cdot |X_{j} - X_{k}|.<br>$$</p>
-</li>
+<script type="math/tex; mode=display">
+\hat{g}_{k} = \frac{\partial \mathcal{L}}{\partial e_{k}} + w \cdot \|X_{j} - X_{k}\|.</script></li>
 <li><p><strong>贪婪采样</strong>：用确定性贪婪采样替代随机采样，按$\hat{g}$的值从高到低顺序选择，进一步加快搜索的收敛速度。  </p>
 </li>
 <li><p><strong>避免自环问题</strong>：保持已评估后缀的历史记录，过滤掉重复的状态，从而防止迭代中的自环。</p>
@@ -159,7 +161,6 @@ MathJax = {
 </ul>
 <p>通过这些改进，Faster-GCG有效提高了越狱攻击的性能。本节的伪代码如下所示：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Require: 初始后缀 $x_&#123;1:n&#125;$，迭代次数 $T$，损失函数 $\mathcal&#123;L&#125; := \mathcal&#123;L&#125;_&#123;CW&#125;$，批量大小 $B$，历史记录集 $\mathcal&#123;S&#125; := \emptyset$</span><br><span class="line"></span><br><span class="line">loop $T$ 次</span><br><span class="line">    for $i=1$ to $n$ do</span><br><span class="line">        计算正则化梯度 $-\hat&#123;g&#125;^&#123;(i)&#125;$ </span><br><span class="line">        $b=0$ </span><br><span class="line">        while $b&lt;B$ do</span><br><span class="line">            $\tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125; := x_&#123;1:n&#125;$</span><br><span class="line">            更新 $\tilde&#123;x&#125;_&#123;i&#125;^&#123;(b)&#125;$ 采用贪婪采样</span><br><span class="line">            if $\tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125; \notin \mathcal&#123;S&#125;$ then</span><br><span class="line">                计算损失 $\mathcal&#123;L&#125;(\tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125;)$</span><br><span class="line">                $S = S \cup \&#123; \tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125; \&#125;$ </span><br><span class="line">                $b = b + 1$</span><br><span class="line">        $x_&#123;1:n&#125; := \tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b^&#123;*&#125;)&#125;$，其中 $b^&#123;*&#125;=\arg\min_&#123;b&#125; \mathcal&#123;L&#125;(\tilde&#123;x&#125;_&#123;1:n&#125;^&#123;(b)&#125;)$</span><br><span class="line">        </span><br><span class="line">return 优化后的后缀 $x_&#123;1:n&#125;$</span><br></pre></td></tr></table></figure>
-
 <p>通过这些策略，Faster-GCG能够在效率和效果上都取得提升，有效地挖掘LLMs的脆弱性。</p>
 <h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><p>在本研究中，Faster-GCG方法的有效性通过一系列实验进行了验证，实验包括开放源代码与封闭源代码的大型语言模型（LLMs）的针对性攻击。</p>
 <h3 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h3><p>模型方面，研究团队测试了Faster-GCG在四个大型语言模型上的表现，包括两个开放源代码模型：Vicuna-13B和Llama-2-7B-chat，以及两个封闭源代码模型：GPT-3.5-Turbo和GPT-4。实验使用了JBB-Behaviors数据集，该数据集包含100个精心设计的行为场景，用于评估对大型语言模型的攻击成功率（ASR）。</p>
@@ -180,7 +181,7 @@ MathJax = {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2qxu630000i4bjldk5k7aao" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/10/26/2410-15362/" data-id="cm2qy3vc8000o9djlbepid5bv" data-title="清华大学提出Faster-GCG方法：高效的针对对齐大型语言模型的离散优化监狱突破攻击" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
