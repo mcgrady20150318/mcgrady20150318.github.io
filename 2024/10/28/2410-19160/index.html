@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法">
+<meta property="og:url" content="http://example.com/2024/10/28/2410-19160/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/dab3c0fbb565b05463f0a8272276adab404ed8202f6772d16cdd9c3022c16bcb.jpg">
+<meta property="og:image" content="http://example.com/images/dab3c0fbb565b05463f0a8272276adab404ed8202f6772d16cdd9c3022c16bcb.jpg">
+<meta property="og:image" content="http://example.com/images/a45637f83ebfbcd11995f8663b0ed7fa8a3c72a87f33148351518c0dce2d9fd1.jpg">
+<meta property="og:image" content="http://example.com/images/7f09daf5ea102d7d9976b53004e1e686dc3f386bff4bf8dc2770c44c70b911ee.jpg">
+<meta property="og:image" content="http://example.com/images/8f6b6f0f86fc8f842d0c230ae619dba026fe7269a2b3901967ca843a8f2b6754.jpg">
+<meta property="og:image" content="http://example.com/images/dab3c0fbb565b05463f0a8272276adab404ed8202f6772d16cdd9c3022c16bcb.jpg">
+<meta property="og:image" content="http://example.com/images/dab3c0fbb565b05463f0a8272276adab404ed8202f6772d16cdd9c3022c16bcb.jpg">
+<meta property="og:image" content="http://example.com/images/a45637f83ebfbcd11995f8663b0ed7fa8a3c72a87f33148351518c0dce2d9fd1.jpg">
+<meta property="og:image" content="http://example.com/images/a5bf6faef46b2e54d4968d044f73d78b02dbcf07ec0a9d369c1b99f16df06d3e.jpg">
+<meta property="og:image" content="http://example.com/images/7f09daf5ea102d7d9976b53004e1e686dc3f386bff4bf8dc2770c44c70b911ee.jpg">
+<meta property="og:image" content="http://example.com/images/8f6b6f0f86fc8f842d0c230ae619dba026fe7269a2b3901967ca843a8f2b6754.jpg">
+<meta property="article:published_time" content="2024-10-28T03:47:58.000Z">
+<meta property="article:modified_time" content="2024-10-28T05:20:51.986Z">
+<meta property="article:author" content="anquanwang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/dab3c0fbb565b05463f0a8272276adab404ed8202f6772d16cdd9c3022c16bcb.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/10/28/2410-19134/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/10/27/2402-11753/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/28/2410-19160/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/28/2410-19160/&text=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/28/2410-19160/&title=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/28/2410-19160/&is_video=false&description=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法&body=Check out this article: http://example.com/2024/10/28/2410-19160/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/28/2410-19160/&title=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/28/2410-19160/&title=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/28/2410-19160/&title=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/28/2410-19160/&title=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/28/2410-19160/&name=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/28/2410-19160/&t=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E5%BD%A2%E5%BC%8F%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.1.</span> <span class="toc-text"> 问题的形式描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text"> 优化问题设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E6%94%BE%E6%9D%BE%E6%8A%80%E6%9C%AF"><span class="toc-number">2.3.</span> <span class="toc-text"> 正则化放松技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weight-decay-%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">2.4.</span> <span class="toc-text"> weight decay 的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0"><span class="toc-number">2.5.</span> <span class="toc-text"> 算法概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E6%8E%A8%E7%90%86%E5%92%8C%E7%A6%BB%E6%95%A3%E5%8C%96"><span class="toc-number">2.6.</span> <span class="toc-text"> 反向推理和离散化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%96%BD%E7%BB%86%E8%8A%82"><span class="toc-number">3.1.</span> <span class="toc-text"> 实验实施细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%88%86%E6%9E%90"><span class="toc-number">3.2.</span> <span class="toc-text"> 实验分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA-2"><span class="toc-number">5.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-2"><span class="toc-number">6.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E6%AD%A3%E5%BC%8F%E6%8F%8F%E8%BF%B0"><span class="toc-number">6.1.</span> <span class="toc-text"> 问题的正式描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98"><span class="toc-number">6.2.</span> <span class="toc-text"> 优化问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E6%9D%BE%E5%BC%9B"><span class="toc-number">6.3.</span> <span class="toc-text"> 正则化松弛</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E7%A6%BB%E6%95%A3%E5%8C%96"><span class="toc-number">6.4.</span> <span class="toc-text"> 去离散化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F"><span class="toc-number">6.5.</span> <span class="toc-text"> 权重衰减</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C-2"><span class="toc-number">7.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="toc-number">7.1.</span> <span class="toc-text"> 实验设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E5%8F%82%E6%95%B0%E5%92%8C%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="toc-number">7.2.</span> <span class="toc-text"> 超参数和优化技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%88%86%E6%9E%90-2"><span class="toc-number">7.3.</span> <span class="toc-text"> 实验分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-number">7.4.</span> <span class="toc-text"> 评估指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%BA%BF%E6%96%B9%E6%B3%95"><span class="toc-number">7.5.</span> <span class="toc-text"> 基线方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-number">7.6.</span> <span class="toc-text"> 结果展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E7%A7%BB%E6%94%BB%E5%87%BB%E8%AF%84%E4%BC%B0"><span class="toc-number">7.7.</span> <span class="toc-text"> 转移攻击评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E8%9E%8D%E7%A0%94%E7%A9%B6"><span class="toc-number">7.8.</span> <span class="toc-text"> 消融研究</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-2"><span class="toc-number">8.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">anquanwang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-28T03:47:58.000Z" class="dt-published" itemprop="datePublished">2024-10-28</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\(', right: '\)', display: false},
+              {left: '\[', right: '\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+<h2 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h2>
+<p>随着大型语言模型（LLMs）在各类实际应用中的广泛使用，其安全性成为一个至关重要的问题。虽然通过对齐技术已经显著提高了整体安全性，但LLMs仍然容易受到精心设计的对抗性输入的攻击。因此，研究对抗性攻击方法已成为了解这些模型脆弱性的重要手段。</p>
+<p>当前的对抗性攻击方法存在显著的局限性。一方面，依赖于优化离散Token的攻击方法效率有限；另一方面，进行连续优化的技术却无法生成有效的Token，使得其在实际应用中变得不切实际。为了克服这些问题，作者提出了一种新颖的对抗性攻击技术，利用正则化梯度和连续优化的方法，使得攻击速度较现有的最佳方法提高了两个数量级，并显著提升了对齐语言模型的攻击成功率。同时，该方法能够生成有效的Token，从根本上解决了现有连续优化方法的局限性。</p>
+<p>通过在五个最先进的LLM上应用该攻击方法，并对四个数据集进行测试，研究展示了其有效性。该技术不仅提高了攻击的效率，也为探索LLMs的脆弱性提供了一种新的实用框架。图1概述了正则化松弛方法的基本流程和思路。<br />
+<img src="/images/dab3c0fbb565b05463f0a8272276adab404ed8202f6772d16cdd9c3022c16bcb.jpg" alt="" /></p>
+<h2 id="方法"><a class="markdownIt-Anchor" href="#方法"></a> 方法</h2>
+<p>在这项研究中，作者提出了一种名为“正则化放松”（Regularized Relaxation，RR）的新方法，旨在优化输入的Token嵌入，从而有效引发有害行为。该方法通过将正则化项引入优化过程，增强优化效果并提高对抗性攻击的成功率。</p>
+<h3 id="问题的形式描述"><a class="markdownIt-Anchor" href="#问题的形式描述"></a> 问题的形式描述</h3>
+<p>假设有一个LLM ( f_{\theta}(\cdot) )，其中 ( \theta ) 代表模型参数。模型具有一个嵌入矩阵 ( \mathbf{E} \in \mathbb{R}^{V \times d} )，其中 ( V ) 是词汇表的大小，( d ) 是嵌入维度。输入序列表示为 ( \mathbf{x} = [x_{1}, x_{2}, \ldots, x_{n}] )，每个Token ( x_{i} ) 对应其嵌入向量 ( \mathbf{e}<em>{x</em>{i}} \in \mathbb{R}^{d} ) 。</p>
+<p>作者的目标是找到一个优化的嵌入序列 ( \mathbf{e}_{\mathrm{adv}} \in \mathbb{R}^{m \times d} )，通过将其与提示嵌入序列结合，最大化诱发指定有害行为的可能性。</p>
+<h3 id="优化问题设置"><a class="markdownIt-Anchor" href="#优化问题设置"></a> 优化问题设置</h3>
+<p>问题的优化目标可以表示为：</p>
+<p>[<br />
+\mathcal{L} = -\sum_{t=1}^{p}\log P(y_{t} | \mathbf{e_{x}} |\mathbf{e}_{\mathrm{adv}}^{(t)})<br />
+]</p>
+<p>其中 ( P(y_{t} | \mathbf{e_{x}} |\mathbf{e}_{\mathrm{adv}}^{(t)}) ) 是给定输入嵌入的输出Token的概率。优化问题可以表述为：</p>
+<p>[<br />
+\mathbf{e}<em>{\mathrm{adv}}^{(t+1)} = \mathbf{e}</em>{\mathrm{adv}}^{(t)} - \alpha \nabla_{\mathbf{e}<em>{\mathrm{adv}}} \mathcal{L} \big(f</em>{\theta} \big(\mathbf{e}<em>{\mathbf{x}} |\mathbf{e}</em>{\mathrm{adv}}^{(t)}\big), \mathbf{y}\big)<br />
+]</p>
+<p>这里的参数依次为：</p>
+<ul>
+<li>( \alpha )：学习率</li>
+<li>( \mathcal{L} )：对抗交叉熵损失函数</li>
+<li>( \nabla_{\mathbf{e}<em>{\mathrm{adv}}} \mathcal{L} )：损失函数对 ( \mathbf{e}</em>{\mathrm{adv}}^{(t)} ) 的梯度</li>
+</ul>
+<h3 id="正则化放松技术"><a class="markdownIt-Anchor" href="#正则化放松技术"></a> 正则化放松技术</h3>
+<p>该方法引入了L2正则化项，以稳定和增强优化过程。具体而言，这个正则化项指导优化嵌入接近于平均Token嵌入：</p>
+<p>[<br />
+\mathcal{R} = \lambda ||\mathbf{e}<em>{x</em>{i}} - \bar{\mathbf{e}}||_{2}^{2}<br />
+]</p>
+<p>其中 ( \bar{\mathbf{e}} ) 是所有嵌入的平均值， ( \lambda ) 是调控正则化强度的超参数。这样的设计鼓励嵌入向量保持接近于平均Token嵌入，从而减少优化路径上的离散化问题。</p>
+<h3 id="weight-decay-的应用"><a class="markdownIt-Anchor" href="#weight-decay-的应用"></a> weight decay 的应用</h3>
+<p>作者还探讨了通过 weight decay 来实现正则化的方法。weight decay 通过在梯度更新步骤中减小权重大小，实现了对大权重的惩罚。结合AdamW优化器有效地使优化过程更加稳定，并促进了快速收敛。</p>
+<h3 id="算法概述"><a class="markdownIt-Anchor" href="#算法概述"></a> 算法概述</h3>
+<p>该方法的总体流程图示意如下：</p>
+<p><img src="/images/dab3c0fbb565b05463f0a8272276adab404ed8202f6772d16cdd9c3022c16bcb.jpg" alt="" /></p>
+<h3 id="反向推理和离散化"><a class="markdownIt-Anchor" href="#反向推理和离散化"></a> 反向推理和离散化</h3>
+<p>在进行离散化时，作者计算优化的对抗嵌入与每个词汇嵌入之间的欧几里得距离，选择最近的嵌入作为具体的后缀Token。这种处理确保生成的Tokens能够有效地用于后续的输入中，从而引发预期的行为。</p>
+<h2 id="实验"><a class="markdownIt-Anchor" href="#实验"></a> 实验</h2>
+<p>为了评估他们的攻击方法在大语言模型（LLMs）上的有效性，研究者们对几种最先进的开源模型进行了实验。他们测量了这些攻击对模型对抗鲁棒性和对抗攻击的有效性，同时与领先的优化基准攻击技术进行了比较。</p>
+<h3 id="实验实施细节"><a class="markdownIt-Anchor" href="#实验实施细节"></a> 实验实施细节</h3>
+<p>模型方面，研究者评估了以下五个开源目标模型：Llama2-7B-chat、Vicuna-7B-v1.5、Falcon-7B-Instruct、Mistral-7B-Instruct-v0.3和MPT-7B-Chat。此外，他们还使用了两个评估模型：Meta-Llama3-8B-Instruct和Beaver-7b-v1.0-cost。</p>
+<p>在数据集方面，研究者使用了四个数据集进行实验：AdvBench、HarmBench、Jailbreak Bench和Malicious Instruct，每个数据集包含多种有害行为。AdvBench作为评估LLM对抗攻击鲁棒性的基准，其他数据集则提供了更广泛的有害行为。通过使用这些数据集，研究者增强了研究结果的鲁棒性，并能够直接与现有攻击方法进行比较。</p>
+<p>实验的设置在单个NVIDIA RTX A6000 GPU上进行。研究者使用的关键超参数之一是权重衰减系数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">\lambda=0.05</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">λ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">0</span><span class="mord">5</span></span></span></span>。初始学习率值因模型而异，以优化性能。为了提高效率，研究者还结合了几种优化技术，包括向初始后缀Token嵌入添加微小噪声、在计算总损失梯度后应用梯度裁剪，以及动态调整学习率的学习率调度器。这些技术显著提高了方法的表现。</p>
+<h3 id="实验分析"><a class="markdownIt-Anchor" href="#实验分析"></a> 实验分析</h3>
+<p>研究者对估计的对抗攻击后缀进行了初始化，使用20个空格分隔的感叹号序列（&quot;!&quot;）。虽然他们的方法对初始化并不敏感，但这种选择确保了结果的可重复性。</p>
+<p>在评估指标方面，研究者使用了攻击成功率（ASR）作为关键指标，以评估他们的方法的有效性与现有方法的比较。他们评估模型响应的第一种方法是使用修改后的提示，输出的结果为布尔值——真或假，表示该响应是否具有有害性。此外，第二种评估方法使用另一个模型生成的浮动分数，以测量生成响应的有害性。</p>
+<p>表1展示了各种攻击方法在不同模型和数据集中的性能比较。</p>
+<p><img src="/images/a45637f83ebfbcd11995f8663b0ed7fa8a3c72a87f33148351518c0dce2d9fd1.jpg" alt="" /></p>
+<p>另外，研究者还分析了不同来源模型和数据集在受害者模型上的迁移攻击结果，显示了对抗后缀在不同模型之间的有效性。</p>
+<p>表2展示了迁移攻击的结果。</p>
+<p><img src="/images/7f09daf5ea102d7d9976b53004e1e686dc3f386bff4bf8dc2770c44c70b911ee.jpg" alt="" /></p>
+<p>在消融研究部分，研究者检查了权重衰减对优化过程的影响，表明正则化的引入显著提升了ASR值，显示出其对优化性能的积极影响。</p>
+<p>表3展示了权重衰减对Llama2和Vicuna攻击成功率的影响。</p>
+<p><img src="/images/8f6b6f0f86fc8f842d0c230ae619dba026fe7269a2b3901967ca843a8f2b6754.jpg" alt="" /></p>
+<p>综上所述，实验结果显示了研究者的方法在速度和有效性上均表现出色，提供了一个实用的框架以探索大语言模型的脆弱性。</p>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<p>本文介绍了一种新颖的方法，通过正则化松弛技术提高对抗性后缀生成的效率和有效性。该方法在优化对抗性后缀时的速度几乎比传统的离散优化技术快两个数量级，同时在离散化和生成多样化Token方面也有所改善。对五种最先进的大型语言模型（LLMs）的广泛实验表明，所提方法在稳健性和有效性上优于现有的方法，为探索LLMs中的脆弱性提供了可扩展的框架。</p>
+<p>作为一种白盒技术，所提方法需要访问模型的嵌入和参数，以计算梯度。攻击的迁移能力进一步突显了该方法的潜力。凭借其高效率，这种方法在各类公开可用模型中的大规模测试中具有重要前景。未来的研究将集中在评估其在不同领域、语言和模型中的迁移能力和泛化能力。深入研究这些方面将加深对对抗鲁棒性的理解，并增强防御能力，以应对自然语言处理中的新兴威胁。</p>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\(', right: '\)', display: false},
+              {left: '\[', right: '\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+<h2 id="动机-2"><a class="markdownIt-Anchor" href="#动机-2"></a> 动机</h2>
+<p>随着大型语言模型（LLMs）的广泛应用，其安全性变得尤为重要。尽管对齐技术在整体安全性上取得了显著进展，但LLMs依然易受到精心设计的对抗性输入的攻击。因此，发展对抗性攻击方法已成为研究者们探讨这些模型脆弱性的重要手段。</p>
+<p>现有的对抗性攻击方法存在显著限制。依赖于离散Token的优化方法效率有限；而连续优化技术则无法生成模型词汇中的有效Token，这使得它们在实际应用中变得不切实际。针对这些问题，本文提出了一种新技术，利用带有正则化的梯度和连续优化方法，克服了这些限制。</p>
+<p>通过该方法，作者显示其对抗性攻击在执行效率和成功率上均显著优于现有的贪心坐标梯度（GCG）方法，速度提高了两个数量级，同时成功地生成了有效的Token，解决了当前连续优化方法的基本缺陷。研究还通过五个最先进的LLMs和四个数据集验证了所提攻击方法的有效性。</p>
+<p>这种研究的创新之处在于提出了一种在连续嵌入空间中进行对抗性攻击的新策略，通过正则化方法来优化松弛的Token嵌入，并生成有效的离散对抗性Token，从而有效地引导LLMs产生有害行为。这种新方法的快速和有效性为对抗性攻击的研究提供了新的视角，也为进一步理解和提升LLMs的安全性奠定了基础。</p>
+<p><img src="/images/dab3c0fbb565b05463f0a8272276adab404ed8202f6772d16cdd9c3022c16bcb.jpg" alt="Regularized Relaxation Overview" /></p>
+<h2 id="方法-2"><a class="markdownIt-Anchor" href="#方法-2"></a> 方法</h2>
+<p>本文提出了一种新的对抗攻击方法，称为<strong>Regularized Relaxation（RR）</strong>，旨在通过优化输入的Token嵌入来有效诱发大型语言模型（LLMs）的有害行为。该方法主要包括以下几个部分。</p>
+<h3 id="问题的正式描述"><a class="markdownIt-Anchor" href="#问题的正式描述"></a> 问题的正式描述</h3>
+<p>目标是找到一个嵌入序列 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="bold">e</mi><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">v</mi></mrow></msub><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mrow><mi>m</mi><mo>×</mo><mi>d</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\mathbf{e}_{\mathrm{adv}} \in \mathbb{R}^{m \times d}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6891em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">e</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">d</span><span class="mord mathrm mtight" style="margin-right:0.01389em;">v</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8491079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span><span class="mbin mtight">×</span><span class="mord mathdefault mtight">d</span></span></span></span></span></span></span></span></span></span></span></span>，以最大化当与输入嵌入序列结合时诱导特定有害行为的可能性。其中，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">m</span></span></span></span> 是后缀的长度，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold">x</mi><mo>=</mo><mo stretchy="false">[</mo><msub><mi>x</mi><mn>1</mn></msub><mo separator="true">,</mo><msub><mi>x</mi><mn>2</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\mathbf{x} = [x_1, x_2, \ldots, x_n]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">x</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span> 表示输入Token序列，每个Token <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>x</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">x_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 通过嵌入矩阵 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold">E</mi></mrow><annotation encoding="application/x-tex">\mathbf{E}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">E</span></span></span></span></span> 映射到其对应的嵌入向量 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="bold">e</mi><msub><mi>x</mi><mi>i</mi></msub></msub><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mi>d</mi></msup></mrow><annotation encoding="application/x-tex">\mathbf{e}_{x_i} \in \mathbb{R}^d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7892em;vertical-align:-0.2501em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">e</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139199999999997em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2501em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.849108em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.849108em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span></span></span></span></span></span></span></span></span>。</p>
+<p>优化问题可以描述为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="script">L</mi><mo>=</mo><mo>−</mo><munderover><mo>∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mi>p</mi></munderover><mi>log</mi><mo>⁡</mo><mi>P</mi><mo stretchy="false">(</mo><msub><mi>y</mi><mi>t</mi></msub><mi mathvariant="normal">∣</mi><msub><mi mathvariant="bold">e</mi><mi mathvariant="bold">x</mi></msub><mi mathvariant="normal">∥</mi><msubsup><mi mathvariant="bold">e</mi><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">v</mi></mrow><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></msubsup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathcal{L} = -\sum_{t=1}^{p}\log P(y_{t}|\mathbf{e_{x}}\|\mathbf{e}_{\mathrm{adv}}^{(t)})
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal">L</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.965618em;vertical-align:-1.267113em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.6985050000000004em;"><span style="top:-1.882887em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span><span style="top:-4.347113em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.267113em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord"><span class="mord mathbf">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.161108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathbf mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span><span class="mord">∥</span><span class="mord"><span class="mord"><span class="mord mathbf">e</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.3986920000000005em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">d</span><span class="mord mathrm mtight" style="margin-right:0.01389em;">v</span></span></span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathdefault mtight">t</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3013079999999999em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>这里，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="script">L</mi></mrow><annotation encoding="application/x-tex">\mathcal{L}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal">L</span></span></span></span></span> 表示对抗交叉熵损失，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><msub><mi>y</mi><mi>t</mi></msub><mi mathvariant="normal">∣</mi><msub><mi mathvariant="bold">e</mi><mi mathvariant="bold">x</mi></msub><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><msubsup><mi mathvariant="bold">e</mi><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">v</mi></mrow><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></msubsup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">P(y_{t}|\mathbf{e_{x}}||\mathbf{e}_{\mathrm{adv}}^{(t)})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3461079999999999em;vertical-align:-0.30130799999999996em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord"><span class="mord mathbf">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.161108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathbf mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span><span class="mord">∣</span><span class="mord">∣</span><span class="mord"><span class="mord"><span class="mord mathbf">e</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.398692em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">d</span><span class="mord mathrm mtight" style="margin-right:0.01389em;">v</span></span></span></span></span><span style="top:-3.2197999999999998em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathdefault mtight">t</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.30130799999999996em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> 是给定输入嵌入的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord mathdefault">t</span></span></span></span>-th 目标Token 的概率。</p>
+<h3 id="优化问题"><a class="markdownIt-Anchor" href="#优化问题"></a> 优化问题</h3>
+<p>优化过程通过以下公式执行：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi mathvariant="bold">e</mi><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">v</mi></mrow><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msubsup><mo>=</mo><msubsup><mi mathvariant="bold">e</mi><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">v</mi></mrow><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></msubsup><mo>−</mo><mi>α</mi><msub><mi mathvariant="normal">∇</mi><msub><mi mathvariant="bold">e</mi><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">v</mi></mrow></msub></msub><mi mathvariant="script">L</mi><mo fence="false">(</mo><msub><mi>f</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><msub><mi mathvariant="bold">e</mi><mi mathvariant="bold">x</mi></msub><mi mathvariant="normal">∥</mi><msubsup><mi mathvariant="bold">e</mi><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">v</mi></mrow><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></msubsup><mo stretchy="false">)</mo><mo separator="true">,</mo><mi mathvariant="bold">y</mi><mo fence="false">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{e}_{\mathrm{adv}}^{(t+1)} = \mathbf{e}_{\mathrm{adv}}^{(t)} - \alpha \nabla_{\mathbf{e}_{\mathrm{adv}}}\mathcal{L}\big(f_{\theta}(\mathbf{e}_{\mathbf{x}} \|\mathbf{e}_{\mathrm{adv}}^{(t)}), \mathbf{y}\big)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3461079999999999em;vertical-align:-0.3013079999999999em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">e</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.3986920000000005em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">d</span><span class="mord mathrm mtight" style="margin-right:0.01389em;">v</span></span></span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathdefault mtight">t</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3013079999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.3461079999999999em;vertical-align:-0.3013079999999999em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">e</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.3986920000000005em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">d</span><span class="mord mathrm mtight" style="margin-right:0.01389em;">v</span></span></span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathdefault mtight">t</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3013079999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.3948099999999999em;vertical-align:-0.35001em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16110799999999997em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">e</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">d</span><span class="mord mathrm mtight" style="margin-right:0.01389em;">v</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25586em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathcal">L</span></span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord mathbf">e</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.161108em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">x</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∥</span><span class="mord"><span class="mord"><span class="mord mathbf">e</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0448em;"><span style="top:-2.3986920000000005em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">d</span><span class="mord mathrm mtight" style="margin-right:0.01389em;">v</span></span></span></span></span><span style="top:-3.2198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathdefault mtight">t</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3013079999999999em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathbf" style="margin-right:0.01597em;">y</span></span><span class="mord"><span class="delimsizing size1">)</span></span></span></span></span></span></p>
+<p>在这个公式中：</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span></span></span></span> 是学习率。</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>∥</mo></mrow><annotation encoding="application/x-tex">\parallel</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mrel">∥</span></span></span></span> 表示连接操作。</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">∇</mi><msub><mi mathvariant="bold">e</mi><mrow><mi mathvariant="normal">a</mi><mi mathvariant="normal">d</mi><mi mathvariant="normal">v</mi></mrow></msub></msub><mi mathvariant="script">L</mi></mrow><annotation encoding="application/x-tex">\nabla_{\mathbf{e}_{\mathrm{adv}}}\mathcal{L}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.93919em;vertical-align:-0.25586em;"></span><span class="mord"><span class="mord">∇</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16110799999999997em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">e</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">d</span><span class="mord mathrm mtight" style="margin-right:0.01389em;">v</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25586em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathcal">L</span></span></span></span></span> 是相对于当前Token嵌入的损失函数的梯度。</li>
+</ul>
+<h3 id="正则化松弛"><a class="markdownIt-Anchor" href="#正则化松弛"></a> 正则化松弛</h3>
+<p>Regularized Relaxation 方法在优化过程中引入了正则化项，以稳定和增强优化过程。该正则化引导优化后的嵌入朝向平均Token嵌入 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mover accent="true"><mi mathvariant="bold">e</mi><mo>ˉ</mo></mover></mrow><annotation encoding="application/x-tex">\bar{\mathbf{e}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58122em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.58122em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">e</span></span></span></span><span style="top:-3.01344em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">ˉ</span></span></span></span></span></span></span></span></span> 运动，从而有助于嵌入在优化路径上接近有效Token。具体而言，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="normal">L</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathrm{L}^{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathrm">L</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span> 正则化通过加入惩罚项鼓励优化后的嵌入向量更接近于原点，从而减少嵌入的幅度。</p>
+<p>正则化项为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>λ</mi><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><msub><mi mathvariant="bold">e</mi><msub><mi mathvariant="bold">x</mi><mi>i</mi></msub></msub><mo>−</mo><mover accent="true"><mi mathvariant="bold">e</mi><mo>ˉ</mo></mover><mi mathvariant="normal">∣</mi><msubsup><mi mathvariant="normal">∣</mi><mn>2</mn><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">\lambda ||\mathbf{e}_{\mathbf{x}_{i}} - \bar{\mathbf{e}}||_{2}^{2}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0001em;vertical-align:-0.2501em;"></span><span class="mord mathdefault">λ</span><span class="mord">∣</span><span class="mord">∣</span><span class="mord"><span class="mord"><span class="mord mathbf">e</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16110799999999997em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">x</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2501em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.58122em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">e</span></span></span></span><span style="top:-3.01344em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.19444em;">ˉ</span></span></span></span></span></span><span class="mord">∣</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-2.4530000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.247em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>该项计算优化后嵌入与平均Token嵌入之间的平方欧几里得距离，抑制了优化后的嵌入过于分散，鼓励其保持在平均Token嵌入附近。</p>
+<h3 id="去离散化"><a class="markdownIt-Anchor" href="#去离散化"></a> 去离散化</h3>
+<p>为将优化得到的嵌入映射回可用的Token，本文采用去离散化技术。通过计算优化后的对抗嵌入与学习的嵌入空间 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="bold">E</mi></mrow><annotation encoding="application/x-tex">\mathbf{E}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">E</span></span></span></span></span> 中每个嵌入之间的欧几里得距离，选择距离最近的Token作为具体的后缀Token。</p>
+<h3 id="权重衰减"><a class="markdownIt-Anchor" href="#权重衰减"></a> 权重衰减</h3>
+<p>权重衰减作为一种正则化方法，通过在梯度更新步骤中降低权重来防止过拟合。文中将权重衰减与AdamW优化器结合使用，从而分别实现嵌入优化过程的有效正则化，加快收敛速度并改善性能。</p>
+<p><img src="/images/dab3c0fbb565b05463f0a8272276adab404ed8202f6772d16cdd9c3022c16bcb.jpg" alt="" /></p>
+<p>正则化松弛的整体框架如图所示。通过对以上方法的综合运用，作者的性能得到了显著提升，尤其在攻击成功率和效率方面。</p>
+<h2 id="实验-2"><a class="markdownIt-Anchor" href="#实验-2"></a> 实验</h2>
+<p>为了评估他们的攻击方法在大语言模型（LLM）上的有效性，作者进行了几项实验，使用了多个状态最前沿的开源模型。他们测量了攻击对模型对抗性和对抗攻击的鲁棒性的影响，并将他们的方法与领先的优化基础攻击技术进行了比较。</p>
+<h3 id="实验设置"><a class="markdownIt-Anchor" href="#实验设置"></a> 实验设置</h3>
+<p>作者选择了五个目标模型进行评估，包括Llama2-7B-chat、Vicuna-7B-v1.5、Falcon-7B-Instruct、Mistral-7B-Instruct-v0.3和MPT-7B-Chat。作为评估模型，他们使用了Meta-Llama3-8B-Instruct和Beaver-7b-v1.0-cost。实验中使用了四个数据集：AdvBench、HarmBench、Jailbreak Bench和Malicious Instruct，这些数据集包含了多种有害行为。通过使用这些数据集，作者提高了研究结果的鲁棒性，并使其与现有攻击方法的直接比较成为可能。</p>
+<h3 id="超参数和优化技术"><a class="markdownIt-Anchor" href="#超参数和优化技术"></a> 超参数和优化技术</h3>
+<p>在实验中，作者使用了一个权重衰减系数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>λ</mi><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">\lambda=0.05</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">λ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mord">.</span><span class="mord">0</span><span class="mord">5</span></span></span></span>作为关键超参数。不同模型的初始学习率值有所不同，以优化性能。为了提升效率，他们加入了一些优化技术，如在初始后缀Token嵌入中添加微小噪声，并在总损失梯度计算后应用梯度裁剪。此外，他们使用动态调整学习率的学习率调度器，以确保有效的收敛。</p>
+<h3 id="实验分析-2"><a class="markdownIt-Anchor" href="#实验分析-2"></a> 实验分析</h3>
+<p>实验中，作者将对抗攻击后缀初始化为一组用空格分隔的20个感叹号（“!”）。虽然该方法对初始化不敏感，但此选择确保了复现性。</p>
+<h3 id="评估指标"><a class="markdownIt-Anchor" href="#评估指标"></a> 评估指标</h3>
+<p>为了评估攻击方法的性能与鲁棒性，作者使用了攻击成功率（ASR），提供了对其方法有效性的深入见解。他们使用两种模型基础的评估方法；第一种方法涉及修改提示，将有害行为和模型响应输入到评估器Meta-Llama3-8B-Instruct中，输出为布尔值（真或假），显示响应是否有害且符合行为标准。第二种方法则使用Beaver-7bv1.0-cost模型生成浮动得分，正分表示有害内容，负分表示无害内容。作者将两种方法有效组合，以减少误报率。</p>
+<h3 id="基线方法"><a class="markdownIt-Anchor" href="#基线方法"></a> 基线方法</h3>
+<p>作者评估了他们的方法与其他几种领先方法的有效性，包括GCG、AutoDAN、PGD和Soft Prompt Threats，这些方法被广泛认可为针对鲁棒LLM的最有效攻击。通过选择来自每个数据集的50个有害行为及其目标，作者评估了各目标模型的ASR[<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>&gt;</mo><mn>10</mn></mrow><annotation encoding="application/x-tex">&gt;10</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span></span></span></span>]和ASR[<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>&gt;</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">&gt;5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">5</span></span></span></span>]。</p>
+<h3 id="结果展示"><a class="markdownIt-Anchor" href="#结果展示"></a> 结果展示</h3>
+<p>根据表1，作者的方法在攻击成功率（ASR）方面超过了所有基线方法，并在大多数数据集上均表现出更高的效率，验证了他们的攻击方法的有效性。</p>
+<p><img src="/images/a45637f83ebfbcd11995f8663b0ed7fa8a3c72a87f33148351518c0dce2d9fd1.jpg" alt="" /></p>
+<p>图3展示了各方法的平均运行时间，表明作者的方法在处理多种模型和数据集时显示出显著的优化速度提高，同时保持了有效性。</p>
+<p><img src="/images/a5bf6faef46b2e54d4968d044f73d78b02dbcf07ec0a9d369c1b99f16df06d3e.jpg" alt="" /></p>
+<h3 id="转移攻击评估"><a class="markdownIt-Anchor" href="#转移攻击评估"></a> 转移攻击评估</h3>
+<p>为了评估他们的方法的转移能力，作者首先对源模型Llama2-7b Chat和Vicuna 7B-v1.5进行攻击，为每个数据集中所有50种有害行为生成对抗后缀。将这些对抗后缀附加到相应的有害行为上后，传递给受害模型以生成响应。结果摘要显示对抗后缀在不同模型间维持其有效性。</p>
+<p><img src="/images/7f09daf5ea102d7d9976b53004e1e686dc3f386bff4bf8dc2770c44c70b911ee.jpg" alt="" /></p>
+<h3 id="消融研究"><a class="markdownIt-Anchor" href="#消融研究"></a> 消融研究</h3>
+<p>作者对使用Llama2-7b Chat和Vicuna 7B-v1.5的优化过程中的权重衰减影响进行了探讨。在该研究中，作者对来自每个数据集的50种有害行为的对抗后缀Token进行了优化。结果显示，应用权重衰减显著提高了ASR值，证明了正则化对优化性能的积极影响。</p>
+<p><img src="/images/8f6b6f0f86fc8f842d0c230ae619dba026fe7269a2b3901967ca843a8f2b6754.jpg" alt="" /></p>
+<h2 id="结论-2"><a class="markdownIt-Anchor" href="#结论-2"></a> 结论</h2>
+<p>在这项研究中，作者提出了一种新的方法，通过使用正则化松弛（Regularized Relaxation）有效地优化对抗性后缀Token的嵌入，这些嵌入可以转化为能够引发有害行为的Token。当输入到大型语言模型（LLMs）中时，这一过程能够生成合法的Token，尽管这些Token在视觉上可能对人类而言毫无意义。</p>
+<p>作者的研究表明，通过正则化技术的应用，能够平衡对抗性交叉熵损失与L2正则化，从而显著提高了攻击的有效性和效率。与之前的方法相比，作者的技术在速度上有显著提升，优化后缀Token的效率几乎快于传统离散优化技术两个数量级。此外，该方法还在生成多样化对抗性Token的能力上表现出明显优势，这为探索LLM的脆弱性提供了一个实用框架。</p>
+<p>通过在五种最先进的LLMs上进行广泛的实验，作者展示了其方法的稳健性和有效性，且在攻击成功率（ASR）上超越了现有的所有方法。这些结果突显了正则化松弛方法在处理多个模型和数据集中的有害行为时的有效性和高效率。</p>
+<p>总之，虽然此研究方法仍依赖于对模型嵌入和参数的白盒访问，但其效率暗示着未来可以在公开模型上进行大规模测试的潜力。未来的工作将侧重于评估此方法在不同领域、语言以及模型的转移能力和广泛性，这将进一步加深对对抗性稳健性的理解，并增强应对不断演变威胁的防御能力。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E5%BD%A2%E5%BC%8F%E6%8F%8F%E8%BF%B0"><span class="toc-number">2.1.</span> <span class="toc-text"> 问题的形式描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.2.</span> <span class="toc-text"> 优化问题设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E6%94%BE%E6%9D%BE%E6%8A%80%E6%9C%AF"><span class="toc-number">2.3.</span> <span class="toc-text"> 正则化放松技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weight-decay-%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-number">2.4.</span> <span class="toc-text"> weight decay 的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%B3%95%E6%A6%82%E8%BF%B0"><span class="toc-number">2.5.</span> <span class="toc-text"> 算法概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E6%8E%A8%E7%90%86%E5%92%8C%E7%A6%BB%E6%95%A3%E5%8C%96"><span class="toc-number">2.6.</span> <span class="toc-text"> 反向推理和离散化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%AE%9E%E6%96%BD%E7%BB%86%E8%8A%82"><span class="toc-number">3.1.</span> <span class="toc-text"> 实验实施细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%88%86%E6%9E%90"><span class="toc-number">3.2.</span> <span class="toc-text"> 实验分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA-2"><span class="toc-number">5.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95-2"><span class="toc-number">6.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E7%9A%84%E6%AD%A3%E5%BC%8F%E6%8F%8F%E8%BF%B0"><span class="toc-number">6.1.</span> <span class="toc-text"> 问题的正式描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98"><span class="toc-number">6.2.</span> <span class="toc-text"> 优化问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E5%8C%96%E6%9D%BE%E5%BC%9B"><span class="toc-number">6.3.</span> <span class="toc-text"> 正则化松弛</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%BB%E7%A6%BB%E6%95%A3%E5%8C%96"><span class="toc-number">6.4.</span> <span class="toc-text"> 去离散化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%83%E9%87%8D%E8%A1%B0%E5%87%8F"><span class="toc-number">6.5.</span> <span class="toc-text"> 权重衰减</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C-2"><span class="toc-number">7.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="toc-number">7.1.</span> <span class="toc-text"> 实验设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B6%85%E5%8F%82%E6%95%B0%E5%92%8C%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="toc-number">7.2.</span> <span class="toc-text"> 超参数和优化技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E5%88%86%E6%9E%90-2"><span class="toc-number">7.3.</span> <span class="toc-text"> 实验分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-number">7.4.</span> <span class="toc-text"> 评估指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E7%BA%BF%E6%96%B9%E6%B3%95"><span class="toc-number">7.5.</span> <span class="toc-text"> 基线方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-number">7.6.</span> <span class="toc-text"> 结果展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AC%E7%A7%BB%E6%94%BB%E5%87%BB%E8%AF%84%E4%BC%B0"><span class="toc-number">7.7.</span> <span class="toc-text"> 转移攻击评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E8%9E%8D%E7%A0%94%E7%A9%B6"><span class="toc-number">7.8.</span> <span class="toc-text"> 消融研究</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA-2"><span class="toc-number">8.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/28/2410-19160/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/28/2410-19160/&text=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/28/2410-19160/&title=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/28/2410-19160/&is_video=false&description=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法&body=Check out this article: http://example.com/2024/10/28/2410-19160/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/28/2410-19160/&title=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/28/2410-19160/&title=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/28/2410-19160/&title=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/28/2410-19160/&title=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/28/2410-19160/&name=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/28/2410-19160/&t=佛罗里达州立大学提出一种基于正则化放松的对大型语言模型的对抗攻击方法"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    anquanwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

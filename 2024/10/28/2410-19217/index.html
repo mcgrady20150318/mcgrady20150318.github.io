@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制">
+<meta property="og:url" content="http://example.com/2024/10/28/2410-19217/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-10-28T05:13:24.000Z">
+<meta property="article:modified_time" content="2024-10-28T05:13:24.316Z">
+<meta property="article:author" content="anquanwang">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/10/28/2410-19160-1/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/10/28/2410-18857/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/28/2410-19217/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/28/2410-19217/&text=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/28/2410-19217/&title=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/28/2410-19217/&is_video=false&description=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制&body=Check out this article: http://example.com/2024/10/28/2410-19217/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/28/2410-19217/&title=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/28/2410-19217/&title=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/28/2410-19217/&title=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/28/2410-19217/&title=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/28/2410-19217/&name=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/28/2410-19217/&t=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text"> 关键定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E8%83%BD%E5%8A%9B%E7%9A%84%E7%95%8C%E5%AE%9A"><span class="toc-number">2.2.</span> <span class="toc-text"> 学习能力的界定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E5%AD%A6%E4%B9%A0%E8%8C%83%E5%BC%8F%E7%9A%84%E5%8F%91%E7%8E%B0"><span class="toc-number">2.3.</span> <span class="toc-text"> 不同学习范式的发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%85%AC%E5%BC%8F%E4%B8%8E%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="toc-number">2.4.</span> <span class="toc-text"> 关键公式与示意图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">anquanwang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-28T05:13:24.000Z" class="dt-published" itemprop="datePublished">2024-10-28</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\(', right: '\)', display: false},
+              {left: '\[', right: '\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+<h2 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h2>
+<p>在当今社会，生成模型已经成为各种经济活动中强大的工具。这些技术通过整合大量数据，利用丰富的嵌入混合，能够合成高质量的输出，包括文本、图像、视频及其他领域。然而，随着对生成模型应用的关注增加，出现了一个重要问题，即模型所生成的内容中包含的“幻觉”现象——即模型生成的输出虽然看似合乎逻辑，但实际上却是无效或错误的。这对于那些需要准确性和安全性的关键应用场景而言，极大限制了生成模型的实用性。</p>
+<p>为了解决幻觉问题，一些经验性方法被提出，例如事实数据增强、幻觉检测和基于人类反馈的微调等。然而，这些方法的效果往往通过实验验证，并未从理论角度给出严谨的解释。因此，研究者们迫切希望从学习理论的角度，深入理解幻觉现象及其对生成模型表现的影响。</p>
+<p>在这项研究中，作者们提出了一个理论框架，以分析无幻觉生成模型的学习能力。他们的研究发现，在仅依赖训练数据集的情况下，无幻觉学习在统计学上是不可行的，即使假设类的规模只有两个，并且整个训练集都是可信的。为此，他们提出，通过将与实际事实对齐的归纳偏置融入学习过程中，可以克服这一局限性。此外，作者们证明了有限VC维的概念类在不同学习范式下的有效性，这为减少生成模型中的幻觉提供了一种系统化的解决方案。</p>
+<p>本研究的主要创新点在于：</p>
+<ol>
+<li><strong>理论基础</strong>：为生成模型的非幻觉学习提供了严谨的理论基础，明确了进行有效学习所需的结构假设。</li>
+<li><strong>方法论</strong>：通过引入与概念类相关的归纳偏置，展示了如何降低生成模型中的幻觉率，为进一步的实用应用奠定了基础。</li>
+<li><strong>学习范式的探讨</strong>：针对合适的学习者类型（适当学习者与不适当学习者）对生成模型的学习能力进行了区分与分析，为未来研究提供了新的视角。</li>
+</ol>
+<p>综上所述，研究者希望通过这些发现，提高对生成模型中幻觉现象的理解，并为解决这一问题开辟新的方向。</p>
+<h2 id="方法"><a class="markdownIt-Anchor" href="#方法"></a> 方法</h2>
+<p>本文提出了一种理论框架，旨在从学习理论的角度分析非幻觉生成模型的学习能力。研究者首先设定了一个形式化的框架，定义了输入空间<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="script">X</mi></mrow><annotation encoding="application/x-tex">\mathcal{X}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.14643em;">X</span></span></span></span></span>、真实事实集<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="script">T</mi></mrow><annotation encoding="application/x-tex">\mathcal{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.25417em;">T</span></span></span></span></span>以及生成模型和数据生成机制的相关概念。</p>
+<h3 id="关键定义"><a class="markdownIt-Anchor" href="#关键定义"></a> 关键定义</h3>
+<ol>
+<li>
+<p><strong>事实集与生成模型</strong><br />
+设定事实集<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="script">T</mi><mo>⊂</mo><mi mathvariant="script">X</mi></mrow><annotation encoding="application/x-tex">\mathcal{T} \subset \mathcal{X}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.25417em;">T</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.14643em;">X</span></span></span></span></span>，表示与任务相关的真实陈述。生成模型通过分布<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo>∈</mo><mi mathvariant="normal">Δ</mi><mo stretchy="false">(</mo><mi mathvariant="script">X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">p \in \Delta(\mathcal{X})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335400000000001em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">p</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Δ</span><span class="mopen">(</span><span class="mord"><span class="mord mathcal" style="margin-right:0.14643em;">X</span></span><span class="mclose">)</span></span></span></span>来表示，其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Δ</mi><mo stretchy="false">(</mo><mi mathvariant="script">X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Delta(\mathcal{X})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Δ</span><span class="mopen">(</span><span class="mord"><span class="mord mathcal" style="margin-right:0.14643em;">X</span></span><span class="mclose">)</span></span></span></span>为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="script">X</mi></mrow><annotation encoding="application/x-tex">\mathcal{X}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.14643em;">X</span></span></span></span></span>的所有概率分布集合。</p>
+</li>
+<li>
+<p><strong>幻觉率的定义</strong><br />
+幻觉率被定义为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="sans-serif">h</mi><mi mathvariant="sans-serif">a</mi><mi mathvariant="sans-serif">l</mi><mi mathvariant="sans-serif">l</mi></mrow><mo stretchy="false">(</mo><mi>p</mi><mo separator="true">,</mo><mi mathvariant="script">T</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">*</mi><mo>⁡</mo><msub><mrow><mi>P</mi><mi>r</mi></mrow><mrow><mi mathvariant="bold">x</mi><mo>∼</mo><mi>p</mi></mrow></msub><mo stretchy="false">[</mo><mi mathvariant="bold">x</mi><mi mathvariant="normal">∉</mi><mi mathvariant="script">T</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\mathsf{h a l l}(p,\mathcal{T}) = \operatorname*{Pr}_{\mathbf{x} \sim p}[\mathbf{x} \notin \mathcal{T}]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathsf">h</span><span class="mord mathsf">a</span><span class="mord mathsf">l</span><span class="mord mathsf">l</span></span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.25417em;">T</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mop"><span class="mord mathrm">*</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16110799999999997em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">x</span></span><span class="mrel mtight">∼</span><span class="mord mathdefault mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord"><span class="mord mathbf">x</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mord"><span class="mrel">∈</span></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.75em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="llap"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="inner"><span class="mord"><span class="mord">/</span><span class="mspace" style="margin-right:0.05555555555555555em;"></span></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.25417em;">T</span></span><span class="mclose">]</span></span></span></span></span></p>
+<p>这衡量了生成模型向非事实实例分配的概率质量。</p>
+</li>
+<li>
+<p><strong>可信的数据生成</strong><br />
+当生成机制<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span></span></span></span>是忠实的，即<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="sans-serif">h</mi><mi mathvariant="sans-serif">a</mi><mi mathvariant="sans-serif">l</mi><mi mathvariant="sans-serif">l</mi></mrow><mo stretchy="false">(</mo><mi>q</mi><mo separator="true">,</mo><mi mathvariant="script">T</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mathsf{h a l l}(q, \mathcal{T}) = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathsf">h</span><span class="mord mathsf">a</span><span class="mord mathsf">l</span><span class="mord mathsf">l</span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.25417em;">T</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>时，我们称<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span></span></span></span>是忠实的演示者。这意味着<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span></span></span></span>不生成非事实样本。</p>
+</li>
+<li>
+<p><strong>学习规则的定义</strong><br />
+学习规则<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Φ</mi><mo>:</mo><msup><mi mathvariant="script">X</mi><mo>∗</mo></msup><mo>→</mo><mi mathvariant="normal">Δ</mi><mo stretchy="false">(</mo><mi mathvariant="script">X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Phi:\mathcal{X}^{*} \rightarrow \Delta(\mathcal{X})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">Φ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.688696em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathcal" style="margin-right:0.14643em;">X</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∗</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Δ</span><span class="mopen">(</span><span class="mord"><span class="mord mathcal" style="margin-right:0.14643em;">X</span></span><span class="mclose">)</span></span></span></span>是从训练数据集生成模型的函数。对于给定<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>ϵ</mi><mo separator="true">,</mo><mi>δ</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\epsilon, \delta &gt; 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">ϵ</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03785em;">δ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>，学习者<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Φ</mi></mrow><annotation encoding="application/x-tex">\Phi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">Φ</span></span></span></span>非幻觉地学习<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mi>q</mi><mo separator="true">,</mo><mi mathvariant="script">T</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(q, \mathcal{T})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.25417em;">T</span></span><span class="mclose">)</span></span></span></span>的条件是：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">*</mi><mo>⁡</mo><msub><mrow><mi>P</mi><mi>r</mi></mrow><mrow><msup><mi mathvariant="bold">x</mi><mi>n</mi></msup><mo>∼</mo><mi>q</mi></mrow></msub><mrow><mo fence="true">[</mo><mrow><mi mathvariant="sans-serif">h</mi><mi mathvariant="sans-serif">a</mi><mi mathvariant="sans-serif">l</mi><mi mathvariant="sans-serif">l</mi></mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Φ</mi><mo stretchy="false">(</mo><msup><mi mathvariant="bold">x</mi><mi>n</mi></msup><mo stretchy="false">)</mo><mo separator="true">,</mo><mi mathvariant="script">T</mi><mo stretchy="false">)</mo><mo>≥</mo><mi>ϵ</mi><mo fence="true">]</mo></mrow><mo>≤</mo><mi>δ</mi></mrow><annotation encoding="application/x-tex">\operatorname*{Pr}_{\mathbf{x}^{n}\sim q}\left[\mathsf{h a l l}(\Phi(\mathbf{x}^{n}), \mathcal{T}) \geq \epsilon\right] \leq \delta
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mop"><span class="mord mathrm">*</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.26548em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">x</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5935428571428571em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span><span class="mrel mtight">∼</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">q</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">[</span><span class="mord"><span class="mord mathsf">h</span><span class="mord mathsf">a</span><span class="mord mathsf">l</span><span class="mord mathsf">l</span></span><span class="mopen">(</span><span class="mord">Φ</span><span class="mopen">(</span><span class="mord"><span class="mord"><span class="mord mathbf">x</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.25417em;">T</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mord mathdefault">ϵ</span><span class="mclose delimcenter" style="top:0em;">]</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03785em;">δ</span></span></span></span></span></p>
+<p>其中训练集<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="bold">x</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">\mathbf{x}^{n}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">x</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span></span></span></span>从忠实的演示者<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">q</span></span></span></span>中独立同分布采样。</p>
+</li>
+</ol>
+<h3 id="学习能力的界定"><a class="markdownIt-Anchor" href="#学习能力的界定"></a> 学习能力的界定</h3>
+<p>本文探讨了非幻觉学习的两个范式：适当学习和不适当学习。对每个范式而言，需要考察对应的假设类<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="script">P</mi></mrow><annotation encoding="application/x-tex">\mathcal{P}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.08222em;">P</span></span></span></span></span>对学习能力的影响。</p>
+<ul>
+<li><strong>适当学习</strong>：学习规则必须生成在假设类<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="script">P</mi></mrow><annotation encoding="application/x-tex">\mathcal{P}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.08222em;">P</span></span></span></span></span>内的模型。</li>
+<li><strong>不适当学习</strong>：学习规则无这样的约束，输出可以是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Δ</mi><mo stretchy="false">(</mo><mi mathvariant="script">X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Delta(\mathcal{X})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Δ</span><span class="mopen">(</span><span class="mord"><span class="mord mathcal" style="margin-right:0.14643em;">X</span></span><span class="mclose">)</span></span></span></span>的任何分布。</li>
+</ul>
+<h3 id="不同学习范式的发现"><a class="markdownIt-Anchor" href="#不同学习范式的发现"></a> 不同学习范式的发现</h3>
+<ul>
+<li>
+<p><strong>不可学习性</strong>：作者证明了，在没有关于事实集<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="script">T</mi></mrow><annotation encoding="application/x-tex">\mathcal{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.25417em;">T</span></span></span></span></span>的假设下，对于任何适当学习者来说，非幻觉学习是不可能的。即使在假设类规模为2的情况下，依然无法实现非幻觉学习。</p>
+</li>
+<li>
+<p><strong>不适当学习的可行性</strong>：文章进一步表明，如果事实集<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="script">T</mi></mrow><annotation encoding="application/x-tex">\mathcal{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.25417em;">T</span></span></span></span></span>属于有限VC维的概念类，那么可以使用不适当学习者实现非幻觉学习，并且能够推广至演示者的信息量。</p>
+</li>
+<li>
+<p><strong>适当学习的挑战</strong>：即使在有限VC维的概念类下，适当学习也可能面临挑战。作者提供了相应的例子，展示在某些条件下，适当学习者必须产生幻觉输出。</p>
+</li>
+</ul>
+<h3 id="关键公式与示意图"><a class="markdownIt-Anchor" href="#关键公式与示意图"></a> 关键公式与示意图</h3>
+<ul>
+<li><strong>幻觉率公式</strong><br />
+幻觉率的量化公式为：<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="sans-serif">h</mi><mi mathvariant="sans-serif">a</mi><mi mathvariant="sans-serif">l</mi><mi mathvariant="sans-serif">l</mi></mrow><mo stretchy="false">(</mo><mi>p</mi><mo separator="true">,</mo><mi mathvariant="script">T</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">*</mi><mo>⁡</mo><msub><mrow><mi>P</mi><mi>r</mi></mrow><mrow><mi mathvariant="bold">x</mi><mo>∼</mo><mi>p</mi></mrow></msub><mo stretchy="false">[</mo><mi mathvariant="bold">x</mi><mi mathvariant="normal">∉</mi><mi mathvariant="script">T</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\mathsf{h a l l}(p, \mathcal{T}) = \operatorname*{Pr}_{\mathbf{x} \sim p}[\mathbf{x} \notin \mathcal{T}]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathsf">h</span><span class="mord mathsf">a</span><span class="mord mathsf">l</span><span class="mord mathsf">l</span></span><span class="mopen">(</span><span class="mord mathdefault">p</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.25417em;">T</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mop"><span class="mord mathrm">*</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16110799999999997em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">x</span></span><span class="mrel mtight">∼</span><span class="mord mathdefault mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord"><span class="mord mathbf">x</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mord"><span class="mrel">∈</span></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.75em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="llap"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="inner"><span class="mord"><span class="mord">/</span><span class="mspace" style="margin-right:0.05555555555555555em;"></span></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.25417em;">T</span></span><span class="mclose">]</span></span></span></span></span></p>
+</li>
+</ul>
+<p>在论文中，研究者通过分析非幻觉生成模型的学习能力，从而为理解生成模型的幻觉现象提供了理论基础，并提出了必须在学习过程中引入与实际事实一致的归纳偏置。</p>
+<h2 id="实验"><a class="markdownIt-Anchor" href="#实验"></a> 实验</h2>
+<p>在此部分，研究团队探讨了非幻觉学习的可行性，特别是在给定训练数据集的基础上进行学习的难度。他们构建了几个实验，旨在评估不同条件下非幻觉学习的能力，并确认引入先验知识对于学习过程的重要性。</p>
+<p>研究者首先通过理论分析展示了在完全真实的训练集情境下，依然无法实现非幻觉的学习。为此，他们考虑了一个简化的案例：假设存在一个包含两个假设的假设类，每个假设类代表一种生成模型。由于幻觉的产生是统计上不可避免的，因此在只有两个假设类的情况下，学习算法面临的挑战变得尤为明显。</p>
+<p>团队利用各类分布和实际事实集<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="script">T</mi></mrow><annotation encoding="application/x-tex">\mathcal{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathcal" style="margin-right:0.25417em;">T</span></span></span></span></span>的组合进行实验。此外，他们利用随机构造的方法选择了事实集和生成模型，验证不同情况下学习者的性能。他们设计了一种用于评估学习者是否产生幻觉的标准，具体而言，通过对生成的模型与真实事实集之间的分布进行比较，计算幻觉率。</p>
+<p>在对不同假设类进行评估的过程中，研究人员观察到，尽管引入后验知识能够显著改善模型的性能，但这仅在某些条件下是有效的。实验结果表明，当模型受到更严格的假设类限制时，幻觉的发生率仍然很高。</p>
+<p>研究者使用样本复杂度的理论结果来进行实证验证，并设定了必要的条件，使得在引入了有限VC维的概念类后，学习者得以有效地减少幻觉的生成。这种方法展示了如何通过适当的概念类限制而实现有效的学习。</p>
+<p>此外，研究团队还探讨了不合适的学习规则如何导致高幻觉率，并提出了相应的改进措施。他们在这些实验中使用了相应的概率分布，以便在训练过程中能够更好地理解学习机制。</p>
+<p>在这一系列实验中，团队特别强调了“无免费午餐”理论在学习过程中的应用，表明如果没有对学习目标的特定假设，学习过程可能根据数据不同而变得非常困难。研究者们通过对不同学习策略进行深入分析，提出完善学习规则的途径，以实际数据为基础更好地实现非幻觉学习。</p>
+<p>在这种新的学习框架下，研究者希望为理解生成模型中的幻觉现象提供更为系统的理论支持，尽管这些结果更具概念性，但为后续的实践和研究奠定了基础。</p>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<p>本论文从学习理论的角度探讨了非幻觉生成模型的可学习性。研究表明，如果在学习过程中不融入对真实事实集的知识，那么即便在相对幻觉的测量中，非幻觉学习在统计上也是不可能的。这与经典的分布PAC学习形成了鲜明对比，因为在后者中，agnostic学习不需要对真实分布做出限制。</p>
+<p>接下来，论文建立了一些积极结果，显示通过将真实事实集限制为一定具有有限VC维的概念类，可以实现非幻觉学习，同时确定了实现可学习性所需的样本复杂度。</p>
+<p>尽管本研究的贡献主要是概念上的，但相信它将帮助从业人员以更加严谨的方式理解生成模型中的幻觉的基本限制。此外，研究还提供了多种算法策略，通过正则化在学习过程中融入对真实事实集的知识，例如文中提供的学习规则（7）和（8），尽管这些方法在计算上并不是高效的。未来，研究者可以在此基础上进行深入探索，以减轻生成模型中的幻觉现象。这包括探索通过逻辑规则、合成数据生成或利用人类反馈等方式融入事实知识，以及开发更高效的算法。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text"> 关键定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E8%83%BD%E5%8A%9B%E7%9A%84%E7%95%8C%E5%AE%9A"><span class="toc-number">2.2.</span> <span class="toc-text"> 学习能力的界定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E5%AD%A6%E4%B9%A0%E8%8C%83%E5%BC%8F%E7%9A%84%E5%8F%91%E7%8E%B0"><span class="toc-number">2.3.</span> <span class="toc-text"> 不同学习范式的发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%85%AC%E5%BC%8F%E4%B8%8E%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="toc-number">2.4.</span> <span class="toc-text"> 关键公式与示意图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/28/2410-19217/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/28/2410-19217/&text=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/28/2410-19217/&title=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/28/2410-19217/&is_video=false&description=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制&body=Check out this article: http://example.com/2024/10/28/2410-19217/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/28/2410-19217/&title=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/28/2410-19217/&title=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/28/2410-19217/&title=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/28/2410-19217/&title=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/28/2410-19217/&name=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/28/2410-19217/&t=普渡大学提出非幻觉生成模型的学习理论框架及其有限VC维的概念类限制"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    anquanwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架">
+<meta property="og:url" content="http://example.com/2024/10/28/2410-19133/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/9353a7673d9c7b876c4bdb67ce777ccf05044ce423cab55bac82c13a23bcac4d.jpg">
+<meta property="og:image" content="http://example.com/images/9353a7673d9c7b876c4bdb67ce777ccf05044ce423cab55bac82c13a23bcac4d.jpg">
+<meta property="og:image" content="http://example.com/images/4f2591fbd9920b9a5caf3a0ec54d172c44838a242292d8a0e2813f53d167c922.jpg">
+<meta property="og:image" content="http://example.com/images/05ed50012162be6b31876d0ba82efe8d0c40bb795bfe779218b498b73cc62d34.jpg">
+<meta property="og:image" content="http://example.com/images/e11d8ca636fb5944b5219b48d4b97c00befd2a32d246daa7c7f686cbcdfa4039.jpg">
+<meta property="og:image" content="http://example.com/images/127db0cbd15ad34fb460b4f3246a6e4e03802de9189c2f957f438c4ef74ce642.jpg">
+<meta property="og:image" content="http://example.com/images/54f279dae0efc05da1b8ff4fe5e72d8b505170970b0c38829f962842037b41d9.jpg">
+<meta property="og:image" content="http://example.com/images/7cb927a83dd88a220bbc012b712dac93247ce776b4efbfc042a71297ed97e967.jpg">
+<meta property="article:published_time" content="2024-10-28T04:21:30.000Z">
+<meta property="article:modified_time" content="2024-10-28T04:21:30.068Z">
+<meta property="article:author" content="anquanwang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/9353a7673d9c7b876c4bdb67ce777ccf05044ce423cab55bac82c13a23bcac4d.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/10/28/2410-18860/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/10/28/2410-19134/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/28/2410-19133/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/28/2410-19133/&text=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/28/2410-19133/&title=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/28/2410-19133/&is_video=false&description=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架&body=Check out this article: http://example.com/2024/10/28/2410-19133/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/28/2410-19133/&title=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/28/2410-19133/&title=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/28/2410-19133/&title=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/28/2410-19133/&title=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/28/2410-19133/&name=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/28/2410-19133/&t=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%A1%A8%E8%BF%B0"><span class="toc-number">2.1.</span> <span class="toc-text"> 问题表述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%97%AE%E9%A2%98%E7%9A%84%E4%BC%98%E5%8C%96%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text"> 路由问题的优化模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8Bppm"><span class="toc-number">2.3.</span> <span class="toc-text"> 性能预测模型（PPM）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5%E5%9F%BA%E4%BA%8Eppm"><span class="toc-number">2.4.</span> <span class="toc-text"> 路由策略基于PPM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%B0%E6%8D%AE%E9%9B%86m-ulti-p-ref"><span class="toc-number">2.5.</span> <span class="toc-text"> 实验数据集：M ULTI P REF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0"><span class="toc-number">2.6.</span> <span class="toc-text"> 路由框架概述</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ppm%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0"><span class="toc-number">3.1.</span> <span class="toc-text"> PPM性能评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%8C%96%E5%88%B0%E6%9C%AA%E8%A7%81%E5%81%8F%E5%A5%BD%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">3.2.</span> <span class="toc-text"> 泛化到未见偏好数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%93%8D%E5%BA%94%E7%94%9F%E6%88%90%E8%AF%84%E4%BB%B7"><span class="toc-number">3.3.</span> <span class="toc-text"> 最佳响应生成评价</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ppm%E5%88%86%E6%9E%90%E4%BA%BA%E7%B1%BB%E6%B3%A8%E9%87%8A%E7%9A%84%E6%9C%89%E6%95%88%E6%80%A7"><span class="toc-number">3.4.</span> <span class="toc-text"> PPM分析：人类注释的有效性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%BA%E7%B1%BB%E4%B8%8Eai%E6%A0%87%E6%B3%A8%E8%80%85%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">3.5.</span> <span class="toc-text"> 人类与AI标注者的一致性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E6%A1%86%E6%9E%B6%E7%9A%84%E6%95%88%E6%9E%9C%E8%AF%84%E4%BC%B0"><span class="toc-number">3.6.</span> <span class="toc-text"> 路由框架的效果评估</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">anquanwang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-28T04:21:30.000Z" class="dt-published" itemprop="datePublished">2024-10-28</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\(', right: '\)', display: false},
+              {left: '\[', right: '\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+<h2 id="动机"><a class="markdownIt-Anchor" href="#动机"></a> 动机</h2>
+<p>在机器学习领域，尤其是大型语言模型（LMs）的开发中，如何有效地收集和利用人类反馈以实现人类偏好的对齐是一项重要的研究方向。目前，基于人类反馈的强化学习（RLHF）被广泛应用于大规模语言模型的训练，以此提升模型的输出质量。然而，直接收集人类的偏好数据通常是一项代价高昂且耗时的任务，且其结果的方差可能较大。这使得仅依靠人类注释在效率和成本方面存在一定的局限性。</p>
+<p>为了解决这一问题，研究者们开始关注从语言模型生成的偏好注释作为合成标注的替代方案。这种方法的优点在于具有较低的成本和可扩展性。然而，基于语言模型的偏好注释往往存在偏见和错误，从而影响其质量。因此，如何在人工和自动生成的偏好之间找到合适的平衡成为了一个亟待解决的挑战。</p>
+<p>本文中，研究者提出了一种新的路由框架，该框架通过组合人类和LM的输入，旨在提高偏好注释的质量，并减少人工注释的总体成本。该方法的核心在于识别那些能从人类注释中受益的偏好实例，从而优化注释的选择过程。这一研究不仅为更高效的偏好数据收集提供了新的思路，也为提升LM在不同上下文中的表现奠定了基础。</p>
+<p>如同下图所示，该研究的框架展示了性能预测模型（PPM）与基于该模型的路由策略的融合。通过这一方法，研究者希望能够实现更优的模型性能，同时降低数据收集的复杂度和成本。</p>
+<p><img src="/images/9353a7673d9c7b876c4bdb67ce777ccf05044ce423cab55bac82c13a23bcac4d.jpg" alt="Overview of the routing framework." /></p>
+<h2 id="方法"><a class="markdownIt-Anchor" href="#方法"></a> 方法</h2>
+<h3 id="问题表述"><a class="markdownIt-Anchor" href="#问题表述"></a> 问题表述</h3>
+<p>在本研究中，作者提出了一种路由框架，用于在人工标注和语言模型（LM）生成的标注之间分配偏好实例。该方法旨在识别能够从人工标注中受益的特定实例，同时将其余实例路由至LM。具体来说，研究将这一决策建立在基于奖励模型（Reward Model，RM）训练得到的性能上，以便最大化偏好数据集的性能指标。</p>
+<h3 id="路由问题的优化模型"><a class="markdownIt-Anchor" href="#路由问题的优化模型"></a> 路由问题的优化模型</h3>
+<p>设定现有的未标注偏好实例数据集为 (\mathcal{D}={\langle x<sup>{(i)},y_{1}</sup>{(i)},y_{2}<sup>{(i)}\rangle}_{i=1}</sup>{n})，其中每个实例可以从两个来源获得标注：一个是人工评注，另一个是LM生成。定义二进制决策变量 (z_{i}\in{0,1})，当(z_{i}=0)时选择人工标注，当(z_{i}=1)时选择LM生成的标注。目标是优化选择 (z_{i}) 的配置，以最大化性能指标，如下所示：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">*</mi><mo>⁡</mo><msub><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow><mrow><mi>z</mi><mo>∈</mo><mo stretchy="false">{</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><msup><mo stretchy="false">}</mo><mi>n</mi></msup></mrow></msub><mrow><mi mathvariant="normal">P</mi><mi mathvariant="normal">E</mi><mi mathvariant="normal">R</mi><mi mathvariant="normal">F</mi></mrow><mo stretchy="false">(</mo><mi>R</mi><mo stretchy="false">(</mo><mi mathvariant="script">D</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\operatorname*{max}_{z\in\{0,1\}^{n}}\mathrm{PERF}(R(\mathcal{D}(z))),
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1052em;vertical-align:-0.3551999999999999em;"></span><span class="mop"><span class="mord mathrm">*</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span><span class="mrel mtight">∈</span><span class="mopen mtight">{</span><span class="mord mtight">0</span><span class="mpunct mtight">,</span><span class="mord mtight">1</span><span class="mclose mtight"><span class="mclose mtight">}</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5935428571428571em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathrm">P</span><span class="mord mathrm">E</span><span class="mord mathrm">R</span><span class="mord mathrm">F</span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord"><span class="mord mathcal" style="margin-right:0.02778em;">D</span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mclose">)</span><span class="mclose">)</span><span class="mpunct">,</span></span></span></span></span></p>
+<p>其中 (\mathrm{PERF}) 是 RM 在数据集 (\mathcal{D}(z)) 上的性能。这个优化问题并没有闭合的解析解，因此采用了模拟候选数据集的方法，利用收集到的性能数据来训练性能预测模型（PPM）。</p>
+<h3 id="性能预测模型ppm"><a class="markdownIt-Anchor" href="#性能预测模型ppm"></a> 性能预测模型（PPM）</h3>
+<p>PPM 作为回归模型，旨在为任意候选偏好数据集提供性能评估。PPM 接受作为输入的特征向量，以上面提到的路由配置统计信息构建。模型评估通过生成具有不同路由配置的候选数据集 ({\hat{\mathcal{D}}_{i}})并训练 RM 来进行性能评估。</p>
+<p>特征空间的构建基于文本信息和描述信息的标签。文本标签主要包括响应之间的余弦相似度、提示的长度和响应的长度差等。描述标签包含与提示相关的元数据，比如所需的专业知识和用户的意图复杂度等。这些标签以实例级别提取，形成PPM的特征向量。</p>
+<h3 id="路由策略基于ppm"><a class="markdownIt-Anchor" href="#路由策略基于ppm"></a> 路由策略基于PPM</h3>
+<p>路由的目标是寻找最佳的路由配置 (z^{<em>}={z_{1},z_{2},\ldots,z_{n}})，从而最大化奖励模型性能 (\mathrm{PERF}(\hat{\mathcal{D}}(z^{</em>})))。使用模拟候选数据集生成大量样本后，通过PPM预测各个模拟候选的性能，从中选择性能最高的配置进行最终的路由。</p>
+<h3 id="实验数据集m-ulti-p-ref"><a class="markdownIt-Anchor" href="#实验数据集m-ulti-p-ref"></a> 实验数据集：M ULTI P REF</h3>
+<p>M ULTI P REF 数据集由10461个例子构成，包含人工和GPT-4注释。该数据集用于训练PPM，并可应用于后续的路由实验。数据集的收集来自多个开放资源，并经过专门设计的标注流程以保证数据质量，确保每个实例至少由四位评注员进行标注，采用多数表决的方式对标注结果进行整合。</p>
+<h3 id="路由框架概述"><a class="markdownIt-Anchor" href="#路由框架概述"></a> 路由框架概述</h3>
+<p>路由框架的整体布局如图所示：</p>
+<p><img src="/images/9353a7673d9c7b876c4bdb67ce777ccf05044ce423cab55bac82c13a23bcac4d.jpg" alt="" /></p>
+<p>框架包括性能预测模型（PPM）和基于该模型的路由策略。PPM 通过模拟和评估不同数据集的性能来为特定的路由配置提供性能预测，最终选择出预期表现最佳的配置。</p>
+<h2 id="实验"><a class="markdownIt-Anchor" href="#实验"></a> 实验</h2>
+<p>本研究的实验部分分为多个阶段，包括对性能预测模型（PPM）的评估、不同行为数据集的泛化能力测试以及如何通过路由框架改进现有的偏好学习。</p>
+<h3 id="ppm性能评估"><a class="markdownIt-Anchor" href="#ppm性能评估"></a> PPM性能评估</h3>
+<p>为验证PPM的拟合优度，研究者从M ULTI P REF生成了200个候选数据集，并使用Tülu 2 13B作为基础模型进行奖励模型的训练。接着，通过生成16个持出数据集来比较PPM的预测性能与奖励模型在Reward Bench上的性能。预测性能与实际性能的比较结果通过均方根误差（RMSE）和斯皮尔曼相关系数（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>ρ</mi></mrow><annotation encoding="application/x-tex">\rho</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">ρ</span></span></span></span>）进行评估。</p>
+<p>图1 显示了不同回归模型的拟合效果，结果表明，二次模型的拟合优度最佳，因此后续实验中采用该模型作为PPM。</p>
+<p><img src="/images/4f2591fbd9920b9a5caf3a0ec54d172c44838a242292d8a0e2813f53d167c922.jpg" alt="" /></p>
+<h3 id="泛化到未见偏好数据集"><a class="markdownIt-Anchor" href="#泛化到未见偏好数据集"></a> 泛化到未见偏好数据集</h3>
+<p>接下来，研究团队测试了基于M ULTI P REF训练的回归模型是否可以泛化到未见的偏好数据集。评估的偏好数据集包括Helpsteer2、ChatArena Conversations和AlpacaFarm Human Preferences，这些数据集均由人类标注，并添加了来自GPT-4的合成注释。</p>
+<p>评估中，研究人员将每个未路由数据集的实例生成候选数据集，然后利用PPM选择能获得最佳性能的路由配置。最终，路由框架生成的混合注释在多个指标上均表现优于单一来源的注释。</p>
+<p><img src="/images/05ed50012162be6b31876d0ba82efe8d0c40bb795bfe779218b498b73cc62d34.jpg" alt="" /></p>
+<h3 id="最佳响应生成评价"><a class="markdownIt-Anchor" href="#最佳响应生成评价"></a> 最佳响应生成评价</h3>
+<p>所有的评估都围绕使用“最佳-N”重排序格式，将多个生成样本通过模型评分来找出最优输出。实验使用了多个广泛应用的基准数据集，包括GSM8K（数学推理）、BIG-Bench Hard（理由推理）、IFEval（精确指令跟随）、Codex HumanEval（编程）和AlpacaEval（常规聊天能力）。表1展示了使用最佳混合偏好集的实验结果，该混合在大多数情况下均优于使用纯人类或纯合成注释的结果。</p>
+<p><img src="/images/e11d8ca636fb5944b5219b48d4b97c00befd2a32d246daa7c7f686cbcdfa4039.jpg" alt="" /></p>
+<h3 id="ppm分析人类注释的有效性"><a class="markdownIt-Anchor" href="#ppm分析人类注释的有效性"></a> PPM分析：人类注释的有效性</h3>
+<p>为了评估人类注释的收益，研究者分析了PPM所学到的特征，以识别哪些实例更适合直接进行人类标注。通过计算对不同标签的平均收益，发现当响应之间的语义相似性处于适中水平时，实例更可能从人类注释中获益。尤其是涉及专家领域知识的实例，更倾向于从人类注释中得到更高的评分平均值。</p>
+<p><img src="/images/127db0cbd15ad34fb460b4f3246a6e4e03802de9189c2f957f438c4ef74ce642.jpg" alt="" /></p>
+<h3 id="人类与ai标注者的一致性"><a class="markdownIt-Anchor" href="#人类与ai标注者的一致性"></a> 人类与AI标注者的一致性</h3>
+<p>研究还分析了人类标注者与GPT-4之间的一致性，发现对于路由到人类的实例，标注者之间的一致性得分为61.5%，而GPT-4的得分为57.8%。研究者指出，造成这种差异的原因主要包括用户指令的主观性、开放性请求中的标注差异、以及AI在某些情况下出现的偏差。</p>
+<p><img src="/images/54f279dae0efc05da1b8ff4fe5e72d8b505170970b0c38829f962842037b41d9.jpg" alt="" /></p>
+<h3 id="路由框架的效果评估"><a class="markdownIt-Anchor" href="#路由框架的效果评估"></a> 路由框架的效果评估</h3>
+<p>研究团队还利用相同的PPM训练模型，评估其在Helpsteer2-Preferences数据集上的泛化能力，发现最佳混合偏好集要求67.6%的实例路由到人类标注者。与其他数据集相比，这个数据集在100%人类注释情况下表现优越。</p>
+<p><img src="/images/7cb927a83dd88a220bbc012b712dac93247ce776b4efbfc042a71297ed97e967.jpg" alt="" /></p>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<p>本研究提出了一种用于偏好学习的路由框架，旨在将实例分配给人类注释者或语言模型（LM），通过识别出能够从人类注释中受益的子集，优化偏好注释的质量。研究结果表明，从该框架生成的混合注释在Reward Bench上的表现优于100%的人类注释和100%来自LM的注释，并且在通过最佳-N重排名的方式在常见的语言模型基准测试中也表现良好。这种路由框架能够在给定的人类注释预算中超越随机抽样的效果，证明了选择性地收集人类偏好注释的有效性。</p>
+<p>此外，研究还揭示了影响特定实例受益于人类注释的关键特征，这些特征包括响应之间的高度相似性、需要人类专业知识的提示以及恰当地涉及的主题领域。研究结果不仅为如何有效地结合人类和LM的注释提供了新的见解，也为偏好学习提供了数据驱动的策略，展示了优化注释源使用的潜力。通过这一框架，研究人员希望为未来的偏好数据收集提供更高效的方法，最终推动人类价值和目标与大型语言模型的对齐。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%9C%BA"><span class="toc-number">1.</span> <span class="toc-text"> 动机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%A1%A8%E8%BF%B0"><span class="toc-number">2.1.</span> <span class="toc-text"> 问题表述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%97%AE%E9%A2%98%E7%9A%84%E4%BC%98%E5%8C%96%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text"> 路由问题的优化模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8Bppm"><span class="toc-number">2.3.</span> <span class="toc-text"> 性能预测模型（PPM）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E7%AD%96%E7%95%A5%E5%9F%BA%E4%BA%8Eppm"><span class="toc-number">2.4.</span> <span class="toc-text"> 路由策略基于PPM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%B0%E6%8D%AE%E9%9B%86m-ulti-p-ref"><span class="toc-number">2.5.</span> <span class="toc-text"> 实验数据集：M ULTI P REF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0"><span class="toc-number">2.6.</span> <span class="toc-text"> 路由框架概述</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">3.</span> <span class="toc-text"> 实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ppm%E6%80%A7%E8%83%BD%E8%AF%84%E4%BC%B0"><span class="toc-number">3.1.</span> <span class="toc-text"> PPM性能评估</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%9B%E5%8C%96%E5%88%B0%E6%9C%AA%E8%A7%81%E5%81%8F%E5%A5%BD%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">3.2.</span> <span class="toc-text"> 泛化到未见偏好数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E4%BD%B3%E5%93%8D%E5%BA%94%E7%94%9F%E6%88%90%E8%AF%84%E4%BB%B7"><span class="toc-number">3.3.</span> <span class="toc-text"> 最佳响应生成评价</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ppm%E5%88%86%E6%9E%90%E4%BA%BA%E7%B1%BB%E6%B3%A8%E9%87%8A%E7%9A%84%E6%9C%89%E6%95%88%E6%80%A7"><span class="toc-number">3.4.</span> <span class="toc-text"> PPM分析：人类注释的有效性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%BA%E7%B1%BB%E4%B8%8Eai%E6%A0%87%E6%B3%A8%E8%80%85%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">3.5.</span> <span class="toc-text"> 人类与AI标注者的一致性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E6%A1%86%E6%9E%B6%E7%9A%84%E6%95%88%E6%9E%9C%E8%AF%84%E4%BC%B0"><span class="toc-number">3.6.</span> <span class="toc-text"> 路由框架的效果评估</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.</span> <span class="toc-text"> 结论</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/28/2410-19133/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/28/2410-19133/&text=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/28/2410-19133/&title=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/28/2410-19133/&is_video=false&description=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架&body=Check out this article: http://example.com/2024/10/28/2410-19133/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/28/2410-19133/&title=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/28/2410-19133/&title=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/28/2410-19133/&title=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/28/2410-19133/&title=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/28/2410-19133/&name=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/28/2410-19133/&t=艾伦人工智能研究院提出了一种基于人类与语言模型混合偏好学习的实例路由框架"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    anquanwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
