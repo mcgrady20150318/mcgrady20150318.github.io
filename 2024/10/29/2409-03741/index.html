@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究">
+<meta property="og:url" content="http://example.com/2024/10/29/2409-03741/index.html">
+<meta property="og:site_name" content="安全汪">
+<meta property="og:description" content="document.addEventListener(&quot;DOMContentLoaded&quot;, function() {         renderMathInElement(document.body, {           &#x2F;&#x2F; customised options           &#x2F;&#x2F; • auto-render specific keys, e.g.:">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/6f5083725f8d86b647bc8982c013d4b4d1ac950fe54e0bc1a63362f944113ed5.jpg">
+<meta property="og:image" content="http://example.com/images/5e8c37616b5e957a57f193da8e5212fbfb74754f042a856c0485944d17ca62ab.jpg">
+<meta property="og:image" content="http://example.com/images/eb8c37616b5e957a57f193da8e5212fbfb74754f042a856c0485944d17ca62ab.jpg">
+<meta property="og:image" content="http://example.com/images/6f5083725f8d86b647bc8982c013d4b4d1ac950fe54e0bc1a63362f944113ed5.jpg">
+<meta property="og:image" content="http://example.com/images/cd40f17aad9c3dd730fd0e1825b7e72fc50aae29e1c9378ca3b7f62dd14f5a22.jpg">
+<meta property="og:image" content="http://example.com/images/0c69ce9b7470e8ec2224b080b35fb95ae838856b9e9fb7b26b4c78b5d4d01c3b.jpg">
+<meta property="og:image" content="http://example.com/images/7ef83e0a927c59deca06430dca47c44a399e2c7c02b9019eafe16e13e1f12750.jpg">
+<meta property="article:published_time" content="2024-10-29T02:33:01.000Z">
+<meta property="article:modified_time" content="2024-10-29T02:33:01.631Z">
+<meta property="article:author" content="anquanwang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/6f5083725f8d86b647bc8982c013d4b4d1ac950fe54e0bc1a63362f944113ed5.jpg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2024/10/29/2410-06967/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2024/10/29/2410-10343/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/29/2409-03741/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/29/2409-03741/&text=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/29/2409-03741/&title=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/29/2409-03741/&is_video=false&description=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究&body=Check out this article: http://example.com/2024/10/29/2409-03741/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/29/2409-03741/&title=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/29/2409-03741/&title=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/29/2409-03741/&title=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/29/2409-03741/&title=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/29/2409-03741/&name=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/29/2409-03741/&t=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 1 引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%83%8C%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text"> 2 背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text"> 2.1 机器学习模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E6%95%B0%E6%8D%AE%E9%87%8D%E8%A6%81%E6%80%A7"><span class="toc-number">2.2.</span> <span class="toc-text"> 2.2 数据重要性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%AF%84%E4%BC%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text"> 3 评估设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BC%9A%E5%91%98%E6%8E%A8%E6%96%AD%E6%94%BB%E5%87%BB"><span class="toc-number">4.</span> <span class="toc-text"> 4 会员推断攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%B5%81%E7%A8%8B"><span class="toc-number">4.1.</span> <span class="toc-text"> 攻击流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E9%87%8D%E8%A6%81%E6%80%A7%E6%A0%B7%E6%9C%AC%E7%9A%84%E8%84%86%E5%BC%B1%E6%80%A7"><span class="toc-number">4.2.</span> <span class="toc-text"> 高重要性样本的脆弱性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%90%E7%A7%81%E6%B4%8B%E8%91%B1%E6%95%88%E5%BA%94"><span class="toc-number">4.3.</span> <span class="toc-text"> 隐私洋葱效应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B%E6%94%BB%E5%87%BB%E6%80%A7%E8%83%BD%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">4.4.</span> <span class="toc-text"> 改进攻击性能的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.5.</span> <span class="toc-text"> 结论</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%A8%A1%E5%9E%8B%E7%AA%83%E5%8F%96"><span class="toc-number">5.</span> <span class="toc-text"> 5 模型窃取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#51-%E7%9B%B8%E5%90%8C%E5%88%86%E5%B8%83%E6%9F%A5%E8%AF%A2"><span class="toc-number">5.1.</span> <span class="toc-text"> 5.1 相同分布查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#52-%E4%B8%8D%E5%90%8C%E5%88%86%E5%B8%83%E6%9F%A5%E8%AF%A2"><span class="toc-number">5.2.</span> <span class="toc-text"> 5.2 不同分布查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">5.3.</span> <span class="toc-text"> 小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%90%8E%E9%97%A8%E6%94%BB%E5%87%BB"><span class="toc-number">6.</span> <span class="toc-text"> 6 后门攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%B1%9E%E6%80%A7%E6%8E%A8%E6%96%AD%E6%94%BB%E5%87%BB"><span class="toc-number">7.</span> <span class="toc-text"> 7 属性推断攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E4%B8%AA%E4%BA%BA%E8%AF%84%E4%BB%B7"><span class="toc-number">8.</span> <span class="toc-text"> 8 个人评价</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E8%B4%A1%E7%8C%AE"><span class="toc-number">8.1.</span> <span class="toc-text"> 主要贡献</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91"><span class="toc-number">8.2.</span> <span class="toc-text"> 未来研究方向</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">anquanwang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-10-29T02:33:01.000Z" class="dt-published" itemprop="datePublished">2024-10-29</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\(', right: '\)', display: false},
+              {left: '\[', right: '\]', display: true}
+          ],
+          // • rendering keys, e.g.:
+          throwOnError : false
+        });
+    });
+</script>
+<h2 id="1-引言"><a class="markdownIt-Anchor" href="#1-引言"></a> 1 引言</h2>
+<p>在当今的科技时代，机器学习已成为各个领域不可或缺的工具，推动了许多行业的变革与发展。数据在机器学习模型的训练中扮演着核心角色，其重要性不容忽视。模型的性能和预测准确性在很大程度上依赖于所使用的数据集的质量和特征。因此，理解数据的重要性及其对模型性能的影响，对于提升机器学习的可解释性和可用性具有重要意义。</p>
+<p>近年来的研究表明，个别数据样本对模型的影响是异质的，某些数据样本在提升模型效用和整体效果方面表现出更高的贡献。这种数据重要性的差异不仅影响模型的性能，还可能影响模型的安全性。尤其是高重要性数据样本，因其在模型训练中的关键作用，是否更容易受到攻击成为一个亟待探讨的问题。</p>
+<p>在医疗诊断等领域，某些患者记录可能包含稀有但高度指示性的症状，这些记录被视为高重要性样本。评估这些记录是否更容易受到攻击至关重要，因为数据泄露可能导致歧视、保险费用上升或其他严重后果。因此，理解数据重要性与机器学习攻击之间的关系，不仅具有理论意义，也具有重要的实际应用价值。</p>
+<p>本研究旨在深入探讨数据重要性与机器学习攻击之间的关系，重点分析高重要性数据样本是否面临更高的攻击风险。通过对五种不同类型的攻击进行分析，研究将揭示高重要性样本在不同攻击场景下的脆弱性，为未来的防御机制提供理论依据和实践指导。</p>
+<h2 id="2-背景"><a class="markdownIt-Anchor" href="#2-背景"></a> 2 背景</h2>
+<p>在机器学习领域，模型的构建和训练依赖于大量的数据。数据的重要性不仅影响模型的性能，还对模型的安全性产生深远的影响。本节将介绍机器学习模型的基本概念，并详细探讨数据重要性的定义及其评估方法。</p>
+<h3 id="21-机器学习模型"><a class="markdownIt-Anchor" href="#21-机器学习模型"></a> 2.1 机器学习模型</h3>
+<p>机器学习算法的目标是构建能够有效预测输出的模型。这些模型通常由一个参数化函数表示，记作 ( f_{\Theta}:\mathcal{X}\rightarrow\mathcal{Y} )，其中 ( \mathcal{X} ) 表示输入空间，( \mathcal{Y} ) 表示输出空间，涵盖所有可能的预测。确定最优参数值 ( \Theta ) 的过程涉及通过梯度下降最小化目标函数。具体而言，目标是最小化分类损失：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><munder><mo><mi mathvariant="double-struck">E</mi></mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo></mrow></munder><mo stretchy="false">[</mo><mi mathvariant="script">L</mi><mo stretchy="false">(</mo><msub><mi>f</mi><mi mathvariant="normal">Θ</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">\underset{(x,y)}{\mathbb{E}}[\mathcal{L}(f_{\Theta}(x),y)]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.716em;vertical-align:-0.966em;"></span><span class="mord"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.68889em;"><span style="top:-2.3089999999999997em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mathdefault mtight">x</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span><span class="mclose mtight">)</span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop"><span class="mord"><span class="mord mathbb">E</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.966em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord"><span class="mord mathcal">L</span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">Θ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mclose">]</span></span></span></span></span></p>
+<p>其中 ( (x,y)\in\mathcal{X}\times\mathcal{Y} ) 表示用于训练目标模型的训练数据集中的样本。这个优化过程通过迭代调整参数，引导模型实现最佳性能。</p>
+<h3 id="22-数据重要性"><a class="markdownIt-Anchor" href="#22-数据重要性"></a> 2.2 数据重要性</h3>
+<p>在机器学习中，评估单个训练样本的重要性是一个基本而复杂的问题，具有广泛的影响，尤其是在数据估值方面。理解单个训练样本在学习任务中的重要性，对数据评估、资源分配和机器学习模型的质量都有深远的影响。</p>
+<p>留一法（Leave-one-out, LOO）长期以来被视为评估数据样本重要性的直观方法。形式上，设 ( D ) 和 ( D_{\mathrm{val}} ) 分别表示训练集和验证集，( \mathcal{A} ) 表示学习算法。( U_{\mathcal{A},D_{\mathrm{val}}} ) 表示在 ( D ) 上训练的模型在验证集上的准确性。目标样本 ( z ) 的重要性可以通过将目标样本纳入训练集前后的效用差异来量化，表达为：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>ν</mi><mrow><mi>l</mi><mi>o</mi><mi>o</mi></mrow></msub><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo>∝</mo><msub><mi>U</mi><mrow><mi mathvariant="script">A</mi><mo separator="true">,</mo><msub><mi>D</mi><mrow><mi mathvariant="normal">v</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow></msub></mrow></msub><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo><mo>−</mo><msub><mi>U</mi><mrow><mi mathvariant="script">A</mi><mo separator="true">,</mo><msub><mi>D</mi><mrow><mi mathvariant="normal">v</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow></msub></mrow></msub><mo stretchy="false">(</mo><mi>D</mi><mi mathvariant="normal">\</mi><mo stretchy="false">{</mo><mi>z</mi><mo stretchy="false">}</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\nu_{l o o}(z)\propto U_{\mathcal{A},D_{\mathrm{val}}}(D)-U_{\mathcal{A},D_{\mathrm{val}}}(D\backslash\{z\})
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.06366em;">ν</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.06366em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.01968em;">l</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">o</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∝</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.328331em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathcal mtight">A</span></span><span class="mpunct mtight">,</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.02778em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.01389em;">v</span><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">l</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.328331em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathcal mtight">A</span></span><span class="mpunct mtight">,</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.02778em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.01389em;">v</span><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">l</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mord">\</span><span class="mopen">{</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">}</span><span class="mclose">)</span></span></span></span></span></p>
+<p>然而，评估训练集中所有 ( N ) 个样本的重要性需要重新训练模型 ( N ) 次，导致计算负担沉重。为了解决这一限制，Koh 和 Liang 提出了影响函数作为一种近似方法，显著降低了计算成本，从 ( O(N p<sup>{2}+p</sup>{3}) ) 降至 ( O(N p) )，其中 ( p ) 表示模型参数的数量。</p>
+<p>尽管 LOO 方法有效，Ghorbani 和 Zou 提出了对其能力的担忧，认为其无法捕捉数据子集之间的复杂交互。他们认为，Shapley 值提供了一个更全面的框架来衡量数据的重要性。Shapley 值最初由 Shapley 提出，为训练集中的每个样本 ( z ) 分配一个重要性值，使用以下公式：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="sans-serif">v</mi><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">h</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">p</mi></mrow></msub><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo>∝</mo><mfrac><mn>1</mn><mi>N</mi></mfrac><munder><mo>∑</mo><mrow><mi>S</mi><mo>⊆</mo><mi>D</mi><mo>∖</mo><mo stretchy="false">{</mo><mi>z</mi><mo stretchy="false">}</mo></mrow></munder><mfrac><mn>1</mn><mrow><mo fence="true">(</mo><mfrac linethickness="0px"><mrow><mi>N</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi mathvariant="normal">∣</mi><mi>S</mi><mi mathvariant="normal">∣</mi></mrow></mfrac><mo fence="true">)</mo></mrow></mfrac><mo fence="false">[</mo><msub><mi>U</mi><mrow><mi mathvariant="script">A</mi><mo separator="true">,</mo><msub><mi>D</mi><mrow><mi mathvariant="normal">v</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow></msub></mrow></msub><mo fence="false">(</mo><mi>S</mi><mo>∪</mo><mo stretchy="false">{</mo><mi>z</mi><mo stretchy="false">}</mo><mo fence="false">)</mo><mo>−</mo><msub><mi>U</mi><mrow><mi mathvariant="script">A</mi><mo separator="true">,</mo><msub><mi>D</mi><mrow><mi mathvariant="normal">v</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi></mrow></msub></mrow></msub><mo fence="false">(</mo><mi>S</mi><mo fence="false">)</mo><mo fence="false">]</mo></mrow><annotation encoding="application/x-tex">\mathsf{v}_{\mathrm{shap}}(z)\propto\frac{1}{N}\sum_{S\subseteq D\setminus\{z\}}\frac{1}{\binom{N-1}{|S|}}\big[U_{\mathcal{A},D_{\mathrm{val}}}\big(S\cup\{z\}\big)-U_{\mathcal{A},D_{\mathrm{val}}}\big(S\big)\big]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord"><span class="mord mathsf" style="margin-right:0.01389em;">v</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">s</span><span class="mord mathrm mtight">h</span><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">p</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∝</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.8374449999999998em;vertical-align:-1.516005em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">N</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.050005em;"><span style="top:-1.808995em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.05764em;">S</span><span class="mrel mtight">⊆</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">D</span><span class="mbin mtight">∖</span><span class="mopen mtight">{</span><span class="mord mathdefault mtight" style="margin-right:0.04398em;">z</span><span class="mclose mtight">}</span></span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.516005em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.187669em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9223309999999999em;"><span style="top:-2.355em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∣</span><span class="mord mathdefault mtight" style="margin-right:0.05764em;">S</span><span class="mord mtight">∣</span></span></span></span><span style="top:-3.144em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.10903em;">N</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.332331em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="delimsizing size1">[</span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.328331em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathcal mtight">A</span></span><span class="mpunct mtight">,</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.02778em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.01389em;">v</span><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">l</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∪</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.20001em;vertical-align:-0.35001em;"></span><span class="mopen">{</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">}</span><span class="mord"><span class="delimsizing size1">)</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.20001em;vertical-align:-0.35001em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.328331em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathcal mtight">A</span></span><span class="mpunct mtight">,</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.02778em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight" style="margin-right:0.01389em;">v</span><span class="mord mathrm mtight">a</span><span class="mord mathrm mtight">l</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15122857142857138em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord"><span class="delimsizing size1">(</span></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord"><span class="delimsizing size1">)</span></span><span class="mord"><span class="delimsizing size1">]</span></span></span></span></span></span></p>
+<p>为了简化对每个样本分配的 Shapley 值的解释，可以将其视为在典型场景中的准确性贡献。例如，在一个假设场景中，100 个样本的模型实现了 90% 的准确性，一个有价值的样本可能贡献 2% 的准确性，而一个不太重要的样本可能仅贡献 0.1%。因此，分配给有价值样本的重要性值为 0.02，而不太重要样本的重要性值为 0.001。重要性为 0 的样本表示对模型准确性没有贡献，而小于 0 的值则表明可能由于标签错误或样本超出分布而产生的负面影响。</p>
+<p>Shapley 值考虑了训练集中所有可能子集的贡献，提供了对数据重要性的更全面评估。然而，基于定义公式准确计算 Shapley 值需要训练 ( O(2^{N}) ) 个机器学习模型，这使得在复杂数据集上变得不切实际。因此，现有方法采用近似算法来估计 Shapley 值。例如，Ghorbani 和 Zou 提出了两种基于蒙特卡洛的方法来近似 Shapley 值。为了加快评估时间并使大数据集的分析成为可能，Jia 等人利用 ( K )-最近邻（KNN）算法来近似目标学习算法，将时间复杂度降低到 ( \mathcal{O}(N\log N) )。</p>
+<p>通过以上讨论，可以看出数据的重要性在机器学习模型的训练和评估中扮演着至关重要的角色。理解数据的重要性不仅有助于提升模型性能，还能为数据隐私和安全性提供新的视角。</p>
+<h2 id="3-评估设置"><a class="markdownIt-Anchor" href="#3-评估设置"></a> 3 评估设置</h2>
+<p>在本研究中，作者采用了KNN-Shapley方法来评估样本的重要性。选择这一方法的原因主要基于两个方面：效用和可扩展性。</p>
+<p>首先，从效用的角度来看，传统的数据归因方法在处理数据子集之间的复杂交互时存在一定的局限性。以往的研究表明，留一法（Leave-One-Out, LOO）虽然直观，但在捕捉数据样本之间的复杂关系时效果不佳。因此，作者选择了Shapley值作为一种更为全面的评估框架，以便更准确地量化数据的重要性。Shapley值考虑了所有可能的训练集子集的贡献，提供了对数据重要性的更全面评估。</p>
+<p>其次，从可扩展性的角度来看，许多测量方法在计算效率上表现不佳。例如，使用留一法计算CIFAR10数据集的样本重要性需要超过80小时的计算时间，而Shapley值方法通常更为耗时。相较之下，KNN-Shapley方法在计算效率上表现优越，能够在较短的时间内处理大规模数据集。根据Jia等人的研究，KNN-Shapley方法的运行时间复杂度为(O(N \log N))，使其成为进行实验的唯一可行方法。</p>
+<p>在数据集的选择上，作者使用了三个广泛使用的基准数据集：CIFAR10、CelebA和Tiny Image Net。CIFAR10包含60,000张彩色图像，均匀分布在十个类别中，代表日常生活中常见的物体。CelebA是一个大规模的人脸数据集，包含超过40个标注的二元属性。为了确保分析的平衡性，作者遵循了先前的研究，选择了三个最平衡的属性（Heavy Makeup、Mouth Slightly Open和Smiling）来创建一个8类分类任务。此外，Tiny Image Net是ImageNet数据集的一个子集，包含200个不同的物体类别，每个类别有500张训练图像。</p>
+<p>通过对样本重要性的评估，作者能够深入理解高重要性和低重要性数据之间的学习特征差异。这一评估为后续的机器学习攻击实验提供了基础，确保了研究结果的可靠性和有效性。</p>
+<h2 id="4-会员推断攻击"><a class="markdownIt-Anchor" href="#4-会员推断攻击"></a> 4 会员推断攻击</h2>
+<p>会员推断攻击（Membership Inference Attack, MIA）是一种常见的隐私攻击，旨在确定特定数据样本是否属于训练数据集。该攻击因其简单性和广泛适用性而被广泛应用于评估训练数据的隐私性。在攻击场景中，攻击者获得对目标模型的访问权限，并试图判断给定数据样本的会员状态。</p>
+<h3 id="攻击流程"><a class="markdownIt-Anchor" href="#攻击流程"></a> 攻击流程</h3>
+<p>会员推断攻击的流程可以被视为一个安全游戏，具体步骤如下：</p>
+<ol>
+<li>挑战者从数据分布中抽取训练数据集 (D) 并训练模型 (f_{\Theta} \gets \mathcal{T}(D))。</li>
+<li>挑战者随机选择一个比特 (b)，如果 (b=0)，则从分布中抽取一个新样本 ((x,y) \gets \mathbb{D})（确保 ((x,y) \notin D)）；否则，从训练集中选择一个样本 ((x,y) \stackrel{\mathfrak{S}}{\leftarrow} D)。</li>
+<li>挑战者将样本 ((x,y)) 发送给攻击者。</li>
+<li>攻击者获得对分布 (\mathbb{D}) 和模型 (f_{\Theta}) 的查询访问权限，并输出一个比特 (\hat{b} \gets \mathcal{A}^{\mathbb{D},f}(x,y))。</li>
+<li>输出 1 如果 (\hat{b}=b)，否则输出 0。</li>
+</ol>
+<p>攻击者通常会利用辅助信息来提高攻击的成功率。攻击的准确性可以通过以下公式定义：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mi>c</mi><mi>c</mi><mo>=</mo><mi mathvariant="normal">*</mi><mo>⁡</mo><msub><mrow><mi>P</mi><mi>r</mi></mrow><mrow><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo separator="true">,</mo><mi>f</mi><mo separator="true">,</mo><mi>b</mi></mrow></msub><mo stretchy="false">[</mo><msup><mi mathvariant="script">A</mi><mrow><mi mathvariant="double-struck">D</mi><mo separator="true">,</mo><mi>f</mi></mrow></msup><mo stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>b</mi><mo stretchy="false">]</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">Acc = \operatorname*{Pr}_{x,y,f,b}[\mathcal{A}^{\mathbb{D},f}(x,y)=b].
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">A</span><span class="mord mathdefault">c</span><span class="mord mathdefault">c</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.1852159999999998em;vertical-align:-0.286108em;"></span><span class="mop"><span class="mord mathrm">*</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">x</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.10764em;">f</span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight">b</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">[</span><span class="mord"><span class="mord"><span class="mord mathcal">A</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8991079999999999em;"><span style="top:-3.1130000000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbb mtight">D</span></span><span class="mpunct mtight">,</span><span class="mord mathdefault mtight" style="margin-right:0.10764em;">f</span></span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">b</span><span class="mclose">]</span><span class="mord">.</span></span></span></span></span></p>
+<h3 id="高重要性样本的脆弱性"><a class="markdownIt-Anchor" href="#高重要性样本的脆弱性"></a> 高重要性样本的脆弱性</h3>
+<p>在本研究中，作者探讨了高重要性样本在会员推断攻击中的脆弱性。通过对 CIFAR10 和 CelebA 数据集的实验，发现高重要性样本在低假阳性率区域表现出更高的脆弱性。例如，在 CIFAR10 数据集中，当假阳性率（FPR）为 1% 时，高重要性样本的真实阳性率（TPR）是低重要性样本的 10.2 倍。这一发现表明，高重要性样本在会员推断攻击中面临显著的隐私风险。</p>
+<h3 id="隐私洋葱效应"><a class="markdownIt-Anchor" href="#隐私洋葱效应"></a> 隐私洋葱效应</h3>
+<p>隐私洋葱效应（Privacy Onion Effect）是指在移除最脆弱的样本后，新的脆弱样本会暴露出来。研究表明，当高重要性样本被移除时，原本被认为不重要的样本会获得更高的重要性。这一现象在本研究中得到了验证，移除高重要性样本后，剩余样本的重要性分布发生了显著变化。</p>
+<p><img src="/images/6f5083725f8d86b647bc8982c013d4b4d1ac950fe54e0bc1a63362f944113ed5.jpg" alt="隐私洋葱效应示意图" /></p>
+<h3 id="改进攻击性能的方法"><a class="markdownIt-Anchor" href="#改进攻击性能的方法"></a> 改进攻击性能的方法</h3>
+<p>为了提高会员推断攻击的效率，作者提出了一种基于样本特定标准的方法。通过引入与样本特征相关的阈值，攻击者可以更有效地进行攻击。具体而言，作者提出了以下公式来重新校准会员推断指标：</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="monospace">C</mi><mi mathvariant="monospace">a</mi><mi mathvariant="monospace">l</mi><mi mathvariant="monospace">i</mi><mi mathvariant="monospace">M</mi><mi mathvariant="monospace">e</mi><mi mathvariant="monospace">m</mi></mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn><mrow><mi mathvariant="monospace">r</mi><mi mathvariant="monospace">i</mi><mi mathvariant="monospace">M</mi><mi mathvariant="monospace">e</mi><mi mathvariant="monospace">m</mi></mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>+</mo><mi>k</mi><mo>×</mo><mrow><mi mathvariant="monospace">S</mi><mi mathvariant="monospace">h</mi><mi mathvariant="monospace">a</mi><mi mathvariant="monospace">p</mi><mi mathvariant="monospace">l</mi><mi mathvariant="monospace">e</mi><mi mathvariant="monospace">y</mi></mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathtt{C a l i M e m}(x) = 0\mathtt{r i M e m}(x) + k \times \mathtt{S h a p l e y}(x)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathtt">C</span><span class="mord mathtt">a</span><span class="mord mathtt">l</span><span class="mord mathtt">i</span><span class="mord mathtt">M</span><span class="mord mathtt">e</span><span class="mord mathtt">m</span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">0</span><span class="mord"><span class="mord mathtt">r</span><span class="mord mathtt">i</span><span class="mord mathtt">M</span><span class="mord mathtt">e</span><span class="mord mathtt">m</span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathtt">S</span><span class="mord mathtt">h</span><span class="mord mathtt">a</span><span class="mord mathtt">p</span><span class="mord mathtt">l</span><span class="mord mathtt">e</span><span class="mord mathtt">y</span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span></p>
+<p>其中，(\mathtt{O r i M e m}(x)) 是传统的会员指标，(\mathtt{S h a p l e y}(x)) 是特定样本的 Shapley 值。通过调整超参数 (k)，实验结果表明，结合重要性校准显著提高了攻击的效率。</p>
+<p><img src="/images/5e8c37616b5e957a57f193da8e5212fbfb74754f042a856c0485944d17ca62ab.jpg" alt="会员推断攻击性能提升示意图" /></p>
+<h3 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h3>
+<p>本节的研究结果表明，高重要性样本在会员推断攻击中表现出显著的脆弱性，尤其是在低假阳性率区域。隐私洋葱效应的存在进一步强调了高重要性样本的隐私风险。通过引入样本特定标准，攻击者可以有效提升攻击性能。这些发现为未来的隐私审计和防御机制提供了重要的参考。</p>
+<h2 id="5-模型窃取"><a class="markdownIt-Anchor" href="#5-模型窃取"></a> 5 模型窃取</h2>
+<p>模型窃取攻击是一种旨在获取目标模型机密性的攻击方式，其主要目标是创建一个能够模拟目标模型功能的替代模型。与会员推断攻击不同，模型窃取攻击并不直接利用训练样本的隐私信息，而是通过查询目标模型的输出，试图重建一个与目标模型相似的模型。这种攻击可以被恶意行为者用于多种目的，包括经济利益或作为后续攻击的前奏。</p>
+<h3 id="51-相同分布查询"><a class="markdownIt-Anchor" href="#51-相同分布查询"></a> 5.1 相同分布查询</h3>
+<p>在本研究中，作者首先探讨了在相同分布下进行模型窃取攻击的效率。为此，研究者训练了三个目标模型，分别在CIFAR10、CelebA和Tiny Image Net数据集上进行训练，测试准确率分别为95.15%、79.05%和65.01%。在攻击过程中，研究者设定了从100到10,000的查询预算，并优先收集高重要性数据，直到预算耗尽。</p>
+<p>攻击结果如图11所示，显示高重要性样本在模型窃取过程中的效率显著高于低重要性样本。例如，当查询预算设定为1000时，高重要性数据能够以53.77%的准确率窃取CIFAR10模型，而低重要性数据仅能达到33.29%的准确率。这一趋势在其他两个数据集上也得到了验证，尤其是在Tiny Image Net数据集中，高重要性数据的窃取准确率为19.25%，而低重要性数据仅为9.25%，显示出2.1倍的差异。</p>
+<p>这一差异的一个可能解释是，高重要性样本在查询集中的类平衡性较好。尽管研究者对高和低重要性样本的分布进行了分析，发现两者在类分布上并无显著差异，但高重要性样本的选择可能更能代表目标模型的特征，从而提高了窃取效率。</p>
+<h3 id="52-不同分布查询"><a class="markdownIt-Anchor" href="#52-不同分布查询"></a> 5.2 不同分布查询</h3>
+<p>接下来，研究者探讨了在不同分布下进行模型窃取攻击的效果。具体而言，研究者使用CIFAR10模型作为目标模型，并用CelebA和Tiny Image Net数据集进行查询。结果如图12所示，研究者发现高重要性样本在跨任务场景中的优势消失。在相同的查询预算下，高和低重要性样本的窃取准确率相近，这表明样本在一个任务中被认为重要的特征并不能有效转移到其他任务中。</p>
+<h3 id="小结"><a class="markdownIt-Anchor" href="#小结"></a> 小结</h3>
+<p>本节的研究结果表明，高重要性样本在相同分布查询中展现出更高的模型窃取效率，且这种效率并非仅仅由于分布偏差所致。研究者指出，当攻击者了解目标任务时，可以利用高重要性样本来优化攻击性能，从而减少查询预算。然而，这一结论在目标任务与查询分布不一致的情况下并不成立，表明在不同任务中选择高重要性样本作为“通用”查询集并不可行。</p>
+<h2 id="6-后门攻击"><a class="markdownIt-Anchor" href="#6-后门攻击"></a> 6 后门攻击</h2>
+<p>后门攻击是一种训练时攻击，旨在通过干扰训练过程来操控模型的行为。其主要目标是使模型在正常输入下表现得像一个良性模型，但在检测到特定触发器时，故意将输入错误分类为预定类别。这种攻击可能导致模型的完整性和可靠性受到严重威胁，从而引发潜在的安全漏洞、数据操控或未经授权访问敏感信息。</p>
+<p>在后门攻击的背景下，毒化率（poison rate）扮演着关键角色，因为它直接影响攻击的有效性和隐蔽性。较高的毒化率可能导致攻击成功率的增加，但也会提高被检测的风险，因为需要修改大量样本。相反，较低的毒化率可能提供更好的隐蔽性，但可能无法实现最佳的攻击性能。此外，在某些情况下，攻击者可能只能控制少量样本，这使得在有限的样本数量下进行有效的毒化成为一个有趣且具有挑战性的问题。</p>
+<p>本节将通过实证研究探讨不同重要性水平样本的毒化对攻击性能的影响。我们采用两个指标来评估攻击性能：</p>
+<ol>
+<li>
+<p><strong>准确性</strong>：该指标评估后门模型与干净模型之间的偏差。我们测量后门模型在干净数据集上的表现，成功的攻击应使得模型的准确性接近干净模型，从而难以被检测。</p>
+</li>
+<li>
+<p><strong>攻击成功率（ASR）</strong>：该指标评估后门模型的功能性，并在触发数据集上进行测量。理想的后门模型应在所有触发样本中表现出高ASR，表明其能够将所有触发样本错误分类为目标标签。</p>
+</li>
+</ol>
+<p>通过分析这些指标，我们旨在深入了解数据重要性对攻击性能的影响，并进一步理解后门攻击中攻击有效性与隐蔽性之间的权衡。</p>
+<p>在本部分中，我们采用与BadNets相同的方法对模型进行后门攻击，具体的超参数细节见附录G。此外，我们还验证了我们的结论在其他五种后门攻击中的普遍性，这些攻击使用不同的触发模式或针对不同的学习范式，详细讨论见附录I。</p>
+<p>我们在图13中展示了攻击成功率的可视化结果。图中显示，随着毒化样本数量的增加，攻击成功率显著提高。同时，我们观察到高重要性样本与低重要性样本之间的显著差异。具体而言，毒化相同数量的高重要性样本在提高攻击成功率方面比毒化低重要性样本更为有效。这种现象在毒化率较小时尤为明显。例如，在CIFAR10数据集中，当毒化样本数量为50时，毒化高重要性数据的模型ASR为54.42%，而毒化低重要性数据的模型ASR仅为37.74%，显示出1.44倍的优势。类似的趋势也在其他两个数据集中得到了验证。</p>
+<p>然而，当毒化率较高时，差异并不显著。我们认为这是由于重要性优势与攻击上限之间的权衡。随着毒化样本数量的增加，使用高重要性数据的优势变得更加明显。然而，实现后门攻击的最佳ASR并不需要大量数据。通常，毒化约10%的数据集就足够。因此，随着毒化样本数量的增加，高重要性和低重要性样本之间的差距会缩小。然而，仍然观察到毒化高重要性样本需要毒化更少的样本以实现其最佳ASR。</p>
+<p>在攻击者对数据的访问有限的情况下，确定样本的真实重要性可能具有挑战性，这影响了选择性毒化高重要性样本的可行性。在这种情况下，我们实证证明，仅使用训练集的一小部分计算重要性值可以很好地近似真实重要性。例如，仅使用2%的CIFAR10数据，计算出的重要性值与整个数据集的相关性系数为0.811±0.016。随着数据量的增加，这些近似的准确性也在提高：使用5%的数据时，相关性系数上升至0.899±0.006，而使用20%的数据时，超过0.96。这些结果表明，即使在数据访问有限的情况下，近似样本的重要性也是可行的，从而为在现实约束下有效的攻击规划提供了便利。</p>
+<p>此外，我们对清洁准确性的影响进行了调查，未发现样本重要性水平对清洁准确性有显著影响。在这两种情况下，重要性样本的毒化对清洁准确性的影响均保持在2%以下，表明后门攻击的隐蔽性。</p>
+<p>综上所述，我们的实验证明，毒化高重要性样本能够提高毒化过程的效率，尤其是在毒化率较低的情况下。这一发现为在有限数据访问情况下开发攻击策略提供了宝贵的指导。除了优化有效注入的触发模式外，优先毒化高重要性样本也成为一种有前景的方法。</p>
+<h2 id="7-属性推断攻击"><a class="markdownIt-Anchor" href="#7-属性推断攻击"></a> 7 属性推断攻击</h2>
+<p>属性推断攻击是一种隐私攻击，旨在推断与机器学习模型原始任务无直接关系的敏感属性。例如，一个训练用于预测年龄的模型可能无意中学习到预测种族的能力。这种攻击对隐私和公平性具有重要影响，因为敏感属性的意外泄露可能导致隐私权的侵犯、潜在的歧视以及对机器学习系统的信任破坏。</p>
+<p>在本研究中，研究者关注于一个常见的攻击场景，其中攻击者利用从目标模型获得的目标样本嵌入来预测其敏感属性。攻击者假设对训练数据集有辅助信息，并从相似分布中收集一个影子数据集。他们训练一个影子模型以模仿目标模型的行为，并使用嵌入和敏感属性来训练攻击分类器。</p>
+<p>为评估攻击性能，研究者使用相对准确度作为指标，比较准确度与随机猜测基线的差异，后者因CelebA数据集的分布不均而有所不同。实验结果显示，数据重要性与属性推断攻击的成功率之间没有显著关联。例如，“弓形眉毛”属性在高重要性样本中容易被推断，而“高颧骨”属性仅能在低重要性样本中推断。此外，“嘴巴微微张开”属性在中等重要性样本中表现出最明显的推断脆弱性。这些结果表明，数据重要性与属性推断攻击之间并不存在显著的相关性。</p>
+<p>一个可能的解释是，数据样本的重要性值可能因预测任务而异。换句话说，某些特征或属性的重要性在不同的预测任务中可能有所不同。例如，虽然胡须可能是预测性别的重要特征，但在预测收入时可能重要性较低。研究者通过在附录F中可视化不同属性的重要性值之间的相关性进一步验证了这一推测，结果表明，样本在一个属性上的高重要性可能与其在另一个属性上的重要性不一致。</p>
+<p>综上所述，研究者的发现表明，数据样本的重要性与攻击性能之间并没有简单的相关性，这与他们最初的假设一致。这一结果强调了在进行属性推断攻击时，考虑数据样本的重要性及其在特定任务中的变化是至关重要的。未来的研究可以进一步探讨如何在不同任务中评估和利用数据样本的重要性，以提高攻击的有效性和针对性。</p>
+<h2 id="8-个人评价"><a class="markdownIt-Anchor" href="#8-个人评价"></a> 8 个人评价</h2>
+<p>在这项研究中，作者深入探讨了数据重要性与机器学习攻击之间的关系，揭示了高重要性数据样本在多种攻击场景下的脆弱性。通过对五种不同类型的攻击进行分析，研究表明，高重要性样本在会员推断攻击和模型窃取攻击中表现出显著的脆弱性。这一发现不仅为理解数据在机器学习模型中的作用提供了新的视角，也为未来的安全防护措施提出了重要的启示。</p>
+<h3 id="主要贡献"><a class="markdownIt-Anchor" href="#主要贡献"></a> 主要贡献</h3>
+<ol>
+<li>
+<p><strong>数据重要性与攻击脆弱性的关联</strong>：研究通过实证分析，确认了高重要性样本在会员推断攻击中的高脆弱性，尤其是在低假阳性率区域。具体而言，在CIFAR10数据集中，高重要性样本的真实阳性率（TPR）在1%的假阳性率（FPR）下比低重要性样本高出10.2倍。这一结果强调了在设计安全防护机制时，必须考虑数据样本的重要性。</p>
+<p><img src="/images/eb8c37616b5e957a57f193da8e5212fbfb74754f042a856c0485944d17ca62ab.jpg" alt="" /></p>
+</li>
+<li>
+<p><strong>隐私洋葱效应的扩展</strong>：研究进一步扩展了隐私洋葱效应的概念，表明当高重要性样本被移除时，低重要性样本的相对重要性会增加。这一发现提示研究者在进行隐私审计时，需考虑样本的重要性分布。</p>
+<p><img src="/images/6f5083725f8d86b647bc8982c013d4b4d1ac950fe54e0bc1a63362f944113ed5.jpg" alt="" /></p>
+</li>
+<li>
+<p><strong>模型窃取攻击的效率</strong>：在模型窃取攻击中，研究发现高重要性样本在相同分布查询中的效率显著高于低重要性样本。这一结果表明，攻击者在选择查询样本时，应优先考虑高重要性样本，以提高攻击的成功率。</p>
+<p><img src="/images/cd40f17aad9c3dd730fd0e1825b7e72fc50aae29e1c9378ca3b7f62dd14f5a22.jpg" alt="" /></p>
+</li>
+<li>
+<p><strong>后门攻击的影响</strong>：研究还探讨了后门攻击中高重要性样本的影响，发现对高重要性样本的污染能够显著提高攻击成功率。这一发现为设计更有效的攻击策略提供了理论基础。</p>
+<p><img src="/images/0c69ce9b7470e8ec2224b080b35fb95ae838856b9e9fb7b26b4c78b5d4d01c3b.jpg" alt="" /></p>
+</li>
+<li>
+<p><strong>属性推断攻击的复杂性</strong>：在属性推断攻击中，研究表明数据重要性与攻击成功率之间并没有显著的相关性。这一结果强调了在不同任务下，样本重要性的变化可能会影响攻击的效果。</p>
+<p><img src="/images/7ef83e0a927c59deca06430dca47c44a399e2c7c02b9019eafe16e13e1f12750.jpg" alt="" /></p>
+</li>
+</ol>
+<h3 id="未来研究方向"><a class="markdownIt-Anchor" href="#未来研究方向"></a> 未来研究方向</h3>
+<p>基于本研究的发现，未来的研究可以集中在以下几个方面：</p>
+<ul>
+<li><strong>防御机制的开发</strong>：针对高重要性样本的脆弱性，研究者应探索创新的防御机制，以平衡模型的效用与数据的安全性。</li>
+<li><strong>样本重要性动态调整</strong>：研究如何动态调整样本的重要性，以提高模型的鲁棒性和安全性。</li>
+<li><strong>跨任务攻击的研究</strong>：进一步探讨在不同任务之间，样本重要性如何影响攻击效果，以便为设计更有效的攻击和防御策略提供指导。</li>
+</ul>
+<p>总之，本研究为理解数据重要性在机器学习攻击中的作用提供了重要的理论基础，并为未来的研究指明了方向。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%BC%95%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 1 引言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E8%83%8C%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text"> 2 背景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#21-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text"> 2.1 机器学习模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-%E6%95%B0%E6%8D%AE%E9%87%8D%E8%A6%81%E6%80%A7"><span class="toc-number">2.2.</span> <span class="toc-text"> 2.2 数据重要性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%AF%84%E4%BC%B0%E8%AE%BE%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text"> 3 评估设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BC%9A%E5%91%98%E6%8E%A8%E6%96%AD%E6%94%BB%E5%87%BB"><span class="toc-number">4.</span> <span class="toc-text"> 4 会员推断攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%87%BB%E6%B5%81%E7%A8%8B"><span class="toc-number">4.1.</span> <span class="toc-text"> 攻击流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E9%87%8D%E8%A6%81%E6%80%A7%E6%A0%B7%E6%9C%AC%E7%9A%84%E8%84%86%E5%BC%B1%E6%80%A7"><span class="toc-number">4.2.</span> <span class="toc-text"> 高重要性样本的脆弱性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9A%90%E7%A7%81%E6%B4%8B%E8%91%B1%E6%95%88%E5%BA%94"><span class="toc-number">4.3.</span> <span class="toc-text"> 隐私洋葱效应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%B9%E8%BF%9B%E6%94%BB%E5%87%BB%E6%80%A7%E8%83%BD%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">4.4.</span> <span class="toc-text"> 改进攻击性能的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-number">4.5.</span> <span class="toc-text"> 结论</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%A8%A1%E5%9E%8B%E7%AA%83%E5%8F%96"><span class="toc-number">5.</span> <span class="toc-text"> 5 模型窃取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#51-%E7%9B%B8%E5%90%8C%E5%88%86%E5%B8%83%E6%9F%A5%E8%AF%A2"><span class="toc-number">5.1.</span> <span class="toc-text"> 5.1 相同分布查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#52-%E4%B8%8D%E5%90%8C%E5%88%86%E5%B8%83%E6%9F%A5%E8%AF%A2"><span class="toc-number">5.2.</span> <span class="toc-text"> 5.2 不同分布查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">5.3.</span> <span class="toc-text"> 小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%90%8E%E9%97%A8%E6%94%BB%E5%87%BB"><span class="toc-number">6.</span> <span class="toc-text"> 6 后门攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E5%B1%9E%E6%80%A7%E6%8E%A8%E6%96%AD%E6%94%BB%E5%87%BB"><span class="toc-number">7.</span> <span class="toc-text"> 7 属性推断攻击</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E4%B8%AA%E4%BA%BA%E8%AF%84%E4%BB%B7"><span class="toc-number">8.</span> <span class="toc-text"> 8 个人评价</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E8%B4%A1%E7%8C%AE"><span class="toc-number">8.1.</span> <span class="toc-text"> 主要贡献</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E7%A0%94%E7%A9%B6%E6%96%B9%E5%90%91"><span class="toc-number">8.2.</span> <span class="toc-text"> 未来研究方向</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2024/10/29/2409-03741/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2024/10/29/2409-03741/&text=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2024/10/29/2409-03741/&title=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2024/10/29/2409-03741/&is_video=false&description=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究&body=Check out this article: http://example.com/2024/10/29/2409-03741/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2024/10/29/2409-03741/&title=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2024/10/29/2409-03741/&title=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2024/10/29/2409-03741/&title=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2024/10/29/2409-03741/&title=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2024/10/29/2409-03741/&name=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2024/10/29/2409-03741/&t=CISPA亥姆霍兹信息安全中心提出数据重要性与机器学习攻击脆弱性关系的研究"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2024
+    anquanwang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
